@@ -4,15 +4,12 @@
   <title>IT2901</title>
 </head>
 <body>
-  <div class="container">  
-  <div class="ui one column grid">
-    <div class="row">
-      <div class="column">
-        <h1 id="index-header" class="ui center aligned header">
-          Hello Wooooorld
-        </h1>
-      </div>
+  <div class="ui container">
+    <div class="ui three item menu">
+      <a class="active item" ui-sref="home">Hjem</a>
+      <a class="item" ui-sref="profile">Profil</a>
+      <a class="item" ui-sref="activities">Aktiviteter</a>
     </div>
   </div>
-  </div>
+  <div ui-view></div>
 </body>
