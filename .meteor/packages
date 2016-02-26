@@ -19,7 +19,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular
 semantic:ui-css
 fourseven:scss
-<<<<<<< HEAD
-=======
 angularui:angular-ui-router
->>>>>>> a80026c045333e1a8849124bc7f8e42e34623feb
