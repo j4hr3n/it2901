@@ -19,3 +19,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular
 semantic:ui-css
 fourseven:scss
+twbs:bootstrap
