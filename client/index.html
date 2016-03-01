@@ -2,30 +2,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title>IT2901</title>
-  <script>
-    $(document)
-      .ready(function() {
 
-        // fix menu when passed
-        $('.masthead')
-          .visibility({
-            once: false,
-            onBottomPassed: function() {
-              $('.fixed.menu').transition('fade in');
-            },
-            onBottomPassedReverse: function() {
-              $('.fixed.menu').transition('fade out');
-            }
-          })
-        ;
+  <link rel="icon" type="image/png" src="img/favicon.ico">
 
-        // create sidebar and attach to menu open
-        $('.ui.sidebar')
-          .sidebar('attach events', '.toc.item')
-        ;
-
-      });
-  </script>
   <script src="js/app.js"></script>
   <script src="js/routes.js"></script>
   <script src="js/controllers/acitivitiesController.js"></script>
@@ -33,22 +12,6 @@
 </head>
 <body ng-app="it2901">
   <div class="pusher">
-  <div class="ui large top fixed hidden menu">
-    <div class="ui container">
-      <a class="item" ui-sref="home">Hjem</a>
-      <a class="item" ui-sref="activities">Aktiviteter</a>
-      <a class="item" ui-sref="profile">Profil</a>
-
-      <div class="right menu">
-        <div class="item">
-          <a class="ui button">Logg in</a>
-        </div>
-        <div class="item">
-          <a class="ui primary button">Registrer deg</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="ui container">
     <div class="ui large secondary pointing menu">
@@ -59,7 +22,7 @@
       <a class="item" ui-sref="activities">Aktiviteter</a>
       <a class="item" ui-sref="profile">Profil</a>
       <div class="right menu">
-          <a class="item">Logg inn</a>
+          <a class="item" ng-click="fireLoginModal()">Logg inn</a>
           <a class="item">Registrer deg</a>
       </div>
     </div>

@@ -964,18 +964,11 @@
   background-color: @orBackgroundColor;
   text-shadow: @orTextShadow;
 
-  text-indent: 0.01em;
+  margin-top: @orVerticalOffset;
+  margin-left: @orHorizontalOffset;
 
-  // margin-top: @orVerticalOffset;
-  // margin-left: @orHorizontalOffset;
-  margin-top: -1em;
-  margin-left: -1em;
-
-  // width: @orCircleSize;
-  // height: @orCircleSize;
-
-  width: 2em;
-  heigth: 2em;
+  width: @orCircleSize;
+  height: @orCircleSize;
 
   line-height: @orLineHeight;
   color: @orTextColor;
@@ -3296,3 +3289,4 @@
 }
 
 .loadUIOverrides();
+
