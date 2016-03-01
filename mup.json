@@ -14,12 +14,13 @@
 
   "enableUploadProgressBar": true,
 
-  "appName": "it2901",
+  "appName": "heijahrenit",
 
   "app": ".",
 
   "env": {
-    "ROOT_URL": "http://46.101.53.156"
+    "ROOT_URL": "http://46.101.53.156",
+    "PORT": 8001
   },
 
   "deployCheckWaitTime": 15
