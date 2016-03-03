@@ -1,3 +1,4 @@
+  // SPRINT 1 Debug
 Users = new Mongo.Collection("users");
 
 Users.insert(
@@ -20,14 +21,18 @@ function profileCtrl($scope, $reactive) {
    }
   });
 
-  this.baba = 1;Users.find({}).hasNext();
+  this.babak = { name: 'Babak', friends: 24};
 
   this.incrementFriends = (user) => {
+
+    this.babak.friends += 1;
+
+    user.friends = user.friends+1;
     Users.update(
       { name: user.name },
       {
         name: user.name,
-        friends: user.friends+1
+        friends: user.friends
       },
       { upsert: true }
   )};
