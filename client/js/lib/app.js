@@ -7,6 +7,7 @@
     .run(function($rootScope){
       $rootScope.fireLoginModal = function(){
         console.log("login clicked");
+        alert("hello")
         $('#loginModal').modal('show');
       }
     })
