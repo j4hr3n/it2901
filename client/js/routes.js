@@ -25,6 +25,10 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/downloads',
       templateUrl: 'client/templates/downloads.html'
     })
+    .state('loggedIn',{
+      url: '/LoggedIn',
+      templateUrl: 'client/templates/LoggedInScreen.html'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
