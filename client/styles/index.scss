@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  background-color: #FDFDFD;
 }
 
 #index-header{
@@ -14,6 +15,15 @@ body {
 
 .pull-down{
   margin-top: 1.5em;
+}
+
+.modalsize {
+  padding: 20px 0 20px 50px;
+}
+
+.landing-image{
+  background-image: url(/img/bg-1.jpg) !important;
+  background-size: cover !important;
 }
 
 .hidden.menu {
