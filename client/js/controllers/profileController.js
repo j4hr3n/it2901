@@ -1,13 +1,3 @@
-  // SPRINT 1 Debug
-Users = new Mongo.Collection("users");
-
-Users.insert(
-  {
-    name: 'Babak',
-    friends: 24
-  }
-);
-
 angular
     .module('it2901')
     .controller('profileCtrl', profileCtrl);
@@ -17,22 +7,17 @@ function profileCtrl($scope, $reactive) {
  
   this.helpers({
     user: () => {
-      return Users.find({});
+      return Users.findOne({});
    }
   });
 
-  this.babak = { name: 'Babak', friends: 24};
+  this.incrementFriends = (s) => {
 
-  this.incrementFriends = (user) => {
-
-    this.babak.friends += 1;
-
-    user.friends = user.friends+1;
     Users.update(
-      { name: user.name },
+      { 'name': this.user.name },
       {
-        name: user.name,
-        friends: user.friends
+        'name': this.user.name,
+        'friends': this.user.friends+1
       },
       { upsert: true }
   )};
