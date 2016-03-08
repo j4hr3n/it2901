@@ -10,15 +10,6 @@ function profileCtrl($scope, $reactive) {
       return Users.findOne({});
     }
   });
-  Users.insert({
-        'nameFirst': 'Babaks',
-        'nameLast': 'sFarschian',
-        'friends': 24
-  });
-
-  console.log("prctrl:")
-  console.log(Users.find({}).count());
-  console.log(Users.find({}));
 
 
   this.incrementFriends = () => {

@@ -1,4 +1,6 @@
 Meteor.startup(function () {
+  Users.remove({});
+  
   if (Users.find().count() === 0) {
     var users = [
       {
