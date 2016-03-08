@@ -21,6 +21,10 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/activities',
       templateUrl: 'client/templates/activities.html'
     })
+    .state('downloads',{
+      url: '/downloads',
+      templateUrl: 'client/templates/downloads.html'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
