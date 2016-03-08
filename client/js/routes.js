@@ -29,6 +29,11 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/LoggedIn',
       templateUrl: 'client/templates/LoggedInScreen.html'
     })
+    .state('network',{
+      url: '/network',
+      templateUrl: 'client/templates/network.html',
+      controller: 'networkController'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
