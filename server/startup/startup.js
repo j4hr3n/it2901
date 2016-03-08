@@ -1,22 +1,27 @@
 Meteor.startup(function () {
+  Users.remove({});
+  
   if (Users.find().count() === 0) {
     var users = [
       {
-        'name': 'Babak',
+        'nameFirst': 'Babak',
+        'nameLast': 'Farschian',
         'friends': 24
       },
       {
-        'name': 'Per Pål',
+        'nameFirst': 'Per',
+        'nameLast': 'Pål',
         'friends': 0
       },
       {
-        'name': 'Randy Savage',
+        'nameFirst': 'Randy',
+        'nameLast': 'Savage',
         'friends': 101
       }
     ];
  
     for (var i = 0; i < users.length; i++) {
-      Users.insert(parties[i]);
+      Users.insert(users[i]);
     }
   }
 });

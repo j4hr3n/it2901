@@ -3,23 +3,35 @@ angular
     .controller('profileCtrl', profileCtrl);
 
 function profileCtrl($scope, $reactive) {
-  $reactive(this).attach($scope);;
- 
+  $reactive(this).attach($scope);
+  
   this.helpers({
     user: () => {
       return Users.findOne({});
-   }
+    }
   });
 
-  this.incrementFriends = (s) => {
+
+  this.incrementFriends = () => {
 
     Users.update(
-      { 'name': this.user.name },
-      {
-        'name': this.user.name,
-        'friends': this.user.friends+1
-      },
-      { upsert: true }
-  )};
+      { _id: this.user._id },
+      { $inc: { friends: 1 } }
+    )
+  };
+
+  this.updateInfo = () => {
+
+    Users.update(
+      { _id: this.user._id },
+      { 
+        $set: { 
+        name: this.user.name,
+        nameFirst: this.user.nameFirst,
+        nameLast: this.user.nameLast,
+        friends: this.user.friends } 
+      }
+    )
+  };
   
 }

@@ -6,7 +6,7 @@
           <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
         </div>
         <div class="content">
-          <a class="header">{{ prc.user.name }}</a>
+          <a class="header">{{ prc.user.nameFirst + " " + prc.user.nameLast }}</a>
           <div class="meta">
             <span class="date">Ble med i 2016</span>
           </div>
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="extra content">
-          <a ng-click="prc.incrementFriends(us)">
+          <a ng-click="prc.incrementFriends()">
             <i class="user icon"></i>
             {{ prc.user.friends }} venner
           </a>
@@ -33,14 +33,13 @@
       <form class="ui form">
         <div class="field">
           <label>Fornavn</label>
-          <input type="text" readonly name="first-name" placeholder="Babak">
+          <input type="text" ng-model="prc.user.nameFirst" name="first-name">
         </div>
         <div class="field">
           <label>Etternavn</label>
-          <input type="text" readonly name="last-name" placeholder="Farschian">
+          <input type="text" ng-model="prc.user.nameLast">
         </div>
-
-        <button class="ui button" type="submit">Endre informasjon</button>
+        <button ng-click="prc.updateInfo()" class="ui button" type="submit">Endre informasjon</button>
       </form>
     </div>
   </div>
