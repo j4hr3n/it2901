@@ -24,4 +24,8 @@ Meteor.startup(function () {
       Users.insert(users[i]);
     }
   }
+
+  Meteor.publish("users", function () {
+    return Users.find();
+  });
 });
