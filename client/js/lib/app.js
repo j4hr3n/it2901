@@ -6,9 +6,7 @@
       ])
     .run(function($rootScope){
       $rootScope.fireLoginModal = function(){
-        $('.ui.small.modal.login').modal('show');
-      },
-      $rootScope.fireRegisterModal = function(){
-        $('.ui.small.modal.register').modal('show');
+        console.log("login clicked");
+        $('#loginModal').modal('show');
       }
     })

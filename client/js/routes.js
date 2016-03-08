@@ -6,12 +6,11 @@ function config($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('it2901', {
       abstract: true,
-      templateUrl: 'client/templates/app.html',
+      templateUrl: 'client/templates/app.html'
     })
     .state('home', {
       url: '/',
-      templateUrl: 'client/templates/home.html',
-      controller: 'homeController'
+      templateUrl: 'client/templates/home.html'
     })
     .state('profile', {
       url: '/profile',
@@ -20,10 +19,6 @@ function config($stateProvider, $urlRouterProvider) {
     .state('activities',{
       url: '/activities',
       templateUrl: 'client/templates/activities.html'
-    })
-    .state('downloads',{
-      url: '/downloads',
-      templateUrl: 'client/templates/downloads.html'
     })
 
   $urlRouterProvider.otherwise('/');
