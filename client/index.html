@@ -33,7 +33,7 @@
   <div ui-view></div>
 </div>
 <!--Register Modal-->
-<div class="ui small modal register">
+<div class="ui small modal register" ng-controller="registerCtrl">
   <i class="close icon"></i>
   <div class="header">
     Registrering
@@ -41,24 +41,28 @@
   <div class="ui container modalsize">
   <form class="ui form">
     <div class="field six wide column padding">
-      <label>Fornavn</label>
-      <input type="text" name="fornavn" placeholder="Fornavn" required>
-    </div>
-    <div class="field six wide column">
-      <label>Last Name</label>
-      <input type="text" name="etternavn" placeholder="Etternavn" required>
+      <label>Brukernavn</label>
+      <input type="text" name="fornavn" ng-model="regc.user.username" placeholder="Brukernavn" required>
     </div>
     <div class="field six wide column">
       <label>Passord</label>
-      <input type="password" name="password" placeholder="Passord" required>
+      <input type="password" name="password" ng-model="regc.user.password" placeholder="" required>
     </div>
     <div class="field six wide column">
       <label>Gjenta nytt passord</label>
-      <input type="password" name="password" placeholder="Gjenta nyttpassord" required>
+      <input type="password" name="password" ng-model="regc.passwordRepeat"  placeholder="Gjenta nyttpassord" required>
+    </div>
+    <div class="field six wide column padding">
+      <label>Fornavn</label>
+      <input type="text" name="fornavn" placeholder="Fornavn" ng-model="regc.user.nameFirst" required>
+    </div>
+    <div class="field six wide column">
+      <label>Last Name</label>
+      <input type="text" name="etternavn" placeholder="Etternavn" ng-model="regc.user.nameLast" required>
     </div>
     <div class="field six wide column">
       <label>Epost</label>
-      <input type="email" name="email" placeholder="Epost" required>
+      <input type="email" name="email" placeholder="Epost" ng-model="regc.user.email" required>
     </div>
     <div class="field six wide column">
       <div class="ui checkbox">

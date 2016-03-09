@@ -4,19 +4,28 @@ Meteor.startup(function () {
   if (Users.find().count() === 0) {
     var users = [
       {
+        'username': 'Babs',
+        'password':'123',
         'nameFirst': 'Babak',
         'nameLast': 'Farschian',
-        'friends': 24
+        'friends': 24,
+        'email':'baf@idi.ntnu.no'
       },
       {
+        'username': 'perp',
+        'password':'123',
         'nameFirst': 'Per',
         'nameLast': 'Pål',
-        'friends': 0
+        'friends': 0,
+        'email':'pepa@ntnu.no'
       },
       {
+        'username': 'theRandy',
+        'password':'123',
         'nameFirst': 'Randy',
         'nameLast': 'Savage',
-        'friends': 101
+        'friends': 101,
+        'email':'randyS@ntnu.no'
       }
     ];
  
