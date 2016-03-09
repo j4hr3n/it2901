@@ -42,5 +42,22 @@
         <button ng-click="prc.updateInfo()" class="ui button" type="submit">Endre informasjon</button>
       </form>
     </div>
+    <div class="ui stackable grid container">
+      <div class="row"> <!-- Kontaktliste: DB-test -->
+        <div class="ui divided items">
+          <h3>Dine kontakter</h3>
+          <div class="item" ng-repeat="contact in prc.contacts">
+            <i class="user icon"></i>
+            <div class="middle aligned content">
+              {{contact.nameFirst +" "+ contact.nameLast}}
+              <p>
+                Du har {{prc.user.friends - contact.friends}}
+                flere venner enn dem !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

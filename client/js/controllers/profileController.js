@@ -8,6 +8,9 @@ function profileCtrl($scope, $reactive) {
   this.helpers({
     user: () => {
       return Users.findOne({});
+    },
+    contacts: () => {
+      return Users.find({});
     }
   });
 
