@@ -29,15 +29,14 @@ function registerCtrl($scope, $reactive, $location) {
 
   this.registerNewUser = () => {
 
-    matchingUser = null;//Users.findOne({ 'username' : this.user.username });
+    matchingUser = Users.findOne({ 'username' : this.user.username });
 
-    if (matchingUser === null) {
+    if (matchingUser == null) {
       Users.insert(this.user);
-      console.log("inserting");
+      $('.ui.small.modal.register').modal('hide');
       $location.path("/LoggedIn");
     } else {
       console.log("not inserting2");
-      $location.path("/downloads");
     }
   };
 }
