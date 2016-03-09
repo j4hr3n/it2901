@@ -22,7 +22,7 @@ function config($stateProvider, $urlRouterProvider) {
     })
     .state('downloads',{
       url: '/downloads',
-      templateUrl: 'client/templates/downloads.html'
+      templateUrl: 'client/templates/app.html'
     })
     .state('loggedIn',{
       url: '/LoggedIn',

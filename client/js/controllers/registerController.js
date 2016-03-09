@@ -13,6 +13,7 @@ function registerCtrl($scope, $reactive, $location) {
     'friends': 0,
     'email':'baf@idi.ntnu.no'
   };
+  this.passwordRepeat = "123";
   /* 
   this.newUser = {
     'username': '',
@@ -22,15 +23,21 @@ function registerCtrl($scope, $reactive, $location) {
     'friends': 0,
     'email':''
   };
+
+  this.passwordRepeat = "";
   */
 
   this.registerNewUser = () => {
 
-    matchingUser = Users.findOne({ 'username' : this.user.username });
+    matchingUser = null;//Users.findOne({ 'username' : this.user.username });
 
     if (matchingUser === null) {
       Users.insert(this.user);
+      console.log("inserting");
       $location.path("/LoggedIn");
+    } else {
+      console.log("not inserting2");
+      $location.path("/downloads");
     }
   };
 }
