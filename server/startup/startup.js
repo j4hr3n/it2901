@@ -1,16 +1,19 @@
 Meteor.startup(function () {
-  Users.remove({});
   
-  if (Users.find().count() === 0) {
+  /*if (Meteor.users.find().count() === 0) {
     var users = [
-      {
+      {        
         'username': 'Babs',
-        'password':'123',
-        'nameFirst': 'Babak',
-        'nameLast': 'Farschian',
-        'friends': 24,
-        'email':'baf@idi.ntnu.no'
-      },
+        'createdAt': new Date().toISOString()
+        'emails': [
+          { address: 'baf@idi.ntnu.no', verified: true },
+        ],
+        'profile': {
+          'nameFirst': 'Babak',
+          'nameLast': 'Farschian',
+          'friends': 24,
+        }
+      }/*,
       {
         'username': 'perp',
         'password':'123',
@@ -26,7 +29,7 @@ Meteor.startup(function () {
         'nameLast': 'Savage',
         'friends': 101,
         'email':'randyS@ntnu.no'
-      }
+      }/*
     ];
  
     for (var i = 0; i < users.length; i++) {
@@ -36,7 +39,7 @@ Meteor.startup(function () {
 
   Meteor.publish("users", function () {
     return Users.find();
-  });
+  });*/
   
   // "By default, the current user's username, emails and profile are 
   // published to the client." http://docs.meteor.com/#/full/meteor_users
