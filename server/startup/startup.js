@@ -37,4 +37,7 @@ Meteor.startup(function () {
   Meteor.publish("users", function () {
     return Users.find();
   });
+  
+  // "By default, the current user's username, emails and profile are 
+  // published to the client." http://docs.meteor.com/#/full/meteor_users
 });
