@@ -27,7 +27,8 @@ function config($stateProvider, $urlRouterProvider) {
     })
     .state('loggedIn',{
       url: '/LoggedIn',
-      templateUrl: 'client/templates/LoggedInScreen.html'
+      templateUrl: 'client/templates/LoggedInScreen.html',
+      controller: 'dashboardController'
     })
     .state('network',{
       url: '/network',
