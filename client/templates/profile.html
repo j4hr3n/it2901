@@ -6,7 +6,7 @@
           <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
         </div>
         <div class="content">
-          <a class="header">{{ prc.user.nameFirst + " " + prc.user.nameLast }}</a>
+          <a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
           <div class="meta">
             <span class="date">Ble med i 2016</span>
           </div>
@@ -17,7 +17,7 @@
         <div class="extra content">
           <a ng-click="prc.incrementFriends()">
             <i class="user icon"></i>
-            {{ prc.user.friends }} venner
+            {{ prc.user.profile.friends }} venner
           </a>
         </div>
       </div>
@@ -33,11 +33,11 @@
       <form class="ui form">
         <div class="field">
           <label>Fornavn</label>
-          <input type="text" ng-model="prc.user.nameFirst" name="first-name">
+          <input type="text" ng-model="prc.user.profile.nameFirst" name="first-name">
         </div>
         <div class="field">
           <label>Etternavn</label>
-          <input type="text" ng-model="prc.user.nameLast">
+          <input type="text" ng-model="prc.user.profile.nameLast">
         </div>
         <button ng-click="prc.updateInfo()" class="ui button" type="submit">Endre informasjon</button>
       </form>
@@ -49,11 +49,10 @@
           <div class="item" ng-repeat="contact in prc.contacts">
             <i class="user icon"></i>
             <div class="middle aligned content">
-              {{contact.nameFirst +" "+ contact.nameLast}}
-              <p>
-                Du har {{prc.user.friends - contact.friends}}
-                flere venner enn dem !
-              </p>
+              {{ 
+              contact.profile.nameFirst +" "+ 
+              contact.profile.nameLast +", "+ 
+              contact.username }}
             </div>
           </div>
         </div>

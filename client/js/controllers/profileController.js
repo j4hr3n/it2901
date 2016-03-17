@@ -7,7 +7,8 @@ function profileCtrl($scope, $reactive) {
   
   this.helpers({
     user: () => {
-      return Meteor.users.findOne({});
+      return Meteor.user() || Meteor.users.findOne({});
+                        // ^ Debug
     },
     contacts: () => {
       return Meteor.users.find({});
