@@ -1,1 +1,1 @@
-Users = new Mongo.Collection("users");
+//Users = new Mongo.Collection("users");

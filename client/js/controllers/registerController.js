@@ -6,37 +6,38 @@ function registerCtrl($scope, $reactive, $location) {
   $reactive(this).attach($scope);
 
   this.user = {
-    'username': 'Babs',
+    'username': 'NyBabs',
     'password':'123',
-    'nameFirst': 'Babak',
-    'nameLast': 'Farschian',
-    'friends': 0,
-    'email':'baf@idi.ntnu.no'
+    'email':'baf@idi.ntnu.no',
+    'profile': {
+      'nameFirst': 'Babak',
+      'nameLast': 'Farschian',
+      'friends': 0
+    }
   };
-  this.passwordRepeat = "123";
-  /* 
-  this.newUser = {
-    'username': '',
-    'password':'',
-    'nameFirst': '',
-    'nameLast': '',
-    'friends': 0,
-    'email':''
-  };
+  this.passwordRepeat = this.user.password;
 
-  this.passwordRepeat = "";
-  */
+  this.error = '';
 
   this.registerNewUser = () => {
 
-    matchingUser = Users.findOne({ 'username' : this.user.username });
+    console.log(Meteor.users.find({}));
+    matchingUser = Meteor.users.findOne({ 'username' : this.user.username });
 
     if (matchingUser == null) {
-      Users.insert(this.user);
-      $('.ui.small.modal.register').modal('hide');
-      $location.path("/LoggedIn");
+      Accounts.createUser(this.user, (err) => {
+        if (err) {
+          console.log("Failed creating new user: " + err);
+          this.error = err
+        } 
+        else {
+          console.log("Created new user: " + this.user.username);
+          $('.ui.small.modal.register').modal('hide');
+          $location.path("/LoggedIn");
+        }
+      });
     } else {
-      console.log("not inserting2");
+      console.log("Failed creating new user: Non-unique username");
     }
   };
 }
