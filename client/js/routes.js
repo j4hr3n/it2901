@@ -25,8 +25,8 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/downloads',
       templateUrl: 'client/templates/downloads.html'
     })
-    .state('loggedIn', {
-      url: '/LoggedIn',
+    .state('dashboard', {
+      url: '/dashboard',
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl'
     })
