@@ -33,7 +33,7 @@ function registerCtrl($scope, $reactive, $location) {
         else {
           console.log("Created new user: " + this.user.username);
           $('.ui.small.modal.register').modal('hide');
-          $location.path("/LoggedIn");
+          $location.path("/dashboard");
         }
       });
     } else {
