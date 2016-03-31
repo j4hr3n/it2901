@@ -45,3 +45,8 @@ function dashboardCtrl() {
 
   }
 }
+
+
+function newsfeed() {
+  $( "#randomID" ).load( "templates/dashboard.html" );
+}
