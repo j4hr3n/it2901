@@ -1,7 +1,7 @@
 <div class="ui container dashboard">
-  <div class="ui three column grid">
+  <div class="ui two column grid">
     <!-- Section one -->
-    <div class="column pull-down">
+    <div class="left floated column pull-down right-padding">
       <h3 class="ui dividing header">Nyheter</h3>
       <div class="ui stackable grid container"></div>
       <div class="row dashboard-margin">
@@ -47,8 +47,9 @@
         </div>
       </div>
       <div class="row dashboard-margin">
-        <div class="ui form">
+        <div>
 
+        <div class="ui form">
           <div class="field">
             <label>Søk etter nye kontakter</label>
             <div class="ui icon input">
@@ -57,8 +58,6 @@
               <div class="results"></div>
             </div>
           </div>
-
-          <div class="row dashboard-margin">
             <div class="field">
               <label>Søk i venner</label>
               <div class="ui icon input">
@@ -71,14 +70,14 @@
         </div>
       </div>
       <div class="row">
-    
+
         <a ui-sref="network"> <button class="ui large blue button "> Se kontakter
         </button></a>
-         
+
       </div>
     </div>
     <!-- Section two -->
-    <div class="column pull-down">
+    <div class="right floated column pull-down">
       <h3 class="ui dividing header">Øvelser</h3>
       <div class="ui stackable grid container">
         <div class="row dashboard-margin">
@@ -103,6 +102,11 @@
             </div>
           </div>
         </div>
+        <div class="row">
+        <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
+        </button></a>
+      </div>
+
         <div class="row">
           <div class="ui divided items">
             <h3>Kommende Aktiviteter</h3>
@@ -148,36 +152,6 @@
             </button>
           </div>
         </div>
-      </div>
-    </div>
-    <!-- Section three -->
-    <div class="column pull-down">
-      <h3 class="ui dividing header">Din fitness</h3>
-      <div class="ui stackable grid container">
-        <div class="row dashboard-margin progress-bar" id="circle">
-          <!-- <div class="ui medium image">
-            <img src="/img/graf.png">
-          </div> -->
-          <progress class="ui centered" max="100"></progress>
-        </div>
-        <div class="row">
-          <div class="full ui center aligned raised segment">
-          <div class="ui small statistic">
-            <div class="label">
-              Skritt hittil i dag
-            </div>
-            <div class="value">
-              2000
-            </div>
-            <div class="label">
-              Skritt hittil i år
-            </div>
-            <div class="value">
-              40000
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
   </div>

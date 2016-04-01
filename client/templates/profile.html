@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="profileCtrl as prc">
+<div class="ui container profile" ng-controller="profileCtrl as prc">
   <div class="ui two column grid">
     <div class="column pull-down">
       <div class="ui card">
@@ -22,26 +22,35 @@
         </div>
       </div>
     </div>
+    <!-- Indicator -->
     <div class="column pull-down">
-      <h2 class="ui icon header">
-        <i class="user icon"></i>
-        <div class="content">
-          Informasjon
-          <div class="sub header">Her finner du informasjonen vi har registrert om deg som bruker.</div>
+      <h3 class="ui dividing header">Din fitness</h3>
+      <div class="ui stackable grid container">
+        <div class="row dashboard-margin progress-bar" id="circle">
+          <progress class="ui centered" max="100"></progress>
         </div>
-      </h2>
-      <form class="ui form">
-        <div class="field">
-          <label>Fornavn</label>
-          <input type="text" ng-model="prc.user.profile.nameFirst" name="first-name">
+        <div class="row">
+          <div class="full ui center aligned raised segment">
+          <div class="ui small statistic">
+            <div class="label">
+              Skritt hittil i dag
+            </div>
+            <div class="value">
+              2000
+            </div>
+            <div class="label">
+              Skritt hittil i år
+            </div>
+            <div class="value">
+              40000
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <label>Etternavn</label>
-          <input type="text" ng-model="prc.user.profile.nameLast">
-        </div>
-        <button ng-click="prc.updateInfo()" class="ui button" type="submit">Endre informasjon</button>
-      </form>
+      </div>
+      </div>
     </div>
+
+
     <div class="ui stackable grid container">
       <div class="row"> <!-- Kontaktliste: DB-test -->
         <div class="ui divided items">
@@ -49,14 +58,15 @@
           <div class="item" ng-repeat="contact in prc.contacts">
             <i class="user icon"></i>
             <div class="middle aligned content">
-              {{ 
-              contact.profile.nameFirst +" "+ 
-              contact.profile.nameLast +", "+ 
+              {{
+              contact.profile.nameFirst +" "+
+              contact.profile.nameLast +", "+
               contact.username }}
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
