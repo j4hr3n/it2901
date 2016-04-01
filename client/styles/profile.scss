@@ -1,28 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700);
 $blue: #2185D0;
-.ui.container.dashboard {
-  .column{
+.ui.container.profile {
 
-  }
-  .dashboard-margin {
-    margin-top: 2em;
-  }
-  .left.floated.column.pull-down.right-padding {
-    margin-right: 0em;
-    width: 45%;
-  }
-  .right.floated.column.pull-down {
-    margin-right: 0em;
-    width: 45%;
-  }
-  .row {
-    padding: 1em;
-  }
-
-
-  .full.ui.center.aligned.raised.segment {
-    width: 100%;
-  }
   #circle {
     width: 300px !important;
     height: 300px;
