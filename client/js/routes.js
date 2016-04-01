@@ -17,22 +17,27 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/profile',
       templateUrl: 'client/templates/profile.html'
     })
-    .state('activities',{
+    .state('activities', {
       url: '/activities',
       templateUrl: 'client/templates/activities.html'
     })
-    .state('downloads',{
+    .state('downloads', {
       url: '/downloads',
       templateUrl: 'client/templates/downloads.html'
     })
-    .state('loggedIn',{
-      url: '/LoggedIn',
-      templateUrl: 'client/templates/LoggedInScreen.html'
+    .state('dashboard', {
+      url: '/dashboard',
+      templateUrl: 'client/templates/dashboard.html',
+      controller: 'dashboardCtrl'
     })
-    .state('network',{
+    .state('network', {
       url: '/network',
       templateUrl: 'client/templates/network.html',
       controller: 'networkController'
+    })
+    .state('balanse', {
+      url: '/activities/balanse',
+      templateUrl: 'client/templates/balanse.html'
     })
 
   $urlRouterProvider.otherwise('/');

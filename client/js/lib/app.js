@@ -2,7 +2,8 @@
   angular
     .module('it2901',
       ['angular-meteor',
-      'ui.router'
+      'ui.router',
+      'accounts.ui'
       ])
     .run(function($rootScope){
       $rootScope.fireLoginModal = function(){
@@ -12,3 +13,6 @@
         $('.ui.small.modal.register').modal('show');
       }
     })
+    
+  Meteor.subscribe("allUsers");
+

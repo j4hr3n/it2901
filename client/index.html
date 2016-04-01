@@ -11,22 +11,24 @@
   <script src="js/controllers/homeController.js"></script>
 </head>
 <body ng-app="it2901">
-  <div class="pusher">
+  <div class="pusher" ng-controller="indexCtrl as indc">
 
   <div class="ui container">
     <div class="ui large secondary pointing menu">
       <a class="toc item">
         <i class="sidebar icon"></i>
       </a>
-      <a class="item" ui-sref="home">Hjem</a>
-      <a class="item" ui-sref="activities">Aktiviteter</a>
-      <a class="item" ui-sref="profile">Profil</a>
-      <a class="item" ui-sref="downloads">Nedlastinger</a>
-      <a class="item" ui-sref="loggedIn">Logget inn TEST</a>
+      <a class="item" ui-sref="home" ng-if="!indc.isLoggedIn">Hjem</a>
+      <a class="item" ui-sref="loggedIn" ng-if="indc.isLoggedIn">Dine aktiviteter</a>
+      <a class="item" ui-sref="activities" ng-if="indc.isLoggedIn">Legg til nye aktiviteter</a>
+      <a class="item" ui-sref="downloads">Last ned til din mobil</a>
 
       <div class="right menu">
-          <a class="item" ng-click="fireLoginModal()">Logg inn</a>
-          <a class="item" ng-click="fireRegisterModal()">Registrer deg</a>
+        <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireLoginModal()">Logg inn</a>
+        <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireRegisterModal()">Registrer deg</a>
+        <a class="item" ng-show="indc.isLoggedIn" ui-sref="profile">Din profil</a>
+        <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard">Ditt dashboard</a>
+        <a class="item" ng-show="indc.isLoggedIn" ng-click="indc.logout()">Logg ut</a>
       </div>
     </div>
   </div>
@@ -35,8 +37,8 @@
 
   <div ui-view></div>
 </div>
-<!--Register Modal-->
-<div class="ui small modal register">
+<!--Register Modal -->
+<div class="ui small modal register" ng-controller="registerCtrl as regc">
   <i class="close icon"></i>
   <div class="header">
     Registrering
@@ -44,24 +46,28 @@
   <div class="ui container modalsize">
   <form class="ui form">
     <div class="field six wide column padding">
-      <label>Fornavn</label>
-      <input type="text" name="fornavn" placeholder="Fornavn" required>
-    </div>
-    <div class="field six wide column">
-      <label>Last Name</label>
-      <input type="text" name="etternavn" placeholder="Etternavn" required>
+      <label>Brukernavn</label>
+      <input type="text" name="fornavn" ng-model="regc.user.username" placeholder="Brukernavn" required>
     </div>
     <div class="field six wide column">
       <label>Passord</label>
-      <input type="password" name="password" placeholder="Passord" required>
+      <input type="password" name="password" ng-model="regc.user.password" placeholder="Passord" required>
     </div>
     <div class="field six wide column">
-      <label>Gjenta nytt passord</label>
-      <input type="password" name="password" placeholder="Gjenta nyttpassord" required>
+      <label>Gjenta passord</label>
+      <input type="password" name="password" ng-model="regc.passwordRepeat"  placeholder="Gjenta passord" required>
+    </div>
+    <div class="field six wide column padding">
+      <label>Fornavn</label>
+      <input type="text" name="fornavn" placeholder="Fornavn" ng-model="regc.user.profile.nameFirst" required>
+    </div>
+    <div class="field six wide column">
+      <label>Last Name</label>
+      <input type="text" name="etternavn" placeholder="Etternavn" ng-model="regc.user.profile.nameLast" required>
     </div>
     <div class="field six wide column">
       <label>Epost</label>
-      <input type="email" name="email" placeholder="Epost" required>
+      <input type="email" name="email" placeholder="Epost" ng-model="regc.user.email" required>
     </div>
     <div class="field six wide column">
       <div class="ui checkbox">
@@ -69,29 +75,29 @@
         <label>I agree to the Terms and Conditions</label>
       </div>
     </div>
-    <button class="ui button submit" type="submit">Submit</button>
+    <button class="ui button submit" ng-click="regc.registerNewUser()" type="submit">Submit</button>
   </form>
   </div>
 </div> <!--Modal ends-->
 
 <!--Login Modal-->
-<div class="ui small modal login">
+<div class="ui small modal login" ng-controller="loginCtrl as lgc">
   <i class="close icon"></i>
   <div class="header">
-    Registrering
+    Logg inn med ditt brukernavn
   </div>
 
   <div class="ui container modalsize">
     <form class="ui form">
       <div class="field six wide column padding">
         <label>Brukernavn</label>
-        <input type="text" name="username" placeholder="Brukernavn" required>
+        <input type="text" name="username" placeholder="Brukernavn" required ng-model="lgc.credentials.username">
       </div>
       <div class="field six wide column">
         <label>Password</label>
-        <input type="password" name="password" placeholder="Passord" required>
+        <input type="password" name="password" placeholder="Passord" required ng-model="lgc.credentials.password">
       </div>
-      <button class="ui green button">Logg inn</button>
+      <button class="ui green button" ng-click="lgc.login()">Logg inn</button>
     </form>
   </div>
 </div> <!--Modal ends-->
