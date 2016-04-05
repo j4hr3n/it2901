@@ -22,3 +22,5 @@ flemay:less-autoprefixer
 meteorhacks:kadira
 accounts-password
 dotansimha:accounts-ui-angular
+tmeasday:publish-counts
+angularutils:pagination

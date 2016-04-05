@@ -1,0 +1,9 @@
+<h1>Newsfeed:</h1>
+<ul>
+  <li dir-paginate="post in newsfeed.posts | itemsPerPage: newsfeed.postsPerPage" total-items="newsfeed.postCount">
+    {{ post.title }}
+    <p>
+    	<i>{{ post.description }}</i>
+    </p>
+  </li>
+</ul>

@@ -3,7 +3,8 @@
     .module('it2901',
       ['angular-meteor',
       'ui.router',
-      'accounts.ui'
+      'accounts.ui',
+      'angularUtils.directives.dirPagination'
       ])
     .run(function($rootScope){
       $rootScope.fireLoginModal = function(){

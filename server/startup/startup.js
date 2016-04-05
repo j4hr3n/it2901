@@ -1,5 +1,4 @@
 Meteor.startup(function () {
-  //Meteor.users.remove({});
   // if (Meteor.users.find().count() === 0) {
   //   var users = [
   //     {
@@ -38,6 +37,45 @@ Meteor.startup(function () {
   //     Accounts.createUser(users[i]);
   //   }
   // }
+
+  if (NewsPosts.find().count() === 0) {
+    NewsPosts.insert({
+      title: 'Fredrik har laget en ny hendelse: "Tur i parken"',
+      description: 'Håper alle blir med!',
+      date: new Date(),
+      owner: Meteor.users.findOne()._id,
+      "public": true
+    });
+  } 
+
+  Meteor.publish("newsfeedPosts", function (options) {
+    //if (this.userId) {
+      selector = {
+        $or: [
+          { $and: [
+              { owner: {$exists: true}},
+              { $or: [
+                { owner: this.userId}
+                //{owner: { $in: Meteor.user().profile.friends}},
+              ]}
+          ]},
+          { $and: [
+              { "public": true},
+              { "public": {$exists: true}}
+          ]},
+          { "public": {$exists: true}}
+        ]
+      };
+
+      Counts.publish(this, 'numberOfNewsfeedPosts', 
+        NewsPosts.find(selector), {noReady: true});
+
+      return NewsPosts.find(selector, options);
+
+    //} else {
+     // return null;
+   //}
+  });
 
   Meteor.publish("allUsers", function () {
     return Meteor.users.find({}, {'profile': 1, 'username': 1});

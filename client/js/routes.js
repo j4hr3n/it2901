@@ -39,6 +39,10 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/activities/balanse',
       templateUrl: 'client/templates/balanse.html'
     })
+    .state("newsfeed", {
+      url: '/news',
+      template: '<newsfeed></newsfeed>'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
