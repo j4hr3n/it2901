@@ -13,6 +13,5 @@
         $('.ui.small.modal.register').modal('show');
       }
     })
-    
-  Meteor.subscribe("allUsers");
 
+  Meteor.subscribe("allUsers");
