@@ -1,0 +1,79 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700);
+$blue: #2185D0;
+.ui.container.dashboard {
+  .column{
+
+  }
+  .dashboard-margin {
+    margin-top: 2em;
+  }
+  .left.floated.column.pull-down.right-padding {
+    margin-right: 0em;
+    width: 45%;
+  }
+  .right.floated.column.pull-down {
+    margin-right: 0em;
+    width: 45%;
+  }
+  .row {
+    padding: 1em;
+  }
+
+
+  .full.ui.center.aligned.raised.segment {
+    width: 100%;
+  }
+  #circle {
+    width: 300px !important;
+    height: 300px;
+    background: $blue;
+    -moz-border-radius: 300px;
+    -webkit-border-radius: 300px;
+    border-radius: 300px;
+  }
+  progress {
+    appearance: none;
+    position: relative;
+    overflow: hidden;
+    width: 1.5em;
+    height: 1em;
+    padding: 0;
+    border: none;
+    font-family: 'Ubuntu Mono', sans-serif;
+    font-size: 120px;
+    transition: height 0.4s;
+  }
+  progress.hidden {
+    height: 0;
+    transition-delay: 0.4s;
+  }
+  progress::before {
+    content: attr(value);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 0.62em;
+    color: transparentize(white, 0.7);
+    background: linear-gradient( hsla(145, 63%, 49%, 1), hsla(145, 63%, 49%, .5) 100% ) no-repeat center;
+    background-position: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  progress::-webkit-progress-bar,
+  progress::-webkit-progress-value {
+    background: transparent;
+  }
+  /* ------------------------------ */
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 50px;
+    background: radial-gradient( hsl(30,80%,80%), hsl(210,50%,70%) ) no-repeat center;
+  }
+}

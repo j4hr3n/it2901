@@ -6,12 +6,12 @@ function registerCtrl($scope, $reactive, $location) {
   $reactive(this).attach($scope);
 
   this.user = {
-    'username': 'NyBabs',
-    'password':'123',
-    'email':'baf@idi.ntnu.no',
+    'username': '',
+    'password':'',
+    'email':'',
     'profile': {
-      'nameFirst': 'Babak',
-      'nameLast': 'Farschian',
+      'nameFirst': '',
+      'nameLast': '',
       'friends': 0
     }
   };
@@ -29,11 +29,11 @@ function registerCtrl($scope, $reactive, $location) {
         if (err) {
           console.log("Failed creating new user: " + err);
           this.error = err
-        } 
+        }
         else {
           console.log("Created new user: " + this.user.username);
           $('.ui.small.modal.register').modal('hide');
-          $location.path("/LoggedIn");
+          $location.path("/dashboard");
         }
       });
     } else {
