@@ -3,7 +3,7 @@ angular
   .controller('dashboardCtrl', dashboardCtrl);
 
 function dashboardCtrl($scope, $state){
-	$state.transitionTo('event-list');
+	//$state.transitionTo('dashboard.event-list');
 }
 
 
