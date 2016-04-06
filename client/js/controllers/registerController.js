@@ -12,7 +12,7 @@ function registerCtrl($scope, $reactive, $location) {
     'profile': {
       'nameFirst': '',
       'nameLast': '',
-      'friends': 0
+      'friends': []
     }
   };
   this.passwordRepeat = this.user.password;

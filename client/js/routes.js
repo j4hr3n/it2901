@@ -39,6 +39,10 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/activities/balanse',
       templateUrl: 'client/templates/balanse.html'
     })
+    .state('venner', {
+      url: '/profile/venner',
+      templateUrl: 'client/templates/venner.html'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
