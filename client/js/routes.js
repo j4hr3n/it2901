@@ -39,6 +39,10 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/activities/balanse',
       templateUrl: 'client/templates/balanse.html'
     })
+    .state("newsfeedDebug", {
+      url: '/news',
+      template: '<newsfeed></newsfeed>'
+    })
     .state('venner', {
       url: '/profile/venner',
       templateUrl: 'client/templates/venner.html'

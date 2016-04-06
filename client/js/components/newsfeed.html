@@ -1,0 +1,14 @@
+<div class="ui container pull-down">
+	<h3>Hva som foregår</h3>
+	<div class="ui relaxed divided list">
+	  	<div class="item" ng-repeat="post in newsfeed.posts">
+	  		<i class="large child middle aligned icon"></i>
+	  		<div class="content">
+	  			<a class="header">{{ post.title }}</a>
+	  			<div class="description">{{ post.description }}</div>
+	  		</div>
+	  	</div>
+		<a href="" ng-if="newsfeed.elementNumber > 0" ng-click="newsfeed.changePage(-1)">Se nyere beskjeder</a>
+		<a href="" ng-if="newsfeed.elementNumber < newsfeed.postsCount-newsfeed.postsPerPage" ng-click="newsfeed.changePage(1)">Se eldre beskjeder</a>
+	</div>
+</div>
