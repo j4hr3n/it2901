@@ -16,3 +16,4 @@ This is the repo for Group 11's IT2901 project on fall-risk prevention/awareness
   * The webpage will be hosted on localhost:3000
 5. To deploy --> `./build.sh`
   * The webpage will deploy to [hei.jahren.it](hei.jahren.it)
+

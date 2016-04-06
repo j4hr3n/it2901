@@ -1,28 +1,43 @@
+
+
 <div class="ui container profile" ng-controller="profileCtrl as prc">
   <div class="ui two column grid">
     <div class="column pull-down">
-      <div class="ui card">
-        <div class="image">
-          <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
-        </div>
-        <div class="content">
-          <a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
-          <div class="meta">
-            <span class="date">Ble med i 2016</span>
+      <div class="ui stackable grid container">
+        <div class="ui card">
+          <div class="image">
+            <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
           </div>
-          <div class="description">
-            Babak er en gladlaks
+          <div class="content">
+            <a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
+            <div class="meta">
+              <span class="date">Ble med i 2016</span>
+            </div>
+            <div class="description">
+              Babak er en gladlaks
+            </div>
+          </div>
+          <div class="extra content">
+            <a ui-sref="venner" ng-click="prc.incrementFriends()">
+              <i class="user icon"></i>
+              {{ prc.friends.length }} venner
+            </a>
           </div>
         </div>
-        <div class="extra content">
-          <a ng-click="prc.incrementFriends()">
-            <i class="user icon"></i>
-            {{ prc.user.profile.friends }} venner
-          </a>
-        </div>
+        
+
       </div>
+
+      <div class="venner">
+          <div class="ui items">
+            <h3>Dine kontakter</h3>
+            <div class="item" ng-repeat="fr in prc.friends">
+              <p>{{ fr.username }}</p>
+            </div>
+          </div>
+        </div>
     </div>
-    <!-- Indicator -->
+    
     <div class="column pull-down">
       <h3 class="ui dividing header">Din fitness</h3>
       <div class="ui stackable grid container">
@@ -47,26 +62,27 @@
           </div>
         </div>
       </div>
+
+      <div class="ui icon input">
+            <input type="text" placeholder="Søk etter nye kontakter...">
+            <i class="search icon"></i>
       </div>
-    </div>
-
-
-    <div class="ui stackable grid container">
-      <div class="row"> <!-- Kontaktliste: DB-test -->
-        <div class="ui divided items">
-          <h3>Dine kontakter</h3>
-          <div class="item" ng-repeat="contact in prc.contacts">
-            <i class="user icon"></i>
-            <div class="middle aligned content">
-              {{
-              contact.profile.nameFirst +" "+
-              contact.profile.nameLast +", "+
-              contact.username }}
+      </div>
+          <div class="ui stackable grid container">
+            <div>
+              <div class="ui divided items">
+                <h3>Alle kontakter i databasen</h3>
+                <div class="item" ng-repeat="user in prc.contacts">
+                  <li>{{user.username}} <button ng-click="addFriend(user._id)">Add friend</button></li>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+    
     </div>
+
+    
 
   </div>
 </div>
+

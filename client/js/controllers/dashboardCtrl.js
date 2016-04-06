@@ -3,7 +3,7 @@ angular
   .controller('dashboardCtrl', dashboardCtrl);
 
 function dashboardCtrl(){
-  
+
 }
 
 

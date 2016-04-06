@@ -1,0 +1,26 @@
+<div class="ui container venner" ng-controller="profileCtrl as prc">
+	<div class="ui grid">
+	  <div class="four wide column" ng-repeat="fr in prc.friends">
+	  	<div class="ui card">
+	  	  <div class="image">
+	  	    <img src="/img/kristy.png">
+	  	  </div>
+	  	  <div class="content">
+	  	    <a class="header">{{ fr.username }}</a>
+	  	    <div class="meta">
+	  	      <span class="date">Joined in 2013</span>
+	  	    </div>
+	  	    <div class="description">
+	  	      Kristy is an art director living in New York.
+	  	    </div>
+	  	  </div>
+	  	  <div class="extra content">
+	  	    <a>
+	  	      <i class="user icon"></i>
+	  	      22 Friends
+	  	    </a>
+	  	  </div>
+	  	</div>
+	  </div>
+	</div>
+</div>

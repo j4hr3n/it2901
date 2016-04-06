@@ -1,3 +1,4 @@
+
 angular
     .module('it2901')
     .controller('profileCtrl', profileCtrl);
@@ -11,7 +12,13 @@ function profileCtrl($scope, $reactive) {
                         // ^ Debug
     },
     contacts: () => {
-      return Meteor.users.find({});
+      return Meteor.users.find({}, {'username':1});
+    },
+
+    friends: () => {
+      user =  Meteor.user();
+      return user.profile.friends;
+      
     }
   });
 
@@ -23,6 +30,43 @@ function profileCtrl($scope, $reactive) {
       { $inc: { friends: 1 } }
     )
   };
+
+  var friendList = []
+  friendObject = Meteor.user().profile.friends
+  for (var i = 0; i < friendObject.length; i++) {
+    friendList.push(friendObject[i]._id)
+  };
+
+  $scope.addFriend = function(userId){
+    theUser = Meteor.users.findOne({'_id' : userId})
+    
+    if ( userId === Meteor.userId() ){
+      sweetAlert("Oops...", "You cannot be your own friend. Jesus Christ!!", "error");
+    } 
+    else if ( friendList.indexOf(userId) < 0 ){
+      Meteor.call('addFriend', theUser)
+      friendList.push(userId)
+      swal("Friend added", "You are now friend with this person!", "success")
+    }
+    else {
+      sweetAlert("Oops...", "You are already friend with this motherfucker!", "error");
+    }
+
+    
+  }
+
+  $scope.getFriends = function(){
+    Meteor.call(
+    'getFriends',
+    function(error, result){
+        if(error){
+            console.log(error);
+        } else {
+            console.log(result);
+        }
+    }
+  );
+}
 
   this.updateInfo = () => {
 
