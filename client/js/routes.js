@@ -30,6 +30,12 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl'
     })
+    .state('dashboard.event-list', {
+      //parent: 'dashboard',
+      //#url: '/eventlist',
+      templateUrl: 'client/event-list/event-list.html',
+      //controller : 'eventListCtrl'
+    })
     .state('network', {
       url: '/network',
       templateUrl: 'client/templates/network.html',

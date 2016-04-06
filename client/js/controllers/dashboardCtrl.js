@@ -2,8 +2,8 @@ angular
   .module('it2901')
   .controller('dashboardCtrl', dashboardCtrl);
 
-function dashboardCtrl(){
-
+function dashboardCtrl($scope, $state){
+	$state.transitionTo('event-list');
 }
 
 
