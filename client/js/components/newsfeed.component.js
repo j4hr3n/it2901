@@ -10,8 +10,8 @@ angular.module("it2901").directive("newsfeed", function () {
 function newsfeedCtrl($scope, $reactive) {
 	$reactive(this).attach($scope);
 
-	this.postsPerPage = 10
-	this.pageNumber = 1;
+	this.postsPerPage = 10;
+	this.elementNumber = 0;
 
 	this.helpers({
 		posts: () => {
@@ -20,16 +20,23 @@ function newsfeedCtrl($scope, $reactive) {
 		postsCount: () => {
           return Counts.get('numberOfNewsfeedPosts');
         }
-	})
+	});
 
 	this.subscribe("newsfeedPosts", () => {
 		return [{
 			limit: parseInt(this.postsPerPage),
-			skip: parseInt(
-				(this.getReactively('pageNumber')-1) * this.postsPerPage),
+			skip: parseInt(this.getReactively('elementNumber')),
 			sort: { date: 1}
 		}]
-	})
+	});
+
+	this.changePage = (pageDiff) => {
+		console.log("changed element from "+this.elementNumber+" to "+(this.elementNumber + this.postsPerPage*pageDiff)+ " ("+this.postsPerPage+", "+pageDiff+")");
+		
+		this.elementNumber = Math.max(0, Math.min(this.postsCount-this.postsPerPage, 
+			this.elementNumber + this.postsPerPage*pageDiff));
+		console.log(this.elementNumber);
+	};
 
 	this.newPost = {
 		title: "Tittel",

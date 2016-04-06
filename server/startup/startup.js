@@ -38,14 +38,17 @@ Meteor.startup(function () {
   //   }
   // }
 
-  if (NewsPosts.find().count() === 0) {
-    NewsPosts.insert({
-      title: 'Fredrik har laget en ny hendelse: "Tur i parken"',
-      description: 'Håper alle blir med!',
-      date: new Date(),
-      owner: Meteor.users.findOne()._id,
-      "public": true
-    });
+  if (NewsPosts.find().count() < 15) {
+    NewsPosts.remove({});
+    for (i=0; i<15; i++) {
+      NewsPosts.insert({
+        title: 'Fredrik ('+i+') har laget en ny hendelse: "Tur i parken"',
+        description: 'Håper alle blir med!',
+        date: new Date(),
+        owner: Meteor.users.findOne()._id,
+        "public": true
+      });
+    }
   } 
 
   Meteor.publish("newsfeedPosts", function (options) {
