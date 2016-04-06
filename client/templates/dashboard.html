@@ -1,41 +1,15 @@
 <div class="ui container dashboard">
 
-  <div class="container">
-    <div id="heading">
-      <h1>search bar</h1>
-    </div>
-    {{> searchBox }}
-    {{> searchResult}}
+  <div ng-app="angularTypeahead">
+  	<div class="container-fluid" ng-controller="TypeaheadCtrl">
+  		<!--<h2><img src="" alt="Angular.js Logo"> Angular.js Typeahead</h2>-->
+  		<div class="form-group">
+  		  <label for="states">Search for US States</label>
+  			<input name="states" id="states" type="text" placeholder="enter a state" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+  		</div>
+      <button class="btn btn-success" type="submit">Submit</button>
+  	</div>
   </div>
-
-<template name="searchBox">
-  <input type="text" id="search-box" placeholder="search packages here" />
-</template>
-
-<template name="searchResult">
-  <div id='search-result'>
-    <div id="search-meta">
-      {{#if isLoading}}
-        searching ...
-      {{/if}}
-    </div>
-
-    {{#each getPackages}}
-    <div class="package">
-      <h4 class="name">
-        <a href="{{git}}" target="_blank">{{{packageName}}}</a>
-      </h4>
-      <div class="description">
-        {{{description}}}
-      </div>
-    </div>
-    {{/each}}
-  </div>
-</template>
-
-
-
-
 
 
 
@@ -51,7 +25,6 @@
 
 
   <div class="ui two column grid">
-
     <!-- Section one -->
     <div class="left floated column pull-down right-padding">
       <h3 class="ui dividing header">Nyheter</h3>
