@@ -12,8 +12,13 @@ function registerCtrl($scope, $reactive, $location) {
     'profile': {
       'nameFirst': '',
       'nameLast': '',
-      'friends': []
+      'friends': [],
+      'notifications' : {
+        'friendRequests' : [],
+        'activities' : []
+      }
     }
+    
   };
   this.passwordRepeat = this.user.password;
 

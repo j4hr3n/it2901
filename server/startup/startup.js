@@ -9,7 +9,11 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
-          'friends': []
+          'friends': [],
+          'notifications' : {
+            'friendRequests' : [],
+            'activities' : []
+          }
         }
       },
       {
@@ -19,7 +23,11 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
-          'friends': []
+          'friends': [],
+          'notifications' : {
+            'friendRequests' : [],
+            'activities' : []
+          }
         }
       },
       {
@@ -29,7 +37,11 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'P�l',
-          'friends': []
+          'friends': [],
+          'notifications' : {
+            'friendRequests' : [],
+            'activities' : []
+          }
         }
       }
     ];
