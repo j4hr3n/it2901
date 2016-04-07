@@ -34,9 +34,38 @@
             <div class="item" ng-repeat="fr in prc.friends">
               <p>{{ fr.username }}</p>
             </div>
+            <div class="ui compact menu">
+              <a class="item newFriend">
+                  <i class="add user icon"></i> Friends
+                  <div class="floating ui ui red circular label" ng-model="test">{{test()}}</div>
+                </a>
+            </div>
+            <script type="text/javascript">
+              $('.newFriend').click(function(){
+                $('.ui.small.modal.friendModal')
+                  .modal('show')
+                ;
+              })
+                
+              ;
+            </script>
           </div>
         </div>
     </div>
+
+    
+    <!--modal-->
+
+    <div class="ui small modal friendModal">
+      <i class="close icon"></i>
+      <div class="header">
+        Friend requests
+      </div>
+      <div class="description">
+        <p>Coming soon feature</p>
+      </div>
+    </div>
+
     
     <div class="column pull-down">
       <h3 class="ui dividing header">Din fitness</h3>
@@ -85,4 +114,6 @@
 
   </div>
 </div>
+
+
 

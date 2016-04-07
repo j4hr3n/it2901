@@ -19,8 +19,22 @@ function profileCtrl($scope, $reactive) {
       user =  Meteor.user();
       return user.profile.friends;
       
-    }
+    },
+
+    notifications: () => {
+      user =  Meteor.user();
+      return user.profile.nameFirst;
+
+      //user.profile.notifications.friendRequest.info.length
+    },
+
+
+
   });
+
+  $scope.test = function(){
+    return Meteor.user().profile.notifications.friendRequests.length;
+  }
 
 
   this.incrementFriends = () => {
