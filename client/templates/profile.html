@@ -24,7 +24,7 @@
             </a>
           </div>
         </div>
-        
+
 
       </div>
 
@@ -46,14 +46,14 @@
                   .modal('show')
                 ;
               })
-                
+
               ;
             </script>
           </div>
         </div>
     </div>
 
-    
+
     <!--modal-->
 
     <div class="ui small modal friendModal">
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    
+
     <div class="column pull-down">
       <h3 class="ui dividing header">Din fitness</h3>
       <div class="ui stackable grid container">
@@ -102,18 +102,15 @@
               <div class="ui divided items">
                 <h3>Alle kontakter i databasen</h3>
                 <div class="item" ng-repeat="user in prc.contacts">
-                  <li>{{user.username}} <button ng-click="addFriend(user._id)">Add friend</button></li>
+                  <li>{{user.username}} <button ng-click="addFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
                 </div>
               </div>
             </div>
           </div>
-    
+
     </div>
 
-    
+
 
   </div>
 </div>
-
-
-
