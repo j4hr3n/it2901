@@ -1,7 +1,8 @@
 'use strict';
 angular
   .module('it2901', ['angular-meteor',
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ])
   .run(function($rootScope) {
     $rootScope.fireLoginModal = function() {
