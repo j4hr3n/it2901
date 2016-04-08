@@ -30,6 +30,11 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl'
     })
+    .state('dashboard.eventlist', {
+      url: '/eventlist',
+      templateUrl: 'client/event-list/event-list.html',
+      controller : 'eventListCtrl'
+    })
     .state('network', {
       url: '/network',
       templateUrl: 'client/templates/network.html',
@@ -46,6 +51,15 @@ function config($stateProvider, $urlRouterProvider) {
     .state('venner', {
       url: '/profile/venner',
       templateUrl: 'client/templates/venner.html'
+    })
+    .state('example', {
+      url: '/example',
+      templateUrl: 'client/miniex/parent.html' 
+    })
+    .state('dashboard.child', {
+      url: '/child',
+      templateUrl: 'client/event-list/event-list.html',
+      controller : 'eventListCtrl'
     })
 
   $urlRouterProvider.otherwise('/');

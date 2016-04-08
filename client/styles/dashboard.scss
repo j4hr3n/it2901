@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:700);
 $blue: #2185D0;
+
 .ui.container.dashboard {
   .column{
 
@@ -17,6 +18,11 @@ $blue: #2185D0;
   }
   .row {
     padding: 1em;
+  }
+
+  .ui.small.modal > header.modal{
+  background: $blue;
+  text: #000000;
   }
 
 

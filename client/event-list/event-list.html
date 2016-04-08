@@ -1,0 +1,66 @@
+<div ng-controller="eventListCtrl as evC">
+
+<div class="six wide  ui divided items">
+  <h3>Kommende Aktiviteter</h3>
+  <div class="item" ng-repeat = "event in evC.events">
+    <i class="calendar icon"></i>
+    <div class="content">
+      <a class=" header"> {{ event.name }} </a>
+      <div class="description">   
+        <p>Mandag, 14.mars, kl 12.00</p>
+        <p>{{ event.location }}</p>
+      </div>
+    </div>
+    </div>
+    </div>
+
+          <div class="ui medium buttons">
+            <button class="ui blue button" ng-click="fireCreateEventModal()">
+              Opprett aktivitet
+            </button>
+            <button class="ui blue button" ng-click="">
+              Se aktiviteter
+            </button>
+          </div>
+
+            <div class="ui small inverted modal createEvent" >
+  <i class="close icon"></i>
+
+ <div class="header modal">Opprett en ny aktivitet</div>
+  <div class="content">
+
+            <div id="form" class="ui form pull-down" >
+<div class="required field">
+  <label>Tittel: </label>
+  <input type="text" ng-model="evC.newEvent.name"/>
+  </div>
+  <div class="field">
+  <label>Beskrivels: </label>
+  <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
+   <div class="field">
+    <label>Legg til venner: </label>
+    <select multiple="" class="ui dropdown">
+    <option value="">Velg venn</option>
+    <option value="1">Aleksander</option>
+    <option value="2">Christopher</option>
+    <option value="3">Sarah</option>
+    <option value="4">Brang</option>
+    <option value="5">Sindre</option>
+    <option value="6">Emil</option>
+    </select>
+  </div>
+  <div class="field">
+  <label>Dato: </label>
+  <input type="text" class="form-control" id="form-datepicker">  
+  </div>
+  <div class="field">
+    <label>Sted: </label>
+    <input type="text" ng-model="evC.newEvent.location"/>
+  </div>
+  <button class="ui medium blue button" ng-click="evC.addEvent()">Opprett</button>
+</div>
+</div>
+</div>
+
+</div>
+</div>
