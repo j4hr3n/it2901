@@ -19,16 +19,9 @@ function dashboardCtrl($scope) {
     'Wyoming'
   ];
 
-  // $scope.newsfeed = function() {
-  //   $("#randomID").load("templates/dashboard.html");
-  // }
+  // return Meteor.user.nameFirst()
   //
-  // $('.ui.search')
-  //   .search({
-  //     /*Bytte ut source med data fra DB*/
-  //     source: content
-  //   });
-
+  //   console.log(result);
 
 
 }
