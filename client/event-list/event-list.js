@@ -9,6 +9,10 @@ function eventListCtrl($scope, $reactive) {
       }
 
     $('#form-datepicker').datepicker();
+
+    $('#addFriends').dropdown({
+        allowAdditions: true
+    });
     
     $reactive(this).attach($scope);
 

@@ -9,6 +9,10 @@ function egneAktiviteterCtrl($scope, $reactive) {
       }
 
     $('#form-datepicker').datepicker();
+
+    $('#addFriends').dropdown({
+        allowAdditions: true
+    });
     
     $reactive(this).attach($scope);
 
@@ -23,7 +27,10 @@ function egneAktiviteterCtrl($scope, $reactive) {
     this.helpers({
         events: () => {
            return Events.find({});
-       }
+       },
+        oneEvent: () => {
+          return Events.findOne({_id: $stateParams.eventId});
+        },
    });
 
     this.addEvent = () => {
