@@ -76,6 +76,7 @@ observe-sequence@1.0.9
 ordered-dict@1.0.5
 pbastowski:angular-babel@1.0.9
 promise@0.6.5
+rajit:bootstrap3-datepicker@1.5.1
 random@1.0.7
 rate-limit@1.0.2
 reactive-dict@1.1.5
