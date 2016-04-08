@@ -51,7 +51,9 @@
           </div>
           <div class="field">
             <label>Dato: </label>
-            <input type="text" class="form-control" ng-model="evC.newEvent.date" id="form-datepicker">  
+            <div class="choosedate">
+            <input type="text" class="form-control" id="form-datepicker" ng-click="fireDatepicker()">
+          </div>  
           </div>
           <div class="field">
             <label>Sted: </label>

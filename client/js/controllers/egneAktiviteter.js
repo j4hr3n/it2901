@@ -6,9 +6,11 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     $scope.fireCreateEventModal = function() {
         $('.ui.small.modal.createEvent').modal('show');
-      }
+      };
 
-    $('#form-datepicker').datepicker();
+    $scope.fireDatepicker = function() {
+    $('.choosedate').datepicker({});
+      };
 
     $('#addFriends').dropdown({
         allowAdditions: true

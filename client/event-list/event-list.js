@@ -8,6 +8,10 @@ function eventListCtrl($scope, $reactive) {
         $('.ui.small.modal.createEvent').modal('show');
       }
 
+    $scope.fireDatepicker = function() {
+        $('.choosedate').datepicker({});
+      };
+
     $('#form-datepicker').datepicker();
 
     $('#addFriends').dropdown({
