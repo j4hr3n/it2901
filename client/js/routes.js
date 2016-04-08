@@ -61,6 +61,11 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
     })
+    .state('egneAktiviteter', {
+      url: '/mineAktiviteter',
+      templateUrl: 'client/templates/egneAktiviteter.html',
+      controller: 'egneAktiviteterCtrl'
+    })
 
   $urlRouterProvider.otherwise('/');
 }
