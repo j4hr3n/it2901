@@ -2,25 +2,31 @@ angular
 .module('it2901')
 .controller('egneAktiviteterCtrl', egneAktiviteterCtrl);
 
-function egneAktiviteterCtrl($scope, $reactive) {
+function egneAktiviteterCtrl($scope, $reactive) {  
+    $reactive(this).attach($scope);
 
-    $scope.fireCreateEventModal = function() {
+     $scope.fireCreateEventModal = function() {
         $('.ui.small.modal.createEvent').modal('show');
-      };
+      }
 
     $scope.fireDatepicker = function() {
     $('.choosedate').datepicker({});
-      };
+      }
 
     $('#addFriends').dropdown({
         allowAdditions: true
     });
-    
-    $reactive(this).attach($scope);
 
-    this.eventForm = () => {
-        document.getElementById('form').style.visibility = "visible";
-    };
+    $('.ui.status.button').popup({
+    inline   : true,
+    hoverable: true,
+    position : 'bottom left',
+    delay: {
+      show: 300,
+      hide: 800
+    }
+  })
+;
 
     this.newEvent = {};
 
@@ -29,10 +35,10 @@ function egneAktiviteterCtrl($scope, $reactive) {
     this.helpers({
         events: () => {
            return Events.find({});
-       },
+       }, /*
         oneEvent: () => {
           return Events.findOne({_id: $stateParams.eventId});
-        },
+        },*/
    });
 
     this.addEvent = () => {

@@ -1,5 +1,30 @@
+$blue: #2185D0;
+$white: #ffffff;
+$grey: #aaaaaa;
+
 .ui.container.myEvents{
 	.colum.pull-down.myEvents{
 	background: #ff00ff;
 	}
+	
+}
+.header.blue.modal{
+	background: $blue;
+	color: $white;
+}
+
+.huge.center.aligned.calendar.icon{
+	margin: 0px auto;
+}
+.ui.card > .content{
+		border-top: 0px;
+		margin: 0px auto;
+		text-align: center;
+	}
+.ui.small.grey.basic.button{
+	padding: 0.5em 1.5em 0.5em 1.5em;
+}
+.ui.status.basic.button{
+	color: $grey;
+	border: 0px;
 }

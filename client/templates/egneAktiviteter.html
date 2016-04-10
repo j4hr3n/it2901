@@ -13,7 +13,7 @@
     <div class="ui small inverted modal createEvent" >
       <i class="close icon"></i>
 
-      <div class="header modal">Opprett en ny aktivitet</div>
+      <div class="header blue modal">Opprett en ny aktivitet</div>
       <div class="content">
 
         <div id="form" class="ui form pull-down" >
@@ -47,7 +47,7 @@
               <label>Sted: </label>
               <input type="text" ng-model="evC.newEvent.location"/>
             </div>
-            <button class="ui medium blue button" ng-click="evC.addEvent()">Opprett</button>
+            <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
           </div>
         </div>
       </div>
@@ -73,11 +73,11 @@
     <div class="ui stackable container">
       <div class="row">
         <div class="ui card">
-          <div class="image">
-            <i class=" huge centered calendar icon"></i>
-          </div>
+          
+            <i class=" huge center aligned calendar icon"></i>
+         
           <div class="content">
-            <div class="header">
+            <div class="header pull-down">
              <p>Gåtur til senteret </p> 
            </div>
            <div class="meta">
@@ -89,10 +89,16 @@
            </div>
          </div>
          <div class="extra content">
-          <a title="Klikk for å endre status">
+          <div class="ui status  basic button">
             <i class="thumbs up outline icon"></i>
-            Status: Attending
-          </a>
+            Status: Deltar
+          </div>
+          <div class="ui fluid popup top left transition hidden">
+          <div class="ui toggle checkbox">
+  <input type="checkbox" name="status">
+  <label>Du deltar</label>
+</div>
+          </div>
         </div>
         <div class="extra content">
          
