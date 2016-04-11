@@ -11,25 +11,48 @@ Meteor.methods({
 		//Meteor.users.update({_id : Meteor.userId()}, { $push : { "profile.friends" : theUser }})
 	},
 
-	'addNewsPost' : (user, data, 'public' = false) => {
+	'addNewsPost' : (user, data, isPublic = false) => {
 		/* 'data needs one of the following properties:
 
-		friendAdded : { newFriend: <user id>}
-		newActivity: { activity: <activity id>}
+		friendAdded : { newFriendID: <user id>}
 		userPost: { title: <string>,
 					description: <string>,
 					resources (optional): <reference>}
-		newEvent: { event: <eventID>}
+		newEvent: { eventID: <eventID>}
+		joinedEvent: { eventID: <eventID>}
 		*/
 		
-		if (!(_.size(data) == 1))
+		if (_.size(data) != 1) {
 			throw new Meteor.Error(404, "'data' needs to have exactly one"
-				+" type (friendAdded, newActivity, userPost, newEvent, etc., "
-				+" see method comment.)");
+				+" type (friendAdded, userPost, newEvent, etc., "
+				+" see method comment for more info.)");
+		}
 
 		if data.hasOwnProperty("friendAdded") {
+			var info = data.friendAdded;
+			var type = "friendAdded";
+		} else if data.hasOwnProperty("userPost") {
+			var info = data.userPost;
+			var type = "userPost";
+		} else if data.hasOwnProperty("newEvent") {
+			var info = data.newEvent;
+			var type = "newEvent";
+		} else if data.hasOwnProperty("joinedEvent") {
+			var info = data.joinedEvent;
+			var type = "joinedEvent";
+		} else {
+			throw new Meteor.Error(404, "'data' needs to have exactly one"
+				+" type (friendAdded, newActivity, userPost, newEvent, etc., "
+				+" see method comment for more info.)");
+		}
 
-		} e
+		NewsPosts.insert({
+			owner: user,
+	        info: info,
+	        type: type,
+	        date: new Date(),
+	        "public": isPublic
+      });
 	},
 
 	'getFriends' : function(){
