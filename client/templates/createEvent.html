@@ -28,10 +28,8 @@
             </div>
             <div class="field">
               <label>Legg til venner</label>
-              <select name="participants" multiple="" class="ui fluid search dropdown" id="addFriends" ng-model="participants" ng-options="user._id as user.username for user in evC.users">
+              <select multiple="" ng-model="evC.newEvent.participants" ng-options="user.username for user in evC.users track by user._id">
                <option value="">Velg venner</option>
-               
-           
               </select>
             </div>
             <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>

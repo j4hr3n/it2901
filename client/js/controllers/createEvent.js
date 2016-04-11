@@ -14,7 +14,7 @@ function createEventCtrl($scope, $reactive) {
     $('.choosedate').datepicker({});
       }
 
-    $('#addFriends').dropdown({
+    $('#addUsers').dropdown({
         allowAdditions: true
     });
 

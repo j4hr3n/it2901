@@ -23,9 +23,9 @@
             <p>{{ event.date }} kl 12.00</p>
             <p>{{ event.location }}</p>
           </div>
-          <div class="ui list" ng-repeat="participant in evC.participants">
+          <div class="ui list" ng-repeat="participant in event.participants">
             <div class="ui item">
-              {{participant}}
+              {{participant.username}}
             </div>
           </div>
         </div>
