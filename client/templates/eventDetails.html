@@ -1,0 +1,57 @@
+<div class="ui card">
+  
+  <i class=" huge center aligned calendar icon"></i>
+  
+  <div class="content">
+    <div class="header pull-down">
+     <p>Gåtur til senteret </p> 
+   </div>
+   <div class="meta">
+     <span>Opprettet av: Svein XX</span><br>
+     <span class="date">12 mars 2016, kl 12:00 </span> <br>
+     <span>Trondheim </span>
+   </div>
+   <div class="content pull-down">
+     <p>Dette er en beskrivelse for en event. Nå er det bare dummy data, men det kommer selvfølgelig ekta data etterhvert. For nå er dette er morsom event som du vl få veldig mye igejn for å være med på.</p>
+   </div>
+ </div>
+ <div class="extra content">
+  <a id="status">
+    <i class="thumbs up outline icon"></i>
+    Status: Deltar
+  </a>
+  <div class="ui fluid popup top left transition hidden">
+    <div class="ui toggle checkbox">
+      <input type="checkbox" name="status">
+      <label>Du deltar</label>
+    </div>
+  </div>
+</div>
+<div class="extra content">
+ 
+  <i class="heart outline icon"></i>
+  Vanskelighetsgrad: {{ evC.level }}
+  
+</div>
+<div class="extra content">
+  <a class="participants button">
+    <i class="user icon"></i>
+    {{ evC.participants }} invitert
+  </a>
+  <div class="ui fluid popup top left transition hidden">
+    <div class="ui list">
+      <div class="item">list of participants</div>
+    </div>
+  </div>
+  <a class="participating button">
+    <i class="checkmark icon"></i>
+    {{ evC.participating }} deltar
+  </a>
+  <div class="ui fluid popup top left transition hidden">
+    <div class="ui list">
+      <div class="item">list of participants</div>
+    </div>
+  </div>
+</div>
+
+</div>

@@ -35,6 +35,11 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
     })
+    .state('eventlist.createEvent',{
+      url: '/createEvent',
+      templateUrl: 'client/templates/createEvent.html',
+      controller: 'createEventCtrl'
+    })
     .state('network', {
       url: '/network',
       templateUrl: 'client/templates/network.html',
@@ -65,6 +70,16 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/mineAktiviteter',
       templateUrl: 'client/templates/egneAktiviteter.html',
       controller: 'egneAktiviteterCtrl'
+    })
+    .state('egneAktiviteter.createEvent',{
+      url:'/createEvent',
+      templateUrl: 'client/templates/createEvent.html',
+      controller: 'createEventCtrl'
+    })
+    .state('egneAktiviteter.eventDetails', {
+      url: '/eventDetails',
+      templateUrl: 'client/templates/eventDetails',
+      controller: 'eventDetailsCtrl'
     })
 
   $urlRouterProvider.otherwise('/');

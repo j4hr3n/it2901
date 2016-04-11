@@ -1,68 +1,32 @@
 <div class="ui container myEvents" ng-controller="egneAktiviteterCtrl as evC">
-  <div class="ui container">
-   <div class="ui medium buttons pull-down">
-    <button class="ui blue button" ng-click="fireCreateEventModal()">
-      Opprett aktivitet
-    </button>
-  </div>
+  <div class="ui stackable grid container pull-down">
+  <div class= "row">
+   
+
+   <div ui-view></div>
+  
+
 </div>
+</div>
+<div class="row">
 
 <div class="ui two column grid">
   <div class="column pull-down myEvents">
 
-    <div class="ui small inverted modal createEvent" >
-      <i class="close icon"></i>
-
-      <div class="header blue modal">Opprett en ny aktivitet</div>
-      <div class="content">
-
-        <div id="form" class="ui form pull-down" >
-          <div class="required field">
-            <label>Tittel: </label>
-            <input type="text" ng-model="evC.newEvent.name"/>
-          </div>
-          <div class="field">
-            <label>Beskrivelse: </label>
-            <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
-            <div class="field">
-              <label>Legg til venner</label>
-              <select name="participants" multiple="" class="ui fluid search dropdown" id="addFriends">
-                <option value="">Legg til venner</option>
-                <option value="">Velg venn</option>
-                <option value="1">Aleksander</option>
-                <option value="2">Christopher</option>
-                <option value="3">Sarah</option>
-                <option value="4">Brang</option>
-                <option value="5">Sindre</option>
-                <option value="6">Emil</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Dato: </label>
-               <div class="choosedate">
-            <input type="text" class="form-control" id="form-datepicker" ng-click="fireDatepicker()">
-          </div> 
-            </div>
-            <div class="field">
-              <label>Sted: </label>
-              <input type="text" ng-model="evC.newEvent.location"/>
-            </div>
-            <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
     <div class="six wide  ui divided items">
       <h3>Mine Aktiviteter</h3>
-      <div class="item" ng-repeat="event in evC.events">
+      <div class="item"  ui-sref="{{event._id}}" ng-repeat="event in evC.events" >
         <i class="calendar icon"></i>
         <div class="content">
           <a class=" header"> {{ event.name }} </a>
           <div class="description">   
             <p>{{ event.date }} kl 12.00</p>
             <p>{{ event.location }}</p>
+          </div>
+          <div class="ui list" ng-repeat="participant in evC.participants">
+            <div class="ui item">
+              {{participant}}
+            </div>
           </div>
         </div>
       </div>
@@ -72,52 +36,14 @@
   <div class="column pull-down myEvents">
     <div class="ui stackable container">
       <div class="row">
-        <div class="ui card">
-          
-            <i class=" huge center aligned calendar icon"></i>
-         
-          <div class="content">
-            <div class="header pull-down">
-             <p>Gåtur til senteret </p> 
-           </div>
-           <div class="meta">
-             <span class="date">12 mars 2016, kl 12:00 </span> <br>
-             <span>Trondheim </span>
-           </div>
-           <div class="content pull-down">
-             <p>Dette er en test event. Her vil det komme er rask beskrivelse av eventen som forteller hvor morsom den er.</p>
-           </div>
-         </div>
-         <div class="extra content">
-          <div class="ui status  basic button">
-            <i class="thumbs up outline icon"></i>
-            Status: Deltar
-          </div>
-          <div class="ui fluid popup top left transition hidden">
-          <div class="ui toggle checkbox">
-  <input type="checkbox" name="status">
-  <label>Du deltar</label>
-</div>
-          </div>
-        </div>
-        <div class="extra content">
-         
-          <i class="heart outline icon"></i>
-          Vanskelighetsgrad: middels
-          
-        </div>
-        <div class="extra content">
-          <a title="Klikk for å se hvem som skal delta">
-            <i class="user icon"></i>
-            12 deltakere
-          </a>
-        </div>
         
-      </div>
+      <div class="ui view">Trykk på en aktivitet for å se detaljer</div>
+
     </div>
     
     
   </div>
+</div>
 </div>
 </div>
 </div>

@@ -1,19 +1,10 @@
 angular
 .module('it2901')
-.controller('egneAktiviteterCtrl', egneAktiviteterCtrl);
+.controller('eventDetailsCtrl', eventDetailsCtrl);
 
-function egneAktiviteterCtrl($scope, $reactive) {  
+function eventDetailsCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
-     $scope.fireCreateEventModal = function() {
-        $('.ui.small.modal.createEvent').modal('show');
-      }
-
-    $scope.fireDatepicker = function() {
-    $('.choosedate').datepicker({});
-      }
-
-    $('#addFriends').dropdown();
 
     $('#status').popup({
     inline   : true,
@@ -51,15 +42,12 @@ function egneAktiviteterCtrl($scope, $reactive) {
     this.helpers({
         events: () => {
            return Events.find({});
-       },
-        users: () => {
-      return Meteor.users.find({}, {'username':1});
-    }, /*
+       }, /*
         oneEvent: () => {
           return Events.findOne({_id: $stateParams.eventId});
         },*/
    });
-    this.participants = ['Sarah', 'Alexander', 'Christoffer'];
+    this.participants = "15";
     this.participating = "6";
     this.level = "middels";
 
