@@ -112,7 +112,7 @@ function profileCtrl($scope, $reactive) {
     theUser = Meteor.users.findOne({'_id' : userId})
     
     if ( userId === Meteor.userId() ){
-      sweetAlert("Oops...", "You cannot be your own friend. Jesus Christ!!", "error");
+      sweetAlert("Oops...", "You cannot be your own friend.", "error");
     } 
     else if ( friendList.indexOf(userId) < 0 ){
       Meteor.call('addFriend', theUser)
@@ -120,7 +120,7 @@ function profileCtrl($scope, $reactive) {
       swal("Friend added", "You are now friend with this person!", "success")
     }
     else {
-      sweetAlert("Oops...", "You are already friend with this motherfucker!", "error");
+      sweetAlert("Oops...", "You are already friend with this person!", "error");
     }
 
     
