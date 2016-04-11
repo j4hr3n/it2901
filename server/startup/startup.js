@@ -1,4 +1,23 @@
 Meteor.startup(function () {
+  Events.remove({});
+  if(Events.find().count() === 0){
+    var events = [
+      {
+        'name': 'Event1',
+        'description': 'Dette er event 1'
+      },
+      {
+        'name': 'Event2',
+        'description': 'Dette er event 2'
+      }
+    ];
+
+    for (var i = 0; i < events.length; i++) {
+        Events.insert(events[i]);
+    }
+  }
+
+
   Meteor.users.remove({});
   if (Meteor.users.find().count() === 0) {
     var users = [
