@@ -17,7 +17,6 @@ Meteor.startup(function () {
     }
   }
 
-
   Meteor.users.remove({});
   if (Meteor.users.find().count() === 0) {
     var users = [
@@ -74,24 +73,24 @@ Meteor.startup(function () {
     var posts = [
       {
         type: "friendAdded",
-        info: { newFriendID: Meteor.users.findOne({username: "perp"})._id},
         date: new Date(),
-        owner: Meteor.users.findOne({username: "therandy"})._id,
-        "public": true
+        ownerID: Meteor.users.findOne({username: "therandy"})._id,
+        "public": true,
+        newFriendID: Meteor.users.findOne({username: "perp"})._id
       },
       {
         type: "newEvent",
-        info: { eventID: Events.findOne()._id},
         date: new Date(),
-        owner: Meteor.users.findOne({username: "Babs"})._id,
-        "public": true
+        ownerID: Meteor.users.findOne({username: "Babs"})._id,
+        "public": true,
+        eventID: Events.findOne()._id
       },
       {
         type: "joinedEvent",
-        info: { eventID: Events.findOne()._id},
         date: new Date(),
-        owner: Meteor.users.findOne({username: "therandy"})._id,
-        "public": true
+        ownerID: Meteor.users.findOne({username: "therandy"})._id,
+        "public": true,
+        eventID: Events.findOne()._id
       },
     ];
 
@@ -106,10 +105,10 @@ Meteor.startup(function () {
       selector = {
         $or: [
           { $and: [
-              { owner: {$exists: true}},
+              { ownerID: {$exists: true}},
               { $or: [
-                { owner: this.userId}
-                //{owner: { $in: Meteor.user().profile.friends}},
+                { ownerID: this.userId}
+                { ownerID: { $in: Meteor.users.findOne(this.userId);.profile.friends}},
               ]}
           ]},
           { $and: [
