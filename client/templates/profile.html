@@ -10,11 +10,8 @@
         	<div>
         		<div ng-switch-when = "save">
         			<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
-        			<div class="meta">
-	            		<span name="status" class="date">Sintef</span>
-	          		</div>
 	          		<div name="bio" class="description">
-	            	<label><strong> BIO</strong> - {{text}}</label>
+	            	<span> {{ prc.user.profile.bio }}</span>
 	          		</div>
         		</div>
 <!--         		<div ng-switch-when="saved">
@@ -33,7 +30,7 @@
 	          		<!--	<input type="text" ng-model="" name="Status" placeholder="Hva tenker du på?">-->
 	          		</div>
 	          		<div class="description">
-	          		<!--	<input type="text" ng-model="" name="bio" placeholder="Fortell litt om deg selv"> -->
+	          		<input type="text" ng-model="prc.user.profile.bio" name="bio" placeholder="Fortell litt om deg selv">
 	          		</div>
 	          	</div>
 	          </div>

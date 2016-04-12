@@ -64,7 +64,7 @@ Meteor.startup(function () {
         }
       }
     ];
-  
+
     for (var i = 0; i < users.length; i++) {
       Accounts.createUser(users[i]);
     }
@@ -81,7 +81,7 @@ Meteor.startup(function () {
         "public": true
       });
     }
-  } 
+  }
 
   Meteor.publish("newsfeedPosts", function (options) {
     //if (this.userId) {
@@ -102,7 +102,7 @@ Meteor.startup(function () {
         ]
       };
 
-      Counts.publish(this, 'numberOfNewsfeedPosts', 
+      Counts.publish(this, 'numberOfNewsfeedPosts',
         NewsPosts.find(selector), {noReady: true});
 
       return NewsPosts.find(selector, options);
