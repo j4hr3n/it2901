@@ -41,7 +41,7 @@
 	        <div class="extra content">
 	          <a ng-click="prc.incrementFriends()">
 	            <i class="user icon"></i>
-	            {{ prc.user.profile.friends }} venner
+	            {{ prc.user.profile.friends.length }} venner
 	          </a>
 	        </div>
 	        <div ng-switch-when="save">
@@ -70,9 +70,11 @@
                 $('.ui.small.modal.friendModal')
                   .modal('show')
                 ;
-              })
+              });
 
-              ;
+              function closeModal(){
+                location.reload()
+              }
             </script>
           </div>
         </div>
@@ -83,9 +85,13 @@
     <!--modal-->
 
     <div class="ui small modal friendModal">
-      <i class="close icon"></i>
+      <i class="close icon" onclick="closeModal()"></i>
       <div class="header">
         Friend requests
+      </div>
+      <div class="content" ng-repeat="fr in friendRequests()">
+        <li class="friend">{{ fr.username }}</li>
+        <button ng-click="accept(fr._id, bool=true)">Accept</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
       </div>
     </div>
 
@@ -125,7 +131,7 @@
               <div class="ui divided items">
                 <h3>Alle kontakter i databasen</h3>
                 <div class="item" ng-repeat="user in prc.contacts">
-                  <li>{{user.username}} <button ng-click="addFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
+                  <li>{{user.username}} <button ng-click="inviteFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
                 </div>
               </div>
             </div>

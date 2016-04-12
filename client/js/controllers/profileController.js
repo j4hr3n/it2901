@@ -37,6 +37,8 @@ function profileCtrl($scope, $reactive) {
   }
 
 
+
+
   this.incrementFriends = () => {
 
     meteor.users.update(
@@ -101,29 +103,66 @@ function profileCtrl($scope, $reactive) {
 
 // Fitness score
 
-
   var friendList = []
-  friendObject = Meteor.user().profile.friends
-  for (var i = 0; i < friendObject.length; i++) {
-    friendList.push(friendObject[i]._id)
-  };
+  
 
-  $scope.addFriend = function(userId){
+  function isFriend(userId){
+    friendObject = Meteor.user().profile.friends
+    for (var i = 0; i < friendObject.length; i++) {
+      friendList.push(friendObject[i]._id)
+    };
+
+    if (friendList.indexOf(userId) < 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  friendRequestList = []
+  function isRequest(userId){
+    friendRequestObjects = Meteor.user().profile.notifications.friendRequests
+    for (var i = 0; i < friendRequestObjects.length; i++) {
+      friendRequestList.push(friendRequestObjects[i._id])
+    };
+
+    if (friendRequestList.indexOf(userId) < 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
+  
+
+  $scope.inviteFriend = function(userId){
     theUser = Meteor.users.findOne({'_id' : userId})
-    
     if ( userId === Meteor.userId() ){
       sweetAlert("Oops...", "You cannot be your own friend.", "error");
-    } 
-    else if ( friendList.indexOf(userId) < 0 ){
-      Meteor.call('addFriend', theUser)
-      friendList.push(userId)
-      swal("Friend added", "You are now friend with this person!", "success")
+    } else if ( isFriend(userId) == true){
+      sweetAlert("Oops...", "You are already friend with this person!", "error");  
+    } else if ( isRequest(userId) == true ){
+      sweetAlert("Oops...", "You have already sent friend invitation to this person!", "error");  
+    } else if ( isFriend(userId) == false ){
+        reqList = []
+        allRequests = Meteor.user().profile.notifications.friendRequests
+        if (allRequests){
+          for (var i = 0; i < allRequests.length; i++) {
+            reqList.push(allRequests[i]._id)
+          };
+        }
+        alert(reqList.length)
+        if (reqList.indexOf(userId) < 0 ){
+          Meteor.call('inviteFriend', theUser)
+          swal("Invitation sent", "An invitation has been sent", "success")
+          friendRequestList.push(userId)
+        }else{
+          swal("Oops", "You've already got an invitation from this freind. You just need to approve it!", "error")
+        }
+        
+    }else {
+      sweetAlert("Oops...", "You are already friend with this person!", "error");  
     }
-    else {
-      sweetAlert("Oops...", "You are already friend with this person!", "error");
-    }
-
-    
   }
 
   $scope.getFriends = function(){
@@ -138,6 +177,39 @@ function profileCtrl($scope, $reactive) {
     }
   );
 }
+
+  $scope.friendRequests = function(){
+    allRequests = []
+    requests = Meteor.user().profile.notifications.friendRequests;
+    for (var i = 0; i < requests.length; i++) {
+      allRequests.push(requests[i])
+    };
+    return allRequests;
+  }
+
+  $scope.accept = function(userId, bool){
+    if (bool == true){
+      if ( isFriend(userId) == false ){
+        Meteor.call("addFriend", userId, bool, function(err, result){
+          swal("Accepted", "You are now friend with this person", "success")
+          friendList.push(userId)
+          index = friendRequestList.indexOf(userId)
+          friendRequestList.splice(index, 1)
+        })
+      }
+
+    }else if (bool == false){
+      Meteor.call("addFriend", userId, bool, function(err, result){
+        swal("Denied", "Request denied", "error");
+      })
+
+      /*if ( Meteor.user().profile.notifications.friendRequests.length == 0 ){
+        location.reload()
+      }*/
+    }
+
+
+  }
 
 
     var value = 1;
