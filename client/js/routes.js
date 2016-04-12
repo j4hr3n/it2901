@@ -76,9 +76,9 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/createEvent.html',
       controller: 'createEventCtrl'
     })
-    .state('egneAktiviteter.eventDetails', {
-      url: '/eventDetails',
-      templateUrl: 'client/templates/eventDetails',
+    .state('eventDetails', {
+      url: '/mineAktiviteter/:eventId',
+      templateUrl: 'client/templates/eventDetails.html',
       controller: 'eventDetailsCtrl'
     })
 

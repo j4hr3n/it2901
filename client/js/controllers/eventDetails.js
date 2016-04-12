@@ -2,8 +2,10 @@ angular
 .module('it2901')
 .controller('eventDetailsCtrl', eventDetailsCtrl);
 
-function eventDetailsCtrl($scope, $reactive) {  
+function eventDetailsCtrl($scope, $stateParams, $reactive) {  
     $reactive(this).attach($scope);
+
+    $scope.eventId = $stateParams.eventId;
 
 
     $('#status').popup({
@@ -42,13 +44,14 @@ function eventDetailsCtrl($scope, $reactive) {
     this.helpers({
         events: () => {
            return Events.find({});
-       }, /*
-        oneEvent: () => {
+       },
+       currentEvent: () => {
           return Events.findOne({_id: $stateParams.eventId});
-        },*/
+        }, 
+
    });
-    this.participants = "15";
-    this.participating = "6";
+    this.partic
+    ipating = "6";
     this.level = "middels";
 
     this.addEvent = () => {

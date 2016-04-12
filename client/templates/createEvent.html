@@ -13,6 +13,8 @@
             <label>Tittel: </label>
             <input type="text" ng-model="evC.newEvent.name"/>
           </div>
+          <div class="ui two column grid">
+          <div class="column">
           <div class="field">
             <label>Beskrivelse: </label>
             <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
@@ -33,6 +35,18 @@
               </select>
             </div>
             <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
+          </div>
+          </div>
+          <div class="column">
+          <div class="field">
+            <label>Type: </label>
+              <input type="text" ng-model="evC.newEvent.type"/>
+          </div>
+            <div class="field">
+              <label>Vanskelighetsgrad: </label>
+              <input type="text" ng-model="evC.newEvent.level"/>
+            </div>
+          </div>
           </div>
         </div>
       </div>
