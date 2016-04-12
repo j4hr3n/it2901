@@ -152,7 +152,6 @@ function profileCtrl($scope, $reactive) {
             reqList.push(allRequests[i]._id)
           };
         }
-        alert(reqList.length)
         if (reqList.indexOf(userId) < 0 ){
           Meteor.call('inviteFriend', theUser)
           swal("Invitation sent", "An invitation has been sent", "success")
