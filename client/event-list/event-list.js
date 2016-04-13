@@ -7,14 +7,8 @@ function eventListCtrl($scope, $reactive) {
     $scope.fireCreateEventModal = function() {
         $('.ui.small.modal.createEvent').modal('show');
       }
-
-    $('#form-datepicker').datepicker();
     
     $reactive(this).attach($scope);
-
-    this.eventForm = () => {
-        document.getElementById('form').style.visibility = "visible";
-    };
 
     this.newEvent = {};
 
@@ -26,12 +20,7 @@ function eventListCtrl($scope, $reactive) {
        }
    });
 
-    this.addEvent = () => {
-        this.newEvent.owner = Meteor.user()._id;
-        Events.insert(this.newEvent);
-        this.newEvent = {};
-    };
-
+  
     this.removeEvent = (event) => {
         Events.remove({_id: event._id});
     }

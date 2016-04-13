@@ -22,7 +22,7 @@ function loginCtrl($scope, $reactive, $location) {
         } else {
           console.log("Logged in successfully");
           $('.ui.small.modal.login').modal('hide');
-          $location.path("/dashboard");
+          $location.path("/dashboard/eventlist");
         }
       });
   };

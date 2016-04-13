@@ -26,14 +26,17 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/downloads.html'
     })
     .state('dashboard', {
-      url: '/dashboard',
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl'
     })
     .state('dashboard.eventlist', {
-      url: '/eventlist',
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
+    })
+    .state('dashboard.eventlist.createEvent',{
+      url: '/dashboard',
+      templateUrl: 'client/templates/createEvent.html',
+      controller: 'createEventCtrl'
     })
     .state('network', {
       url: '/network',
@@ -62,10 +65,30 @@ function config($stateProvider, $urlRouterProvider) {
       controller : 'eventListCtrl'
     })
     .state('egneAktiviteter', {
-      url: '/mineAktiviteter',
       templateUrl: 'client/templates/egneAktiviteter.html',
-      controller: 'egneAktiviteterCtrl'
+      controller: 'egneAktiviteterCtrl',
     })
+    .state('egneAktiviteter.createEvent', {
+      url: '/mineAktiviteter',
+      views: {
+        "createEvent": {
+          templateUrl: 'client/templates/createEvent.html',
+          controller: 'createEventCtrl'
+        }
+      }
+    })
+    .state('egneAktiviteter.eventDetails',{
+      url: '/mineAktiviteter/:eventId',
+      views: {
+        "createEvent": {
+          templateUrl: 'client/templates/createEvent.html',
+          controller: 'createEventCtrl'
+        },
+        "eventDetails": {
+          templateUrl: 'client/templates/eventDetails.html',
+          controller: 'eventDetailsCtrl',
+        }}
+      });
 
   $urlRouterProvider.otherwise('/');
 }

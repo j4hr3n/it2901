@@ -1,0 +1,58 @@
+<button class="ui blue button" ng-click="fireCreateEventModal()">
+      Opprett aktivitet
+</button>
+
+ <div class="ui small modal createEvent" ng-controller="createEventCtrl as evC" >
+      <i class="close icon"></i>
+
+      <div class="header blue modal">Opprett en ny aktivitet</div>
+      <div class="content">
+
+        <div id="form" class="ui form pull-down" >
+          <div class="required field">
+            <label>Tittel: </label>
+            <input type="text" ng-model="evC.newEvent.name"/>
+          </div>
+          <div class="ui two column grid">
+          <div class="column">
+          <div class="field">
+            <label>Beskrivelse: </label>
+            <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
+            <div class="field">
+              <label>Dato: </label>
+               <div class="choosedate">
+            <input type="text" class="form-control" ng-model="evC.newEvent.date" ng-click="fireDatepicker()">
+          </div> 
+            </div>
+            <div class="field">
+              <label>Sted: </label>
+              <input type="text" ng-model="evC.newEvent.location"/>
+            </div>
+            <div class="field">
+              <label>Legg til venner</label>
+              <select multiple="" ng-model="evC.newEvent.participants" ng-options="user.username for user in evC.users track by user._id">
+               <option value="">Velg venner</option>
+              </select>
+            </div>
+            <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
+          </div>
+          </div>
+          <div class="column">
+          <div class="field">
+            <label>Type: </label>
+              <input type="text" ng-model="evC.newEvent.type"/>
+          </div>
+            <div class="field">
+              <label>Vanskelighetsgrad: </label>
+              <input type="text" ng-model="evC.newEvent.level"/>
+            </div>
+             <div class="field">
+              <label>Legg til øvelser: </label>
+              <input type="text" ng-model="evC.newEvent.exercises"/>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
