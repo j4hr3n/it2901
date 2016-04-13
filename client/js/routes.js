@@ -26,17 +26,15 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/downloads.html'
     })
     .state('dashboard', {
-      url: '/dashboard',
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl'
     })
     .state('dashboard.eventlist', {
-      url: '/eventlist',
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
     })
-    .state('dashboarsd.eventlist.createEvent',{
-      url: '/createEvent',
+    .state('dashboard.eventlist.createEvent',{
+      url: '/dashboard',
       templateUrl: 'client/templates/createEvent.html',
       controller: 'createEventCtrl'
     })
