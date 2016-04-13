@@ -1,18 +1,6 @@
 <div class="ui container dashboard">
 
 
-<!--Typeahead search-->
-  <div>
-  	<div class="ui container" ng-controller="dashboardCtrl as dbc">
-      <div class="ui form">
-        <div class="field">
-  		  <label for="users">Typeahead search</label>
-        <input name="users" id="users" type="text" placeholder="enter a state" ng-model="selected" typeahead="user.profile.nameFirst for user in dbc.usersList | filter:$viewValue | limitTo:8">
-  			<!--<input name="states" id="states" type="text" placeholder="enter a state" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8">-->
-      </div>
-  		</div>
-  	</div>
-  </div>
 
   <div class="ui two column grid">
     <!-- Section one -->

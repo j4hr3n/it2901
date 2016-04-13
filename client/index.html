@@ -24,6 +24,21 @@
       <a class="item" ui-sref="loggedIn" ng-if="indc.isLoggedIn">Dine aktiviteter</a>
       <a class="item" ui-sref="activities" ng-if="indc.isLoggedIn">Legg til nye aktiviteter</a>
       <a class="item" ui-sref="downloads">Last ned til din mobil</a>
+      <!--Typeahead search-->
+        <div>
+        	<div class="container-fluid" ng-controller="indexCtrl as idx">
+            <div class="ui form-group ">
+              <div class="four wide field">
+        		  <label for="users">Typeahead search</label>
+              <!--<input class = "prompt" ></input>-->
+              <input name="users" id="users" type="text" placeholder="enter a state" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
+            </div>
+        		</div>
+        	</div>
+        </div>
+
+
+
 
       <div class="right menu">
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireLoginModal()">Logg inn</a>
