@@ -1,34 +1,56 @@
-
-
 <div class="ui container profile" ng-controller="profileCtrl as prc">
   <div class="ui two column grid">
     <div class="column pull-down">
-      <div class="ui stackable grid container">
-        <div class="ui card">
-          <div class="image">
-            <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
-          </div>
-          <div class="content">
-            <a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
-            <div class="meta">
-              <span class="date">Ble med i 2016</span>
-            </div>
-            <div class="description">
-              Babak er en gladlaks
-            </div>
-          </div>
-          <div class="extra content">
-            <a ui-sref="venner" ng-click="prc.incrementFriends()">
-              <i class="user icon"></i>
-              {{ prc.friends.length }} venner
-            </a>
-          </div>
+      <div ng-switch on="editProfile" class="ui card">
+        <div class="image">
+          <img src="http://debatt.kommunal-rapport.no/sites/debatt.kommunal-rapport.no/files/styles/medium/public/profiles/photos/babak_farshchian.jpg?itok=fDM-GqGf">
+         <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button>
         </div>
-
-
-      </div>
-
-      <div class="venner">
+        <div class="content">
+        	<div>
+        		<div ng-switch-when = "save">
+        			<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
+	          		<div name="bio" class="description">
+	            	<span> {{ prc.user.profile.bio }}</span>
+	          		</div>
+        		</div>
+<!--         		<div ng-switch-when="saved">
+	          		<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
+	          		<div class="meta">
+	            		<span ng-switch-default class="date">Sintef</span>
+	          		</div>
+	          		<div class="description">
+	            	<label ng-switch-default>Babak er en gladlaks</label>
+	          		</div>
+	          	</div> -->
+	          	<div ng-switch-when="edit">
+	          		<input type="text" ng-model="prc.user.profile.nameFirst" name="first-name" placeholder="Fornavn">
+	          		<input type="text" ng-model="prc.user.profile.nameLast" name="last-name" placeholder="Etternavn">
+	          		<div class="meta">
+	          		<!--	<input type="text" ng-model="" name="Status" placeholder="Hva tenker du på?">-->
+	          		</div>
+	          		<div class="description">
+	          		<input type="text" ng-model="prc.user.profile.bio" name="bio" placeholder="Fortell litt om deg selv">
+	          		</div>
+	          	</div>
+	          </div>
+	        </div>
+	        <div class="extra content">
+	          <a ng-click="prc.incrementFriends()">
+	            <i class="user icon"></i>
+	            {{ prc.user.profile.friends.length }} venner
+	          </a>
+	        </div>
+	        <div ng-switch-when="save">
+	        	<button Id="editButton" ng-click="switchProfile()" class="ui button" type="submit">Redigere profil</button>
+	        </div>
+	        <div ng-switch-when="edit">
+	        	<button id="editButton" ng-click="switchProfile();prc.updateInfo()" class="ui button" type="submit">Lagre endringer</button>
+	      		<button id="removeButton" ng-click="noEdit()" class="ui button" type="cancel">X</button>
+	        </div>
+	    </div>
+	    
+	    <div class="venner">
           <div class="ui items">
             <h3>Dine kontakter</h3>
             <div class="item" ng-repeat="fr in prc.friends">
@@ -45,21 +67,28 @@
                 $('.ui.small.modal.friendModal')
                   .modal('show')
                 ;
-              })
+              });
 
-              ;
+              function closeModal(){
+                location.reload()
+              }
             </script>
           </div>
         </div>
-    </div>
+	</div>
 
 
+ -->
     <!--modal-->
 
     <div class="ui small modal friendModal">
-      <i class="close icon"></i>
+      <i class="close icon" onclick="closeModal()"></i>
       <div class="header">
         Friend requests
+      </div>
+      <div class="content" ng-repeat="fr in friendRequests()">
+        <li class="friend">{{ fr.username }}</li>
+        <button ng-click="accept(fr._id, bool=true)">Accept</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
       </div>
     </div>
 
@@ -99,7 +128,7 @@
               <div class="ui divided items">
                 <h3>Alle kontakter i databasen</h3>
                 <div class="item" ng-repeat="user in prc.contacts">
-                  <li>{{user.username}} <button ng-click="addFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
+                  <li>{{user.username}} <button ng-click="inviteFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
                 </div>
               </div>
             </div>

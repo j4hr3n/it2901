@@ -1,27 +1,5 @@
 <div class="ui container dashboard">
 
-  <div>
-  	<div class="ui container">
-  		<div class="ui form">
-        <div class="field">
-  		  <label for="states">Search for US States</label>
-  			<input name="states" id="states" type="text" placeholder="enter a state" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8">
-      </div>
-  		</div>
-      <!-- <button class="btn btn-success" type="submit">Submit</button> -->
-  	</div>
-  </div>
-
-
-
-<!-- Search bar -->
-  <!-- <div class="ui search">
-  <div class="ui icon input">
-    <input class="search" type="text" placeholder="Search pls">
-    <i class="search icon"></i>
-  </div>
-  <div class="results"></div>
-</div> -->
 
 
   <div class="ui two column grid">
@@ -141,13 +119,10 @@
           
 
       </div>
-
         <div class="row dashboard-margin">
-        
-    <div ui-view></div>
-          
+          <div ui-view></div>
         </div>
-        
+
       </div>
     </div>
   </div>
