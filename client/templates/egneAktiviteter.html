@@ -3,7 +3,7 @@
   <div class= "row">
    
 
-   <div ui-view></div>
+   <div ui-view="createEvent"></div>
   
 
 </div>
@@ -19,7 +19,7 @@
       <div class="item" ng-repeat="event in evC.events" >
         <i class="calendar icon"></i>
         <div class="content">
-          <a class=" header" ui-sref="eventDetails({ eventId: event._id })"> {{ event.name }} </a>
+          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
           <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event)"><i class="remove circle icon"></i></button>
           <div class="description">   
             <p>{{ event.date }} kl 12.00</p>
@@ -34,8 +34,8 @@
     <div class="ui stackable container">
       <div class="row">
         
-      <div class="ui view">Trykk på en aktivitet for å se detaljer</div>
-
+      <div ui-view="eventDetails">Trykk for å se detaljer</div>
+      
     </div>
     
     

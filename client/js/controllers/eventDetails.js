@@ -48,6 +48,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
        currentEvent: () => {
           return Events.findOne({_id: $stateParams.eventId});
         }, 
+       
 
    });
     this.partic

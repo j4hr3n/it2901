@@ -35,15 +35,19 @@ function createEventCtrl($scope, $reactive) {
    });
 
     this.addEvent = () => {
+       var test = (Meteor.user()._id != null);
+       console.log("validUsername:" + test);
+       if(test){
+
+       
         this.newEvent.owner = Meteor.user()._id;
         Events.insert(this.newEvent);
         this.newEvent = {};
         $('.ui.small.modal.createEvent').modal('hide');
     };
+    }
 
     this.removeEvent = (event) => {
         Events.remove({_id: event._id});
     }
-
-
 }; 

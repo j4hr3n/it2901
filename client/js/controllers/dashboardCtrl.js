@@ -17,7 +17,7 @@ function dashboardCtrl($scope) {
     'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas',
     'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
     'Wyoming'
-  ];
+  ];  
 
   // $scope.newsfeed = function() {
   //   $("#randomID").load("templates/dashboard.html");

@@ -27,7 +27,7 @@
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireLoginModal()">Logg inn</a>
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireRegisterModal()">Registrer deg</a>
         <a class="item" ng-show="indc.isLoggedIn" ui-sref="profile">Din profil</a>
-        <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard">Ditt dashboard</a>
+        <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard.eventlist">Ditt dashboard</a>
         <a class="item" ng-show="indc.isLoggedIn" ng-click="indc.logout()">Logg ut</a>
       </div>
     </div>

@@ -35,7 +35,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
     })
-    .state('eventlist.createEvent',{
+    .state('dashboarsd.eventlist.createEvent',{
       url: '/createEvent',
       templateUrl: 'client/templates/createEvent.html',
       controller: 'createEventCtrl'
@@ -67,20 +67,30 @@ function config($stateProvider, $urlRouterProvider) {
       controller : 'eventListCtrl'
     })
     .state('egneAktiviteter', {
-      url: '/mineAktiviteter',
       templateUrl: 'client/templates/egneAktiviteter.html',
-      controller: 'egneAktiviteterCtrl'
+      controller: 'egneAktiviteterCtrl',
     })
-    .state('egneAktiviteter.createEvent',{
-      url:'/createEvent',
-      templateUrl: 'client/templates/createEvent.html',
-      controller: 'createEventCtrl'
+    .state('egneAktiviteter.createEvent', {
+      url: '/mineAktiviteter',
+      views: {
+        "createEvent": {
+          templateUrl: 'client/templates/createEvent.html',
+          controller: 'createEventCtrl'
+        }
+      }
     })
-    .state('eventDetails', {
+    .state('egneAktiviteter.eventDetails',{
       url: '/mineAktiviteter/:eventId',
-      templateUrl: 'client/templates/eventDetails.html',
-      controller: 'eventDetailsCtrl'
-    })
+      views: {
+        "createEvent": {
+          templateUrl: 'client/templates/createEvent.html',
+          controller: 'createEventCtrl'
+        },
+        "eventDetails": {
+          templateUrl: 'client/templates/eventDetails.html',
+          controller: 'eventDetailsCtrl',
+        }}
+      });
 
   $urlRouterProvider.otherwise('/');
 }
