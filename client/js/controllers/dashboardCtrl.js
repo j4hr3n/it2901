@@ -19,15 +19,25 @@ function dashboardCtrl($scope, $reactive) {
     //     _id: $stateParams.partyId
     //   });
     // },
-    users: ()=> {
-      return Meteor.users.find({}, {'username':1});
+    usersList: ()=> {
+      //these parameters do nothing :C
+      return Meteor.users.find({}, {});
+      // return Meteor.users.find({
+      // users: {
+      //           $elemMatch: {
+      //                username: "Babs"
+      //
+      //           }
+      //         }
+      //       }
+      //     )
     }
     });
   }
 
 
 
-  result = Meteor.users.find().fetch();
+  //result = Meteor.users.find().fetch();
   //a = Meteor.users.find().count();
 
 
