@@ -3,5 +3,9 @@ angular
     .controller('networkController', networkController);
 
 function networkController() {
+
+$scope.showFriend = function(fr) {
   
+}
+
 }

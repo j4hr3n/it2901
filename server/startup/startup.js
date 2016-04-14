@@ -63,7 +63,7 @@ Meteor.startup(function () {
         }
       }
     ];
-  
+
     for (var i = 0; i < users.length; i++) {
       Accounts.createUser(users[i]);
     }
@@ -149,7 +149,7 @@ Meteor.startup(function () {
         ]
       };selector = {};
 
-      Counts.publish(this, 'numberOfNewsfeedPosts', 
+      Counts.publish(this, 'numberOfNewsfeedPosts',
         NewsPosts.find(selector), {noReady: true});
 
       return NewsPosts.find(selector, options);
@@ -163,7 +163,7 @@ Meteor.startup(function () {
     return Meteor.users.find({}, {'profile': 1, 'username': 1});
   });
   // "By default, the current user's username, emails and profile are
-  // published to the client." http://docs.meteor.com/#/full/meteor_users
+  // published to the client." http://docs.meteor.com/#/ffull/meteor_users
 
   Meteor.publish("events", () => { return Events.find({})});
 });

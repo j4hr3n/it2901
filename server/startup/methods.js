@@ -60,26 +60,56 @@ Meteor.methods({
 				+" types (friendAdded, newActivity, userPost, newEvent, etc.), "
 				+" see method comment for more info.)");
 		}
+
 		newsPost_new.ownerID = userID;
 		newsPost_new.public = isPublic;
 		newsPost_new.date = new Date();
 
 		NewsPosts.insert(newsPost_new);
+
 	},
 
-	'addFriend' : function(theUser){
-		Meteor.users.update({_id : theUser._id}, 
-			{ $push : { "profile.notifications.friendRequests" : 
+	'inviteFriend' : function(theUser){
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" : 
 			{'_id' : Meteor.userId(),
 			'username' : Meteor.user().username,
 			'time' : new Date(),
 			'status' : false
 			}
 		}});
-		Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded": 
-			{ newFriendID: theUser._id}});
+
+
 		//console.log(Meteor.users.findOne({username: "Babs"}, {notifications:1, _id:0}))
 		//Meteor.users.update({_id : Meteor.userId()}, { $push : { "profile.friends" : theUser }})
+	},
+
+	'getFriends' : function(){
+		var friendList = []
+		friendObject = Meteor.user().profile.friends
+		for (var i = 0; i < friendObject.length; i++) {
+		  friendList.push(friendObject[i]._id)
+		};
+		return friendList;
+	},
+
+	'test' : function(){
+		return "hei";
+	},
+
+	'addFriend' : function(userId, bool){
+		if ( bool == true ) {
+			theUser = Meteor.users.findOne({'_id' : userId})
+			Meteor.users.update({_id : Meteor.userId()}, { $push : { "profile.friends" : theUser }})
+			Meteor.users.update({_id : userId}, {$push : {"profile.friends" : Meteor.user()}})
+			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
+			Meteor.users.update({_id : userId}, {$pull : { "profile.notifications.friendRequests" : { '_id' : Meteor.user()}}})
+
+			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded": 
+				{ newFriendID: userId}});
+		} else if ( bool == false){
+			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
+		}
+
 	},
 
 	'getFriends' : function(){

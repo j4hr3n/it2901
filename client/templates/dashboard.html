@@ -1,15 +1,6 @@
 <div class="ui container dashboard">
 
-  <div>
-  	<div class="ui container">
-  		<div class="ui form">
-        <div class="field">
-  		  <label for="states">Search for US States</label>
-  			<input name="states" id="states" type="text" placeholder="enter a state" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8">
-      </div>
-  		</div>
-  	</div>
-  </div>
+
 
   <div class="ui two column grid">
     <!-- Section one -->
@@ -90,10 +81,14 @@
     </div>
     <!-- Section two -->
     <div class="right floated column pull-down">
-      <h3 class="ui dividing header">Øvelser</h3>
+      <h3 class="ui dividing header">Øvelser og aktiviteter</h3>
       <div class="ui stackable grid container">
         <div class="row dashboard-margin">
-          <div class="ui middle aligned divided list">
+        <a ui-sref="activities"> <button class="ui large blue button "> Finn nye øvelser og aktiviteter
+        </button></a>
+        <div class="row dashboard-margin">
+          <div class="ui middle aligned divided list pull-down">
+          <h3>Dine øvelser</h3>
             <div class="item">
               <i class="large child icon"></i>
               <div class="content">
@@ -113,21 +108,19 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
-        <div class="row">
+        
           <div class="ui medium buttons">
             <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
             </button></a>
             <a ui-sref="activities"> <button class="ui medium blue button "> Se øvelser
             </button></a>
-          </div>
+          
 
       </div>
-
-        <div class="row">
-
-    <div ui-view></div>
-
+        <div class="row dashboard-margin">
+          <div ui-view></div>
         </div>
 
       </div>

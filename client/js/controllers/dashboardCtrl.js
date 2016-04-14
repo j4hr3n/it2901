@@ -2,26 +2,19 @@ angular
   .module('it2901')
   .controller('dashboardCtrl', dashboardCtrl);
 
-function dashboardCtrl($scope) {
 
-  var _selected;
-
-  $scope.selected = undefined;
-  $scope.states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-    'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-    'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-    'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Dakota',
-    'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas',
-    'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin',
-    'Wyoming'
-  ];
-
-  // return Meteor.user.nameFirst()
-  //
-  //   console.log(result);
+function dashboardCtrl($scope, $reactive) {
 
 
-}
+
+  }
+
+
+
+  //result = Meteor.users.find().fetch();
+  //a = Meteor.users.find().count();
+
+
+  //console.log(result);
+  //console.log(a);
+

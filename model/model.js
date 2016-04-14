@@ -8,7 +8,7 @@ Events.allow({
 	insert: function (userId, event) {
 		return userId && event.owner === userId;
 	},
-	remove: function (){
+	remove: function (userId, event){
 		return userId && event.owner === userId;
 	}
 });
