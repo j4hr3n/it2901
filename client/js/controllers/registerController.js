@@ -5,32 +5,25 @@ angular
 function registerCtrl($scope, $reactive, $location) {
   $reactive(this).attach($scope);
 
-  this.user = {
+  this.user = {  // This is converted into an order-sensitive argument list
     'username': '',
-    'password':'',
-    'email':'',
-    'profile': {
-      'nameFirst': '',
-      'nameLast': '',
-      'friends': [],
-      'notifications' : {
-        'friendRequests' : [],
-        'activities' : []
-      }
-    }
-    
+    'password': '',
+    'email': '',
+    'nameFirst': '',
+    'nameLast': '',
+    'bio': ''
   };
+  
   this.passwordRepeat = this.user.password;
 
   this.error = '';
 
   this.registerNewUser = () => {
 
-    console.log(Meteor.users.find({}));
     matchingUser = Meteor.users.findOne({ 'username' : this.user.username });
 
     if (matchingUser == null) {
-      Accounts.createUser(this.user, (err) => {
+      Meteor.apply('createNewUser', _.values(this.user), false, (err) => {
         if (err) {
           console.log("Failed creating new user: " + err);
           this.error = err

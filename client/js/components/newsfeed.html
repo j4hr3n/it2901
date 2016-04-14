@@ -1,13 +1,25 @@
 <div class="ui container pull-down">
 	<h3>Hva som foregår</h3>
 	<div class="ui relaxed divided list">
-	  	<div class="item" ng-repeat="post in newsfeed.posts">
+	  	<div class="item" ng-repeat="post in newsfeed.posts" ng-switch on="post.type">
 	  		<i class="large child middle aligned icon"></i>
-	  		<div class="content">
-	  			<a class="header">{{ post.title }}</a>
+	  		<div class="content" ng-switch-when="friendAdded">
+	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har lagt til {{ post.newFriend.profile.nameFirst +" "+ post.newFriend.profile.nameLast }} som venn!</a>
+	  		</div>
+	  		<div class="content" ng-switch-when="userPost">
+	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast +': "'+ post.title +"\"" }}</a>
 	  			<div class="description">{{ post.description }}</div>
 	  		</div>
+	  		<div class="content" ng-switch-when="newEvent">
+	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har laget en ny aktivitet: {{ "\""+post.event.name+"\"" }}"
+	  			</a>
+	  		</div>
+	  		<div class="content" ng-switch-when="joinedEvent">
+	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har blitt med i aktiviteten {{ "\""+post.event.name+"\"" }}
+	  			</a>
+	  		</div>
 	  	</div>
+	  	<i ng-show="newsfeed.postsCount == 0">Det ser ikke ut til å være noen nyheter her enda!</i>
 		<a href="" ng-if="newsfeed.elementNumber > 0" ng-click="newsfeed.changePage(-1)">Se nyere beskjeder</a>
 		<a href="" ng-if="newsfeed.elementNumber < newsfeed.postsCount-newsfeed.postsPerPage" ng-click="newsfeed.changePage(1)">Se eldre beskjeder</a>
 	</div>
