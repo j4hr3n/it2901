@@ -15,9 +15,7 @@ function newsfeedCtrl($scope, $reactive) {
 
 	this.helpers({
 		posts: () => {
-			newsPosts = NewsPosts.find({});
-
-			for (post in newsPosts) {
+			return NewsPosts.find({}).map((post) => {
 				post.owner = Meteor.users.findOne({_id: post.ownerID });
 
 				switch (post.type) {
@@ -25,29 +23,33 @@ function newsfeedCtrl($scope, $reactive) {
 						post.newFriend = Meteor.users.findOne({_id: post.newFriendID });
 						break;
 					case "userPost":
-					post.title = post.info.title;
-					post.description = post.info.description;
 						break;
 					case "newEvent":
-						post.event = Meteor.users.findOne({_id: post.eventID });
+						post.event = Events.findOne({_id: post.eventID });
 						break;
 					case "joinedEvent":
-						post.event = Meteor.users.findOne({_id: post.eventID });
+						post.event = Events.findOne({_id: post.eventID });
 						break;
 					default:
-						console.log("Found post with invalid post type: "+ post.type)
+						console.log("Found post with invalid post type: \""+ post.type + "\"")
 						break;
 				}
-			}
-			return newsPosts;
+
+				console.log("post" + " = \""+ post + "\"");
+				for (var property in post) {
+					if (post.hasOwnProperty(property)) {
+						console.log(property + " = \""+ post[property] + "\"");
+					}
+				}
+				return post;
+			});
 		},
 		postsCount: () => {
           return Counts.get('numberOfNewsfeedPosts');
-        },
-        friendResourcesNeeded: (posts) => {
-
         }
 	});
+
+	this.subscribe("events");
 
 	this.subscribe("newsfeedPosts", () => {
 		return [{

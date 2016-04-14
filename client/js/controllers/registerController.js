@@ -23,7 +23,7 @@ function registerCtrl($scope, $reactive, $location) {
     matchingUser = Meteor.users.findOne({ 'username' : this.user.username });
 
     if (matchingUser == null) {
-      Meteor.apply('createNewsPost', _.values(this.user), false, (err) => {
+      Meteor.apply('createNewUser', _.values(this.user), false, (err) => {
         if (err) {
           console.log("Failed creating new user: " + err);
           this.error = err

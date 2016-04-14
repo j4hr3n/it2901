@@ -3,7 +3,7 @@ Meteor.startup(function () {
   if(Events.find().count() === 0){
     var events = [
       {
-        'name': 'Event1',
+        'name': 'Yoga på lørdag',
         'description': 'Dette er event 1'
       },
       {
@@ -54,7 +54,7 @@ Meteor.startup(function () {
         'email':'pepa@ntnu.no',
         'profile': {
           'nameFirst': 'Per',
-          'nameLast': 'P�l',
+          'nameLast': 'Paal',
           'friends': [],
           'notifications' : {
             'friendRequests' : [],
@@ -69,36 +69,66 @@ Meteor.startup(function () {
     }
   }
 
+  NewsPosts.remove({});  
   if (NewsPosts.find().count() < 3) {
-    var posts = [
+    /*var posts = [
       {
-        type: "friendAdded",
-        date: new Date(),
-        ownerID: Meteor.users.findOne({username: "therandy"})._id,
         "public": true,
-        newFriendID: Meteor.users.findOne({username: "perp"})._id
+        info: { "friendAdded": { 
+          newFriendID: Meteor.users.findOne()._id }
+        },
+        ownerID: Meteor.users.findOne({username: "perp"})._id,
+        "public": true,
       },
       {
-        type: "newEvent",
-        date: new Date(),
+        info: { "newEvent": { 
+          eventID: Events.findOne()._id }
+        },
         ownerID: Meteor.users.findOne({username: "Babs"})._id,
         "public": true,
-        eventID: Events.findOne()._id
       },
       {
-        type: "joinedEvent",
-        date: new Date(),
-        ownerID: Meteor.users.findOne({username: "therandy"})._id,
+        info: { "joinedEvent": { 
+          eventID: Events.findOne()._id }
+        },
+        ownerID: Meteor.users.findOne({username: "theRandy"})._id,
         "public": true,
-        eventID: Events.findOne()._id
       },
-    ];
+      {
+        info: { userPost: { 
+          title: "Bilder fra bærturen",
+          description: "Kom nettopp hjem fra turen til Bloksberg!" }
+        },
+        ownerID: Meteor.users.findOne({username: "theRandy"})._id,
+        "public": true,
+      }
+    ];*/
+    Meteor.call('createNewsPost', Meteor.users.findOne({username: "perp"})._id,
+      { "friendAdded": { 
+          newFriendID: Meteor.users.findOne()._id }
+        }, true);
+    Meteor.call('createNewsPost', Meteor.users.findOne({username: "Babs"})._id,
+      { "newEvent": { 
+          eventID: Events.findOne({})._id }
+        }, true);
+    Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
+      { "joinedEvent": { 
+          eventID: Events.findOne({})._id }
+        }, true);
+    Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
+      { "userPost": { 
+          title: "Bilder fra bærturen",
+          description: "Kom nettopp hjem fra turen til Bloksberg!" }
+        }, true);
 
-    NewsPosts.remove({});  
-    for (post in posts) {
-      NewsPosts.insert(post);
-    }
-  } 
+    /*for (post in posts) {
+      Meteor.call('createNewsPost', post.ownerID, post.info, post.public);/*, 
+        (error) => { 
+          if (error) 
+            throw new Meteor.Error(404, "failed to insert number "+i+" ("+error+")")
+        });
+    }*/
+  }
 
   Meteor.publish("newsfeedPosts", function (options) {
     //if (this.userId) {
@@ -108,7 +138,7 @@ Meteor.startup(function () {
               { ownerID: {$exists: true}},
               { $or: [
                 { ownerID: this.userId}
-                { ownerID: { $in: Meteor.users.findOne(this.userId);.profile.friends}},
+                //{ ownerID: { $in: Meteor.users.findOne(this.userId).profile.friends}}
               ]}
           ]},
           { $and: [
@@ -117,7 +147,7 @@ Meteor.startup(function () {
           ]},
           { "public": {$exists: true}}
         ]
-      };
+      };selector = {};
 
       Counts.publish(this, 'numberOfNewsfeedPosts', 
         NewsPosts.find(selector), {noReady: true});
@@ -134,4 +164,6 @@ Meteor.startup(function () {
   });
   // "By default, the current user's username, emails and profile are
   // published to the client." http://docs.meteor.com/#/full/meteor_users
+
+  Meteor.publish("events", () => { return Events.find({})});
 });
