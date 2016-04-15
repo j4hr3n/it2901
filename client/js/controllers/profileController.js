@@ -57,13 +57,13 @@ function profileCtrl($scope, $reactive) {
           "profile.nameFirst": this.user.profile.nameFirst,
           "profile.nameLast": this.user.profile.nameLast,
           "profile.friends": this.user.profile.friends,
-          "profile.bio": this-user.profile.bio } 
+          "profile.bio": this.user.profile.bio } 
       }
     )
   }; 
 
   //Edit profile view
-
+  console.log(this.user.profile.namefirst + "hello");
   $scope.editing = false;
   $scope.removeEdit =false;
   $scope.editProfile = "save";
