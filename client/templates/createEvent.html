@@ -1,28 +1,28 @@
 <button class="ui blue button" ng-click="fireCreateEventModal()">
-      Opprett aktivitet
+  Opprett aktivitet
 </button>
 
- <div class="ui small modal createEvent" ng-controller="createEventCtrl as evC" >
-      <i class="close icon"></i>
+<div class="ui small modal createEvent" ng-controller="createEventCtrl as evC" >
+  <i class="close icon"></i>
 
-      <div class="header blue modal">Opprett en ny aktivitet</div>
-      <div class="content">
+  <div class="header blue modal">Opprett en ny aktivitet</div>
+  <div class="content">
 
-        <div id="form" class="ui form pull-down" >
-          <div class="required field">
-            <label>Tittel: </label>
-            <input type="text" ng-model="evC.newEvent.name"/>
-          </div>
-          <div class="ui two column grid">
-          <div class="column">
+    <div id="form" class="ui form pull-down" >
+      <div class="required field">
+        <label>Tittel: </label>
+        <input type="text" ng-model="evC.newEvent.name"/>
+      </div>
+      <div class="ui two column grid">
+        <div class="column">
           <div class="field">
             <label>Beskrivelse: </label>
             <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
             <div class="field">
               <label>Dato: </label>
-               <div class="choosedate">
-            <input type="text" class="form-control" ng-model="evC.newEvent.date" ng-click="fireDatepicker()">
-          </div> 
+              <div class="choosedate">
+                <input type="text" class="form-control" ng-model="evC.newEvent.date" ng-click="fireDatepicker()">
+              </div> 
             </div>
             <div class="field">
               <label>Sted: </label>
@@ -32,27 +32,58 @@
               <label>Legg til venner</label>
               <select multiple="" ng-model="evC.newEvent.participants" ng-options="user.username for user in evC.users track by user._id">
                <option value="">Velg venner</option>
-              </select>
-            </div>
-            <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
-          </div>
-          </div>
-          <div class="column">
+             </select>
+           </div>
+           <button class="ui medium green button" ng-click="evC.addEvent()">Opprett</button>
+         </div>
+       </div>
+       <div class="column">
+        <div class="field">
+          <label>Type: </label>
+          <select class="ui fluid search dropdown" multiple="" ng-model="evC.newEvent.type">
+  <option value="T">Aktivitetstype</option>
+  <option value="S">Trening</option>
+  <option value="AK">Sosial</option>
+  </select>
+        </div>
+        <div class="field">
+          <label>Vanskelighetsgrad: </label>
+          <div class="inline fields">
           <div class="field">
-            <label>Type: </label>
-              <input type="text" ng-model="evC.newEvent.type"/>
-          </div>
-            <div class="field">
-              <label>Vanskelighetsgrad: </label>
-              <input type="text" ng-model="evC.newEvent.level"/>
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Lett</label>
             </div>
-             <div class="field">
-              <label>Legg til øvelser: </label>
-              <input type="text" ng-model="evC.newEvent.exercises"/>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Middels</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Hard</label>
             </div>
           </div>
           </div>
         </div>
-      </div>
-
+    <div class="field">
+      <label>Legg til øvelser: </label>
+      <input type="text" ng-model="evC.newEvent.exercises"/>
     </div>
+
+     <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" ng-model="evC.newEvent.public">
+        <label>Aktiviteten er tilgjengelig for alle</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
+</div>

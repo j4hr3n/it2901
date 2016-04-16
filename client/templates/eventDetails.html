@@ -17,6 +17,10 @@
    <div class="content pull-down">
   Type: {{ edc.currentEvent.type }}
 </div>
+<div class="content pull-down">
+  <span ng-if="edc.currentEvent.public == true"> Denne aktiviteten er tilgjengelig for alle</span>
+  <span ng-if="edc.currentEvent.public != true"> Denne aktiviteten er kun tilgjeneglig for de som er invitert</span> 
+</div>
  </div>
  <div class="extra content">
   <a id="status">
