@@ -18,6 +18,8 @@ function createEventCtrl($scope, $reactive) {
         allowAdditions: true
     });
 
+    $('.ui.fluid.search.dropdown').dropdown;
+
     this.newEvent = {};
 
     this.subscribe('events');
