@@ -51,19 +51,5 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
        
 
    });
-    this.partic
-    ipating = "6";
-    this.level = "middels";
-
-    this.addEvent = () => {
-        this.newEvent.owner = Meteor.user()._id;
-        Events.insert(this.newEvent);
-        this.newEvent = {};
-    };
-
-    this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
-    }
-
 
 }; 
