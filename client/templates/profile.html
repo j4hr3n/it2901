@@ -68,7 +68,7 @@
 	            <div class="ui compact menu">
 	              <a class="item newFriend">
 	                  <i class="add user icon"></i> Friends
-	                  <div class="floating ui ui red circular label" ng-model="test">{{test()}}</div>
+	                  <div class="floating ui ui red circular label" ng-model="friendRequestNotification">{{friendRequestNotification()}}</div>
 	                </a>
 	            </div><br/>
 	            <div class="item modalMessage">
@@ -76,6 +76,13 @@
 	            	<i class="send icon"></i>
 	            	Send message</button>
 	            </div>
+
+	            <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
+	              <i class="inbox icon"></i>
+	              {{ messageRequestNotification() }}
+	            </button>
+
+
 	            <script type="text/javascript">
 	              $('.newFriend').click(function(){
 	                $('.ui.small.modal.friendModal')
@@ -89,7 +96,15 @@
 
 	              $('.modalMessage').click(function(){
 	              	$('.ui.small.modal.messageModal').modal('show');
-	              })
+	              });
+
+	              $('.modalInbox').click(function(){
+	              	$('.ui.small.modal.inboxModal').modal('show');
+	              });
+
+	              $('.ui.accordion')
+	                .accordion()
+	              ;
 	            </script>
 	          </div>
 	        </div>
@@ -97,7 +112,28 @@
 	     </div>
 
 
-	<!--Message Modal-->
+	
+	<!--Inbox Modal-->	
+	<div class="ui small modal inboxModal">
+		<i class="close icon"></i>
+		<div class="header">
+			Inbox
+		</div>
+		<div class="content">
+			<div class="ui divided items" ng-repeat="msg in prc.messages">
+			  <div class="item">
+			    <div class="ui tiny image">
+			      <img src="/img/kristy.png">
+			    </div>
+			    <div class="middle aligned content">
+			      {{ msg.message }}<a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+	<!--Send Message Modal-->
 	<div class="ui small modal messageModal">
 	  <i class="close icon"></i>
 	  <div class="header">
@@ -107,19 +143,25 @@
 		  <div class="ui form">
 		    <div class="field">
 		      <label>Seach your contacts</label>
-		      <input type="text">
+			<input type="text" ng-model="selected" typeahead="friend.username for friend in prc.friends | filter:$viewValue"
+			typeahead-on-select="onSelect($item, $model, $label)">
+		        
 		    </div>
-
+			<div class="field">
+				<h3>Message will be sent to:</h3>
+		    	<a class="ui green label" ng-repeat="recipient in messageList">{{recipient}}</a>
+		    </div>
+			<div class="field">
+				
+			</div>
 		    <div class="field">
 		        <label>Message</label>
-		        <textarea></textarea>
+		        <textarea ng-model="message"></textarea>
 		    </div>
-
 		    <div class="field">
-		    	<div class="ui submit right floated green button">Send</div>
+		    	<div class="ui submit right floated green button" ng-click="sendMessage(message)">Send</div>
 		    </div>
-		  </div>
-		  
+		  </div>  
 		</div>
 
 	</div>

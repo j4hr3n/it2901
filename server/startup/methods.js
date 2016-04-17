@@ -12,7 +12,8 @@ Meteor.methods({
 		      'notifications' : {
 		        'friendRequests' : [],
 		        'activities' : []
-		      }
+		      },
+		      'messages' : []
 		    }
 		};
 
@@ -67,6 +68,27 @@ Meteor.methods({
 
 		NewsPosts.insert(newsPost_new);
 
+	},
+
+	'sendMessage' : function(message, messageList){
+		for (var i = 0; i < messageList.length; i++) {
+			Meteor.users.update({username : messageList[i]}, { $push : { "profile.messages" :
+				{
+					'message' : message,
+					'time' : new Date().toLocaleString(),
+					'status' : false
+				}
+			}});
+		};
+	},
+
+	'deleteMessage' : function(message){
+		var messages = Meteor.user().profile.messages;
+		for (var i = 0; i < messages.length; i++) {
+		  if (messages[i].message === message){
+		    Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.messages" : { "message" : message}}})
+		  }
+		};
 	},
 
 	'inviteFriend' : function(theUser){

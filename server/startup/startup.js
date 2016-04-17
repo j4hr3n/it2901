@@ -31,7 +31,8 @@ Meteor.startup(function () {
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
-          }
+          },
+          'messages' : []
         }
       },
       {
@@ -45,7 +46,8 @@ Meteor.startup(function () {
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
-          }
+          },
+          'messages' : []
         }
       },
       {
@@ -59,7 +61,8 @@ Meteor.startup(function () {
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
-          }
+          },
+          'messages' : []
         }
       }
     ];
