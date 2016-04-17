@@ -120,13 +120,29 @@
 			Inbox
 		</div>
 		<div class="content">
-			<div class="ui divided items" ng-repeat="msg in prc.messages">
+			<!--<div class="ui divided items" ng-repeat="msg in prc.messages">
+
 			  <div class="item">
+
 			    <div class="ui tiny image">
 			      <img src="/img/kristy.png">
 			    </div>
 			    <div class="middle aligned content">
+			    	<a class="header">Header</a>
 			      {{ msg.message }}<a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
+			    </div>
+			  </div>
+			</div>-->
+			<div class="ui items" ng-repeat="msg in prc.messages">
+			  <div class="item">
+			    <a class="ui tiny image">
+			      <img src="/img/kristy.png">
+			    </a>
+			    <div class="content">
+			      From: <b>{{ msg.from }}</b> | Time: <b> {{ msg.time }}</b>
+			      <div class="description">
+			        {{ msg.message }} <a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
+			      </div>
 			    </div>
 			  </div>
 			</div>

@@ -71,11 +71,14 @@ Meteor.methods({
 	},
 
 	'sendMessage' : function(message, messageList){
+		var date = new Date();
+		time = date.toDateString() + " " + date.getHours().toString() + ":" + date.getMinutes();
 		for (var i = 0; i < messageList.length; i++) {
 			Meteor.users.update({username : messageList[i]}, { $push : { "profile.messages" :
 				{
+					'from' : Meteor.user().username,
 					'message' : message,
-					'time' : new Date().toLocaleString(),
+					'time' : time,
 					'status' : false
 				}
 			}});
