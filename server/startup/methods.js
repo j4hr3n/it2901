@@ -9,6 +9,7 @@ Meteor.methods({
 		      'nameLast': nameLast,
 		      'bio': bio,
 		      'friends': [],
+		      'events' : [],
 		      'notifications' : {
 		        'friendRequests' : [],
 		        'activities' : []
@@ -94,6 +95,11 @@ Meteor.methods({
 		};
 	},
 
+	'addEvent' : function(theUser, theEvent){
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
+		});
+	},
+	
 	'inviteFriend' : function(theUser){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" : 
 			{'_id' : Meteor.userId(),

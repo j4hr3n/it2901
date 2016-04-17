@@ -16,7 +16,15 @@ function eventListCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
-           return Events.find({});
+          var user =  Meteor.user();
+
+         if(user){
+          return user.profile.events;
+
+        }
+        else{
+          return null;
+        }
        }
    });
 

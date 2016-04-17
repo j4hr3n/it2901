@@ -38,13 +38,31 @@ function createEventCtrl($scope, $reactive) {
 
     this.addEvent = () => {
        var test = (Meteor.user()._id != null);
-       console.log("validUsername:" + test);
+      
        if(test){
-
        
         this.newEvent.owner = Meteor.user()._id;
         Events.insert(this.newEvent);
+        
+
+        //legge til newEvent for alle de som er invitert, work in progress
+        for(var i = 0; i < this.newEvent.participants.length; i++ ){
+
+            theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
+            Meteor.call('addEvent', theUser, this.newEvent);
+
+            //theUser.update({profile.notifications.activities: this.newEvent}); 
+           //Meteor.users.update({'_id' : this.newEvent.participants[i]._id}, {$addToSet : {"profile.events": this.newEvent}});
+
+
+        }
+
+       
+
         this.newEvent = {};
+
+        
+
         $('.ui.small.modal.createEvent').modal('hide');
     };
     }

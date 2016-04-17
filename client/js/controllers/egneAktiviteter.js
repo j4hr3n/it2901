@@ -38,19 +38,32 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
-          var temp = Events.find({});          
+
+         var user =  Meteor.user();
+
+         if(user){
+          return user.profile.events;
+
+        }
+        else{
+          return null;
+        }
+
+   
+
+        /*  var temp = Events.find({});          
           var valid;
 
          for(var i = 0; i < temp.length; i++){
 
             console.log("length");
-      /*      for(var j = 0; j < temp.participants.length; j++){
+           for(var j = 0; j < temp.participants.length; j++){
                 if(user._id == temp[i].participants[j]._id ){
                   valid.add(temp[i]);
                   break;
-                }*/
+                }
           }
-          return temp;
+          return temp; */
           
        },
    });
