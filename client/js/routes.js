@@ -88,7 +88,18 @@ function config($stateProvider, $urlRouterProvider) {
           templateUrl: 'client/templates/eventDetails.html',
           controller: 'eventDetailsCtrl',
         }}
-      });
+      })
+
+    .state('party', {
+      url : '/party',
+      template : '<h1>This is a State</h1>'
+    })
+
+    .state('publicProfile', {
+      url : '/public/:username',
+      templateUrl : 'client/templates/publicProfile.html',
+      controller : 'publicProfileCtrl'
+    });
 
   $urlRouterProvider.otherwise('/');
 }

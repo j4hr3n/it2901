@@ -63,7 +63,7 @@
 	          <div class="ui items">
 	            <h3>Dine kontakter</h3>
 	            <div class="item" ng-repeat="fr in prc.friends">
-	              <p>{{ fr.username }}</p>
+	              <a ui-sref="publicProfile({ username : fr.username })">{{ fr.username }}</a>
 	            </div>
 	            <div class="ui compact menu">
 	              <a class="item newFriend">
@@ -234,7 +234,7 @@
               <div class="ui divided items">
                 <h3>Alle kontakter i databasen</h3>
                 <div class="item" ng-repeat="user in prc.contacts">
-                  <li>{{user.username}} <button ng-click="inviteFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
+                  <li><a ui-sref="publicProfile({ username : user.username })">{{ user.username }}</a> <button ng-click="inviteFriend(user._id)" class="ui basic button"><i class="icon user"></i>Add friend</button></li>
                 </div>
               </div>
             </div>
