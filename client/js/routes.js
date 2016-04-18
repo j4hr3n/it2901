@@ -52,7 +52,7 @@ function config($stateProvider, $urlRouterProvider) {
       template: '<newsfeed></newsfeed>'
     })
     .state('venner', {
-      url: '/profile/venner',
+      url: '/venner',
       templateUrl: 'client/templates/venner.html',
       controller : 'profileCtrl'
     })
@@ -90,11 +90,6 @@ function config($stateProvider, $urlRouterProvider) {
           controller: 'eventDetailsCtrl',
         }}
       })
-
-    .state('party', {
-      url : '/party',
-      template : '<h1>This is a State</h1>'
-    })
 
     .state('publicProfile', {
       url : '/public/:username',
