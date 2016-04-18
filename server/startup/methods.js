@@ -1,5 +1,5 @@
 Meteor.methods({
-	'createNewUser' : (username, password, email, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
@@ -14,7 +14,9 @@ Meteor.methods({
 		        'friendRequests' : [],
 		        'activities' : []
 		      },
-		      'messages' : []
+		      'messages' : [],
+		      'profilePicture' : profilePicture
+
 		    }
 		};
 
@@ -159,5 +161,11 @@ Meteor.methods({
 		  friendList.push(friendObject[i]._id)
 		};
 		return friendList;
+	},
+
+	'deleteFriend' : function(userName){
+		var theUser = Meteor.users.findOne({username : userName})
+		Meteor.users.update({_id : Meteor.userId()}, { $pull : { "profile.friends" : { username : userName} }});
+		Meteor.users.update({ username : userName}, { $pull : { "profile.friends" : { username : Meteor.user().username} }});
 	}
 })

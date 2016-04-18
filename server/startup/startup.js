@@ -32,7 +32,8 @@ Meteor.startup(function () {
             'friendRequests' : [],
             'activities' : []
           },
-          'messages' : []
+          'messages' : [],
+          'profilePicture' : 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg'
         }
       },
       {
@@ -47,7 +48,8 @@ Meteor.startup(function () {
             'friendRequests' : [],
             'activities' : []
           },
-          'messages' : []
+          'messages' : [],
+          'profilePicture' : '/img/kristy.png'
         }
       },
       {
@@ -62,7 +64,8 @@ Meteor.startup(function () {
             'friendRequests' : [],
             'activities' : []
           },
-          'messages' : []
+          'messages' : [],
+          'profilePicture' : '/img/profile1.png'
         }
       }
     ];
