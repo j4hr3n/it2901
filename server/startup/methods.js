@@ -99,7 +99,14 @@ Meteor.methods({
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
 		});
 	},
-	
+
+	'deleteEvent' : function(theEvent){
+		console.log(theEvent._id);
+		var res = Meteor.users.update( { }, { $pull : { "profile.events" : { $elemMatch : { "_id" : theEvent._id } } } }, { "multi" : true });	
+		console.log(res);
+		Events.remove({'_id': theEvent._id});
+	},
+
 	'inviteFriend' : function(theUser){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" : 
 			{'_id' : Meteor.userId(),
@@ -122,6 +129,8 @@ Meteor.methods({
 		};
 		return friendList;
 	},
+
+	
 
 	'test' : function(){
 		return "hei";

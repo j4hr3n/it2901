@@ -37,37 +37,24 @@ function createEventCtrl($scope, $reactive) {
    });
 
     this.addEvent = () => {
-       var test = (Meteor.user()._id != null);
-      
-       if(test){
-       
+            
         this.newEvent.owner = Meteor.user()._id;
-        Events.insert(this.newEvent);
-        
+        var ev_id = Events.insert(this.newEvent);
+        var ev = Events.findOne({ '_id' : ev_id });
 
         //legge til newEvent for alle de som er invitert, work in progress
         for(var i = 0; i < this.newEvent.participants.length; i++ ){
 
             theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
-            Meteor.call('addEvent', theUser, this.newEvent);
-
-            //theUser.update({profile.notifications.activities: this.newEvent}); 
-           //Meteor.users.update({'_id' : this.newEvent.participants[i]._id}, {$addToSet : {"profile.events": this.newEvent}});
-
-
+            Meteor.call('addEvent', theUser, ev);
         }
-
-       
 
         this.newEvent = {};
 
-        
-
         $('.ui.small.modal.createEvent').modal('hide');
-    };
     }
 
     this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
+        Events.remove({'_id': event._id});
     }
 }; 

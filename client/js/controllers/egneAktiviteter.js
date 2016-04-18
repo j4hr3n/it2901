@@ -69,6 +69,6 @@ function egneAktiviteterCtrl($scope, $reactive) {
    });
 
     this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
+        Meteor.call('deleteEvent', event);
     }
 }; 

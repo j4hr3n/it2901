@@ -31,6 +31,7 @@ function eventListCtrl($scope, $reactive) {
   
     this.removeEvent = (event) => {
         Events.remove({_id: event._id});
+        
     }
 
 
