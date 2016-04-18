@@ -1,5 +1,5 @@
 Meteor.methods({
-	'createNewUser' : (username, password, email, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
@@ -13,7 +13,9 @@ Meteor.methods({
 		        'friendRequests' : [],
 		        'activities' : []
 		      },
-		      'messages' : []
+		      'messages' : [],
+		      'profilePicture' : profilePicture
+
 		    }
 		};
 

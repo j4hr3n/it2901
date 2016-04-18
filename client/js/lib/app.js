@@ -9,7 +9,7 @@ angular
         $('.ui.small.modal.login').modal('show');
       },
       $rootScope.fireRegisterModal = function() {
-        $('.ui.small.modal.register').modal('show');
+        $('.ui.small.modal.register').modal({ detachable:false, observeChanges:true }).modal('show').modal('refresh')
       }
   })
 

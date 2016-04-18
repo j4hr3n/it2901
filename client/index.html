@@ -50,6 +50,8 @@
 
   <div ui-view></div>
 </div>
+
+
 <!--Register Modal -->
 <div class="ui small modal register" ng-controller="registerCtrl as regc">
   <i class="close icon"></i>
@@ -82,6 +84,14 @@
       <label>Epost</label>
       <input type="email" name="email" placeholder="Epost" ng-model="regc.user.email" required>
     </div>
+    <div class="field six wide column">
+      <label>Upload profile picture</label>
+      <input type="file" id="profilePicture" ng-model="profilePicture" onchange="angular.element(this).scope().change()">
+      <button class="ui primary button" onclick="angular.element(this).scope().uploadFile()" id="profileUpload"
+      style="visibility: visible">Upload</button>
+      <img src="" id="profileImg" style="width: 100%; height: 100%; visibility: hidden">
+    </div>
+    
     <div class="field six wide column">
       <div class="ui checkbox">
         <input type="checkbox" tabindex="0">

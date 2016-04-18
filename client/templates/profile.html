@@ -5,7 +5,7 @@
     	<div class="ui people shape">
 	      <div ng-switch on="editProfile" class="ui card">
 	        <div class="image">
-	          <img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg">
+	          <img ng-src="{{prc.user.profile.profilePicture}}">
 	         <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button>
 	        </div>
 	        <div class="content">

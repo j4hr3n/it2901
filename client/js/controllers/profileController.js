@@ -34,10 +34,12 @@ function profileCtrl($scope, $reactive) {
       return user.profile.messages;
     }
 
-
-
   });
 
+  
+  $scope.profilePicture = function(){
+    return Meteor.user().profile.profilePicture;
+  }
 
   $scope.friendRequestNotification = function(){
     return Meteor.user().profile.notifications.friendRequests.length;
