@@ -47,7 +47,7 @@
 		        <div class="extra content">
 		          <a ng-click="prc.incrementFriends()">
 		            <i class="user icon"></i>
-		            {{ prc.user.profile.friends.length }} venner
+		            <a ui-sref="venner">{{ prc.user.profile.friends.length }} venner</a>
 		          </a>
 		        </div>
 		        <div ng-switch-when="save">

@@ -53,7 +53,8 @@ function config($stateProvider, $urlRouterProvider) {
     })
     .state('venner', {
       url: '/profile/venner',
-      templateUrl: 'client/templates/venner.html'
+      templateUrl: 'client/templates/venner.html',
+      controller : 'profileCtrl'
     })
     .state('example', {
       url: '/example',
