@@ -58,7 +58,7 @@ function config($stateProvider, $urlRouterProvider) {
     })
     .state('example', {
       url: '/example',
-      templateUrl: 'client/miniex/parent.html' 
+      templateUrl: 'client/miniex/parent.html'
     })
     .state('dashboard.child', {
       url: '/child',
@@ -95,6 +95,12 @@ function config($stateProvider, $urlRouterProvider) {
       url : '/public/:username',
       templateUrl : 'client/templates/publicProfile.html',
       controller : 'publicProfileCtrl'
+    })
+
+    .state('contactPage', {
+      url : '/contactPage',
+      templateUrl : 'client/templates/contactPage.html',
+      controller : ''
     });
 
   $urlRouterProvider.otherwise('/');

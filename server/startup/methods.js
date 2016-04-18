@@ -1,9 +1,10 @@
 Meteor.methods({
-	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, admin, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
 		    'email': email,
+				'admin': 0,
 		    'profile': {
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,
@@ -33,7 +34,7 @@ Meteor.methods({
 		newEvent: { eventID: <eventID>}
 		joinedEvent: { eventID: <eventID>}
 		*/
-		
+
 		if (info.hasOwnProperty("friendAdded") == "undefined") {
 			throw new Meteor.Error(404, "'info' is undefined");
 		}
@@ -110,7 +111,7 @@ Meteor.methods({
 	},
 
 	'inviteFriend' : function(theUser){
-		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" : 
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" :
 			{'_id' : Meteor.userId(),
 			'username' : Meteor.user().username,
 			'time' : new Date(),
@@ -132,7 +133,7 @@ Meteor.methods({
 		return friendList;
 	},
 
-	
+
 
 	'test' : function(){
 		return "hei";
@@ -146,7 +147,7 @@ Meteor.methods({
 			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
 			Meteor.users.update({_id : userId}, {$pull : { "profile.notifications.friendRequests" : { '_id' : Meteor.user()}}})
 
-			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded": 
+			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded":
 				{ newFriendID: userId}});
 		} else if ( bool == false){
 			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
