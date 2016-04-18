@@ -104,9 +104,9 @@ Meteor.methods({
 
 	'deleteEvent' : function(theEvent){
 		console.log(theEvent._id);
-		var res = Meteor.users.update( { }, { $pull : { "profile.events" : { $elemMatch : { "_id" : theEvent._id } } } }, { "multi" : true });	
-		console.log(res);
-		Events.remove({'_id': theEvent._id});
+		var id = theEvent._id;
+		Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
+		Events.remove({'_id': id});
 	},
 
 	'inviteFriend' : function(theUser){
