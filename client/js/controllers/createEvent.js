@@ -18,7 +18,7 @@ function createEventCtrl($scope, $reactive) {
         allowAdditions: true
     });
 
-    $('.ui.fluid.search.dropdown').dropdown;
+    $('.ui.fluid.search.dropdown').dropdown({});
 
     this.newEvent = {};
 
