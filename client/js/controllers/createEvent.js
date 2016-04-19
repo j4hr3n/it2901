@@ -22,8 +22,6 @@ function createEventCtrl($scope, $reactive) {
 
     $('.ui.fluid.search.dropdown').dropdown({});
 
-    this.newEvent = {};
-
     this.subscribe('events');
 
     this.helpers({
@@ -38,6 +36,7 @@ function createEventCtrl($scope, $reactive) {
         },*/
    });
 
+<<<<<<< HEAD
     this.addEvent = () => {
             
         this.newEvent.owner = Meteor.user()._id;
@@ -56,5 +55,33 @@ function createEventCtrl($scope, $reactive) {
         this.newEvent = {};
 
         $('.ui.small.modal.createEvent').modal('hide');
+=======
+    this.resetEvent = () => {
+        this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
+            owner: Meteor.user()._id,
+            name: "",
+            description: "",
+            date: new Date(),
+            location: "",
+            participants:  [],
+            type: "",
+            exercises: "",
+            "public": ""
+        };
+>>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
     }
+    this.resetEvent();
+
+    this.addEvent = () => {
+        Meteor.apply('createEvent', _.values(this.newEvent), false, (err) => {
+            if (err) {
+                console.log("Failed creating new event: " + err);
+            }
+            else {
+                console.log("Created new event: " + this.newEvent.name);
+                $('.ui.small.modal.createEvent').modal('hide');
+                this.resetEvent();
+            }
+        });
+    };
 }; 

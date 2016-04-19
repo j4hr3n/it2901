@@ -65,7 +65,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
         events: () => {
           var temp = Events.find({});          
-          var valid;
+          var valid = [];
 
          for(var i = 0; i < temp.length; i++){
 
@@ -85,6 +85,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
        }
    });
 
+<<<<<<< HEAD
     this.removeEvent = (eventId) => {
         theEvent = Events.findOne({_id : eventId})
         if (Meteor.userId() == theEvent.owner){
@@ -98,5 +99,10 @@ function egneAktiviteterCtrl($scope, $reactive) {
         }else{
           swal("Failed!", "You cannot delete this since you are not the owner of the event.", "error")
         }
+=======
+    this.removeEvent = (event) => {
+      Meteor.call('deleteEvent', Meteor.user(), event);
+>>>>>>> refs/remotes/origin/master
+>>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
     }
 }; 

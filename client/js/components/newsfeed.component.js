@@ -10,7 +10,7 @@ angular.module("it2901").directive("newsfeed", function () {
 function newsfeedCtrl($scope, $reactive) {
 	$reactive(this).attach($scope);
 
-	this.postsPerPage = 10;
+	this.postsPerPage = 6;
 	this.elementNumber = 0;
 
 	this.helpers({
@@ -31,15 +31,8 @@ function newsfeedCtrl($scope, $reactive) {
 						post.event = Events.findOne({_id: post.eventID });
 						break;
 					default:
-						console.log("Found post with invalid post type: \""+ post.type + "\"")
+						console.log("[Newsfeed] Found post with invalid post type: \""+ post.type + "\"")
 						break;
-				}
-
-				console.log("post" + " = \""+ post + "\"");
-				for (var property in post) {
-					if (post.hasOwnProperty(property)) {
-						console.log(property + " = \""+ post[property] + "\"");
-					}
 				}
 				return post;
 			});
@@ -60,11 +53,10 @@ function newsfeedCtrl($scope, $reactive) {
 	});
 
 	this.changePage = (pageDiff) => {
-		console.log("changed element from "+this.elementNumber+" to "+(this.elementNumber + this.postsPerPage*pageDiff)+ " ("+this.postsPerPage+", "+pageDiff+")");
+		console.log("[Newsfeed] changed element from "+this.elementNumber+" to "+(this.elementNumber + this.postsPerPage*pageDiff)+ " ("+this.postsPerPage+", "+pageDiff+")");
 		
 		this.elementNumber = Math.max(0, Math.min(this.postsCount-this.postsPerPage, 
 			this.elementNumber + this.postsPerPage*pageDiff));
-		console.log(this.elementNumber);
 	};
 
 	this.newPost = {
