@@ -33,15 +33,30 @@ function egneAktiviteterCtrl($scope, $reactive) {
     }
   });
 
+
     this.subscribe('events');
 
     this.helpers({
         events: () => {
-           return Events.find({});
+
+         var user =  Meteor.user();
+
+         if(user){
+          return user.profile.events;
+
+        }
+        else{
+          return null;
+        }
+          
        },
    });
 
+    var user = Meteor.user();
+    console.log("user:" + user);
+
     this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
+      var user = Meteor.user();
+        Meteor.call('deleteEvent', user, event);
     }
 }; 

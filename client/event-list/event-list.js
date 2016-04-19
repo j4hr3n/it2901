@@ -7,6 +7,10 @@ function eventListCtrl($scope, $reactive) {
     $scope.fireCreateEventModal = function() {
         $('.ui.small.modal.createEvent').modal('show');
       }
+
+    $scope.closeModal = function(){
+      $('.ui.small.modal.createEvent').modal('hide all');
+    }
     
     $reactive(this).attach($scope);
 
@@ -16,13 +20,22 @@ function eventListCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
-           return Events.find({});
+          var user =  Meteor.user();
+
+         if(user){
+          return user.profile.events;
+
+        }
+        else{
+          return null;
+        }
        }
    });
 
   
     this.removeEvent = (event) => {
         Events.remove({_id: event._id});
+        
     }
 
 

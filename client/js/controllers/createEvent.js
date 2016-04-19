@@ -18,6 +18,8 @@ function createEventCtrl($scope, $reactive) {
         allowAdditions: true
     });
 
+    $('.ui.fluid.search.dropdown').dropdown({});
+
     this.newEvent = {};
 
     this.subscribe('events');
@@ -35,19 +37,20 @@ function createEventCtrl($scope, $reactive) {
    });
 
     this.addEvent = () => {
-       var test = (Meteor.user()._id != null);
-       console.log("validUsername:" + test);
-       if(test){
-
-       
+            
         this.newEvent.owner = Meteor.user()._id;
-        Events.insert(this.newEvent);
-        this.newEvent = {};
-        $('.ui.small.modal.createEvent').modal('hide');
-    };
-    }
+        var ev_id = Events.insert(this.newEvent);
+        var ev = Events.findOne({ '_id' : ev_id });
 
-    this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
+        //legge til newEvent for alle de som er invitert, work in progress
+        for(var i = 0; i < this.newEvent.participants.length; i++ ){
+
+            theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
+            Meteor.call('addEvent', theUser, ev);
+        }
+
+        this.newEvent = {};
+
+        $('.ui.small.modal.createEvent').modal('hide');
     }
 }; 

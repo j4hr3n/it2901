@@ -1,18 +1,23 @@
 Meteor.methods({
-	'createNewUser' : (username, password, email, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, admin, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
 		    'email': email,
+				'admin': 0,
 		    'profile': {
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,
 		      'bio': bio,
 		      'friends': [],
+		      'events' : [],
 		      'notifications' : {
 		        'friendRequests' : [],
 		        'activities' : []
-		      }
+		      },
+		      'messages' : [],
+		      'profilePicture' : profilePicture
+
 		    }
 		};
 
@@ -29,7 +34,7 @@ Meteor.methods({
 		newEvent: { eventID: <eventID>}
 		joinedEvent: { eventID: <eventID>}
 		*/
-		
+
 		if (info.hasOwnProperty("friendAdded") == "undefined") {
 			throw new Meteor.Error(404, "'info' is undefined");
 		}
@@ -69,8 +74,48 @@ Meteor.methods({
 
 	},
 
+	'sendMessage' : function(message, messageList){
+		var date = new Date();
+		time = date.toDateString() + " " + date.getHours().toString() + ":" + date.getMinutes();
+		for (var i = 0; i < messageList.length; i++) {
+			Meteor.users.update({username : messageList[i]}, { $push : { "profile.messages" :
+				{
+					'from' : Meteor.user().username,
+					'message' : message,
+					'time' : time,
+					'status' : false
+				}
+			}});
+		};
+	},
+
+	'deleteMessage' : function(message){
+		var messages = Meteor.user().profile.messages;
+		for (var i = 0; i < messages.length; i++) {
+		  if (messages[i].message === message){
+		    Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.messages" : { "message" : message}}})
+		  }
+		};
+	},
+
+	'addEvent' : function(theUser, theEvent){
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
+		});
+	},
+
+	'deleteEvent' : function(theUser, theEvent, ){
+		console.log(theEvent._id);
+		console.log("user: " +  theUser._id + ", owner: " + theEvent.owner);
+
+		if(theUser._id == theEvent.owner){
+			var id = theEvent._id;
+			Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
+			Events.remove({'_id': id});
+		}
+	},
+
 	'inviteFriend' : function(theUser){
-		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" : 
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" :
 			{'_id' : Meteor.userId(),
 			'username' : Meteor.user().username,
 			'time' : new Date(),
@@ -92,6 +137,8 @@ Meteor.methods({
 		return friendList;
 	},
 
+
+
 	'test' : function(){
 		return "hei";
 	},
@@ -104,7 +151,7 @@ Meteor.methods({
 			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
 			Meteor.users.update({_id : userId}, {$pull : { "profile.notifications.friendRequests" : { '_id' : Meteor.user()}}})
 
-			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded": 
+			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded":
 				{ newFriendID: userId}});
 		} else if ( bool == false){
 			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
@@ -119,5 +166,11 @@ Meteor.methods({
 		  friendList.push(friendObject[i]._id)
 		};
 		return friendList;
+	},
+
+	'deleteFriend' : function(userName){
+		var theUser = Meteor.users.findOne({username : userName})
+		Meteor.users.update({_id : Meteor.userId()}, { $pull : { "profile.friends" : { username : userName} }});
+		Meteor.users.update({ username : userName}, { $pull : { "profile.friends" : { username : Meteor.user().username} }});
 	}
 })

@@ -6,6 +6,7 @@ angular
 function profileCtrl($scope, $reactive) {
   $reactive(this).attach($scope);
 
+
   this.helpers({
     user: () => {
       return Meteor.user() || Meteor.users.findOne({});
@@ -28,16 +29,68 @@ function profileCtrl($scope, $reactive) {
       //user.profile.notifications.friendRequest.info.length
     },
 
-
+    messages: () => {
+      user = Meteor.user();
+      return user.profile.messages;
+    }
 
   });
 
-  $scope.test = function(){
+  
+  $scope.profilePicture = function(){
+    return Meteor.user().profile.profilePicture;
+  }
+
+  $scope.friendRequestNotification = function(){
     return Meteor.user().profile.notifications.friendRequests.length;
   }
 
+  $scope.messageRequestNotification = function(){
+    return Meteor.user().profile.messages.length;
+  }
 
+  $scope.messageList = []
+  $scope.onSelect = function ($item, $model, $label) {
+    $scope.messageList.push($item.username);
+    $scope.selected = null;            
+  };
 
+  $scope.sendMessage = function(message){
+    if (message){
+      $scope.message = "";
+      Meteor.call('sendMessage', message, $scope.messageList, function(err, result){
+        if (!err){
+          swal("Message sent", "Your message has been sent!", "success");
+          $scope.message = null;
+          $('.ui.small.modal.messageModal').modal('hide');
+        }else{
+          swal("Failed", "Your message was not sent!", "error");
+          console.log(err);
+          $scope.message = null;
+          $('.ui.small.modal.messageModal').modal('hide');
+        }
+      })
+      $scope.messageList = [];  
+    }else {
+      swal("Failed", "Message cannot be blank. Please type something!", "error");
+    }
+    
+  }
+
+  $scope.deleteMessage = function(message){
+    Meteor.call('deleteMessage', message, function(err, result){
+      if (!err){
+        swal("Deleted", "The message is deleted!", "success")
+        if ( Meteor.user().profile.messages.length == 0 ) {
+          $('.ui.small.modal.inboxModal').modal('hide');
+        }
+      }else{
+        swal("Error", "Failed to delete message!", "error")
+      }
+    })
+  }
+
+  
 
   this.incrementFriends = () => {
 
@@ -57,13 +110,13 @@ function profileCtrl($scope, $reactive) {
           "profile.nameFirst": this.user.profile.nameFirst,
           "profile.nameLast": this.user.profile.nameLast,
           "profile.friends": this.user.profile.friends,
-          "profile.bio": this-user.profile.bio } 
+          "profile.bio": this.user.profile.bio } 
       }
     )
   }; 
 
   //Edit profile view
-
+  console.log(this.user.profile.namefirst + "hello");
   $scope.editing = false;
   $scope.removeEdit =false;
   $scope.editProfile = "save";

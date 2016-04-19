@@ -52,12 +52,13 @@ function config($stateProvider, $urlRouterProvider) {
       template: '<newsfeed></newsfeed>'
     })
     .state('venner', {
-      url: '/profile/venner',
-      templateUrl: 'client/templates/venner.html'
+      url: '/venner',
+      templateUrl: 'client/templates/venner.html',
+      controller : 'profileCtrl'
     })
     .state('example', {
       url: '/example',
-      templateUrl: 'client/miniex/parent.html' 
+      templateUrl: 'client/miniex/parent.html'
     })
     .state('dashboard.child', {
       url: '/child',
@@ -88,7 +89,19 @@ function config($stateProvider, $urlRouterProvider) {
           templateUrl: 'client/templates/eventDetails.html',
           controller: 'eventDetailsCtrl',
         }}
-      });
+      })
+
+    .state('publicProfile', {
+      url : '/public/:username',
+      templateUrl : 'client/templates/publicProfile.html',
+      controller : 'publicProfileCtrl'
+    })
+
+    .state('contactPage', {
+      url : '/contactPage',
+      templateUrl : 'client/templates/contactPage.html',
+      controller : ''
+    });
 
   $urlRouterProvider.otherwise('/');
 }

@@ -1,0 +1,22 @@
+<div class="ui container" ng-controller="publicProfileCtrl as ppc">
+	<div ng-if="world()">
+		This is a public profile for: <b> {{ user }}</b><br/>
+		<img ng-src="{{ profilePicture() }}" style="width: 20%; height: 20%; margin-top: 10px">
+		<div ng-controller="indexCtrl as idc">
+			<div ng-if="idc.isLoggedIn">
+				<button class="ui red button" ng-click="unfriend(user)">Unfriend</button>
+			</div>
+		</div>
+	</div>
+	<div ng-if="world() == false">
+		<b style="color: red">There is no such user</b><br/>
+		<img src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif">
+		<img src="https://media.giphy.com/media/iPnLFwV5pPBsc/giphy.gif"><br/>
+		<div class="ui one column stackable center aligned page grid">
+		   <div class="column twelve wide">
+		       <img src="http://i.imgur.com/SnI2AQp.gif">
+		   </div>
+		</div>
+		
+	</div>
+</div>
