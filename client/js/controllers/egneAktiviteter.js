@@ -5,6 +5,9 @@ angular
 function egneAktiviteterCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
+    userff: () => {
+      return Meteor.user().profile.events;
+    }
 
     $scope.acceptEvent = function(eventId,bool){
       var evs = Meteor.user().profile.events
@@ -57,6 +60,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     
     this.subscribe('events');
+    this.subscribe('users');
 
     this.helpers({
         user: () => {
@@ -85,7 +89,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
        }
    });
 
-<<<<<<< HEAD
+
     this.removeEvent = (eventId) => {
         theEvent = Events.findOne({_id : eventId})
         if (Meteor.userId() == theEvent.owner){
@@ -99,10 +103,9 @@ function egneAktiviteterCtrl($scope, $reactive) {
         }else{
           swal("Failed!", "You cannot delete this since you are not the owner of the event.", "error")
         }
-=======
+      }
+
     this.removeEvent = (event) => {
       Meteor.call('deleteEvent', Meteor.user(), event);
->>>>>>> refs/remotes/origin/master
->>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
     }
 }; 

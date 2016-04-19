@@ -24,7 +24,7 @@ Meteor.methods({
 		Accounts.createUser(this.user);
 	},
 
-<<<<<<< HEAD
+
 	'acceptEvent' : function(eventId){
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
@@ -52,7 +52,8 @@ Meteor.methods({
 	'deleteEvent' : function(eventId){
 		Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "_id" : eventId}}})
 		Events.remove(eventId);
-=======
+	},
+
 	'createEvent' : function(owner, name, description, date, location, participants, type, 
 		exercises, isPublic) { 
 
@@ -75,9 +76,8 @@ Meteor.methods({
 				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
 			);
         }
-        Meteor.call("createNewsPost", owner, { "newEvent":
-				{ eventID: ev_id} });
->>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
+        Meteor.call("createNewsPost", owner, { "newEvent":	{ eventID: ev_id} });
+
 	},
 
 	'createNewsPost' : (userID, info, isPublic = false) => {
@@ -154,7 +154,7 @@ Meteor.methods({
 		};
 	},
 
-<<<<<<< HEAD
+
 	'addEvent' : function(theUser, theEvent){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
 		});

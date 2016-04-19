@@ -1,123 +1,119 @@
 <div class="ui container profile" ng-controller="profileCtrl as prc">
   <div class="ui two column grid">
-    <div class="column pull-down">
-      
-    	<div class="ui people shape">
-	      <div ng-switch on="editProfile" class="ui card">
-	        <div class="image">
-	          <img ng-src="{{prc.user.profile.profilePicture}}">
-	         <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button>
-	        </div>
-	        <div class="content">
-	        	<div>
-	        		<div ng-switch-when = "save">
-	        			<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
-		          		<div name="bio" class="description">
-		            	<span> {{ prc.user.profile.bio }} {{text}}</span>
-		          		</div>
-	        		</div>
-	<!--         		<div ng-switch-when="saved">
-		          		<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
-		          		<div class="meta">
-		            		<span ng-switch-default class="date">Sintef</span>
-		          		</div>
-		          		<div class="description">
-		            	<label ng-switch-default>Babak er en gladlaks</label>
-		          		</div>
-		          	</div> -->
-			        <div ng-switch-when="edit"> 
-	 				
-			          	<div class="ui input">
-			          		<input type="text" maxlength="15" ng-model="prc.user.profile.nameFirst" name="first-name" placeholder="Fornavn">
-			          	</div>
-			          	<div class="ui input">
-			          		<input type="text" maxlength="15" ng-model="prc.user.profile.nameLast" name="last-name" placeholder="Etternavn">
-			          	</div>
-		          		<div class="meta">
-		          		<!--	<input type="text" ng-model="" name="Status" placeholder="Hva tenker du på?">-->
-		          		</div>
-		          		<div class="form ui">
-			          		<div class='field' >
-			          		<textarea maxlength="250" type="text" ng-model="prc.user.profile.bio" name="bio" placeholder="Fortell litt om deg selv"> </textarea>
-			          		</div>
-			          	</div>
-		          	</div>
-		          </div>
-		        </div>
-		        <div class="extra content">
-		          <a ng-click="prc.incrementFriends()">
-		            <i class="user icon"></i>
-		            <a ui-sref="venner">{{ prc.user.profile.friends.length }} venner</a>
-		          </a>
-		        </div>
-		        <div ng-switch-when="save">
-		        	<button Id="editButton" ng-click="switchProfile()" class="ui button" type="submit">Redigere profil</button>
-		        </div>
-		        <div ng-switch-when="edit">
-		        	<button id="editButton" ng-click="switchProfile();prc.updateInfo()" class="ui button" type="submit">Lagre</button>
-	<!-- 	      		<button id="removeButton" ng-click="noEdit()" class="ui button" type="cancel">X</button> -->
-		        </div>
-		    </div>
-		    
-		    <div class="venner">
-	          <div class="ui items">
-	            <h3>Dine kontakter</h3>
-	            <div class="item" ng-repeat="fr in prc.friends">
-	              <a ui-sref="publicProfile({ username : fr.username })">{{ fr.username }}</a>
-	            </div>
-	            <div class="ui compact menu">
-	              <a class="item newFriend">
-	                  <i class="add user icon"></i> Friends
-	                  <div class="floating ui ui red circular label" ng-model="friendRequestNotification">{{friendRequestNotification()}}</div>
-	                </a>
-	            </div><br/>
-	            <div class="item modalMessage">
-	            <button class="ui green button">
-	            	<i class="send icon"></i>
-	            	Send message</button>
-	            </div>
-
-	            <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
-	              <i class="inbox icon"></i>
-	              {{ messageRequestNotification() }}
-	            </button><br/>
-				
-
-	            <a href="#/mineAktiviteter"><button class="ui active button" style="margin-top: 10px">
-	              <i class="calendar icon"></i>
-	              {{ prc.user.profile.events.length }} Events
-	            </button></a>
-
-
-
-
-	            <script type="text/javascript">
-	              $('.newFriend').click(function(){
-	                $('.ui.small.modal.friendModal')
-	                  .modal('show')
-	                ;
-	              });
-
-	              function closeModal(){
-	                location.reload()
-	              }
-
-	              $('.modalMessage').click(function(){
-	              	$('.ui.small.modal.messageModal').modal('show');
-	              });
-
-	              $('.modalInbox').click(function(){
-	              	$('.ui.small.modal.inboxModal').modal('show');
-	              });
-
-	              $('.ui.accordion')
-	                .accordion()
-	              ;
-	            </script>
-	          </div>
-	        </div>
-	       </div>
-	     </div>
+    <div ng-switch on="editProfile" class="ui card">
+      <div class="image">
+        <img ng-src="{{prc.user.profile.profilePicture}}">
+       <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button>
+      </div>
+      <div class="content">
+      	<div>
+      		<div ng-switch-when = "save">
+      			{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}
+    		          		<div name="bio" class="description">
+    		            	<span> {{ prc.user.profile.bio }} {{text}}</span>
+    		          		</div>
+      		</div>
+    	<!--         		<div ng-switch-when="saved">
+    		          		<a class="header">{{ prc.user.profile.nameFirst + " " + prc.user.profile.nameLast }}</a>
+    		          		<div class="meta">
+    		            		<span ng-switch-default class="date">Sintef</span>
+    		          		</div>
+    		          		<div class="description">
+    		            	<label ng-switch-default>Babak er en gladlaks</label>
+    		          		</div>
+    		          	</div> -->
+    			        <div ng-switch-when="edit"> 
+    	 				
+    			          	<div class="ui input">
+    			          		<input type="text" maxlength="15" ng-model="prc.user.profile.nameFirst" name="first-name" placeholder="Fornavn">
+    			          	</div>
+    			          	<div class="ui input">
+    			          		<input type="text" maxlength="15" ng-model="prc.user.profile.nameLast" name="last-name" placeholder="Etternavn">
+    			          	</div>
+    		          		<div class="meta">
+    		          		<!--	<input type="text" ng-model="" name="Status" placeholder="Hva tenker du på?">-->
+    		          		</div>
+    		          		<div class="form ui">
+    			          		<div class='field' >
+    			          		<textarea maxlength="250" type="text" ng-model="prc.user.profile.bio" name="bio" placeholder="Fortell litt om deg selv"> </textarea>
+    			          		</div>
+    			          	</div>
+    		          	</div>
+    		          </div>
+    		        </div>
+    		        <div class="extra content">
+    		          <a ng-click="prc.incrementFriends()">
+    		            <i class="user icon"></i>
+    		            <a ui-sref="venner">{{ prc.user.profile.friends.length }} venner</a>
+    		          </a>
+    		        </div>
+    		        <div ng-switch-when="save">
+    		        	<button Id="editButton" ng-click="switchProfile()" class="ui button" type="submit">Redigere profil</button>
+    		        </div>
+    		        <div ng-switch-when="edit">
+    		        	<button id="editButton" ng-click="switchProfile();prc.updateInfo()" class="ui button" type="submit">Lagre</button>
+    	<!-- 	      		<button id="removeButton" ng-click="noEdit()" class="ui button" type="cancel">X</button> -->
+    		        </div>
+    		    </div>
+    		    
+    		    <h3>Dine kontakter</h3>
+    		    <div class="item" ng-repeat="fr in prc.friends">
+    		      <a ui-sref="publicProfile({ username : fr.username })">{{ fr.username }}</a>
+    		    </div>
+    		    <div class="ui compact menu">
+    		      <a class="item newFriend">
+    		          <i class="add user icon"></i> Friends
+    		          <div class="floating ui ui red circular label" ng-model="friendRequestNotification">{{friendRequestNotification()}}</div>
+    		        </a>
+    		    </div><br/>
+    		    <div class="item modalMessage">
+    		    <button class="ui green button">
+    		    	<i class="send icon"></i>
+    		    	Send message</button>
+    		    </div>
+    		    
+    		    <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
+    		      <i class="inbox icon"></i>
+    		      {{ messageRequestNotification() }}
+    		    </button><br/>
+    		    				
+    		    
+    		    <a href="#/mineAktiviteter"><button class="ui active button" style="margin-top: 10px">
+    		      <i class="calendar icon"></i>
+    		      {{ prc.user.profile.events.length }} Events
+    		    </button></a>
+    		    
+    		    <a href="#/mineAktiviteter"><button class="ui active button" style="margin-top: 10px">
+    		      <i class="calendar icon"></i>
+    		      {{ prc.user.profile.events.length }} Events
+    		    </button></a>
+    		    
+    		    
+    		    
+    		    
+    		    <script type="text/javascript">
+    		      $('.newFriend').click(function(){
+    		        $('.ui.small.modal.friendModal')
+    		          .modal('show')
+    		        ;
+    		      });
+    		    
+    		      function closeModal(){
+    		        location.reload()
+    		      }
+    		    
+    		      $('.modalMessage').click(function(){
+    		      	$('.ui.small.modal.messageModal').modal('show');
+    		      });
+    		    
+    		      $('.modalInbox').click(function(){
+    		      	$('.ui.small.modal.inboxModal').modal('show');
+    		      });
+    		    
+    		      $('.ui.accordion')
+    		        .accordion()
+    		      ;
+    		    </script>
 
 
 	

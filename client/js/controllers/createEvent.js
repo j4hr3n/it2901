@@ -13,7 +13,7 @@ function createEventCtrl($scope, $reactive) {
       }
 
     $scope.fireDatepicker = function() {
-    $('.choosedate').datepicker({});
+        $('.choosedate').datepicker({});
       }
 
     $('#addUsers').dropdown({
@@ -36,7 +36,7 @@ function createEventCtrl($scope, $reactive) {
         },*/
    });
 
-<<<<<<< HEAD
+
     this.addEvent = () => {
             
         this.newEvent.owner = Meteor.user()._id;
@@ -51,11 +51,12 @@ function createEventCtrl($scope, $reactive) {
             theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
             Meteor.call('addEvent', theUser, ev);
         }
+    }
 
         this.newEvent = {};
 
         $('.ui.small.modal.createEvent').modal('hide');
-=======
+
     this.resetEvent = () => {
         this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
             owner: Meteor.user()._id,
@@ -68,7 +69,7 @@ function createEventCtrl($scope, $reactive) {
             exercises: "",
             "public": ""
         };
->>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
+
     }
     this.resetEvent();
 
@@ -84,4 +85,4 @@ function createEventCtrl($scope, $reactive) {
             }
         });
     };
-}; 
+};
