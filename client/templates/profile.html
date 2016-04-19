@@ -1,7 +1,7 @@
 <div class="ui container profile" ng-controller="profileCtrl as prc">
   <div class="ui two column grid">
     <div class="column pull-down">
-      
+
     	<div class="ui people shape">
 	      <div ng-switch on="editProfile" class="ui card">
 	        <div class="image">
@@ -25,8 +25,8 @@
 		            	<label ng-switch-default>Babak er en gladlaks</label>
 		          		</div>
 		          	</div> -->
-			        <div ng-switch-when="edit"> 
-	 				
+			        <div ng-switch-when="edit">
+
 			          	<div class="ui input">
 			          		<input type="text" maxlength="15" ng-model="prc.user.profile.nameFirst" name="first-name" placeholder="Fornavn">
 			          	</div>
@@ -58,13 +58,9 @@
 	<!-- 	      		<button id="removeButton" ng-click="noEdit()" class="ui button" type="cancel">X</button> -->
 		        </div>
 		    </div>
-		    
+
 		    <div class="venner">
 	          <div class="ui items">
-	            <h3>Dine kontakter</h3>
-	            <div class="item" ng-repeat="fr in prc.friends">
-	              <a ui-sref="publicProfile({ username : fr.username })">{{ fr.username }}</a>
-	            </div>
 	            <div class="ui compact menu">
 	              <a class="item newFriend">
 	                  <i class="add user icon"></i> Friends
@@ -112,8 +108,8 @@
 	     </div>
 
 
-	
-	<!--Inbox Modal-->	
+
+	<!--Inbox Modal-->
 	<div class="ui small modal inboxModal">
 		<i class="close icon"></i>
 		<div class="header">
@@ -161,14 +157,14 @@
 		      <label>Seach your contacts</label>
 			<input type="text" ng-model="selected" typeahead="friend.username for friend in prc.friends | filter:$viewValue"
 			typeahead-on-select="onSelect($item, $model, $label)">
-		        
+
 		    </div>
 			<div class="field">
 				<h3>Message will be sent to:</h3>
 		    	<a class="ui green label" ng-repeat="recipient in messageList">{{recipient}}</a>
 		    </div>
 			<div class="field">
-				
+
 			</div>
 		    <div class="field">
 		        <label>Message</label>
@@ -177,7 +173,7 @@
 		    <div class="field">
 		    	<div class="ui submit right floated green button" ng-click="sendMessage(message)">Send</div>
 		    </div>
-		  </div>  
+		  </div>
 		</div>
 
 	</div>

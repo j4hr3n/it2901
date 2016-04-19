@@ -1,10 +1,10 @@
 <div class="ui container myEvents" ng-controller="egneAktiviteterCtrl as evC">
   <div class="ui stackable grid container pull-down">
   <div class= "row">
-   
+
 
    <div ui-view="createEvent"></div>
-  
+
 
 </div>
 </div>
@@ -15,13 +15,13 @@
 
     <div class="six wide  ui divided items">
       <h3>Mine Aktiviteter</h3>
-      
+
       <div class="item" ng-repeat="event in evC.events">
         <i class="calendar icon"></i>
         <div class="content">
           <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
           <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event)"><i class="remove circle icon"></i></button>
-          <div class="description">   
+          <div class="description">
             <p>{{ event.date }} kl 12.00</p>
             <p>{{ event.location }}</p>
           </div>
@@ -33,12 +33,12 @@
   <div class="column pull-down myEvents">
     <div class="ui stackable container">
       <div class="row">
-        
-      <div ui-view="eventDetails">Trykk for å se detaljer</div>
-      
+
+      <div ui-view="eventDetails">Trykk på en aktivitet for å se detaljer</div>
+
     </div>
-    
-    
+
+
   </div>
 </div>
 </div>
