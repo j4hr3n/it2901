@@ -7,7 +7,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
     $scope.eventId = $stateParams.eventId;
 
-
     $('#status').popup({
     inline   : true,
     hoverable: true,
@@ -48,22 +47,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
        currentEvent: () => {
           return Events.findOne({_id: $stateParams.eventId});
         }, 
-       
-
    });
-    this.partic
-    ipating = "6";
-    this.level = "middels";
-
-    this.addEvent = () => {
-        this.newEvent.owner = Meteor.user()._id;
-        Events.insert(this.newEvent);
-        this.newEvent = {};
-    };
-
-    this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
-    }
-
 
 }; 

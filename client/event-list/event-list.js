@@ -21,13 +21,22 @@ function eventListCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
-           return Events.find({});
+          var user =  Meteor.user();
+
+         if(user){
+          return user.profile.events;
+
+        }
+        else{
+          return null;
+        }
        }
    });
 
   
     this.removeEvent = (event) => {
         Events.remove({_id: event._id});
+        
     }
 
 

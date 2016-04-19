@@ -34,7 +34,7 @@
               <label>Sted: </label>
               <input type="text" ng-model="evC.newEvent.location"/>
             </div>
-            <div class="field">
+            <div class="required field">
               <label>Legg til venner</label>
               <select multiple="" ng-model="evC.newEvent.participants" ng-options="user.username for user in evC.users track by user._id">
                <option value="">Velg venner</option>
@@ -44,14 +44,17 @@
          </div>
        </div>
        <div class="column">
-        <div class="field">
-          <label>Type: </label>
-          <select class="ui fluid search dropdown" multiple="" ng-model="evC.newEvent.type">
-  <option value="T">Aktivitetstype</option>
-  <option value="S">Trening</option>
-  <option value="AK">Sosial</option>
+<div class="field">
+<label>Aktivitetstype</label>
+        <select class="ui fluid search dropdown" multiple="" ng-model="evC.newEvent.type">
+  <option value="">Aktivitetstype</option>
+  <option value="Trening">Trening</option>
+  <option value="Sosial">Sosial</option>
+  <option value="Friluft">Friluft</option>
+  <option value="Innendørs">Innendørs</option>
   </select>
-        </div>
+  </div>
+
         <div class="field">
           <label>Vanskelighetsgrad: </label>
           <div class="inline fields">

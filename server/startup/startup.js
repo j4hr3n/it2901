@@ -24,6 +24,7 @@ Meteor.startup(function () {
         'username': 'Babs',
         'password':'123',
         'email':'baf@idi.ntnu.no',
+        'admin': 1,
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
@@ -40,6 +41,7 @@ Meteor.startup(function () {
         'username': 'theRandy',
         'password':'123',
         'email':'RandsterS@ntnu.no',
+        'admin': 1,
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
@@ -56,6 +58,7 @@ Meteor.startup(function () {
         'username': 'perp',
         'password':'123',
         'email':'pepa@ntnu.no',
+        'admin': 1,
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
@@ -70,38 +73,41 @@ Meteor.startup(function () {
       }
     ];
 
+    a = Meteor.users.find().fetch();
+
+
     for (var i = 0; i < users.length; i++) {
       Accounts.createUser(users[i]);
     }
   }
 
-  NewsPosts.remove({});  
+  NewsPosts.remove({});
   if (NewsPosts.find().count() < 3) {
     /*var posts = [
       {
         "public": true,
-        info: { "friendAdded": { 
+        info: { "friendAdded": {
           newFriendID: Meteor.users.findOne()._id }
         },
         ownerID: Meteor.users.findOne({username: "perp"})._id,
         "public": true,
       },
       {
-        info: { "newEvent": { 
+        info: { "newEvent": {
           eventID: Events.findOne()._id }
         },
         ownerID: Meteor.users.findOne({username: "Babs"})._id,
         "public": true,
       },
       {
-        info: { "joinedEvent": { 
+        info: { "joinedEvent": {
           eventID: Events.findOne()._id }
         },
         ownerID: Meteor.users.findOne({username: "theRandy"})._id,
         "public": true,
       },
       {
-        info: { userPost: { 
+        info: { userPost: {
           title: "Bilder fra bærturen",
           description: "Kom nettopp hjem fra turen til Bloksberg!" }
         },
@@ -110,27 +116,27 @@ Meteor.startup(function () {
       }
     ];*/
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "perp"})._id,
-      { "friendAdded": { 
+      { "friendAdded": {
           newFriendID: Meteor.users.findOne()._id }
         }, true);
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "Babs"})._id,
-      { "newEvent": { 
+      { "newEvent": {
           eventID: Events.findOne({})._id }
         }, true);
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
-      { "joinedEvent": { 
+      { "joinedEvent": {
           eventID: Events.findOne({})._id }
         }, true);
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
-      { "userPost": { 
+      { "userPost": {
           title: "Bilder fra bærturen",
           description: "Kom nettopp hjem fra turen til Bloksberg!" }
         }, true);
 
     /*for (post in posts) {
-      Meteor.call('createNewsPost', post.ownerID, post.info, post.public);/*, 
-        (error) => { 
-          if (error) 
+      Meteor.call('createNewsPost', post.ownerID, post.info, post.public);/*,
+        (error) => {
+          if (error)
             throw new Meteor.Error(404, "failed to insert number "+i+" ("+error+")")
         });
     }*/
