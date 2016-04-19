@@ -48,27 +48,15 @@ function egneAktiviteterCtrl($scope, $reactive) {
         else{
           return null;
         }
-
-   
-
-        /*  var temp = Events.find({});          
-          var valid;
-
-         for(var i = 0; i < temp.length; i++){
-
-            console.log("length");
-           for(var j = 0; j < temp.participants.length; j++){
-                if(user._id == temp[i].participants[j]._id ){
-                  valid.add(temp[i]);
-                  break;
-                }
-          }
-          return temp; */
           
        },
    });
 
+    var user = Meteor.user();
+    console.log("user:" + user);
+
     this.removeEvent = (event) => {
-        Meteor.call('deleteEvent', event);
+      var user = Meteor.user();
+        Meteor.call('deleteEvent', user, event);
     }
 }; 
