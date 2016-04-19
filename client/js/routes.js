@@ -101,7 +101,15 @@ function config($stateProvider, $urlRouterProvider) {
       url : '/contactPage',
       templateUrl : 'client/templates/contactPage.html',
       controller : ''
+    })
+
+    .state('personalData', {
+      url : '/personalData',
+      templateUrl : 'client/templates/personalData.html',
+      controller : ''
     });
+
+
 
   $urlRouterProvider.otherwise('/');
 }
