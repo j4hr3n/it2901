@@ -14,8 +14,9 @@
    <div class="content pull-down">
      <p>{{edc.currentEvent.description}}</p>
    </div>
-   <div class="content pull-down">
-  Type: {{ edc.currentEvent.type }}
+   <div class="content pull-down" >
+   Type:
+  <span ng-repeat="type in edc.currentEvent.type">{{ type }}, </span>
 </div>
 <div class="content pull-down">
   <span ng-if="edc.currentEvent.public == true"> Denne aktiviteten er tilgjengelig for alle</span>
