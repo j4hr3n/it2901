@@ -5,7 +5,14 @@ angular
 function eventDetailsCtrl($scope, $stateParams, $reactive) {  
     $reactive(this).attach($scope);
 
+
+    this.subscribe('events');
+    this.subscribe('users');
+
+
     $scope.eventId = $stateParams.eventId;
+
+    $scope.deltar = Events.findOne({_id : $scope.eventId}).isAttendingCount;
 
     $('#status').popup({
     inline   : true,
@@ -37,8 +44,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
     this.newEvent = {};
 
-    this.subscribe('events');
-    this.subscribe('users');
 
     this.helpers({
         events: () => {

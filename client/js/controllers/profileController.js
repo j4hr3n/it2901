@@ -22,6 +22,7 @@ function profileCtrl($scope, $reactive) {
       
     },
 
+
     notifications: () => {
       user =  Meteor.user();
       return user.profile.nameFirst;
@@ -35,6 +36,11 @@ function profileCtrl($scope, $reactive) {
     }
 
   });
+
+  $scope.eventNotification = function(){
+    user = Meteor.user();
+    return user.profile.events.length
+  } 
 
   
   $scope.profilePicture = function(){

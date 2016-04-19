@@ -80,7 +80,15 @@
 	            <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
 	              <i class="inbox icon"></i>
 	              {{ messageRequestNotification() }}
-	            </button>
+	            </button><br/>
+				
+
+	            <a href="#/mineAktiviteter"><button class="ui active button" style="margin-top: 10px">
+	              <i class="calendar icon"></i>
+	              {{ prc.user.profile.events.length }} Events
+	            </button></a>
+
+
 
 
 	            <script type="text/javascript">
