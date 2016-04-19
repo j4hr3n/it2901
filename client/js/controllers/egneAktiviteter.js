@@ -5,6 +5,8 @@ angular
 function egneAktiviteterCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
+    
+
     $('#status').popup({
     inline   : true,
     hoverable: true,

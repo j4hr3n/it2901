@@ -3,7 +3,13 @@
 </button>
 
 <div class="ui small modal createEvent" ng-controller="createEventCtrl as evC" >
-  <i class="close icon" ng-click="closeModal()"></i>
+  <i class="close icon" onclick="closeModal()"></i>
+  <script>
+    function closeModal(){
+      $('.ui.small.modal.createEvent').modal('hide all');  
+    }
+    
+  </script>
 
   <div class="header blue modal">Opprett en ny aktivitet</div>
   <div class="content">

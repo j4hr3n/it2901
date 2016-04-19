@@ -8,9 +8,10 @@ function eventListCtrl($scope, $reactive) {
         $('.ui.small.modal.createEvent').modal('show');
       }
 
-    $scope.closeModal = function(){
+    /*$scope.closeModal = function(){
       $('.ui.small.modal.createEvent').modal('hide all');
-    }
+      
+    }*/
     
     $reactive(this).attach($scope);
 
