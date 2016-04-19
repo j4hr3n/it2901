@@ -2,7 +2,7 @@ angular
 .module('it2901')
 .controller('egneAktiviteterCtrl', egneAktiviteterCtrl);
 
-function egneAktiviteterCtrl($scope, $reactive) {  
+function egneAktiviteterCtrl($scope, $reactive) {
     $reactive(this).attach($scope);
 
     userff: () => {
@@ -68,7 +68,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
         },
 
         events: () => {
-          var temp = Events.find({});          
+          var temp = Events.find({});
           var valid = [];
 
          for(var i = 0; i < temp.length; i++){
@@ -81,7 +81,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
                 }*/
           }
           return temp;
-          
+
        },
 
        userEvents: () => {
@@ -108,4 +108,4 @@ function egneAktiviteterCtrl($scope, $reactive) {
     this.removeEvent = (event) => {
       Meteor.call('deleteEvent', Meteor.user(), event);
     }
-}; 
+};
