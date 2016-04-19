@@ -28,6 +28,7 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
+          //'bio': 'Test bio for babs',
           'friends': [],
           'notifications' : {
             'friendRequests' : [],

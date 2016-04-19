@@ -20,18 +20,22 @@
       <a class="toc item">
         <i class="sidebar icon"></i>
       </a>
-      <a class="item" ui-sref="home" ng-if="!indc.isLoggedIn">Hjem</a>
+      <!--<a class="item" ui-sref="home" ng-if="!indc.isLoggedIn">Hjem</a>-->
       <a class="item" ui-sref="downloads">Last ned til din mobil</a>
+
       <!--Typeahead search-->
         <div>
         	<div class="container-fluid" ng-controller="indexCtrl as idx">
+            <div class="ui icon input">
             <div class="ui form-group ">
               <div class="four wide field">
-        		  <label for="users">Typeahead search</label>
+        		  <label for="users">Search</label>
               <!--<input class = "prompt" ></input>-->
-              <input name="users" id="users" type="text" placeholder="enter a state" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
+              <input name="user" id="users" type="text" placeholder="search for friends" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
+              <i class="search icon"></i>
             </div>
         		</div>
+          </div>
         	</div>
         </div>
 
