@@ -24,6 +24,32 @@ Meteor.methods({
 		Accounts.createUser(this.user);
 	},
 
+	'createEvent' : function(owner, name, description, date, location, participants, type, 
+		exercises, isPublic) { 
+
+		var newEvent = {
+			owner: owner,
+	        name: name,
+	        description: description,
+	        date: date,
+	        location: location,
+	        participants: participants,
+	        type: type,
+	        exercises: exercises,
+	        "public": isPublic
+	    }
+        var ev_id = Events.insert(newEvent);
+
+        for(var participant in newEvent.participants){           
+			Meteor.users.update(
+				{_id : participant._id}, 
+				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
+			);
+        }
+        Meteor.call("createNewsPost", owner, { "newEvent":
+				{ eventID: ev_id} });
+	},
+
 	'createNewsPost' : (userID, info, isPublic = false) => {
 		/* 'info needs one of the following properties:
 
@@ -63,7 +89,7 @@ Meteor.methods({
 		} else {
 			throw new Meteor.Error(404, "'info' lacks one of the required properties"
 				+" types (friendAdded, newActivity, userPost, newEvent, etc.), "
-				+" see method comment for more info.)");
+				+" see this method's comment for more info.)");
 		}
 
 		newsPost_new.ownerID = userID;
@@ -98,19 +124,28 @@ Meteor.methods({
 		};
 	},
 
-	'addEvent' : function(theUser, theEvent){
-		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
-		});
-	},
-
-	'deleteEvent' : function(theUser, theEvent, ){
+	'deleteEvent' : function(theUser, theEvent){
 		console.log(theEvent._id);
 		console.log("user: " +  theUser._id + ", owner: " + theEvent.owner);
 
 		if(theUser._id == theEvent.owner){
 			var id = theEvent._id;
-			Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
+
+			Meteor.users.update( { }, { $pull : { "profile.events" : {eventID : id} }}, 
+				{ "multi" : true });
+
 			Events.remove({'_id': id});
+
+			NewsPosts.remove({ $or: [
+				{ $and: [
+					{ type: "joinedEvent"},
+		            { eventID: id }
+		        ]},
+		        { $and: [
+		        	{ type: "newEvent"},
+		            { eventID: id }
+	            ]}
+	        ]});
 		}
 	},
 
@@ -136,8 +171,6 @@ Meteor.methods({
 		};
 		return friendList;
 	},
-
-
 
 	'test' : function(){
 		return "hei";

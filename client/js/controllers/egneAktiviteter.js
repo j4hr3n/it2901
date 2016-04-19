@@ -57,6 +57,6 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     this.removeEvent = (event) => {
       var user = Meteor.user();
-        Meteor.call('deleteEvent', user, event);
+        Meteor.call('deleteEvent', user, event._id);
     }
 }; 
