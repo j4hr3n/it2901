@@ -2,7 +2,7 @@ angular
 .module('it2901')
 .controller('egneAktiviteterCtrl', egneAktiviteterCtrl);
 
-function egneAktiviteterCtrl($scope, $reactive) {  
+function egneAktiviteterCtrl($scope, $reactive) {
     $reactive(this).attach($scope);
 
     $('#status').popup({
@@ -38,7 +38,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
-          var temp = Events.find({});          
+          var temp = Events.find({});
           var valid = [];
 
          for(var i = 0; i < temp.length; i++){
@@ -51,12 +51,11 @@ function egneAktiviteterCtrl($scope, $reactive) {
                 }*/
           }
           return temp;
-          
+
        },
    });
 
     this.removeEvent = (event) => {
       Meteor.call('deleteEvent', Meteor.user(), event);
->>>>>>> refs/remotes/origin/master
     }
-}; 
+};
