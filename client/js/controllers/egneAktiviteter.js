@@ -39,7 +39,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
     this.helpers({
         events: () => {
           var temp = Events.find({});          
-          var valid;
+          var valid = [];
 
          for(var i = 0; i < temp.length; i++){
 
@@ -56,6 +56,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
    });
 
     this.removeEvent = (event) => {
-        Events.remove({_id: event._id});
+      Meteor.call('deleteEvent', Meteor.user(), event);
+>>>>>>> refs/remotes/origin/master
     }
 }; 

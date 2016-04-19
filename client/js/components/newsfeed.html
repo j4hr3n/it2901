@@ -1,22 +1,21 @@
-<div class="ui container pull-down">
-	<h3>Hva som foregår</h3>
-	<div class="ui relaxed divided list">
-	  	<div class="item" ng-repeat="post in newsfeed.posts" ng-switch on="post.type">
-	  		<i class="large child middle aligned icon"></i>
-	  		<div class="content" ng-switch-when="friendAdded">
-	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har lagt til {{ post.newFriend.profile.nameFirst +" "+ post.newFriend.profile.nameLast }} som venn!</a>
-	  		</div>
-	  		<div class="content" ng-switch-when="userPost">
-	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast +': "'+ post.title +"\"" }}</a>
-	  			<div class="description">{{ post.description }}</div>
-	  		</div>
-	  		<div class="content" ng-switch-when="newEvent">
-	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har laget en ny aktivitet: {{ "\""+post.event.name+"\"" }}"
-	  			</a>
-	  		</div>
-	  		<div class="content" ng-switch-when="joinedEvent">
-	  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }} har blitt med i aktiviteten {{ "\""+post.event.name+"\"" }}
-	  			</a>
+<div class="ui raised blue segment">
+	<div class="ui small feed">
+		<h4 class="ui header">Dette foregår blant vennene du har lagt til:</h4>
+	  	<div class="event" ng-repeat="post in newsfeed.posts" ng-switch on="post.type">
+	  		<div class="content">
+		  		<div class="summary" ng-switch-when="friendAdded">
+		  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har lagt til <a class="header">{{ post.newFriend.profile.nameFirst +" "+ post.newFriend.profile.nameLast }}</a> som venn!
+		  		</div>
+		  		<div class="summary" ng-switch-when="userPost">
+		  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> skrev &laquo;<a class="header">{{ post.title }}</a>&raquo;
+		  			<div>&quot;<i>{{ post.description }}</i>&quot;</div>
+		  		</div>
+		  		<div class="summary" ng-switch-when="newEvent">
+		  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har laget en ny aktivitet: &laquo;<a class="header">{{ post.event.name }}</a>&raquo;
+		  		</div>
+		  		<div class="summary" ng-switch-when="joinedEvent">
+		  			<a class="header">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har blitt med i aktiviteten <a class="header">{{ post.event.name }}</a>
+		  		</div>
 	  		</div>
 	  	</div>
 	  	<i ng-show="newsfeed.postsCount == 0">Det ser ikke ut til å være noen nyheter her enda!</i>

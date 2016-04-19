@@ -1,6 +1,7 @@
 angular
   .module('it2901')
-  .config(config);
+  .config(config)
+  .run(run);
 
 function config($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -13,21 +14,56 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/home.html',
       controller: 'homeController'
     })
-    .state('profile', {
-      url: '/profile',
-      templateUrl: 'client/templates/profile.html'
-    })
-    .state('activities', {
-      url: '/activities',
-      templateUrl: 'client/templates/activities.html'
-    })
     .state('downloads', {
       url: '/downloads',
       templateUrl: 'client/templates/downloads.html'
     })
+    .state('contactPage', {
+      url : '/contactPage',
+      templateUrl : 'client/templates/contactPage.html',
+      controller : ''
+    })
+
+    .state('publicProfile', {
+      url : '/public/:username',
+      templateUrl : 'client/templates/publicProfile.html',
+      controller : 'publicProfileCtrl'
+    })
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'client/templates/profile.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+    .state('activities', {
+      url: '/activities',
+      templateUrl: 'client/templates/activities.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+    .state('activities.balanse', {
+      url: '/activities/balanse',
+      templateUrl: 'client/templates/balanse.html'
+    })
+
     .state('dashboard', {
       templateUrl: 'client/templates/dashboard.html',
-      controller: 'dashboardCtrl'
+      controller: 'dashboardCtrl',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
     .state('dashboard.eventlist', {
       templateUrl: 'client/event-list/event-list.html',
@@ -38,36 +74,16 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/createEvent.html',
       controller: 'createEventCtrl'
     })
-    .state('network', {
-      url: '/network',
-      templateUrl: 'client/templates/network.html',
-      controller: 'networkController'
-    })
-    .state('balanse', {
-      url: '/activities/balanse',
-      templateUrl: 'client/templates/balanse.html'
-    })
-    .state("newsfeedDebug", {
-      url: '/news',
-      template: '<newsfeed></newsfeed>'
-    })
-    .state('venner', {
-      url: '/venner',
-      templateUrl: 'client/templates/venner.html',
-      controller : 'profileCtrl'
-    })
-    .state('example', {
-      url: '/example',
-      templateUrl: 'client/miniex/parent.html'
-    })
-    .state('dashboard.child', {
-      url: '/child',
-      templateUrl: 'client/event-list/event-list.html',
-      controller : 'eventListCtrl'
-    })
+
     .state('egneAktiviteter', {
       templateUrl: 'client/templates/egneAktiviteter.html',
       controller: 'egneAktiviteterCtrl',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
     .state('egneAktiviteter.createEvent', {
       url: '/mineAktiviteter',
@@ -89,18 +105,26 @@ function config($stateProvider, $urlRouterProvider) {
           templateUrl: 'client/templates/eventDetails.html',
           controller: 'eventDetailsCtrl',
         }}
-      })
-
-    .state('publicProfile', {
-      url : '/public/:username',
-      templateUrl : 'client/templates/publicProfile.html',
-      controller : 'publicProfileCtrl'
     })
 
-    .state('contactPage', {
-      url : '/contactPage',
-      templateUrl : 'client/templates/contactPage.html',
-      controller : ''
+    .state('network', { // Debug?
+      url: '/network',
+      templateUrl: 'client/templates/network.html',
+      controller: 'networkController'
+    })
+    .state('venner', { // Debug?
+      rl: '/venner',
+      templateUrl: 'client/templates/venner.html',
+      controller : 'profileCtrl'
+    })
+    .state('example', { // Debug?
+      url: '/example',
+      templateUrl: 'client/miniex/parent.html'
+    })
+    .state('dashboard.child', { // Debug?
+      url: '/child',
+      templateUrl: 'client/event-list/event-list.html',
+      controller : 'eventListCtrl'
     })
 
     .state('personalData', {
@@ -109,7 +133,16 @@ function config($stateProvider, $urlRouterProvider) {
       controller : ''
     });
 
-
-
   $urlRouterProvider.otherwise('/');
+}
+
+function run($rootScope, $state) {
+  $rootScope.$on('$stateChangeError',
+    (event, toState, toParams, fromState, fromParams, error) => {
+      if (error === 'AUTH_REQUIRED') {
+        console.log("Login required");
+        $state.go('home');
+      }
+    }
+  );
 }
