@@ -103,11 +103,15 @@ Meteor.methods({
 		});
 	},
 
-	'deleteEvent' : function(theEvent){
+	'deleteEvent' : function(theUser, theEvent, ){
 		console.log(theEvent._id);
-		var id = theEvent._id;
-		Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
-		Events.remove({'_id': id});
+		console.log("user: " +  theUser._id + ", owner: " + theEvent.owner);
+
+		if(theUser._id == theEvent.owner){
+			var id = theEvent._id;
+			Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
+			Events.remove({'_id': id});
+		}
 	},
 
 	'inviteFriend' : function(theUser){
