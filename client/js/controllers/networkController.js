@@ -4,8 +4,5 @@ angular
 
 function networkController() {
 
-$scope.showFriend = function(fr) {
-  
-}
 
 }

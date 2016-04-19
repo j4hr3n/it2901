@@ -18,7 +18,7 @@ function indexCtrl($scope, $reactive, $location) {
       return Meteor.user();
     },
     usersList: ()=> {
-      //these parameters do nothing :C
+      //Filling in parameters does nothing :C
       return Meteor.users.find({}, {});
       // return Meteor.users.find({
       // users: {

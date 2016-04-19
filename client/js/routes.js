@@ -125,6 +125,12 @@ function config($stateProvider, $urlRouterProvider) {
       url: '/child',
       templateUrl: 'client/event-list/event-list.html',
       controller : 'eventListCtrl'
+    })
+
+    .state('personalData', {
+      url : '/personalData',
+      templateUrl : 'client/templates/personalData.html',
+      controller : ''
     });
 
   $urlRouterProvider.otherwise('/');

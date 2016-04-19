@@ -38,25 +38,25 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     this.helpers({
         events: () => {
+          var temp = Events.find({});          
+          var valid = [];
 
-         var user =  Meteor.user();
+         for(var i = 0; i < temp.length; i++){
 
-         if(user){
-          return user.profile.events;
-
-        }
-        else{
-          return null;
-        }
+            console.log("length");
+      /*      for(var j = 0; j < temp.participants.length; j++){
+                if(user._id == temp[i].participants[j]._id ){
+                  valid.add(temp[i]);
+                  break;
+                }*/
+          }
+          return temp;
           
        },
    });
 
-    var user = Meteor.user();
-    console.log("user:" + user);
-
     this.removeEvent = (event) => {
-      var user = Meteor.user();
-        Meteor.call('deleteEvent', user, event._id);
+      Meteor.call('deleteEvent', Meteor.user(), event);
+>>>>>>> refs/remotes/origin/master
     }
 }; 
