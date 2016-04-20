@@ -35,7 +35,7 @@ Meteor.methods({
 		};
 	},
 
-	'denyEvent' : function(eventId){
+	/*'denyEvent' : function(eventId){
 		evs = Meteor.user().profile.events
 		for (var i = 0; i < evs.length; i++) {
 			if (evs[i]._id == eventId){
@@ -47,7 +47,7 @@ Meteor.methods({
 			}
 		};
 		
-	},
+	},*/
 
 	'deleteEvent' : function(eventId){
 		Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "_id" : eventId}}})
