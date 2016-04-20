@@ -167,38 +167,6 @@ Meteor.methods({
 	},
 
 
-	/*'addEvent' : function(theUser, theEvent){
-		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
-		});
-	},
-
-	/*'deleteEvent' : function(theUser, theEvent, ){
-=======
-	'deleteEvent' : function(theUser, theEvent){
->>>>>>> 926f0735b9f90258bed9d89a3ed68832cf171a31
-		console.log(theEvent._id);
-		console.log("user: " +  theUser._id + ", owner: " + theEvent.owner);
-
-		if(theUser._id == theEvent.owner){
-			var id = theEvent._id;
-
-			Meteor.users.update( { }, { $pull : { "profile.events" : {eventID : id} }}, 
-				{ "multi" : true });
-
-			Events.remove({'_id': id});
-
-			NewsPosts.remove({ $or: [
-				{ $and: [
-					{ type: "joinedEvent"},
-		            { eventID: id }
-		        ]},
-		        { $and: [
-		        	{ type: "newEvent"},
-		            { eventID: id }
-	            ]}
-	        ]});
-		}
-	},*/
 
 	'inviteFriend' : function(theUser){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" :

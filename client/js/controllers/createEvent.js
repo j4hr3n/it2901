@@ -5,8 +5,6 @@ angular
 function createEventCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
-    
-    //console.log(Meteor.user())
 
     $scope.fireCreateEventModal = function() {
         $('.ui.small.modal.createEvent').modal('show');
@@ -30,28 +28,9 @@ function createEventCtrl($scope, $reactive) {
        },
         users: () => {
           return Meteor.users.find({}, {'username':1});
-    }, /*
-        oneEvent: () => {
-          return Events.findOne({_id: $stateParams.eventId});
-        },*/
+    }, 
    });
 
-
-    /*this.addEvent = () => {
-            
-        this.newEvent.owner = Meteor.user()._id;
-        this.newEvent.createdBy = Meteor.user().username;
-        this.newEvent.isAttendingCount = 0;
-        var ev_id = Events.insert(this.newEvent);
-        var ev = Events.findOne({ '_id' : ev_id });
-
-        //legge til newEvent for alle de som er invitert, work in progress
-        for(var i = 0; i < this.newEvent.participants.length; i++ ){
-
-            theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
-            Meteor.call('addEvent', theUser, ev);
-        }
-    }*/
 
         this.newEvent = {};
 
