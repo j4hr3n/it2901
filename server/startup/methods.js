@@ -50,7 +50,7 @@ Meteor.methods({
 	},
 
 	'deleteEvent' : function(eventId){
-		Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "eventId" : eventId}}})
+		Meteor.users.update({}, {$pull : { "profile.events" : { "eventId" : eventId}}}, { "multi" : true })
 		Events.remove(eventId);
 	},
 
