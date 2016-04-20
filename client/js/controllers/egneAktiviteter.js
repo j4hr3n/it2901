@@ -25,7 +25,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
           }
         })
       }
-      
+
     }
 
 
@@ -58,7 +58,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
     }
   });
 
-    
+
     this.subscribe('events');
     this.subscribe('users');
 
