@@ -30,6 +30,7 @@ Meteor.startup(function () {
           'nameLast': 'Farschian',
           //'bio': 'Test bio for babs',
           'friends': [],
+          'events' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -47,6 +48,7 @@ Meteor.startup(function () {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
           'friends': [],
+          'events' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -64,6 +66,7 @@ Meteor.startup(function () {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
           'friends': [],
+          'events' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []

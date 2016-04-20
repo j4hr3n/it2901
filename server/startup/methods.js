@@ -69,13 +69,18 @@ Meteor.methods({
 	        "public": isPublic
 	    }
         var ev_id = Events.insert(newEvent);
-
-        for(var participant in newEvent.participants){           
+        newEvent.participants.forEach(function(participant){
+        	Meteor.users.update(
+				{_id : participant._id}, 
+				{ $push : { "profile.events" : { eventID: ev_id, attending: 0, eventName : newEvent.name} } }
+			);
+        })
+        /*for(var participant in newEvent.participants){
 			Meteor.users.update(
 				{_id : participant._id}, 
 				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
 			);
-        }
+        }*/
         Meteor.call("createNewsPost", owner, { "newEvent":	{ eventID: ev_id} });
 
 	},
