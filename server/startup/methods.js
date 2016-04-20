@@ -35,19 +35,19 @@ Meteor.methods({
 		};
 	},
 
-	/*'denyEvent' : function(eventId){
+	'denyEvent' : function(eventId){
 		evs = Meteor.user().profile.events
 		for (var i = 0; i < evs.length; i++) {
-			if (evs[i]._id == eventId){
-				Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "_id" : eventId}}})
-				Events.update({_id : eventId}, { $pull : { "participants" : { "_id" : Meteor.userId()}}})
-				Events.update({_id : eventId}, { $inc : { "isAttendingCount" : -1}})
+			if (evs[i].eventId == eventId){
+				Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "eventId" : eventId}}})
+				Events.update({_id : eventId}, { $pull : { "participants" : { "username" : Meteor.user().username}}})
+				//Events.update({_id : eventId}, { $inc : { "isAttendingCount" : -1}})
 				//Meteor.events.update({_id : eventId}, {$pull : {"participants" : { _id : Meteor.user()}}})
 				//Meteor.events.remove({"_id" : eventId})
 			}
 		};
 		
-	},*/
+	},
 
 	'deleteEvent' : function(eventId){
 		Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "_id" : eventId}}})
@@ -77,7 +77,7 @@ Meteor.methods({
         newEvent.participants.forEach(function(participant){
         	Meteor.users.update(
 				{ username : participant.username}, 
-				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  attending: false} } }
+				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  owner : newEvent.owner, attending: false} } }
 			);
         })
         /*for(var participant in newEvent.participants){

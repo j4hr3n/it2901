@@ -68,7 +68,8 @@ function egneAktiviteterCtrl($scope, $reactive) {
         },
 
         events: () => {
-          var temp = Events.find({});
+          return Meteor.user().profile.events;
+          /*var temp = Events.find({});
           var valid = [];
 
          for(var i = 0; i < temp.length; i++){
@@ -78,9 +79,9 @@ function egneAktiviteterCtrl($scope, $reactive) {
                 if(user._id == temp[i].participants[j]._id ){
                   valid.add(temp[i]);
                   break;
-                }*/
+                }
           }
-          return temp;
+          return temp;*/
 
        },
 
