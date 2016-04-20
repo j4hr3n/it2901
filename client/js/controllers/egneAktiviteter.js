@@ -57,6 +57,5 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     this.removeEvent = (event) => {
       Meteor.call('deleteEvent', Meteor.user(), event);
->>>>>>> refs/remotes/origin/master
     }
 }; 
