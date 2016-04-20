@@ -79,9 +79,9 @@
 	              {{ messageRequestNotification() }}
 	            </button><br/>
 
-	            
+
 	            <a href="/#/mineAktiviteter"><div class="ui big label" style="margin-top: 10px">
-	              <i class="calendar icon"></i> 
+	              <i class="calendar icon"></i>
 	              {{ prc.user.profile.events.length }} events
 	            </div></a>
 
@@ -227,23 +227,7 @@
         </div>
       </div>
 
-      <div class="ui icon input">
-            <input type="text" placeholder="Søk etter nye kontakter...">
-            <i class="search icon"></i>
-      </div>
-      </div>
-          <div class="ui stackable grid container">
-            <div>
-              <div class="ui divided items">
-                <h3>Alle kontakter i databasen</h3>
-                <div class="item" ng-repeat="user in prc.contacts">
-                  <li><a ui-sref="publicProfile({ username : user.username })">{{ user.username }}</a>
-                    <button ng-click="inviteFriend(user._id)" class="ui basic button">
-                      <i class="icon user"></i>Legg til venn</button></li>
-                </div>
-              </div>
-            </div>
-          </div>
+    </div>
 
     </div>
 
