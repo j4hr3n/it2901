@@ -13,7 +13,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
       var evs = Meteor.user().profile.events
       if (bool == true){
         for (var i = 0; i < evs.length; i++) {
-              if (evs[i]._id == eventId){
+              if (evs[i].eventId == eventId){
                 swal("Accepted", "You are going to this event!", "success")
                 Meteor.call('acceptEvent', eventId)
               }

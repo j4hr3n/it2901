@@ -28,8 +28,8 @@ Meteor.methods({
 	'acceptEvent' : function(eventId){
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
-			if (events[i]._id == eventId){
-				Meteor.users.update({_id : Meteor.userId(), "profile.events._id": eventId},{$set : {"profile.events.$.isAttending" : true}})
+			if (events[i].eventId == eventId){
+				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : true}})
 				Events.update({_id : eventId}, { $inc : { "isAttendingCount" : 1}})
 			}
 		};
@@ -68,11 +68,16 @@ Meteor.methods({
 	        exercises: exercises,
 	        "public": isPublic
 	    }
+	    participants = [];
+	    for (var i = 0; i < newEvent.participants.length; i++) {
+	    	participants.push({ username: newEvent.participants[i].username, "attending" : false})
+	    };
+	    newEvent.participants = participants;
         var ev_id = Events.insert(newEvent);
         newEvent.participants.forEach(function(participant){
         	Meteor.users.update(
-				{_id : participant._id}, 
-				{ $push : { "profile.events" : { eventID: ev_id, attending: 0, eventName : newEvent.name} } }
+				{ username : participant.username}, 
+				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  attending: false} } }
 			);
         })
         /*for(var participant in newEvent.participants){
