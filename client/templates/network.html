@@ -11,7 +11,7 @@
   <div class="column pull-down myFriends">
 
     <div class="six wide  ui divided items">
-      <h3>Mine Kontakter</h3>
+      <h3>Mine Kontakter ({{ nec.user.profile.friends.length }})</h3>
       <p>Test 1.1</p>
       <div class="item" ng-repeat="fr in nec.friends">
         <i class="user icon"></i>
@@ -22,6 +22,7 @@
           </div>
         </div>
         <!--<div class="content">
+          publicProfile({ username: fr.username })
           <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
           <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event)"><i class="remove circle icon"></i></button>
           <div class="description">
@@ -31,6 +32,25 @@
         </div>-->
       </div>
     </div>
+    <div class="six wide  ui divided items second">
+      <div>
+        <div class="ui divided items">
+          <h3>Alle kontakter i databasen</h3>
+          <div class="item" ng-repeat="user in nec.contacts">
+            <i class="icon user"></i>
+            <div class="content">
+              <a ui-sref="publicProfile({ username : user.username })">{{ user.username }}</a>
+                <button ng-click="inviteFriend(user._id)" class="ui basic button add-friend">
+                  <i class="icon user"></i>Legg til venn</button>
+                  <div class="description">
+                    <p>{{ user.profile.nameFirst}} {{user.profile.nameLast}}</p>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="column pull-down myEvents">
