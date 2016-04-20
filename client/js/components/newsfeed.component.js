@@ -23,6 +23,7 @@ function newsfeedCtrl($scope, $reactive) {
 						post.newFriend = Meteor.users.findOne({_id: post.newFriendID });
 						break;
 					case "userPost":
+						post.showDesc = false;
 						break;
 					case "newEvent":
 						post.event = Events.findOne({_id: post.eventID });

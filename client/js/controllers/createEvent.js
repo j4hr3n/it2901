@@ -5,14 +5,37 @@ angular
 function createEventCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
+    this.resetEvent = () => {
+        this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
+            owner: Meteor.user()._id,
+            name: "",
+            description: "",
+            date: new Date(),
+            location: "",
+            participants:  [],
+            type: "",
+            exercises: "",
+            "public": ""
+        };
+    }
+    this.resetEvent();
 
-    $scope.fireCreateEventModal = function() {
+    this.fireCreateEventModal = function() {
+        
         $('.ui.small.modal.createEvent').modal('show');
-      }
+        
+        $('#datepick').datepicker({ language: 'no'});
+        $('#datepick').datepicker().on("changeDate", function(e) {
 
-    $scope.fireDatepicker = function() {
-        $('.choosedate').datepicker({});
-      }
+            newDate = new Date(e.date);
+
+            date = (newDate.getDate() < 10 ? "0"+newDate.getDate() : newDate.getDate())
+            month = ((newDate.getMonth()+1) < 10 ? "0"+(newDate.getMonth()+1) : (newDate.getMonth()+1))
+            
+            $("#datepickInput").val(
+                newDate.getFullYear()+"-"+month+"-"+date);
+        });
+    }
 
     $('#addUsers').dropdown({
         allowAdditions: true
@@ -30,29 +53,6 @@ function createEventCtrl($scope, $reactive) {
           return Meteor.users.find({}, {'username':1});
     }, 
    });
-
-
-        this.newEvent = {};
-
-        $('.ui.small.modal.createEvent').modal('hide');
-
-    this.resetEvent = () => {
-        this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
-            owner: Meteor.user()._id,
-            name: "",
-            description: "",
-            date: new Date(),
-            location: "",
-            participants:  [],
-            type: "",
-            exercises: "",
-            "public": "",
-            createdBy : ""
-        };
-
-    }
-    this.resetEvent();
-
 
     this.addEvent = () => {
         Meteor.apply('createEvent', _.values(this.newEvent), false, (err) => {

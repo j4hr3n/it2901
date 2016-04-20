@@ -2,7 +2,7 @@ angular
   .module('it2901')
   .controller('loginCtrl', loginCtrl);
 
-function loginCtrl($scope, $reactive, $location) {
+function loginCtrl($scope, $reactive, $state) {
   $reactive(this).attach($scope);
 
   this.credentials = {
@@ -22,7 +22,7 @@ function loginCtrl($scope, $reactive, $location) {
         } else {
           console.log("Logged in successfully");
           $('.ui.small.modal.login').modal('hide');
-          $location.path("/dashboard/eventlist");
+          $state.go("dashboard");
         }
       });
   };

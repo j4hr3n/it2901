@@ -2,7 +2,7 @@ angular
     .module('it2901')
     .controller('registerCtrl', registerCtrl);
 
-function registerCtrl($scope, $reactive, $location) {
+function registerCtrl($scope, $reactive, $state) {
   $reactive(this).attach($scope);
 
   
@@ -68,7 +68,7 @@ function registerCtrl($scope, $reactive, $location) {
         else {
           console.log("Created new user: " + this.user.username);
           $('.ui.small.modal.register').modal('hide');
-          $location.path("/dashboard");
+          $state.go("dashboard");
         }
       });
     } else {
