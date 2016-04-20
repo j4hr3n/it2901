@@ -21,6 +21,36 @@ function networkController($scope, $reactive) {
     }
   });
 
+  var friendList = []
+
+
+  function isFriend(userId){
+    friendObject = Meteor.user().profile.friends
+    for (var i = 0; i < friendObject.length; i++) {
+      friendList.push(friendObject[i]._id)
+    };
+
+    if (friendList.indexOf(userId) < 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  friendRequestList = []
+  function isRequest(userId){
+    friendRequestObjects = Meteor.user().profile.notifications.friendRequests
+    for (var i = 0; i < friendRequestObjects.length; i++) {
+      friendRequestList.push(friendRequestObjects[i._id])
+    };
+
+    if (friendRequestList.indexOf(userId) < 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
   $scope.inviteFriend = function(userId){
     theUser = Meteor.users.findOne({'_id' : userId})
     if ( userId === Meteor.userId() ){
