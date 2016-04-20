@@ -7,7 +7,7 @@
      {{edc.currentEvent.name}}
    </div>
    <div class="meta">
-     <span>Opprettet av:{{ edc.currentEvent.owner }}</span><br>
+     <span>Opprettet av: <b> {{ edc.currentEvent.createdBy }}</b></span><br>
      <span class="date">12 mars 2016, kl 12:00 </span> <br>
      <span>{{ edc.currentEvent.location }} </span>
    </div>
@@ -53,7 +53,7 @@
   </div>
   <a class="participating button">
     <i class="checkmark icon"></i>
-    {{ edc.participating }} deltar
+    {{ count }} deltar
   </a>
   <div class="ui fluid popup top left transition hidden">
     <div class="ui list">

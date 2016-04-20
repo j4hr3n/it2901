@@ -5,7 +5,23 @@ angular
 function eventDetailsCtrl($scope, $stateParams, $reactive) {  
     $reactive(this).attach($scope);
 
+
+    this.subscribe('events');
+    this.subscribe('users');
+
+
     $scope.eventId = $stateParams.eventId;
+
+    $scope.count = 0;
+
+    $scope.participants = Events.findOne({_id : $scope.eventId}).participants
+    for (var i = 0; i < $scope.participants.length; i++) {
+      if ($scope.participants[i].attending == true){
+          $scope.count++;
+      }
+    };
+
+
 
     $('#status').popup({
     inline   : true,
@@ -37,8 +53,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
     this.newEvent = {};
 
-    this.subscribe('events');
-    this.subscribe('users');
 
     this.helpers({
         events: () => {
@@ -48,5 +62,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
           return Events.findOne({_id: $stateParams.eventId});
         }, 
    });
+
+    
 
 }; 

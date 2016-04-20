@@ -31,7 +31,7 @@
               <div class="four wide field">
         		  <label for="users">Search</label>
               <!--<input class = "prompt" ></input>-->
-              <input name="user" id="users" type="text" placeholder="search for friends" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
+              <input name="user" id="users" type="text" placeholder="Search for friends or events" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
               <i class="search icon"></i>
             </div>
         		</div>
@@ -128,6 +128,27 @@
     </form>
   </div>
 </div> <!--Modal ends-->
+
+<footer>
+<div class="ui inverted vertical footer segment">
+    <div class="ui two column grid">
+      <div class ="column">
+        <div class ="ui footer container">
+      <h1>Om oss</h1>
+      <p><big>Vi er syv studenter som studerer informatikk ved NTNU. Blabla. SINTEF</big></p>
+      <h1>Om tjenesten vår</h1>
+      <p><big>Blabla. fallforebygging</big></p>
+    </div>
+      </div>
+      <div class ="column">
+        <div class ="ui footer container">
+      <h1>Kontakt Info</h1>
+      <p><big>Kontakt oss på neste-fall@hotmail.com</big></p>
+    </div>
+    </div>
+    </div>
+</div>
+</footer>
 
 
 </body>

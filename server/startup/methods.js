@@ -24,6 +24,36 @@ Meteor.methods({
 		Accounts.createUser(this.user);
 	},
 
+
+	'acceptEvent' : function(eventId){
+		events = Meteor.user().profile.events;
+		for (var i = 0; i < events.length; i++) {
+			if (events[i].eventId == eventId){
+				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : true}})
+				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : true}})
+			}
+		};
+	},
+
+	'denyEvent' : function(eventId){
+		evs = Meteor.user().profile.events
+		for (var i = 0; i < evs.length; i++) {
+			if (evs[i].eventId == eventId){
+				Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "eventId" : eventId}}})
+				Events.update({_id : eventId}, { $pull : { "participants" : { "username" : Meteor.user().username}}})
+				//Events.update({_id : eventId}, { $inc : { "isAttendingCount" : -1}})
+				//Meteor.events.update({_id : eventId}, {$pull : {"participants" : { _id : Meteor.user()}}})
+				//Meteor.events.remove({"_id" : eventId})
+			}
+		};
+		
+	},
+
+	'deleteEvent' : function(eventId){
+		Meteor.users.update({}, {$pull : { "profile.events" : { "eventId" : eventId}}}, { "multi" : true })
+		Events.remove(eventId);
+	},
+
 	'createEvent' : function(owner, name, description, date, location, participants, type, 
 		exercises, isPublic) { 
 
@@ -36,18 +66,30 @@ Meteor.methods({
 	        participants: participants,
 	        type: type,
 	        exercises: exercises,
-	        "public": isPublic
+	        "public": isPublic,
+            createdBy : ""
 	    }
+	    participants = [];
+	    for (var i = 0; i < newEvent.participants.length; i++) {
+	    	participants.push({ username: newEvent.participants[i].username, "attending" : false})
+	    };
+	    newEvent.participants = participants;
+	    newEvent.createdBy = Meteor.user().username;
         var ev_id = Events.insert(newEvent);
-
-        for(var participant in newEvent.participants){           
+        newEvent.participants.forEach(function(participant){
+        	Meteor.users.update(
+				{ username : participant.username}, 
+				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  owner : newEvent.owner, attending: false} } }
+			);
+        })
+        /*for(var participant in newEvent.participants){
 			Meteor.users.update(
 				{_id : participant._id}, 
 				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
 			);
-        }
-        Meteor.call("createNewsPost", owner, { "newEvent":
-				{ eventID: ev_id} });
+        }*/
+        Meteor.call("createNewsPost", owner, { "newEvent":	{ eventID: ev_id} });
+
 	},
 
 	'createNewsPost' : (userID, info, isPublic = false) => {
@@ -124,30 +166,7 @@ Meteor.methods({
 		};
 	},
 
-	'deleteEvent' : function(theUser, theEvent){
-		console.log(theEvent._id);
-		console.log("user: " +  theUser._id + ", owner: " + theEvent.owner);
 
-		if(theUser._id == theEvent.owner){
-			var id = theEvent._id;
-
-			Meteor.users.update( { }, { $pull : { "profile.events" : {eventID : id} }}, 
-				{ "multi" : true });
-
-			Events.remove({'_id': id});
-
-			NewsPosts.remove({ $or: [
-				{ $and: [
-					{ type: "joinedEvent"},
-		            { eventID: id }
-		        ]},
-		        { $and: [
-		        	{ type: "newEvent"},
-		            { eventID: id }
-	            ]}
-	        ]});
-		}
-	},
 
 	'inviteFriend' : function(theUser){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" :

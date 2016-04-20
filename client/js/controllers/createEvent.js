@@ -5,7 +5,6 @@ angular
 function createEventCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
-
     this.resetEvent = () => {
         this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
             owner: Meteor.user()._id,
@@ -19,9 +18,9 @@ function createEventCtrl($scope, $reactive) {
             "public": ""
         };
     }
+    this.resetEvent();
 
     this.fireCreateEventModal = function() {
-        this.resetEvent();
         
         $('.ui.small.modal.createEvent').modal('show');
         
@@ -38,9 +37,6 @@ function createEventCtrl($scope, $reactive) {
         });
     }
 
-    $scope.fireDatepicker = function() {
-      }
-
     $('#addUsers').dropdown({
         allowAdditions: true
     });
@@ -55,10 +51,7 @@ function createEventCtrl($scope, $reactive) {
        },
         users: () => {
           return Meteor.users.find({}, {'username':1});
-    }, /*
-        oneEvent: () => {
-          return Events.findOne({_id: $stateParams.eventId});
-        },*/
+    }, 
    });
 
     this.addEvent = () => {
@@ -73,4 +66,4 @@ function createEventCtrl($scope, $reactive) {
             }
         });
     };
-}; 
+};
