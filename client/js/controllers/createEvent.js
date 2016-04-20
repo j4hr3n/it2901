@@ -6,12 +6,39 @@ function createEventCtrl($scope, $reactive) {
     $reactive(this).attach($scope);
 
 
-    $scope.fireCreateEventModal = function() {
+    this.resetEvent = () => {
+        this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
+            owner: Meteor.user()._id,
+            name: "",
+            description: "",
+            date: new Date(),
+            location: "",
+            participants:  [],
+            type: "",
+            exercises: "",
+            "public": ""
+        };
+    }
+
+    this.fireCreateEventModal = function() {
+        this.resetEvent();
+        
         $('.ui.small.modal.createEvent').modal('show');
-      }
+        
+        $('#datepick').datepicker({ language: 'no'});
+        $('#datepick').datepicker().on("changeDate", function(e) {
+
+            newDate = new Date(e.date);
+
+            date = (newDate.getDate() < 10 ? "0"+newDate.getDate() : newDate.getDate())
+            month = ((newDate.getMonth()+1) < 10 ? "0"+(newDate.getMonth()+1) : (newDate.getMonth()+1))
+            
+            $("#datepickInput").val(
+                newDate.getFullYear()+"-"+month+"-"+date);
+        });
+    }
 
     $scope.fireDatepicker = function() {
-    $('.choosedate').datepicker({});
       }
 
     $('#addUsers').dropdown({
@@ -33,21 +60,6 @@ function createEventCtrl($scope, $reactive) {
           return Events.findOne({_id: $stateParams.eventId});
         },*/
    });
-
-    this.resetEvent = () => {
-        this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
-            owner: Meteor.user()._id,
-            name: "",
-            description: "",
-            date: new Date(),
-            location: "",
-            participants:  [],
-            type: "",
-            exercises: "",
-            "public": ""
-        };
-    }
-    this.resetEvent();
 
     this.addEvent = () => {
         Meteor.apply('createEvent', _.values(this.newEvent), false, (err) => {
