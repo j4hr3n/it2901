@@ -24,6 +24,9 @@ Events.allow({
 		return userId && (event.owner == userId
 			|| _.contains(event.participants, userId));
 	},
+	 update: function (userId, event, fields, modifier) {
+    return userId && event.owner === userId;
+  },
 	remove: function (userId, event){
 		return userId && event.owner == userId;
 	}

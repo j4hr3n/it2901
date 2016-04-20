@@ -67,3 +67,30 @@ function createEventCtrl($scope, $reactive) {
         });
     };
 };
+            
+/*
+        this.newEvent.owner = Meteor.user()._id;
+        var ev_id = Events.insert(this.newEvent);
+console.log("participants: " + this.newEvent.participants);
+
+        var ev = Events.findOne({ '_id' : ev_id });
+        Events.update({_id : ev._id}, { $push : { "participants" : Meteor.user()._id}
+        });
+
+ console.log("participants: " +  ev.participants.length);
+
+        //legge til newEvent for alle de som er invitert, work in progress
+        if(this.newEvent.participants != null){
+        for(var i = 0; i < this.newEvent.participants.length; i++ ){
+
+            theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
+            Meteor.call('addEvent', theUser, ev);
+        }
+        }
+
+        this.newEvent = {};
+
+        $('.ui.small.modal.createEvent').modal('hide');
+    }
+}; 
+*/

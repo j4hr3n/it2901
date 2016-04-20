@@ -76,13 +76,6 @@ function egneAktiviteterCtrl($scope, $reactive) {
        }
    });
 
-<<<<<<< HEAD
-    this.removeEvent = (event) => {
-      Meteor.call('deleteEvent', Meteor.user(), event);
-    }
-}; 
-=======
-
     this.removeEvent = (eventId) => {
         theEvent = Events.findOne({_id : eventId})
         if (Meteor.userId() == theEvent.owner){
@@ -98,4 +91,3 @@ function egneAktiviteterCtrl($scope, $reactive) {
         }
       }
 };
->>>>>>> refs/remotes/origin/master
