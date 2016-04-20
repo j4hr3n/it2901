@@ -18,7 +18,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
                 Meteor.call('acceptEvent', eventId)
               }
             };
-      }else{
+      }else if (bool == false) {
         Meteor.call('denyEvent', eventId, function(err, result){
           if (!err){
             swal("Deleted", "You have declined the invitation.", "success");
@@ -105,8 +105,4 @@ function egneAktiviteterCtrl($scope, $reactive) {
           swal("Failed!", "You cannot delete this since you are not the owner of the event.", "error")
         }
       }
-
-    this.removeEvent = (event) => {
-      Meteor.call('deleteEvent', Meteor.user(), event);
-    }
 };

@@ -22,7 +22,7 @@
         <i class="calendar icon"></i>
         <div class="content">
           <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.eventName }} </a>
-          <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event)"><i class="remove circle icon"></i></button>
+          <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event.eventId)"><i class="remove circle icon"></i></button>
           <div class="description">
 
             <p>{{ event.date }} kl 12.00</p>
@@ -30,7 +30,8 @@
             <div ng-hide="{{event.owner == evC.user._id}}">
                 <button class="ui green small button" ng-click="acceptEvent(event.eventId,true)" id="{{event.eventId}}" ng-show="!event.attending">Accept</button>
                 <label class="ui green label" ng-show="{{ event.attending }}">You are going.</label>
-                <button class="ui red small button" ng-click="acceptEvent(event.eventId,false)" id="event.eventId">Decline</button>
+                <button class="ui red small button" ng-click="acceptEvent(event.eventId,false)" id="event.eventId">Decline
+                </button>
             </div>
           </div>
         </div>
