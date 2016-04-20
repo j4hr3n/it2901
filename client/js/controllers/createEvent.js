@@ -37,7 +37,7 @@ function createEventCtrl($scope, $reactive) {
    });
 
 
-    this.addEvent = () => {
+    /*this.addEvent = () => {
             
         this.newEvent.owner = Meteor.user()._id;
         this.newEvent.createdBy = Meteor.user().username;
@@ -51,7 +51,7 @@ function createEventCtrl($scope, $reactive) {
             theUser = Meteor.users.findOne({'_id' : this.newEvent.participants[i]._id});
             Meteor.call('addEvent', theUser, ev);
         }
-    }
+    }*/
 
         this.newEvent = {};
 
@@ -67,11 +67,13 @@ function createEventCtrl($scope, $reactive) {
             participants:  [],
             type: "",
             exercises: "",
-            "public": ""
+            "public": "",
+            createdBy : ""
         };
 
     }
     this.resetEvent();
+
 
     this.addEvent = () => {
         Meteor.apply('createEvent', _.values(this.newEvent), false, (err) => {

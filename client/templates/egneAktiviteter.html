@@ -21,7 +21,7 @@
       <div class="item" ng-repeat="event in evC.events">
         <i class="calendar icon"></i>
         <div class="content">
-          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.eventName }} </a>
+          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event.eventId })"> {{ event.eventName }} </a>
           <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event.eventId)"><i class="remove circle icon"></i></button>
           <div class="description">
 

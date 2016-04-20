@@ -12,7 +12,28 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
     $scope.eventId = $stateParams.eventId;
 
-    $scope.deltar = Events.findOne({_id : $scope.eventId}).isAttendingCount;
+    //$scope.deltar = Events.findOne({_id : $scope.eventId}).isAttendingCount;
+    $scope.count = 0;
+
+    $scope.participants = Events.findOne({_id : $scope.eventId}).participants
+    for (var i = 0; i < $scope.participants.length; i++) {
+      if ($scope.participants[i].attending == true){
+          $scope.count++;
+      }
+    };
+
+    /*$scope.participantCount = function(){
+      var participants = Events.findOne({ _id : $scope.eventId}).participants
+      for (var i = 0; i < participants.length; i++) {
+        if (participants[i].attending == true){
+          alert("true")
+          $scope.count++;
+        }
+      };
+      return $scope.count;
+
+    }*/
+
 
     $('#status').popup({
     inline   : true,
@@ -53,5 +74,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
           return Events.findOne({_id: $stateParams.eventId});
         }, 
    });
+
+    
 
 }; 

@@ -66,13 +66,15 @@ Meteor.methods({
 	        participants: participants,
 	        type: type,
 	        exercises: exercises,
-	        "public": isPublic
+	        "public": isPublic,
+            createdBy : ""
 	    }
 	    participants = [];
 	    for (var i = 0; i < newEvent.participants.length; i++) {
 	    	participants.push({ username: newEvent.participants[i].username, "attending" : false})
 	    };
 	    newEvent.participants = participants;
+	    newEvent.createdBy = Meteor.user().username;
         var ev_id = Events.insert(newEvent);
         newEvent.participants.forEach(function(participant){
         	Meteor.users.update(
@@ -165,7 +167,7 @@ Meteor.methods({
 	},
 
 
-	'addEvent' : function(theUser, theEvent){
+	/*'addEvent' : function(theUser, theEvent){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
 		});
 	},
