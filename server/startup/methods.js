@@ -30,7 +30,7 @@ Meteor.methods({
 		for (var i = 0; i < events.length; i++) {
 			if (events[i].eventId == eventId){
 				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : true}})
-				Events.update({_id : eventId}, { $inc : { "isAttendingCount" : 1}})
+				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : true}})
 			}
 		};
 	},
