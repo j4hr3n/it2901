@@ -2,6 +2,8 @@ NewsPosts = new Mongo.Collection("newsPosts");
 
 Events = new Mongo.Collection("events");
 
+PersonalData = new Mongo.Collection("personalData")
+
 Meteor.users.allow({
 	insert: function (userId, userDoc) {
 		return userId && userDoc._id == userId;
@@ -36,5 +38,18 @@ NewsPosts.allow({
 	},
 	remove: function (userId, post){
 		return userId && post.ownerID === userId;
+	}
+});
+
+//UNFINISHED. Be able to insert the data from PersonalData into the DB
+PersonalData.allow({
+	insert: function (userId, personalData) {
+		return userId && personalData.ownerID === userId;
+	},
+	update: function (userId){
+		return userId && personalData.ownerID === userId;
+	},
+	remove: function (userId){
+		return userId && personalData.ownerID === userId;
 	}
 });
