@@ -13,6 +13,8 @@ function newsfeedCtrl($scope, $reactive) {
 	this.postsPerPage = 6;
 	this.elementNumber = 0;
 
+	this.showPostCreator = false;
+
 	this.helpers({
 		posts: () => {
 			return NewsPosts.find({}).map((post) => {
@@ -32,7 +34,8 @@ function newsfeedCtrl($scope, $reactive) {
 						post.event = Events.findOne({_id: post.eventID });
 						break;
 					default:
-						console.log("[Newsfeed] Found post with invalid post type: \""+ post.type + "\"")
+						throw TypeError("[Newsfeed] Found post with invalid post type: \""
+							+ post.type + "\"");
 						break;
 				}
 				return post;
@@ -60,21 +63,18 @@ function newsfeedCtrl($scope, $reactive) {
 			this.elementNumber + this.postsPerPage*pageDiff));
 	};
 
-	this.newPost = {
-		title: "Tittel",
-		description: 'Beskrivelse',
-		//date: null,
-		//owner: Meteor.users.findOne()._id,
-		//"public": false
-    };
+    this.resetPost = () => {
+    	this.newPost = {
+			title: "",
+			description: ""
+    	};
+    }
+    this.resetPost();
 	
 	this.addNewPost = () => {
-		NewsPosts.insert({
-			title: newPost.title,
-			description: newPost.title,
-			date: new Date(),
-			owner: Meteor.user()._id,
-			"public": false
-		})
+		Meteor.call("createNewsPost", Meteor.userId(), { "userPost":
+				this.newPost});
+		this.showPostCreator = false;
+		this.resetPost();
 	};
 }

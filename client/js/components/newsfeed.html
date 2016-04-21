@@ -1,13 +1,13 @@
 <div class="ui raised blue segment">
-	<div class="ui small feed">
+	<div class="ui medium feed">
 		<h4 class="ui header">Dette foregår blant vennene du har lagt til:</h4>
-	  	<div class="event" ng-repeat="post in newsfeed.posts" ng-switch on="post.type">
+	  	<div class="event" ng-repeat="post in newsfeed.posts | orderBy: 'date'" ng-switch on="post.type">
 	  		<div class="content">
 		  		<div class="summary" ng-switch-when="friendAdded">
 		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har lagt til <a class="header" ui-sref="publicProfile({ username: post.newFriend.username })">{{ post.newFriend.profile.nameFirst +" "+ post.newFriend.profile.nameLast }}</a> som venn!
 		  		</div>
 		  		<div class="summary" ng-switch-when="userPost">
-		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> skrev <a class="header" ng-click="post.showDesc = !post.showDesc">{{ post.title }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> skrev: <a class="header" ng-click="post.showDesc = !post.showDesc">{{ post.title }}</a>
 		  			<div ng-show="post.showDesc">&laquo;<i>{{ post.description }}</i>&raquo;</div>
 		  		</div>
 		  		<div class="summary" ng-switch-when="newEvent">
@@ -18,8 +18,41 @@
 		  		</div>
 	  		</div>
 	  	</div>
-	  	<i ng-show="newsfeed.postsCount == 0">Det ser ikke ut til å være noen nyheter her enda!</i>
-		<a href="" ng-if="newsfeed.elementNumber > 0" ng-click="newsfeed.changePage(-1)">Se nyere beskjeder</a>
-		<a href="" ng-if="newsfeed.elementNumber < newsfeed.postsCount-newsfeed.postsPerPage" ng-click="newsfeed.changePage(1)">Se eldre beskjeder</a>
+	  	<i ng-show="newsfeed.postsCount == 0">Det ser ikke ut til å være noen nyheter her enda. Bli den første til å legge ut en post!</i>
 	</div>
+	  	<div class="ui basic tiny buttons">
+	  		<button class="ui button" ng-disabled="!(newsfeed.elementNumber > 0)" ng-click="newsfeed.changePage(-1)">
+	  			<i class="left arrow icon"></i>
+			  	Se nyere beskjeder
+  			</button>
+  			<button class="ui button" ng-disabled="!(newsfeed.elementNumber < newsfeed.postsCount-newsfeed.postsPerPage)" ng-click="newsfeed.changePage(1)">
+		  		Se eldre beskjeder
+  				<i class="right arrow icon"></i>
+  			</button>
+		</div>
+
+	<div id="form" class="ui form pull-down column" ng-show="newsfeed.showPostCreator">		
+		<div class="field">
+			<label>Tittel: </label>
+			<input type="text" ng-model="newsfeed.newPost.title" placeholder="Hva foregår?" required/>
+		</div>
+		<div class="field">
+			<label>Beskrivelse: </label>
+			<textArea rows="2" type="text" ng-model="newsfeed.newPost.description" required></textArea>
+		</div>
+		<div class="two column row">
+			<button class="ui medium green button" ng-click="newsfeed.addNewPost()"><b>Ferdig: Legg ut post</b></button>
+			<button class="ui small basic blue button right floated" ng-click="newsfeed.showPostCreator = false">Skjul dette vinduet</button>
+         </div>
+	</div>
+</div>
+
+<div class="ui grid">
+		<div class="right floated eight wide column">
+			
+			<button class="ui small basic blue button" ng-click="newsfeed.showPostCreator = true" ng-hide="newsfeed.showPostCreator">
+					<i class="plus icon"></i>
+					<b>Skriv en nyhetspost som dine venner kan se</b>
+				</button>
+		</div>
 </div>

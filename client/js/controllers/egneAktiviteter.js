@@ -18,7 +18,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
                 Meteor.call('acceptEvent', eventId)
               }
             };
-      }else if (bool == false) {
+      } else if (bool == false) {
         Meteor.call('denyEvent', eventId, function(err, result){
           if (!err){
             swal("Deleted", "You have declined the invitation.", "success");
@@ -28,36 +28,35 @@ function egneAktiviteterCtrl($scope, $reactive) {
 
     }
 
-
-
     $('#status').popup({
-    inline   : true,
-    hoverable: true,
-    position : 'bottom left',
-    delay: {
-      show: 300,
-      hide: 800
-    }
-  });
-    $('.participants.button').popup({
-    inline   : true,
-    hoverable: true,
-    position : 'bottom left',
-    delay: {
-      show: 200,
-      hide: 200
-    }
-  });
-    $('.participating.button').popup({
-    inline   : true,
-    hoverable: true,
-    position : 'bottom left',
-    delay: {
-      show: 200,
-      hide: 200
-    }
-  });
+      inline   : true,
+      hoverable: true,
+      position : 'bottom left',
+      delay: {
+        show: 300,
+        hide: 800
+      }
+    });
 
+    $('.participants.button').popup({
+      inline   : true,
+      hoverable: true,
+      position : 'bottom left',
+      delay: {
+        show: 200,
+        hide: 200
+      }
+    });
+
+    $('.participating.button').popup({
+      inline   : true,
+      hoverable: true,
+      position : 'bottom left',
+      delay: {
+        show: 200,
+        hide: 200
+      }
+    });
 
     this.subscribe('events');
     this.subscribe('users');
@@ -76,13 +75,6 @@ function egneAktiviteterCtrl($scope, $reactive) {
        }
    });
 
-<<<<<<< HEAD
-    this.removeEvent = (event) => {
-      Meteor.call('deleteEvent', Meteor.user(), event);
-    }
-}; 
-=======
-
     this.removeEvent = (eventId) => {
         theEvent = Events.findOne({_id : eventId})
         if (Meteor.userId() == theEvent.owner){
@@ -98,4 +90,3 @@ function egneAktiviteterCtrl($scope, $reactive) {
         }
       }
 };
->>>>>>> refs/remotes/origin/master
