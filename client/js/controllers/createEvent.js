@@ -20,9 +20,12 @@ function createEventCtrl($scope, $reactive) {
     }
     this.resetEvent();
 
+    
+
     this.fireCreateEventModal = function() {
+
+        $('.ui.small.modal.createEvent').modal({ detachable: false }).modal('refresh').modal('show');
         
-        $('.ui.small.modal.createEvent').modal('show');
         
         $('#datepick').datepicker({ language: 'no'});
         $('#datepick').datepicker().on("changeDate", function(e) {
