@@ -57,32 +57,38 @@ function profileCtrl($scope, $reactive) {
 
   $scope.messageList = []
   $scope.onSelect = function ($item, $model, $label) {
+    //var checkFriend = $.grep(Meteor.user().profile.friends, function(obj) { return obj.username == $item.username})
     if ($scope.messageList.indexOf($item.username) == -1){
       $scope.messageList.push($item.username);
       $scope.selected = null;              
     }
     
+    
   };
 
   $scope.sendMessage = function(message){
-    //var checkFriend = $.grep(Meteor.user().profile.friends, function(obj) { return obj.})
-    if (message){
+    if (message && $scope.messageList.length > 0){
       $scope.message = "";
       Meteor.call('sendMessage', message, $scope.messageList, function(err, result){
         if (!err){
           swal("Message sent", "Your message has been sent!", "success");
           $scope.message = null;
-          $('.ui.small.modal.messageModal').modal('hide');
+          $('.ui.small.modal.messageModal').modal('hide all');
         }else{
           swal("Failed", "Your message was not sent!", "error");
           console.log(err);
           $scope.message = null;
-          $('.ui.small.modal.messageModal').modal('hide');
+          $('.ui.small.modal.messageModal').modal('hide all');
         }
       })
       $scope.messageList = [];  
     }else {
-      swal("Failed", "Message cannot be blank. Please type something!", "error");
+      if (!message){
+          swal("Failed", "Message cannot be blank!", "error");  
+      }else if ($scope.messageList == 0){
+        swal("Failed", "Either recipient is blank or there is no such person in your friends list!", "error");  
+      }
+      
     }
     
   }
