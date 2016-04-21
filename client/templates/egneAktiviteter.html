@@ -25,7 +25,7 @@
           <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event.eventId)"><i class="remove circle icon"></i></button>
           <div class="description">
 
-            <p>{{ event.date }} kl 12.00</p>
+            <p>{{ event.date | date }}</p>
             <p>{{ event.location }}</p>
             <div ng-hide="{{event.owner == evC.user._id}}">
                 <button class="ui green small button" ng-click="acceptEvent(event.eventId,true)" id="{{event.eventId}}" ng-show="!event.attending">Accept</button>
