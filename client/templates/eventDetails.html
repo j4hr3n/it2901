@@ -1,4 +1,5 @@
-<div class="ui card" ng-controller="eventDetailsCtrl as edc">
+<div ng-controller="eventDetailsCtrl as edc">
+<div class="ui card">
   
   <i class=" huge center aligned calendar icon"></i>
   
@@ -8,7 +9,7 @@
    </div>
    <div class="meta">
      <span>Opprettet av: <b> {{ edc.currentEvent.createdBy }}</b></span><br>
-     <span class="date">12 mars 2016, kl 12:00 </span> <br>
+     <span class="date"> {{ edc.currentEvent.date | date }} </span> <br>
      <span>{{ edc.currentEvent.location }} </span>
    </div>
    <div class="content pull-down">
@@ -19,7 +20,7 @@
   <span ng-repeat="type in edc.currentEvent.type">{{ type }}, </span>
 </div>
 <div class="content pull-down">
-  <span ng-if="edc.currentEvent.public == true"> Denne aktiviteten er tilgjengelig for alle</span>
+  <span ng-if="edc.currentEvent.public == true"> Åpen for alle</span>
   <span ng-if="edc.currentEvent.public != true"> Denne aktiviteten er kun tilgjeneglig for de som er invitert</span> 
 </div>
  </div>
@@ -62,4 +63,98 @@
   </div>
 </div>
 
+  <button class="ui small gray button" ng-click="fireEditEventModal()">
+  Oppdater
+</button>
+
+</div>
+
+<!-- editEvent Modal -->
+<div class="ui small modal editEvent">
+  <i class="close icon" ng-click="closeModal()"></i>
+
+  <div class="header blue modal">Oppdater {{edc.currentEvent.name}} </div>
+    <div class="content">
+
+    <div id="form" class="ui form pull-down" >
+      <div class="required field">
+        <label>Tittel: </label>
+        <input type="text" ng-model="edc.currentEvent.name"/>
+      </div>
+      <div class="ui two column grid">
+        <div class="column">
+          <div class="field">
+            <label>Beskrivelse: </label>
+            <textArea rows="2" type="text" ng-model="edc.currentEvent.description"></textArea>
+            <div class="field">
+              <label>Dato: </label>
+              <div class="choosedate">
+                <input type="text" class="form-control" ng-model="edc.updated.date" ng-click="fireDatepicker()">
+              </div> 
+            </div>
+            <div class="field">
+              <label>Sted: </label>
+              <input type="text" ng-model="edc.currentEvent.location"/>
+            </div>
+            <div class="required field">
+              <label>Legg til venner</label>
+              <select multiple="" ng-model="edc.currentEvent.participants" ng-options="user.username for user in evC.users track by user._id">
+               <option value="">Velg venner</option>
+             </select>
+           </div>
+           <button class="ui medium green button" ng-click="edc.save()">Oppdater</button>
+         </div>
+       </div>
+       <div class="column">
+<div class="field">
+<label>Aktivitetstype</label>
+        <select class="ui fluid search dropdown"  multiple="" ng-model="edc.currentEvent.type">
+  <option value="">Aktivitetstype</option>
+  <option value="Trening">Trening</option>
+  <option value="Sosial">Sosial</option>
+  <option value="Friluft">Friluft</option>
+  <option value="Innendørs">Innendørs</option>
+  </select>
+  </div>
+
+        <div class="field">
+          <label>Vanskelighetsgrad: </label>
+          <div class="inline fields">
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Lett</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Middels</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+              <label>Hard</label>
+            </div>
+          </div>
+          </div>
+        </div>
+    <div class="field">
+      <label>Legg til øvelser: </label>
+      <input type="text" ng-model="evC.updated.exercises"/>
+    </div>
+
+     <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" ng-model="evC.updated.public">
+        <label>Aktiviteten er tilgjengelig for alle</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>

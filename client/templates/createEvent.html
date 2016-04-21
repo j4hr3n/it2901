@@ -27,7 +27,7 @@
               <textArea rows="2" type="text" ng-model="evC.newEvent.description"></textArea>
               <div class="field">
                 <label>Dato: </label>
-                <div class="choosedate" id="datepick" ng-model="evC.newEvent.date">
+                <div class="choosedate" id="datepick">
                   <input type="date" class="form-control" id="datepickInput" ng-model="evC.newEvent.date">>
                 </div> 
               </div>
@@ -60,19 +60,19 @@
               <label>Vanskelighetsgrad</label>
               <div class="field" style="display: inline">
                 <div class="ui radio checkbox">
-                  <input type="radio" name="frequency" checked="checked">
+                  <input type="radio" name="frequency" ng-model="evC.newEvent.level" value="lett" checked="checked">
                   <label>Lett</label>
                 </div>
               </div>
               <div class="field" style="display: inline">
                 <div class="ui radio checkbox">
-                  <input type="radio" name="frequency" checked="">
+                  <input type="radio" name="frequency" ng-model="evC.newEvent.level" value="middels" checked="">
                   <label>Middels</label>
                 </div>
               </div>
               <div class="field" style="display: inline">
                 <div class="ui radio checkbox">
-                  <input type="radio" name="frequency" checked="">
+                  <input type="radio" name="frequency" ng-model="evC.newEvent.level" value="hard" checked="">
                   <label>Hard</label>
                 </div>
               </div>

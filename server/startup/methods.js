@@ -170,7 +170,21 @@ Meteor.methods({
 		};
 	},
 
+/*
+	'addEvent' : function(theUser, theEvent){
+		Meteor.users.update({_id : theUser._id}, { $push : { "profile.events" : theEvent}
+		});
+	},
 
+	'updateEvent' : function(theUser, theEvent, ){
+
+		if(theUser._id == theEvent.owner){
+			var id = theEvent._id;
+			//Meteor.users.update( { }, { $pull : { "profile.events" : {"_id" : id} }}, { "multi" : true });
+			Events.update({'_id': id});
+		}
+	},
+*/
 
 	'inviteFriend' : function(theUser){
 		Meteor.users.update({_id : theUser._id}, { $push : { "profile.notifications.friendRequests" :
