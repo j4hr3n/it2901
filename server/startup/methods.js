@@ -113,7 +113,11 @@ Meteor.methods({
 			newsPost_new.newFriendID = info.friendAdded.newFriendID;
 
 		} else if (info.hasOwnProperty("userPost")) {
+			if (info.userPost.title == "" || info.userPost.description == "")
+				throw new Meteor.Error(404, "Empty title or description");
+
 			newsPost_new.type = "userPost";
+
 			newsPost_new.title = info.userPost.title;
 			newsPost_new.description = info.userPost.description;
 
@@ -130,7 +134,7 @@ Meteor.methods({
 
 		} else {
 			throw new Meteor.Error(404, "'info' lacks one of the required properties"
-				+" types (friendAdded, newActivity, userPost, newEvent, etc.), "
+				+" types (friendAdded, userPost, newEvent, etc.), "
 				+" see this method's comment for more info.)");
 		}
 
