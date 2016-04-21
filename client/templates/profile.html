@@ -109,9 +109,11 @@
 	              	$('.ui.small.modal.inboxModal').modal('show');
 	              });
 
-	              $('.ui.accordion')
-	                .accordion()
-	              ;
+	              function friendRequestModal(){
+	              	$('.ui.small.modal.friendModal')
+	                  .modal('hide')
+	                ;
+	              }
 	            </script>
 	          </div>
 	        </div>
@@ -127,19 +129,6 @@
 			Innboks
 		</div>
 		<div class="content">
-			<!--<div class="ui divided items" ng-repeat="msg in prc.messages">
-
-			  <div class="item">
-
-			    <div class="ui tiny image">
-			      <img src="/img/kristy.png">
-			    </div>
-			    <div class="middle aligned content">
-			    	<a class="header">Header</a>
-			      {{ msg.message }}<a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
-			    </div>
-			  </div>
-			</div>-->
 			<div class="ui items" ng-repeat="msg in prc.messages">
 			  <div class="item">
 			    <a class="ui tiny image">
@@ -190,7 +179,7 @@
 	</div>
 
 
-    <!-- Accep/Deny modal-->
+    <!-- Accep/Deny friends request modal-->
 
     <div class="ui small modal friendModal">
       <i class="close icon" onclick="closeModal()"></i>
@@ -198,10 +187,10 @@
         Venneforespørsler
       </div>
       <div class="content" ng-repeat="fr in friendRequests()">
-        <li class="friend">{{ fr.username }}</li>
+        <a ui-sref="publicProfile({ username: fr.username })" onclick="friendRequestModal()"><li class="friend">{{ fr.username }}</li></a>
         <button ng-click="accept(fr._id, bool=true)">Aksepter</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
       </div>
-    </div> <!--Accept/Deny model ends-->
+    </div> <!--Accept/Deny firend request model ends-->
 
 
 
