@@ -57,11 +57,15 @@ function profileCtrl($scope, $reactive) {
 
   $scope.messageList = []
   $scope.onSelect = function ($item, $model, $label) {
-    $scope.messageList.push($item.username);
-    $scope.selected = null;            
+    if ($scope.messageList.indexOf($item.username) == -1){
+      $scope.messageList.push($item.username);
+      $scope.selected = null;              
+    }
+    
   };
 
   $scope.sendMessage = function(message){
+    //var checkFriend = $.grep(Meteor.user().profile.friends, function(obj) { return obj.})
     if (message){
       $scope.message = "";
       Meteor.call('sendMessage', message, $scope.messageList, function(err, result){
