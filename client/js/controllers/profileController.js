@@ -42,6 +42,78 @@ function profileCtrl($scope, $reactive) {
     return Meteor.user().profile.profilePicture;
   }
 
+<<<<<<< HEAD
+=======
+  $scope.friendRequestNotification = function(){
+    return Meteor.user().profile.notifications.friendRequests.length;
+  }
+
+  $scope.messageRequestNotification = function(){
+    return Meteor.user().profile.messages.length;
+  }
+
+  $scope.messageList = []
+  $scope.onSelect = function ($item, $model, $label) {
+    //var checkFriend = $.grep(Meteor.user().profile.friends, function(obj) { return obj.username == $item.username})
+    if ($scope.messageList.indexOf($item.username) == -1){
+      $scope.messageList.push($item.username);
+      $scope.selected = null;              
+    }
+    
+    
+  };
+
+  $scope.sendMessage = function(message){
+    if (message && $scope.messageList.length > 0){
+      $scope.message = "";
+      Meteor.call('sendMessage', message, $scope.messageList, function(err, result){
+        if (!err){
+          swal("Message sent", "Your message has been sent!", "success");
+          $scope.message = null;
+          $('.ui.small.modal.messageModal').modal('hide all');
+        }else{
+          swal("Failed", "Your message was not sent!", "error");
+          console.log(err);
+          $scope.message = null;
+          $('.ui.small.modal.messageModal').modal('hide all');
+        }
+      })
+      $scope.messageList = [];  
+    }else {
+      if (!message){
+          swal("Failed", "Message cannot be blank!", "error");  
+      }else if ($scope.messageList == 0){
+        swal("Failed", "Either recipient is blank or there is no such person in your friends list!", "error");  
+      }
+      
+    }
+    
+  }
+
+  $scope.deleteMessage = function(message){
+    Meteor.call('deleteMessage', message, function(err, result){
+      if (!err){
+        swal("Deleted", "The message is deleted!", "success")
+        if ( Meteor.user().profile.messages.length == 0 ) {
+          $('.ui.small.modal.inboxModal').modal('hide');
+        }
+      }else{
+        swal("Error", "Failed to delete message!", "error")
+      }
+    })
+  }
+
+  
+
+  this.incrementFriends = () => {
+
+    meteor.users.update(
+      { _id: this.user._id },
+      { $inc: { friends: 1 } }
+    )
+  };
+
+>>>>>>> origin/master
   this.updateInfo = () => {
 
     Meteor.users.update(
