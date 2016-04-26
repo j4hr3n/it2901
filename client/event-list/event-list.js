@@ -53,6 +53,11 @@ function eventListCtrl($scope, $reactive) {
             }
           }
         });
+//Sorter events på dato
+        display.sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
+        });
+
         return display;
       }
     });

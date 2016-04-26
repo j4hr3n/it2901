@@ -91,7 +91,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
   if(ev.public == true){
     var should_insert = true;
     for(var i = 0; i < display.length; i++){
-      //console.log("displayEvent: " + display[i]._id + ", publicId: " + ev._id);
+      //Hindrer duplikater fra å bli lagt til
       if(display[i]._id == ev._id){
         should_insert=false;
         break;
@@ -102,13 +102,17 @@ function egneAktiviteterCtrl($scope, $reactive) {
     }
   }
 });
-        console.log("display: ");
-        for(var i = 0; i < display.length; i++){
-           console.log("display: " + display[i]._id);
-        }
-         return display;
-       }
-   });
+   console.log("display: ");
+   for(var i = 0; i < display.length; i++){
+     console.log("display: " + display[i]._id);
+   }
+//Sorter events på dato
+   display.sort(function(a,b){
+    return new Date(a.date) - new Date(b.date);
+  });
+   return display;
+ }
+});
 
     this.removeEvent = (eventId) => {
         theEvent = Events.findOne({_id : eventId})
