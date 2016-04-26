@@ -16,15 +16,15 @@
     <div class="six wide  ui divided items">
       <h3>Mine Aktiviteter</h3>
 
-      {{ evC.userff() }}
+      <!-- {{ evC.userff() }} -->
 
-      <div class="item" ng-repeat="event in evC.events">
+      <div class="item" ng-repeat="event in evC.userEvents">
         <i class="calendar icon"></i>
         <div class="content">
-          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event.eventId })"> {{ event.eventName }} </a>
-          <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event.eventId)"><i class="remove circle icon"></i></button>
+          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
+          <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event._id)"><i class="remove circle icon"></i></button>
           <div class="description">
-
+    
             <p>{{ event.date | date }}</p>
             <p>{{ event.location }}</p>
             <div ng-hide="{{event.owner == evC.user._id}}">
