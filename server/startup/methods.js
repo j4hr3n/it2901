@@ -22,7 +22,11 @@ Meteor.methods({
 
 		Accounts.createUser(this.user);
 	},
-
+	//This updates the db with profile pic
+	'addProfilePicture' : function(link){
+			//console.log(link);
+			Meteor.users.update({_id : Meteor.userId()}, {$set : { "profile.profilePicture" : link}})
+		},
 
 	'acceptEvent' : function(eventId){
 		events = Meteor.user().profile.events;
@@ -45,7 +49,7 @@ Meteor.methods({
 				//Meteor.events.remove({"_id" : eventId})
 			}
 		};
-		
+
 	},
 
 	'deleteEvent' : function(eventId){
@@ -53,8 +57,8 @@ Meteor.methods({
 		Events.remove(eventId);
 	},
 
-	'createEvent' : function(owner, name, description, date, location, participants, type, 
-		exercises, isPublic) { 
+	'createEvent' : function(owner, name, description, date, location, participants, type,
+		exercises, isPublic) {
 
 		var newEvent = {
 			owner: owner,
@@ -77,13 +81,13 @@ Meteor.methods({
         var ev_id = Events.insert(newEvent);
         newEvent.participants.forEach(function(participant){
         	Meteor.users.update(
-				{ username : participant.username}, 
+				{ username : participant.username},
 				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  owner : newEvent.owner, attending: false} } }
 			);
         })
         /*for(var participant in newEvent.participants){
 			Meteor.users.update(
-				{_id : participant._id}, 
+				{_id : participant._id},
 				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
 			);
         }*/

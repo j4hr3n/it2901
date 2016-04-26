@@ -3,11 +3,15 @@
 
     <div class="column pull-down">
 
+<!---->
     	<div class="ui people shape">
 	      <div ng-switch on="editProfile" class="ui card">
 	        <div class="image">
-	          <img ng-src="{{prc.user.profile.profilePicture}}">
-	         <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button>
+	          <img ng-src="{{prc.user.profile.profilePicture}}" id="PicID">
+	         <!-- <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button> -->
+           <input type="file" id="PicButton" ng-switch-when ="edit" ng-model="profilePicture" onchange="angular.element(this).scope().change()">
+           <button class="ui primary button" onclick="angular.element(this).scope().uploadFile()" id="profileUpload" ng-switch-when ="edit"
+           style="visibility: visible">Last opp</button>
 	        </div>
 	        <div class="content">
 	        	<div>
@@ -62,7 +66,7 @@
 
 		    <div class="venner">
 	          <div class="ui items">
-	    
+
 
 				<div>
 	             <a ui-sref="personalData"> <button class="ui large blue button "> Personlig data
