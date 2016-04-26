@@ -23,7 +23,6 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl : 'client/templates/contactPage.html',
       controller : ''
     })
-
     .state('publicProfile', {
       url : '/public/:username',
       templateUrl : 'client/templates/publicProfile.html',
@@ -58,6 +57,7 @@ function config($stateProvider, $urlRouterProvider) {
     .state('dashboard', {
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl',
+      abstract: true,
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) { 

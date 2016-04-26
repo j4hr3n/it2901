@@ -5,6 +5,7 @@ angular
 function createEventCtrl($scope, $reactive) {  
     $reactive(this).attach($scope);
 
+
     this.resetEvent = () => {
         this.newEvent = { // Order-sensitive: See Meteor Method "createEvent"
             owner: Meteor.user()._id,
