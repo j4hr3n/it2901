@@ -1,10 +1,9 @@
 Meteor.methods({
-	'createNewUser' : (username, password, email, admin, profilePicture, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
 		    'email': email,
-				'admin': 0,
 		    'profile': {
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,

@@ -56,3 +56,8 @@ PersonalData.allow({
 		return userId && personalData.ownerID === userId;
 	}
 });
+
+Accounts.onCreateUser(function(options, user){
+	user.admin = true;
+	return user
+})

@@ -44,10 +44,11 @@ function registerCtrl($scope, $reactive, $state) {
     'profilePicture' : '',
     'nameFirst': '',
     'nameLast': '',
-    'bio': ''
+    'bio': '',
+    'admin' : "hei"
   };
 
-  
+  console.log(this.user)
 
   this.passwordRepeat = this.user.password;
 
