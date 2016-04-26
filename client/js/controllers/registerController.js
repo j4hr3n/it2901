@@ -44,8 +44,7 @@ function registerCtrl($scope, $reactive, $state) {
     'profilePicture' : '',
     'nameFirst': '',
     'nameLast': '',
-    'bio': '',
-    'admin' : "hei"
+    'bio': ''
   };
 
   console.log(this.user)

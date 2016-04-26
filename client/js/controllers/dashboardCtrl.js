@@ -56,6 +56,10 @@ $reactive(this).attach($scope);
     return Meteor.user().profile.messages.length;
   }
 
+  $scope.eventRequestNotification = function(){
+    return Meteor.user().profile.events.length;
+  }
+
   $scope.messageList = []
   $scope.onSelect = function ($item, $model, $label) {
     $scope.messageList.push($item.username);
