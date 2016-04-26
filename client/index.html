@@ -21,7 +21,7 @@
         <i class="sidebar icon"></i>
       </a>
       <!--<a class="item" ui-sref="home" ng-if="!indc.isLoggedIn">Hjem</a>-->
-      <a class="item" ui-sref="downloads">Last ned til din mobil</a>
+      <a class="item" ui-sref="downloads" ng-if="!indc.isLoggedIn">Last ned til din mobil</a>
 
       <!--Typeahead search-->
         <div>
@@ -29,7 +29,7 @@
             <div class="ui icon input">
             <div class="ui form-group ">
               <div class="four wide field">
-        		  <label for="users">Search</label>
+        		  <label for="users"></label>
               <!--<input class = "prompt" ></input>-->
               <input name="user" id="users" type="text" placeholder="Search for friends or events" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + ' ' + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
               <i class="search icon"></i>
@@ -152,7 +152,14 @@
       <div class ="column">
         <div class ="ui footer container">
       <h1>Kontakt Info</h1>
-      <p><big>Kontakt oss på neste-fall@hotmail.com</big></p>
+      <p><big>Kontakt oss på neste-fall@hotmail.com</big></p><br>
+      <h1>Last ned appen til din mobil</h1>
+      <a href="http://app.jahren.it/" class="ui small image">
+      <img class="ui image medium" src="/img/norsksvg.svg">
+      </a>
+      <a href="http://app.jahren.it/" class="ui small image">
+    	<img class="ui image medium" src="/img/android_badge.png">
+      </a>
     </div>
     </div>
     </div>

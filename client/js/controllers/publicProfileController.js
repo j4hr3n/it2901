@@ -30,7 +30,7 @@ function userProfile($scope, $reactive, $stateParams) {
   	}
   }
 
-  $scope.unfriendConfirmation = function(username){
+  $scope.unfriendConfirmation = function(){
     $('.ui.small.modal.unfriendConfirmation').modal('show');
   }
 

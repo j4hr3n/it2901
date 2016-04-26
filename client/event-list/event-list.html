@@ -5,9 +5,9 @@
     <div class="item" ng-repeat = "event in evC.events">
       <i class="calendar icon"></i>
       <div class="content">
-        <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event.eventId })"> {{ event.eventName }} </a>
+        <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
         <div class="description">   
-          <p> {{ event.date }} kl 12.00</p>
+          <p> {{ event.date | date}} kl 12.00</p>
           <p>{{ event.location }}</p>
         </div>
       </div>
