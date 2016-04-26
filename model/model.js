@@ -57,7 +57,4 @@ PersonalData.allow({
 	}
 });
 
-/*Accounts.onCreateUser(function(options, user){
-	user.admin = true;
-	return user
-})*/
+

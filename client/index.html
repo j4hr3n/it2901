@@ -31,7 +31,7 @@
               <div class="four wide field">
         		  <label for="users">Search</label>
               <!--<input class = "prompt" ></input>-->
-              <input name="user" id="users" type="text" placeholder="Search for friends or events" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
+              <input name="user" id="users" type="text" placeholder="Search for friends or events" ng-model="selected" typeahead-on-select="" typeahead="user.profile.nameFirst + ' ' + user.profile.nameLast for user in idx.usersList | filter:$viewValue | limitTo:8" class="form-control">
               <i class="search icon"></i>
             </div>
         		</div>
