@@ -129,6 +129,15 @@
   </div>
 </div> <!--Modal ends-->
 
+<!--Login error Modal-->
+<div class="ui small modal loginError" ng-controller="loginCtrl as lgc">
+  <div class="errorMessage">
+    <p>Brukernavn eller passord er galt!</p>
+  </div>
+  <button class="ui green button" ng-click="lgc.ok()">Ok</button>
+</div>
+<!--Modal end-->
+
 <footer>
 <div class="ui inverted vertical footer segment">
     <div class="ui two column grid">
