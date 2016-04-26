@@ -12,6 +12,11 @@ function eventListCtrl($scope, $reactive) {
       $('.ui.small.modal.createEvent').modal('hide all');
       
     }*/
+
+    $scope.eventNotification = function(){
+      user = Meteor.user();
+      return user.profile.events.length
+    } 
     
     $reactive(this).attach($scope);
 

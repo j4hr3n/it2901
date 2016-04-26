@@ -13,12 +13,19 @@
       </div>
     </div>
   </div>
-
-  <div class="ui medium buttons">
+  
+  <div class="ui compact menu">
+    <a ui-sref="egneAktiviteter.createEvent" class="item newFriend">
+        <i class="calendar icon"></i> Se alle
+        <div class="floating ui ui red circular label" ng-model="eventNotification">{{eventNotification()}}</div>
+      </a>
+  </div>
+  <div ui-view style="margin-top: 10px"></div>
+  <!--<div class="ui medium buttons">
     <a ui-sref="egneAktiviteter.createEvent"> <button class="ui blue button "> Se alle
     </button></a>
     <div ui-view></div>
-  </div>
+  </div>-->
 
 
 </div>
