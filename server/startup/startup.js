@@ -30,6 +30,7 @@ Meteor.startup(function () {
           //'bio': 'Test bio for babs',
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -47,6 +48,7 @@ Meteor.startup(function () {
           'nameLast': 'Savage',
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -64,6 +66,7 @@ Meteor.startup(function () {
           'nameLast': 'Paal',
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []

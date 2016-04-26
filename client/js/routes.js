@@ -130,7 +130,7 @@ function config($stateProvider, $urlRouterProvider) {
     .state('personalData', {
       url : '/personalData',
       templateUrl : 'client/templates/personalData.html',
-      controller : ''
+      controller : 'personalDataCtrl'
     });
 
   $urlRouterProvider.otherwise('/');
