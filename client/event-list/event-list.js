@@ -13,6 +13,8 @@ function eventListCtrl($scope, $reactive) {
       
     }*/
 
+    $scope.quantity = 3;
+
     $scope.eventNotification = function(){
       user = Meteor.user();
       return user.profile.events.length
