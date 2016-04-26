@@ -41,6 +41,3 @@ function userProfile($scope, $reactive, $stateParams) {
   }
 
 }
-
-
-

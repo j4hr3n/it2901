@@ -20,7 +20,7 @@ $reactive(this).attach($scope);
     friends: () => {
       user =  Meteor.user();
       return user.profile.friends;
-      
+
     },
 
 
@@ -41,9 +41,9 @@ $reactive(this).attach($scope);
   $scope.eventNotification = function(){
     user = Meteor.user();
     return user.profile.events.length
-  } 
+  }
 
-  
+
   $scope.profilePicture = function(){
     return Meteor.user().profile.profilePicture;
   }
@@ -59,7 +59,7 @@ $reactive(this).attach($scope);
   $scope.messageList = []
   $scope.onSelect = function ($item, $model, $label) {
     $scope.messageList.push($item.username);
-    $scope.selected = null;            
+    $scope.selected = null;
   };
 
   $scope.sendMessage = function(message){
@@ -77,11 +77,11 @@ $reactive(this).attach($scope);
           $('.ui.small.modal.messageModal').modal('hide');
         }
       })
-      $scope.messageList = [];  
+      $scope.messageList = [];
     }else {
       swal("Failed", "Message cannot be blank. Please type something!", "error");
     }
-    
+
   }
 
   $scope.deleteMessage = function(message){
@@ -97,7 +97,7 @@ $reactive(this).attach($scope);
     })
   }
 
-  
+
 
   this.incrementFriends = () => {
 
@@ -111,16 +111,16 @@ $reactive(this).attach($scope);
 
     Meteor.users.update(
       { _id: this.user._id },
-      { 
+      {
         $set: {
 
           "profile.nameFirst": this.user.profile.nameFirst,
           "profile.nameLast": this.user.profile.nameLast,
           "profile.friends": this.user.profile.friends,
-          "profile.bio": this.user.profile.bio } 
+          "profile.bio": this.user.profile.bio }
       }
     )
-  }; 
+  };
 
   //Edit profile view
   console.log(this.user.profile.namefirst + "hello");
@@ -128,7 +128,7 @@ $reactive(this).attach($scope);
   $scope.removeEdit =false;
   $scope.editProfile = "save";
   $scope.switchProfile = function() {
-    if ($scope.editing == false) {                    
+    if ($scope.editing == false) {
       if ($scope.removeEdit) {                        // -- Reset changed data
         $scope.editProfile = "save";
         $scope.removeEdit = false;
@@ -154,7 +154,7 @@ $reactive(this).attach($scope);
     // }
 
 
-   // X-button 
+   // X-button
   $scope.noEdit = function() {
     $scope.editing = false;
     $scope.removeEdit = true;
@@ -165,7 +165,7 @@ $reactive(this).attach($scope);
 // Fitness score
 
   var friendList = []
-  
+
 
   function isFriend(userId){
     friendObject = Meteor.user().profile.friends
@@ -193,17 +193,17 @@ $reactive(this).attach($scope);
       return true;
     }
   }
-  
-  
+
+
 
   $scope.inviteFriend = function(userId){
     theUser = Meteor.users.findOne({'_id' : userId})
     if ( userId === Meteor.userId() ){
       sweetAlert("Oops...", "You cannot be your own friend.", "error");
     } else if ( isFriend(userId) == true){
-      sweetAlert("Oops...", "You are already friend with this person!", "error");  
+      sweetAlert("Oops...", "You are already friend with this person!", "error");
     } else if ( isRequest(userId) == true ){
-      sweetAlert("Oops...", "You have already sent friend invitation to this person!", "error");  
+      sweetAlert("Oops...", "You have already sent friend invitation to this person!", "error");
     } else if ( isFriend(userId) == false ){
         reqList = []
         allRequests = Meteor.user().profile.notifications.friendRequests
@@ -219,9 +219,9 @@ $reactive(this).attach($scope);
         }else{
           swal("Oops", "You've already got an invitation from this freind. You just need to approve it!", "error")
         }
-        
+
     }else {
-      sweetAlert("Oops...", "You are already friend with this person!", "error");  
+      sweetAlert("Oops...", "You are already friend with this person!", "error");
     }
   }
 
@@ -256,13 +256,14 @@ $reactive(this).attach($scope);
           index = friendRequestList.indexOf(userId)
           friendRequestList.splice(index, 1)
         })
+        $('.ui.small.modal.friendModal').modal('hide');
       }
 
     }else if (bool == false){
       Meteor.call("addFriend", userId, bool, function(err, result){
         swal("Denied", "Request denied", "error");
       })
-
+      $('.ui.small.modal.friendModal').modal('hide');
       /*if ( Meteor.user().profile.notifications.friendRequests.length == 0 ){
         location.reload()
       }*/
