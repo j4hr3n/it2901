@@ -35,8 +35,15 @@
 
               <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
                 <i class="inbox icon"></i>
-                {{ messageRequestNotification() }}
-              </button>
+                {{ messageRequestNotification() }}  meldinger
+              </button><br/>
+
+                <a href="/#/mineAktiviteter">
+                  <div class="ui big label" style="margin-top: 10px" ng-model="eventRequestNotification">
+                    <i class="calendar icon"></i>
+                    {{ eventRequestNotification() }} events
+                  </div>
+                </a>
 
       </div>
       </div>
@@ -94,7 +101,7 @@
 
 <!-- Accep/Deny modal-->
 
-    <div class="ui small modal friendModal">
+    <div class="ui small modal friendModal" ng-controller="profileCtrl as prc">
       <i class="close icon" onclick="closeModal()"></i>
       <div class="header">
         Venneforespørsler
@@ -106,7 +113,7 @@
     </div> <!--Accept/Deny model ends-->
 
     <!--Send Message Modal-->
-  <div class="ui small modal messageModal">
+  <div class="ui small modal messageModal" ng-controller="profileCtrl as prc">
     <i class="close icon"></i>
     <div class="header">
       Melding
@@ -139,26 +146,13 @@
   </div>
 
   <!--Inbox Modal-->
-  <div class="ui small modal inboxModal">
+  <div class="ui small modal inboxModal" ng-controller="dashboardCtrl as dbC">
     <i class="close icon"></i>
     <div class="header">
       Innboks
     </div>
     <div class="content">
-      <!--<div class="ui divided items" ng-repeat="msg in prc.messages">
-
-        <div class="item">
-
-          <div class="ui tiny image">
-            <img src="/img/kristy.png">
-          </div>
-          <div class="middle aligned content">
-            <a class="header">Header</a>
-            {{ msg.message }}<a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
-          </div>
-        </div>
-      </div>-->
-      <div class="ui items" ng-repeat="msg in prc.messages">
+      <div class="ui items" ng-repeat="msg in dbC.messages">
         <div class="item">
           <a class="ui tiny image">
             <img src="/img/kristy.png">

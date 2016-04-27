@@ -19,6 +19,8 @@ function loginCtrl($scope, $reactive, $state) {
         if (err) {
           console.log("Failed logging in: " + err);
           this.error = err
+          $('.ui.small.modal.loginError').modal('show');
+
         } else {
           console.log("Logged in successfully");
           $('.ui.small.modal.login').modal('hide');
@@ -26,4 +28,10 @@ function loginCtrl($scope, $reactive, $state) {
         }
       });
   };
+
+  this.ok = () => {
+    $('.ui.small.modal.loginError').modal('hide');
+    $('.ui.small.modal.login').modal('show');
+  };
+
 }

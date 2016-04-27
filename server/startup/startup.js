@@ -24,7 +24,6 @@ Meteor.startup(function () {
         'username': 'Babs',
         'password':'123',
         'email':'baf@idi.ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
@@ -32,6 +31,7 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -44,12 +44,12 @@ Meteor.startup(function () {
         'username': 'theRandy',
         'password':'123',
         'email':'RandsterS@ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -62,12 +62,12 @@ Meteor.startup(function () {
         'username': 'perp',
         'password':'123',
         'email':'pepa@ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
           'friends': [],
           'events' : [],
+          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []

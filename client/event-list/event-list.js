@@ -12,6 +12,13 @@ function eventListCtrl($scope, $reactive) {
       $('.ui.small.modal.createEvent').modal('hide all');
       
     }*/
+
+    $scope.quantity = 3;
+
+    $scope.eventNotification = function(){
+      user = Meteor.user();
+      return user.profile.events.length
+    } 
     
     $reactive(this).attach($scope);
 
@@ -20,18 +27,42 @@ function eventListCtrl($scope, $reactive) {
     this.subscribe('events');
 
     this.helpers({
-        events: () => {
-          var user =  Meteor.user();
+      events: () => {
 
-         if(user){
-          return user.profile.events;
+        var display = [];
+        var evs = Meteor.user().profile.events;
+        var all = Events.find({});
 
+        for(var i = 0; i < evs.length; i++){
+
+          var oid = evs[i].eventId;
+          var temp = Events.findOne(oid);
+
+          display.push(temp);
         }
-        else{
-          return null;
-        }
-       }
-   });
+
+        all.forEach(function(ev){
+          if(ev.public == true){
+            var should_insert = true;
+            for(var i = 0; i < display.length; i++){
+              if(display[i]._id == ev._id){
+                should_insert=false;
+                break;
+              }
+            }
+            if (should_insert) {
+              display.push(ev);
+            }
+          }
+        });
+//Sorter events på dato
+        display.sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
+        });
+
+        return display;
+      }
+    });
 
   
     this.removeEvent = (event) => {

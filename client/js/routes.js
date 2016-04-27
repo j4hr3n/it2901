@@ -23,7 +23,6 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl : 'client/templates/contactPage.html',
       controller : ''
     })
-
     .state('publicProfile', {
       url : '/public/:username',
       templateUrl : 'client/templates/publicProfile.html',
@@ -34,7 +33,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/profile.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -57,7 +56,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/activities.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -70,9 +69,10 @@ function config($stateProvider, $urlRouterProvider) {
     .state('dashboard', {
       templateUrl: 'client/templates/dashboard.html',
       controller: 'dashboardCtrl',
+      abstract: true,
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -92,7 +92,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'egneAktiviteterCtrl',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -142,10 +142,15 @@ function config($stateProvider, $urlRouterProvider) {
     .state('personalData', {
       url : '/personalData',
       templateUrl : 'client/templates/personalData.html',
-      controller : ''
+      controller : 'personalDataCtrl'
+    })
+
+    .state('*', {
+      url : '/*',
+      templateUrl : 'client/templates/404.html',
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/*');
 }
 
 function run($rootScope, $state) {

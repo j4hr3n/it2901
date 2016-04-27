@@ -47,7 +47,7 @@ function registerCtrl($scope, $reactive, $state) {
     'bio': ''
   };
 
-  
+  console.log(this.user)
 
   this.passwordRepeat = this.user.password;
 

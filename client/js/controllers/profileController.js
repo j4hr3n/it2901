@@ -19,7 +19,7 @@ function profileCtrl($scope, $reactive) {
     friends: () => {
       user =  Meteor.user();
       return user.profile.friends;
-      
+
     },
 
 
@@ -35,9 +35,9 @@ function profileCtrl($scope, $reactive) {
   $scope.eventNotification = function(){
     user = Meteor.user();
     return user.profile.events.length
-  } 
+  }
 
-  
+
   $scope.profilePicture = function(){
     return Meteor.user().profile.profilePicture;
   }
@@ -46,16 +46,16 @@ function profileCtrl($scope, $reactive) {
 
     Meteor.users.update(
       { _id: this.user._id },
-      { 
+      {
         $set: {
 
           "profile.nameFirst": this.user.profile.nameFirst,
           "profile.nameLast": this.user.profile.nameLast,
           "profile.friends": this.user.profile.friends,
-          "profile.bio": this.user.profile.bio } 
+          "profile.bio": this.user.profile.bio }
       }
     )
-  }; 
+  };
 
   //Edit profile view
   console.log(this.user.profile.namefirst + "hello");
@@ -63,7 +63,7 @@ function profileCtrl($scope, $reactive) {
   $scope.removeEdit =false;
   $scope.editProfile = "save";
   $scope.switchProfile = function() {
-    if ($scope.editing == false) {                    
+    if ($scope.editing == false) {
       if ($scope.removeEdit) {                        // -- Reset changed data
         $scope.editProfile = "save";
         $scope.removeEdit = false;
@@ -89,7 +89,7 @@ function profileCtrl($scope, $reactive) {
     // }
 
 
-   // X-button 
+   // X-button
   $scope.noEdit = function() {
     $scope.editing = false;
     $scope.removeEdit = true;
@@ -141,4 +141,44 @@ function profileCtrl($scope, $reactive) {
       }
 
     }
+
+    //Upload profile pic
+    var link;
+
+    $scope.uploadFile = function(){
+        document.getElementById("profileUpload").className = "ui primary loading button";
+        var file = document.getElementById('PicButton').files[0];
+        fd = new FormData();
+        fd.append('image', file)
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', 'https://api.imgur.com/3/image');
+        xhttp.setRequestHeader('Authorization', 'Client-ID 01b25f3a8aeeb72');
+        xhttp.onreadystatechange = function () {
+          if (xhttp.status === 200 && xhttp.readyState === 4) {
+                    document.getElementById("profileUpload").className = "ui primary button";
+                    document.getElementById("profileUpload").style.visibility = "hidden";
+                    //var node = document.getElementById('profileUpload')
+                    //node.parentNode.removeChild(node);
+                     res = JSON.parse(xhttp.responseText);
+                     link = res.data.link;
+                     //console.log(link)
+                     PicID = document.getElementById('PicID');
+                     PicID.src = link;
+                     //Meteor.user().profile.profilePicture = link;
+                     PicID.style.visibility = "visible";
+                     Meteor.call('addProfilePicture', link)
+              };
+        };
+        xhttp.send(fd);
+    }
+
+    $scope.change = function(){
+      document.getElementById('profileUpload').style.visibility = "visible";
+    }
+
+    // console.log('hei');
+    // console.log(link);
+
+
+
 }
