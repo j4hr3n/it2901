@@ -33,7 +33,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/profile.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -44,15 +44,49 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/activities.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
     })
-    .state('activities.balanse', {
+
+
+    //Balanse route
+    .state('balanse', {
       url: '/activities/balanse',
-      templateUrl: 'client/templates/balanse.html'
+      templateUrl: 'client/templates/balanse.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
+
+    //Styrke route
+    .state('styrke', {
+      url: '/activities/styrke',
+      templateUrl: 'client/templates/styrke.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+    //Fleksibilitet route
+    .state('fleksibilitet', {
+      url: '/activities/fleksibilitet',
+      templateUrl: 'client/templates/fleksibilitet.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
 
     .state('dashboard', {
       templateUrl: 'client/templates/dashboard.html',
@@ -60,7 +94,7 @@ function config($stateProvider, $urlRouterProvider) {
       abstract: true,
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -80,7 +114,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'egneAktiviteterCtrl',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -113,7 +147,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'networkController'
     })
     .state('venner', { // Debug?
-      rl: '/venner',
+      url: '/venner',
       templateUrl: 'client/templates/venner.html',
       controller : 'profileCtrl'
     })

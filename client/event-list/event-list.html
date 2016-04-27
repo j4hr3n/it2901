@@ -6,14 +6,14 @@
       <i class="calendar icon"></i>
       <div class="content">
         <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
-        <div class="description">   
+        <div class="description">
           <p> {{ event.date | date}} kl 12.00</p>
           <p>{{ event.location }}</p>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div class="ui compact menu">
     <a ui-sref="egneAktiviteter.createEvent" class="item newFriend">
         <i class="calendar icon"></i> Se alle
