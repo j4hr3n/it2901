@@ -29,6 +29,7 @@ Meteor.startup(function () {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
           //'bio': 'Test bio for babs',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
           'notifications' : {

@@ -40,6 +40,18 @@ function config($stateProvider, $urlRouterProvider) {
       }}
     })
 
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'client/templates/admin.html',
+      controller: 'adminCtrl',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
     .state('activities', {
       url: '/activities',
       templateUrl: 'client/templates/activities.html',
