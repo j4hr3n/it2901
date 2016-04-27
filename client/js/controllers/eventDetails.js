@@ -12,8 +12,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
   $scope.eventId = $stateParams.eventId;
 
-
-
   $scope.goingFilter = function(object) {
     return object.attending == 1;
   }
@@ -74,23 +72,28 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
    currentEvent: () => {
     return Events.findOne({_id: $stateParams.eventId});
   },
+
   attending: () => {
-    var part = Events.findOne({_id: $stateParams.eventId}).participants;
-    console.log("part: " + part);
-    console.log("ind: " + part.find(Meteor.user));
-    var att = part.find(Meteor.user).attending;
-    console.log("att: " + att);
-    var status;
-    
+    var part = Events.findOne( {_id: $stateParams.eventId}).participants;
+  
+    for (var i = 0; i < part.length; i++ ) {
+      elem = part[i];
+      if (elem.username == Meteor.user().username ) {
+        att = elem.attending;
+        break;
+      }
+    }
+
+    var status;    
     switch (att) {
       
-      case -1:
+    case -1:
       status = "Deltar ikke";
       break;
-      case 0:
+    case 0:
       status = "";
       break;
-      case 1:
+    case 1:
       status = "Deltar";
       break;
     }
