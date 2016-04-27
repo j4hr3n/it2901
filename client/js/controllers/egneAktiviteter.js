@@ -24,7 +24,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
       } else if (bool == false) {
         Meteor.call('denyEvent', eventId, function(err, result){
           if (!err){
-            swal("Deleted", "You have declined the invitation.", "success");
+            swal("Declined", "You are not going to this event.", "error");
           }
         })
       }

@@ -3,38 +3,39 @@ angular
 .controller('eventDetailsCtrl', eventDetailsCtrl);
 
 function eventDetailsCtrl($scope, $stateParams, $reactive) {  
-    $reactive(this).attach($scope);
+  $reactive(this).attach($scope);
 
 
-    this.subscribe('events');
-    this.subscribe('users');
+  this.subscribe('events');
+  this.subscribe('users');
 
 
-    $scope.eventId = $stateParams.eventId;
-    $scope.count = 0;
+  $scope.eventId = $stateParams.eventId;
 
-    $scope.goingFilter = function(object) {
+
+
+  $scope.goingFilter = function(object) {
     return object.attending == 1;
   }
 
-    $scope.participants = Events.findOne({_id : $scope.eventId}).participants
-    for (var i = 0; i < $scope.participants.length; i++) {
-      if ($scope.participants[i].attending == true){
-          $scope.count++;
-      }
-    };
-
-    $scope.fireEditEventModal = function() {
-      $('.ui.small.modal.editEvent').modal('show');
+  $scope.participants = Events.findOne({_id : $scope.eventId}).participants
+  for (var i = 0; i < $scope.participants.length; i++) {
+    if ($scope.participants[i].attending == true){
+      $scope.count++;
     }
+  };
 
-    $('#addUsers').dropdown({
-      allowAdditions: true
-    });
+  $scope.fireEditEventModal = function() {
+    $('.ui.small.modal.editEvent').modal('show');
+  }
 
-    $('.ui.fluid.search.dropdown').dropdown({});
+  $('#addUsers').dropdown({
+    allowAdditions: true
+  });
 
-    $('#status').popup({
+  $('.ui.fluid.search.dropdown').dropdown({});
+
+  $('#status').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -43,7 +44,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 800
     }
   });
-    $('.participants.button').popup({
+  $('.participants.button').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -52,7 +53,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 200
     }
   });
-    $('.participating.button').popup({
+  $('.participating.button').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -63,17 +64,36 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
   });
 
   
-    this.subscribe('events');
-    this.subscribe('users');
+  this.subscribe('events');
+  this.subscribe('users');
 
-    this.helpers({
-        events: () => {
-           return Events.find({});
-         },
-         currentEvent: () => {
-          return Events.findOne({_id: $stateParams.eventId});
-        }, 
-      });
+  this.helpers({
+    events: () => {
+     return Events.find({});
+   },
+   currentEvent: () => {
+    return Events.findOne({_id: $stateParams.eventId});
+  },
+  attending: () => {
+    var part = Events.findOne({_id: $stateParams.eventId}).participants;
+    console.log("part: " + part);
+    var status;
+    console.log("status: " + status);
+    
+    switch (part.find(Meteor.user).attending) {
+      case -1:
+      status = "Deltar ikke";
+      break;
+      case 0:
+      status = "";
+      break;
+      case 1:
+      status = "Deltar";
+      break;
+    }
+    return status;
+  }, 
+});
 
     /*
     this.updateEvent = () => {
@@ -82,24 +102,24 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
 
     };
     */
-  
+    
 
-      this.save = () => {
+    this.save = () => {
 
 
       Events.update({
-      _id: this.currentEvent._id
-    }, {
-      $set: {
-        name: this.currentEvent.name,
-        description: this.currentEvent.description,
-        date: this.currentEvent.date,
-        location: this.currentEvent.location,
+        _id: this.currentEvent._id
+      }, {
+        $set: {
+          name: this.currentEvent.name,
+          description: this.currentEvent.description,
+          date: this.currentEvent.date,
+          location: this.currentEvent.location,
         //participants: this.currentEvent.participants,
         type: this.currentEvent.type,
         level: this.currentEvent.level,
         //exercises: 
-         public: this.currentEvent.public,
+        public: this.currentEvent.public,
       }
     }, (error) => {
       if (error) {
@@ -112,4 +132,4 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
     }
 
 
-};
+  };
