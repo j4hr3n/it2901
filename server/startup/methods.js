@@ -40,8 +40,8 @@ Meteor.methods({
 	'acceptEvent' : function(eventId){
 
           var ev = Events.findOne(eventId);
-          Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : GOING}});
-
+          var test = Events.update({_id : eventId, "participants" : { $elemMatch : { "username" : Meteor.user().username} } }, { $set : { "participants.$.attending" : GOING}});
+          console.log("test: " + test);
 /*
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
@@ -94,6 +94,7 @@ Meteor.methods({
 	    for (var i = 0; i < newEvent.participants.length; i++) {
 	    	participants.push({ username: newEvent.participants[i].username, "attending" : DEFAULT})
 	    };
+	    participants.push({username : Meteor.user().username, "attending" : GOING});
 	    newEvent.participants = participants;
 	    newEvent.createdBy = Meteor.user().username;
         var ev_id = Events.insert(newEvent);
