@@ -12,11 +12,11 @@
 		      <div class="ui form">
 		        <div class="field">
 		        	<label>Seach your contacts (Vil bli fjernet)</label>
-		      		<input name="user" id="users" type="text" placeholder="Search for users" ng-model="adc.selected" typeahead="user as user.profile.nameFirst + user.profile.nameLast for user in adc.usersList | filter:$viewValue | limitTo:8" class="form-control">
+		      		<input name="user" id="users" type="text" placeholder="Search for users" ng-model="adc.selected" typeahead="user as user.profile.nameFirst + ' ' + user.profile.nameLast for user in adc.usersList | filter:$viewValue | limitTo:8" class="form-control">
 		      	</div>
 		      </div>
 		    </div>
-		   		   
+
 	      	<div class="row admin-margin"></div>
 
 	      	<div class="row">
