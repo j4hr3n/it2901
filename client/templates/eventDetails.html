@@ -54,11 +54,11 @@
   </div>
   <a class="participating button">
     <i class="checkmark icon"></i>
-    {{ count }} deltar
+    {{ (edc.currentEvent.participants | filter:goingFilter).length }} deltar
   </a>
   <div class="ui fluid popup top left transition hidden">
     <div class="ui list">
-      <div class="item">list of participants</div>
+      <div class="item" ng-repeat="participant in edc.currentEvent.participants" ng-if="participant.attending == 1" >{{participant.username}} is {{participant.attending}}</div>
     </div>
   </div>
 </div>

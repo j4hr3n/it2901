@@ -2,9 +2,9 @@
   <div class="ui stackable grid container pull-down">
   <div class= "row">
 
-
+  <div class="ui compact menu">
    <div ui-view="createEvent"></div>
-
+</div>
 
 </div>
 </div>
@@ -28,9 +28,9 @@
             <p>{{ event.date | date }}</p>
             <p>{{ event.location }}</p>
             <div ng-hide="{{event.owner == evC.user._id}}">
-                <button class="ui green small button" ng-click="acceptEvent(event.eventId,true)" id="{{event.eventId}}" ng-show="!event.attending">Accept</button>
+                <button class="ui green small button" ng-click="acceptEvent(event._id,true)" id="{{event._id}}" ng-show="!event.attending">Accept</button>
                 <label class="ui green label" ng-show="{{ event.attending }}">You are going.</label>
-                <button class="ui red small button" ng-click="acceptEvent(event.eventId,false)" id="event.eventId">Decline
+                <button class="ui red small button" ng-click="acceptEvent(event._id,false)" id="event._id">Decline
                 </button>
             </div>
           </div>
