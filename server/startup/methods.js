@@ -1,3 +1,7 @@
+const GOING 	= 	1;
+const NOT_GOING =  -1;
+const DEFAULT 	= 	0;
+
 Meteor.methods({
 	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
@@ -29,16 +33,25 @@ Meteor.methods({
 		},
 
 	'acceptEvent' : function(eventId){
+
+          var ev = Events.findOne(eventId);
+          Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : GOING}});
+
+/*
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
 			if (events[i].eventId == eventId){
-				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : true}})
-				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : true}})
+				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : GOING}})
+				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : GOING}})
 			}
-		};
+		};*/
 	},
 
 	'denyEvent' : function(eventId){
+
+		var ev = Events.findOne(eventId);
+          Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : NOT_GOING}});
+/*
 		evs = Meteor.user().profile.events
 		for (var i = 0; i < evs.length; i++) {
 			if (evs[i].eventId == eventId){
@@ -48,7 +61,7 @@ Meteor.methods({
 				//Meteor.events.update({_id : eventId}, {$pull : {"participants" : { _id : Meteor.user()}}})
 				//Meteor.events.remove({"_id" : eventId})
 			}
-		};
+		};*/
 
 	},
 
@@ -74,7 +87,7 @@ Meteor.methods({
 	    }
 	    participants = [];
 	    for (var i = 0; i < newEvent.participants.length; i++) {
-	    	participants.push({ username: newEvent.participants[i].username, "attending" : false})
+	    	participants.push({ username: newEvent.participants[i].username, "attending" : DEFAULT})
 	    };
 	    newEvent.participants = participants;
 	    newEvent.createdBy = Meteor.user().username;
