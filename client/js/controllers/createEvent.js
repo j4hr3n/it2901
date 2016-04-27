@@ -54,7 +54,7 @@ function createEventCtrl($scope, $reactive) {
           return Events.find({});
        },
         users: () => {
-          return Meteor.users.find({}, {'username':1});
+          return Meteor.users.find({_id: {$ne: Meteor.userId()}});
     }, 
    });
 

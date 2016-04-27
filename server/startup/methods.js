@@ -94,6 +94,7 @@ Meteor.methods({
 	    for (var i = 0; i < newEvent.participants.length; i++) {
 	    	participants.push({ username: newEvent.participants[i].username, "attending" : DEFAULT})
 	    };
+	    participants.push({username : Meteor.user().username, "attending" : GOING});
 	    newEvent.participants = participants;
 	    newEvent.createdBy = Meteor.user().username;
         var ev_id = Events.insert(newEvent);
