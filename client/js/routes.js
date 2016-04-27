@@ -34,6 +34,20 @@ function config($stateProvider, $urlRouterProvider) {
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) {
+
+
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'client/templates/admin.html',
+      controller: 'adminCtrl',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) { 
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -165,9 +179,14 @@ function config($stateProvider, $urlRouterProvider) {
       url : '/personalData',
       templateUrl : 'client/templates/personalData.html',
       controller : 'personalDataCtrl'
+    })
+
+    .state('*', {
+      url : '/*',
+      templateUrl : 'client/templates/404.html',
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/*');
 }
 
 function run($rootScope, $state) {

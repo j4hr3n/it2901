@@ -28,9 +28,9 @@ Meteor.startup(function () {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
           //'bio': 'Test bio for babs',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -46,9 +46,9 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -64,9 +64,9 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'personalData' : [{'skritt' : 1000}, {'vekt': 60}, {'hoyde' : 160}],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []

@@ -13,6 +13,10 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
     $scope.eventId = $stateParams.eventId;
     $scope.count = 0;
 
+    $scope.goingFilter = function(object) {
+    return object.attending == 1;
+  }
+
     $scope.participants = Events.findOne({_id : $scope.eventId}).participants
     for (var i = 0; i < $scope.participants.length; i++) {
       if ($scope.participants[i].attending == true){

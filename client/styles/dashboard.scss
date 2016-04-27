@@ -2,7 +2,12 @@
 $blue: #2185D0;
 
 .ui.container.dashboard {
-margin-bottom: 5em;
+
+.ui.blue.item{
+  background: $blue;
+  color: #ffffff;
+}
+
   .column{
 
   }

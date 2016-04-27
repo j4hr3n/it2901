@@ -46,13 +46,14 @@
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireLoginModal()">Logg inn</a>
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireRegisterModal()">Registrer deg</a>
         <a class="item" ng-show="indc.isLoggedIn" ui-sref="profile" ng-cloak>Din profil</a>
+        <a class="item" ng-show="indc.isLoggedIn" ui-sref="admin" ng-cloak>Admin</a>
         <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard.eventlist.createEvent" ng-cloak>Ditt dashboard</a>
         <a class="item" ng-show="indc.isLoggedIn" ng-click="indc.logout()" ng-cloak>Logg ut</a>
       </div>
     </div>
   </div>
 
-  <div ui-view></div>
+  <div class="bottomMargin" ui-view></div>
 </div>
 
 
@@ -65,44 +66,15 @@
   <div class="ui container modalsize">
   <form class="ui form">
     <div class="field six wide column padding">
-      <label>Brukernavn</label>
-      <input type="text" name="fornavn" ng-model="regc.user.username" placeholder="Brukernavn" required>
+      <label>Epost</label>
+      <input type="text" name="email" ng-model="regc.user.email" placeholder="Epost" required>
     </div>
     <div class="field six wide column">
       <label>Passord</label>
       <input type="password" name="password" ng-model="regc.user.password" placeholder="Passord" required>
     </div>
-    <div class="field six wide column">
-      <label>Gjenta passord</label>
-      <input type="password" name="password" ng-model="regc.passwordRepeat"  placeholder="Gjenta passord" required>
-    </div>
-    <div class="field six wide column padding">
-      <label>Fornavn</label>
-      <input type="text" name="fornavn" placeholder="Fornavn" ng-model="regc.user.nameFirst" required>
-    </div>
-    <div class="field six wide column">
-      <label>Last Name</label>
-      <input type="text" name="etternavn" placeholder="Etternavn" ng-model="regc.user.nameLast" required>
-    </div>
-    <div class="field six wide column">
-      <label>Epost</label>
-      <input type="email" name="email" placeholder="Epost" ng-model="regc.user.email" required>
-    </div>
-    <div class="field six wide column">
-      <label>Last opp profilbilde</label>
-      <input type="file" id="profilePicture" ng-model="profilePicture" onchange="angular.element(this).scope().change()">
-      <button class="ui primary button" onclick="angular.element(this).scope().uploadFile()" id="profileUpload"
-      style="visibility: visible">Upload</button>
-      <img src="" id="profileImg" style="width: 100%; height: 100%; visibility: hidden">
-    </div>
-
-    <div class="field six wide column">
-      <div class="ui checkbox">
-        <input type="checkbox" tabindex="0">
-        <label>I agree to the Terms and Conditions</label>
-      </div>
-    </div>
-    <button class="ui button submit" ng-click="regc.registerNewUser()" type="submit">Submit</button>
+    
+    <button class="ui button submit" ng-click="regc.registerNewUser()" type="submit">Registre</button>
   </form>
   </div>
 </div> <!--Modal ends-->
@@ -117,8 +89,8 @@
   <div class="ui container modalsize">
     <form class="ui form">
       <div class="field six wide column padding">
-        <label>Brukernavn</label>
-        <input type="text" name="username" placeholder="Brukernavn" required ng-model="lgc.credentials.username">
+        <label>Epost</label>
+        <input type="text" name="email" placeholder="Brukernavn" required ng-model="lgc.credentials.email">
       </div>
       <div class="field six wide column">
         <label>Password</label>

@@ -13,6 +13,8 @@ function eventListCtrl($scope, $reactive) {
       
     }*/
 
+    $scope.quantity = 3;
+
     $scope.eventNotification = function(){
       user = Meteor.user();
       return user.profile.events.length
@@ -53,6 +55,11 @@ function eventListCtrl($scope, $reactive) {
             }
           }
         });
+//Sorter events på dato
+        display.sort(function(a,b){
+          return new Date(a.date) - new Date(b.date);
+        });
+
         return display;
       }
     });
