@@ -38,16 +38,16 @@ function registerCtrl($scope, $reactive, $state) {
   }
 
   this.user = {  // This is converted into an order-sensitive argument list
-    'username': '',
+    'username': Math.random().toString(36).substring(7),
     'password': '',
     'email': '',
     'profilePicture' : '',
-    'nameFirst': '',
-    'nameLast': '',
+    'nameFirst': 'Ola',
+    'nameLast': 'Nordman',
     'bio': ''
   };
 
-  console.log(this.user)
+
 
   this.passwordRepeat = this.user.password;
 
@@ -56,7 +56,7 @@ function registerCtrl($scope, $reactive, $state) {
   this.registerNewUser = () => {
 
     matchingUser = Meteor.users.findOne({ 'username' : this.user.username });
-    this.user.profilePicture = link;
+    this.user.profilePicture = "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg";
     console.log(_.values(this.user))
 
     if (matchingUser == null) {
