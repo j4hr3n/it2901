@@ -15,7 +15,6 @@ function loginCtrl($scope, $reactive, $state) {
   this.login = () => {
     Meteor.loginWithPassword(
       this.credentials.username, this.credentials.password, (err) => {
-
         if (err) {
           console.log("Failed logging in: " + err);
           this.error = err

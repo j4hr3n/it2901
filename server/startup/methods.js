@@ -22,6 +22,11 @@ Meteor.methods({
 
 		Accounts.createUser(this.user);
 	},
+
+	'endrePassord' : function(newPassword){
+		Accounts.setPassword(Meteor.userId(), newPassword)
+	},
+
 	//This updates the db with profile pic
 	'addProfilePicture' : function(link){
 			//console.log(link);
