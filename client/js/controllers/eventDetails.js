@@ -77,10 +77,13 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
   attending: () => {
     var part = Events.findOne({_id: $stateParams.eventId}).participants;
     console.log("part: " + part);
+    console.log("ind: " + part.find(Meteor.user));
+    var att = part.find(Meteor.user).attending;
+    console.log("att: " + att);
     var status;
-    console.log("status: " + status);
     
-    switch (part.find(Meteor.user).attending) {
+    switch (att) {
+      
       case -1:
       status = "Deltar ikke";
       break;
@@ -91,6 +94,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       status = "Deltar";
       break;
     }
+    console.log("status: " + status);
     return status;
   }, 
 });
