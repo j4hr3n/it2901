@@ -33,7 +33,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/profile.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -44,7 +44,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/activities.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -60,7 +60,7 @@ function config($stateProvider, $urlRouterProvider) {
       abstract: true,
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -80,7 +80,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'egneAktiviteterCtrl',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -131,9 +131,14 @@ function config($stateProvider, $urlRouterProvider) {
       url : '/personalData',
       templateUrl : 'client/templates/personalData.html',
       controller : 'personalDataCtrl'
+    })
+
+    .state('*', {
+      url : '/*',
+      templateUrl : 'client/templates/404.html',
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/*');
 }
 
 function run($rootScope, $state) {
