@@ -2,8 +2,17 @@ $blue: #2185D0;
 $white: #ffffff;
 $grey: #aaaaaa;
 
+.ui.blue.item{
+	background-color: $blue;
+	color: $white;
+	box-shadow: none;
+}
 
 
+.ui.blue.item:hover { 
+    background-color: $blue !important;
+    color: $white !important;
+}
 
 .ui.container.myEvents{
 
