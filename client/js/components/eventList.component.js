@@ -24,7 +24,11 @@ function eventListCtrl ($scope, $reactive) {
         } else {
           return null;
         }
-     }
+     }, 
+     eventNotification: function(){
+      user = Meteor.user();
+      return user.profile.events.length
+    } 
   });
 
   this.removeEvent = (event) => {
