@@ -13,11 +13,16 @@
 </div>
 
 <div class="ui compact menu">
-    <a ui-sref="egneAktiviteter.createEvent" class="ui blue item">
-      Se alle
-      <div class="floating ui red circular label" ng-model="evList.eventNotification">
-        {{evList.eventNotification()}}</div>
-    </a>
-  <button ui-sref="egneAktiviteter" class="ui medium blue button ">Se alle</button>
-  <event-editor></event-editor>
-</div>
+
+    <a ui-sref="egneAktiviteter" class="ui blue item">
+        Se alle
+        <div class="floating ui red circular label" ng-model="eventNotification">{{eventNotification()}}</div>
+      </a>
+     <event-editor></event-editor>
+  </div>
+
+<!--
+<button ui-sref="egneAktiviteter" class="ui medium blue button ">Se alle</button>
+<event-editor></event-editor>
+-->
+
