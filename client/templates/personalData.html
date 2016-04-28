@@ -1,92 +1,13 @@
 <div class="ui container personalData" ng-controller="personalDataCtrl as pdC">
-    <h4 class="ui header first">Her kan brukere legge inn personlig data</h4>
-    <h4 class="ui red header">Denne siden er bare en placeholder</h4>
-    <h1>{{ test }}</h1>
-
+    <h4 class="ui header first">Oversikt over din personlig data</h4>
+    <h1>{{ user }}</h1>
     <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 1" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
+      <div class="ui container" ng-repeat="field in pdC.getReactively('user').profile.personalData track by $index" >
+            <div class="ui action input">
+              <label>Personlig data - {{$index + 1}} </label>
+              <label id="title" placeholder="Type" type="text" ng-model="field.title">{{field.titel}}</label>
+              <label id="value" placeholder="Verdi" type="text" ng-model="field.value">{{field.value}}</label>
+            </div>
+        </div>
     </div>
-
-
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 2" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 3" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 4" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 5" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 6" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
-    <div class="ui container">
-      <div class="ui action input">
-        <input placeholder="Personlig data 7" type="text">
-          <select class="ui compact selection dropdown">
-            <option selected="" value="articles">Data type 1</option>
-            <option value="all">Data type 2</option>
-            <option value="products">Data type 3</option>
-          </select>
-        <div type="submit" class="ui button">Endre</div>
-      </div>
-    </div>
-
 </div>
