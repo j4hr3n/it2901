@@ -7,11 +7,11 @@ Meteor.startup(function () {
         'username': 'Babs',
         'password':'123',
         'email':'baf@idi.ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
           //'bio': 'Test bio for babs',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
           'notifications' : {
@@ -26,10 +26,10 @@ Meteor.startup(function () {
         'username': 'theRandy',
         'password':'123',
         'email':'RandsterS@ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
           'notifications' : {
@@ -44,10 +44,10 @@ Meteor.startup(function () {
         'username': 'perp',
         'password':'123',
         'email':'pepa@ntnu.no',
-        'admin': 1,
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
+          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
           'notifications' : {

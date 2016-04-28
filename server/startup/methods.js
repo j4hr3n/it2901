@@ -1,10 +1,13 @@
+const GOING 	= 	1;
+const NOT_GOING =  -1;
+const DEFAULT 	= 	0;
+
 Meteor.methods({
-	'createNewUser' : (username, password, email, admin, profilePicture, nameFirst, nameLast, bio) => {
+	'createNewUser' : (username, password, email, profilePicture, nameFirst, nameLast, bio) => {
 		this.user = {
 		    'username': username,
 		    'password': password,
 		    'email': email,
-				'admin': 0,
 		    'profile': {
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,
@@ -74,18 +77,44 @@ Meteor.methods({
         	}}
         );
      },
+	'endrePassord' : function(newPassword){
+		Accounts.setPassword(Meteor.userId(), newPassword)
+	},
+
+	//This updates the db with profile pic
+	'addProfilePicture' : function(link){
+		//console.log(link);
+		Meteor.users.update({_id : Meteor.userId()}, {$set : { "profile.profilePicture" : link}})
+	},
 
 	'acceptEvent' : function(eventId){
+
+		if (!Meteor.userId) {
+			throw new Meteor.Error(403, "Need to be logged in to accept event invitation.")
+		};
+
+        var ev = Events.findOne(eventId);
+        var test = Events.update({_id : eventId, "participants" : { $elemMatch : { "username" : Meteor.user().username} } }, { $set : { "participants.$.attending" : GOING}});
+        console.log("test: " + test);
+
+        Meteor.call("createNewsPost", Meteor.userId(), 
+        	{ "joinedEvent":	{ eventID: eventId} });
+/*
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
 			if (events[i].eventId == eventId){
-				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"attending" : true}})
-				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : true}})
+
+				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : GOING}})
+				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : GOING}})
 			}
-		};
+		};*/
 	},
 
 	'denyEvent' : function(eventId){
+
+		var ev = Events.findOne(eventId);
+          Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : NOT_GOING}});
+/*
 		evs = Meteor.user().profile.events
 		for (var i = 0; i < evs.length; i++) {
 			if (evs[i].eventId == eventId){
@@ -95,8 +124,8 @@ Meteor.methods({
 				//Meteor.events.update({_id : eventId}, {$pull : {"participants" : { _id : Meteor.user()}}})
 				//Meteor.events.remove({"_id" : eventId})
 			}
-		};
-		
+		};*/
+
 	},
 
 	'deleteEvent' : function(eventId){
@@ -137,7 +166,7 @@ Meteor.methods({
 	    	if (!resetAttendees && existingAttends[uEvent.createdBy] != undefined)
 		    	attending = existingAttends[uEvent.createdBy];
 		    else {
-		    	attending = (participant == uEvent.createdBy);
+		    	attending = (participant == uEvent.createdBy) ? GOING : DEFAULT;
 		    	console.log("[participants] OwnerComparison: "+participant+" == "+uEvent.createdBy)
 		    }
 	    	
@@ -209,6 +238,28 @@ Meteor.methods({
         );
 
         Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} });
+/*
+	    participants = [];
+	    for (var i = 0; i < newEvent.participants.length; i++) {
+	    	participants.push({ username: newEvent.participants[i].username, "attending" : DEFAULT})
+	    };
+	    participants.push({username : Meteor.user().username, "attending" : GOING});
+	    newEvent.participants = participants;
+	    newEvent.createdBy = Meteor.user().username;
+        var ev_id = Events.insert(newEvent);
+        newEvent.participants.forEach(function(participant){
+        	Meteor.users.update(
+				{ username : participant.username},
+				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  owner : newEvent.owner, attending: false} } }
+			);
+        })
+*/
+        /*for(var participant in newEvent.participants){
+			Meteor.users.update(
+				{_id : participant._id},
+				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
+			);
+        }*/
 
 	},
 
