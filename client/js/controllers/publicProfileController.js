@@ -30,17 +30,25 @@ function userProfile($scope, $reactive, $stateParams) {
   	}
   }
 
-  $scope.unfriend = function(username){
-    Meteor.call('deleteFriend', username, function(err, result){
-      if (!err){
-        swal("Unfriended", username + " is no longer your friend.", "success");
-      }else {
-        swal("Failed", "Some error occured!", "error")
-      }
-    })
+  $scope.unfriendConfirmation = function(){
+    $('.ui.small.modal.unfriendConfirmation').modal('show');
+  }
+
+  $scope.unfriend = function(username, bool){
+    if(bool == true){
+      Meteor.call('deleteFriend', username, function(err, result){
+        if (!err){
+          swal("Unfriended", username + " is no longer your friend.", "success");
+        }else {
+          swal("Failed", "Some error occured!", "error")
+        }
+      })
+      $('.ui.small.modal.unfriendConfirmation').modal('hide');
+    }
+    else if(bool == false){
+      $('.ui.small.modal.unfriendConfirmation').modal('hide');
+    }
+
   }
 
 }
-
-
-

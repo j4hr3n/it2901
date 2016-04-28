@@ -143,6 +143,7 @@ function eventEditorCtrl($scope, $reactive) {
         this.newEvent.date = $('#datepick-'+this.modalID).datepicker('getDate');
 
         console.log("submitEvent:")
+        console.log($('#datepick-'+this.modalID).datepicker('getDate'))
         console.log(_.values(this.newEvent));
         
         if (this.type == "create") {

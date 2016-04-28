@@ -3,7 +3,7 @@ angular
 .controller('eventDetailsCtrl', eventDetailsCtrl);
 
 function eventDetailsCtrl($scope, $stateParams, $reactive) {  
-    $reactive(this).attach($scope);
+  $reactive(this).attach($scope);
 
     this.subscribe('events');
     this.subscribe('allUsers');
@@ -34,8 +34,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       });
 
 
-    $scope.eventId = $stateParams.eventId;
-    $scope.count = 0;
+  $scope.eventId = $stateParams.eventId;
 
     $scope.participants = this.currentEvent.participants
     for (var i = 0; i < this.currentEvent.participants.length; i++) {
@@ -45,17 +44,24 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       }
     };
 
-    $scope.fireEditEventModal = function() {
-      $('.ui.small.modal.editEvent').modal('show');
+  $scope.goingFilter = function(object) {
+    return object.attending == 1;
+  }
+
+  $scope.participants = Events.findOne({_id : $scope.eventId}).participants
+  for (var i = 0; i < $scope.participants.length; i++) {
+    if ($scope.participants[i].attending == true){
+      $scope.count++;
     }
+  };
 
-    $('#addUsers').dropdown({
-      allowAdditions: true
-    });
+  $('#addUsers').dropdown({
+    allowAdditions: true
+  });
 
-    $('.ui.fluid.search.dropdown').dropdown({});
+  $('.ui.fluid.search.dropdown').dropdown({});
 
-    $('#status').popup({
+  $('#status').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -64,7 +70,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 800
     }
   });
-    $('.participants.button').popup({
+  $('.participants.button').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -73,7 +79,7 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 200
     }
   });
-    $('.participating.button').popup({
+  $('.participating.button').popup({
     inline   : true,
     hoverable: true,
     position : 'bottom left',
@@ -82,33 +88,42 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 200
     }
   });
+  
+  this.helpers({
+    events: () => {
+     return Events.find({});
+   },
+   currentEvent: () => {
+    return Events.findOne({_id: $stateParams.eventId});
+  },
 
-      this.save = () => {
-
-
-      Events.update({
-      _id: this.currentEvent._id
-    }, {
-      $set: {
-        name: this.currentEvent.name,
-        description: this.currentEvent.description,
-        date: this.currentEvent.date,
-        location: this.currentEvent.location,
-        //participants: this.currentEvent.participants,
-        type: this.currentEvent.type,
-        level: this.currentEvent.level,
-        //exercises: 
-         public: this.currentEvent.public,
+  attending: () => {
+    var part = Events.findOne( {_id: $stateParams.eventId}).participants;
+  
+    for (var i = 0; i < part.length; i++ ) {
+      elem = part[i];
+      if (elem.username == Meteor.user().username ) {
+        att = elem.attending;
+        break;
       }
-    }, (error) => {
-      if (error) {
-        console.log('Oops, unable to update the event...');
-      } else {
-        console.log('Done!');
-        $('.ui.small.modal.editEvent').modal('hide');
-      }
-    });
     }
 
+    var status;    
+    switch (att) {
+      
+    case -1:
+      status = "Deltar ikke";
+      break;
+    case 0:
+      status = "";
+      break;
+    case 1:
+      status = "Deltar";
+      break;
+    }
+    console.log("status: " + status);
+    return status;
+  }, 
+});
 
 };

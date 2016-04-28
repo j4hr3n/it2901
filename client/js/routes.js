@@ -23,7 +23,6 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl : 'client/templates/contactPage.html',
       controller : ''
     })
-
     .state('publicProfile', {
       url : '/public/:username',
       templateUrl : 'client/templates/publicProfile.html',
@@ -32,6 +31,20 @@ function config($stateProvider, $urlRouterProvider) {
     .state('profile', {
       url: '/profile',
       templateUrl: 'client/templates/profile.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+
+
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'client/templates/admin.html',
+      controller: 'adminCtrl',
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) { 
@@ -45,22 +58,56 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/activities.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
     })
-    .state('activities.balanse', {
+
+
+    //Balanse route
+    .state('balanse', {
       url: '/activities/balanse',
-      templateUrl: 'client/templates/balanse.html'
+      templateUrl: 'client/templates/balanse.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
+
+    //Styrke route
+    .state('styrke', {
+      url: '/activities/styrke',
+      templateUrl: 'client/templates/styrke.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+    //Fleksibilitet route
+    .state('fleksibilitet', {
+      url: '/activities/fleksibilitet',
+      templateUrl: 'client/templates/fleksibilitet.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
 
     .state('dashboard', {
       url: '/dashboard',
       templateUrl: 'client/templates/dashboard.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -72,7 +119,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'egneAktiviteterCtrl',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) { 
+          if (Meteor.userId() === null) {
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -89,7 +136,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'networkController'
     })
     .state('venner', { // Debug?
-      rl: '/venner',
+      url: '/venner',
       templateUrl: 'client/templates/venner.html',
       controller : 'profileCtrl'
     })
@@ -101,10 +148,15 @@ function config($stateProvider, $urlRouterProvider) {
     .state('personalData', {
       url : '/personalData',
       templateUrl : 'client/templates/personalData.html',
-      controller : ''
+      controller : 'personalDataCtrl'
+    })
+
+    .state('*', {
+      url : '/*',
+      templateUrl : 'client/templates/404.html',
     });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/*');
 }
 
 function run($rootScope, $state) {

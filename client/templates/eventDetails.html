@@ -27,7 +27,7 @@
    <div class="extra content">
     <a id="status">
       <i class="thumbs up outline icon"></i>
-      Status: Deltar
+      <span> Status: {{edc.attending}}</span>
     </a>
     <div class="ui fluid popup top left transition hidden">
       <div class="ui toggle checkbox">
@@ -54,11 +54,11 @@
     </div>
     <a class="participating button">
       <i class="checkmark icon"></i>
-      {{ count }} deltar
+      {{ (edc.currentEvent.participants | filter:goingFilter).length }} deltar
     </a>
     <div class="ui fluid popup top left transition hidden">
       <div class="ui list">
-        <div class="item">list of participants</div>
+        <div class="item" ng-repeat="participant in edc.currentEvent.participants" ng-if="participant.attending == 1" >{{participant.username}}</div>
       </div>
     </div>
   </div>
@@ -68,6 +68,7 @@
   <!-- editEvent Modal -->
   <!--<div class="ui small modal editEvent">
     <i class="close icon" ng-click="closeModal()"></i>
+
 
     <div class="header blue modal">Oppdater {{edc.currentEvent.name}} </div>
     <div class="content">
@@ -102,6 +103,7 @@
            </div>
          </div>
          <div class="column">
+
         <div class="field">
           <label>Aktivitetstype</label>
           <select class="ui fluid search dropdown"  multiple="" ng-model="edc.currentEvent.type">
@@ -116,24 +118,35 @@
         <div class="field">
           <label>Vanskelighetsgrad: </label>
           <div class="inline fields">
-          <div class="field">
-            <div class="ui radio checkbox">
-              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
-              <label>Lett</label>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+                <label>Lett</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+                <label>Middels</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="level" checked="" tabindex="0" class="hidden">
+                <label>Hard</label>
+              </div>
             </div>
           </div>
-          <div class="field">
-            <div class="ui radio checkbox">
-              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
-              <label>Middels</label>
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui radio checkbox">
-              <input type="radio" name="level" checked="" tabindex="0" class="hidden">
-              <label>Hard</label>
-            </div>
-          </div>
+        </div>
+        <div class="field">
+          <label>Legg til øvelser: </label>
+          <input type="text" ng-model="evC.updated.exercises"/>
+        </div>
+
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" tabindex="0" ng-model="evC.updated.public">
+            <label>Aktiviteten er tilgjengelig for alle</label>
           </div>
         </div>
 

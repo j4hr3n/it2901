@@ -1,10 +1,12 @@
-<button class="ui small blue button" ng-click="evEditC.fireEditEventModal()" ng-switch="evEditC.type">
-  <p ng-cloak ng-switch-when="create">
-    <i class="plus icon"></i>Opprett en ny aktivitet</p>
+<div ng-switch="evEditC.type">
+  <button ng-switch-when="create" class="ui small blue button" ng-click="evEditC.fireEditEventModal()">
+      <i class="plus icon"></i>Opprett en ny aktivitet
+  </button>
 
-  <p ng-cloak ng-switch-when="edit">
-    <i class="edit icon"></i>Rediger denne aktiviteten</p>
-</button>
+  <button ng-switch-when="edit" class="ui small gray button" ng-click="evEditC.fireEditEventModal()">
+      <i class="edit icon"></i>Rediger denne aktiviteten
+  </button>
+</div>
 
 <div class="ui small modal editEvent" ng-attr-id="{{'modal-'+ evEditC.modalID }}">
   <i class="close icon" onclick="closeModal()"></i>
