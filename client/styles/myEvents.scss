@@ -5,7 +5,10 @@ $grey: #aaaaaa;
 .ui.blue.item{
 	background-color: $blue;
 	color: $white;
-	box-shadow: none;
+	box-shadow: none !important;
+	padding: 1em;
+	border-radius: 10px;
+	border: 0px;
 }
 
 
