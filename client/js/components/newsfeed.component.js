@@ -10,6 +10,7 @@ angular.module("it2901").directive("newsfeed", function () {
 function newsfeedCtrl($scope, $reactive) {
 	$reactive(this).attach($scope);
 
+
 	this.postsPerPage = 6;
 	this.elementNumber = 0;
 
@@ -17,12 +18,42 @@ function newsfeedCtrl($scope, $reactive) {
 
 	this.helpers({
 		posts: () => {
+			if (!Meteor.userId())
+				throw new Meteor.Error(403, "[Newsfeed] Need to be logged in to access newsfeed.");
+			
 			return NewsPosts.find({}).map((post) => {
 				post.owner = Meteor.users.findOne({_id: post.ownerID });
 
+				if (post.owner == null) {
+					throw new Meteor.Error(404, "[Newsfeed] Unable to find owner ID '"
+						+ post.ownerID +"'");
+				}
+				post.ownerLink = post.owner.username;
+				
+				if (post.ownerID == Meteor.userId()) {
+					post.owner = "Du";
+				} else {
+					post.owner = (post.owner.profile.nameFirst 
+						+" "+ post.owner.profile.nameLast);
+				}
+
 				switch (post.type) {
 					case "friendAdded":
-						post.newFriend = Meteor.users.findOne({_id: post.newFriendID });
+						if (post.newFriendID == Meteor.userId()) {
+
+							post.newFriend = "deg";
+							post.newFriendLink = Meteor.user().username;
+						} else {
+							post.newFriend = Meteor.users.findOne({_id: post.newFriendID });
+
+							if (post.newFriend == null) {
+								throw new Meteor.Error(404, "[Newsfeed] Unable to find user ID '"
+									+ post.newFriendID +"'");
+							}
+							post.newFriend = (post.newFriend.profile.nameFirst 
+								+" "+ post.newFriend.profile.nameLast);
+							post.newFriendLink = post.newFriend.username;
+						}
 						break;
 					case "userPost":
 						post.showDesc = false;
@@ -52,7 +83,7 @@ function newsfeedCtrl($scope, $reactive) {
 		return [{
 			limit: parseInt(this.postsPerPage),
 			skip: parseInt(this.getReactively('elementNumber')),
-			sort: { date: 1}
+			sort: { date: -1}
 		}]
 	});
 

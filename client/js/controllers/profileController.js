@@ -6,11 +6,13 @@ angular
 function profileCtrl($scope, $reactive) {
   $reactive(this).attach($scope);
 
+  if (!Meteor.user()) 
+    throw new Meteor.Error(403, "Need to be logged in to access your own profile.");
+
 
   this.helpers({
     user: () => {
-      return Meteor.user() || Meteor.users.findOne({});
-                        // ^ Debug
+      return Meteor.user();
     },
     contacts: () => {
       return Meteor.users.find({}, {'username':1});
@@ -48,17 +50,27 @@ function profileCtrl($scope, $reactive) {
       { _id: this.user._id },
       {
         $set: {
-
           "profile.nameFirst": this.user.profile.nameFirst,
           "profile.nameLast": this.user.profile.nameLast,
           "profile.friends": this.user.profile.friends,
           "profile.bio": this.user.profile.bio }
       }
     )
+
+    if (this.user.nyttpassord){
+      Meteor.call('endrePassord', this.user.nyttpassord, function(err, result){
+        if (!err){
+          swal('Success', 'Your password has been changed! Please login with your new password', "success")
+        }else {
+          swal('Failed!', 'There were some errors with changing your password. Please try again!', "error")
+        }
+      })
+    }
+    
   };
 
   //Edit profile view
-  console.log(this.user.profile.namefirst + "hello");
+  
   $scope.editing = false;
   $scope.removeEdit =false;
   $scope.editProfile = "save";

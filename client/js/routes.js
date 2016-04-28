@@ -34,6 +34,8 @@ function config($stateProvider, $urlRouterProvider) {
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) {
+
+
             return $q.reject('AUTH_REQUIRED');
           } else { return $q.resolve(); }
       }}
@@ -61,15 +63,12 @@ function config($stateProvider, $urlRouterProvider) {
           } else { return $q.resolve(); }
       }}
     })
-    .state('activities.balanse', {
-      url: '/activities/balanse',
-      templateUrl: 'client/templates/balanse.html'
-    })
 
-    .state('dashboard', {
-      templateUrl: 'client/templates/dashboard.html',
-      controller: 'dashboardCtrl',
-      abstract: true,
+
+    //Balanse route
+    .state('balanse', {
+      url: '/activities/balanse',
+      templateUrl: 'client/templates/balanse.html',
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) {
@@ -77,17 +76,45 @@ function config($stateProvider, $urlRouterProvider) {
           } else { return $q.resolve(); }
       }}
     })
-    .state('dashboard.eventlist', {
-      templateUrl: 'client/event-list/event-list.html',
-      controller : 'eventListCtrl'
+
+    //Styrke route
+    .state('styrke', {
+      url: '/activities/styrke',
+      templateUrl: 'client/templates/styrke.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
-    .state('dashboard.eventlist.createEvent',{
+
+    //Fleksibilitet route
+    .state('fleksibilitet', {
+      url: '/activities/fleksibilitet',
+      templateUrl: 'client/templates/fleksibilitet.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
+    })
+
+
+    .state('dashboard', {
       url: '/dashboard',
-      templateUrl: 'client/templates/createEvent.html',
-      controller: 'createEventCtrl'
+      templateUrl: 'client/templates/dashboard.html',
+      resolve: {
+        currentUser($q) {
+          if (Meteor.userId() === null) {
+            return $q.reject('AUTH_REQUIRED');
+          } else { return $q.resolve(); }
+      }}
     })
 
     .state('egneAktiviteter', {
+      url: '/mineAktiviteter',
       templateUrl: 'client/templates/egneAktiviteter.html',
       controller: 'egneAktiviteterCtrl',
       resolve: {
@@ -97,26 +124,10 @@ function config($stateProvider, $urlRouterProvider) {
           } else { return $q.resolve(); }
       }}
     })
-    .state('egneAktiviteter.createEvent', {
-      url: '/mineAktiviteter',
-      views: {
-        "createEvent": {
-          templateUrl: 'client/templates/createEvent.html',
-          controller: 'createEventCtrl'
-        }
-      }
-    })
-    .state('egneAktiviteter.eventDetails',{
-      url: '/mineAktiviteter/:eventId',
-      views: {
-        "createEvent": {
-          templateUrl: 'client/templates/createEvent.html',
-          controller: 'createEventCtrl'
-        },
-        "eventDetails": {
-          templateUrl: 'client/templates/eventDetails.html',
-          controller: 'eventDetailsCtrl',
-        }}
+    .state('egneAktiviteter.eventDetails', {
+      url: '/:eventId',
+      templateUrl: 'client/templates/eventDetails.html',
+      controller: 'eventDetailsCtrl',
     })
 
     .state('network', { // Debug?
@@ -125,18 +136,13 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'networkController'
     })
     .state('venner', { // Debug?
-      rl: '/venner',
+      url: '/venner',
       templateUrl: 'client/templates/venner.html',
       controller : 'profileCtrl'
     })
     .state('example', { // Debug?
       url: '/example',
       templateUrl: 'client/miniex/parent.html'
-    })
-    .state('dashboard.child', { // Debug?
-      url: '/child',
-      templateUrl: 'client/event-list/event-list.html',
-      controller : 'eventListCtrl'
     })
 
     .state('personalData', {

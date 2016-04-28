@@ -1,21 +1,4 @@
 Meteor.startup(function () {
-  Events.remove({});
-  if(Events.find().count() === 0){
-    var events = [
-      {
-        'name': 'Yoga på lørdag',
-        'description': 'Dette er event 1'
-      },
-      {
-        'name': 'Event2',
-        'description': 'Dette er event 2'
-      }
-    ];
-
-    for (var i = 0; i < events.length; i++) {
-        Events.insert(events[i]);
-    }
-  }
 
   Meteor.users.remove({});
   if (Meteor.users.find().count() === 0) {
@@ -77,11 +60,44 @@ Meteor.startup(function () {
       }
     ];
 
-    a = Meteor.users.find().fetch();
-
-
     for (var i = 0; i < users.length; i++) {
       Accounts.createUser(users[i]);
+    }
+  }
+  
+  Events.remove({});
+  if(Events.find().count() === 0){
+    var events = [
+      {
+        createdBy: "Babs",
+        name: 'Yoga på lørdag',
+        description: 'Dette er event 1. Kun Randy er invitert',
+        date: new Date(),
+        location: "",
+        participants: ["Babs","theRandy"],
+        type: ["Innendørs"],
+        exercises: "",
+        public: "false"
+      },
+      {
+        createdBy: "perp",
+        name: 'Event2',
+        description: 'Dette er event 2. Den er offentlig tilgjengelig',
+        date: new Date(),
+        location: "",
+        participants: ["perp"],
+        type: "",
+        exercises: "",
+        public: "true"
+      }
+    ];
+
+    for (i = 0; i < events.length; i++) {
+      newEvent = events[i];
+      
+      Meteor.call('createNewEvent', newEvent.createdBy, newEvent.name, newEvent.description, 
+        newEvent.date, newEvent.location, newEvent.participants, newEvent.type, 
+        newEvent.exercises, newEvent.public);
     }
   }
 

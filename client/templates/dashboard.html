@@ -1,6 +1,5 @@
-<div class="ui container dashboard">
-
-
+<div ng-controller="dashboardCtrl as dbC">
+  <div class="ui container dashboard">
 
   <div class="ui two column grid">
     <!-- Section one -->
@@ -38,13 +37,15 @@
                 {{ messageRequestNotification() }}  meldinger
               </button><br/>
 
+              
+<!--
                 <a href="/#/mineAktiviteter">
                   <div class="ui big label" style="margin-top: 10px" ng-model="eventRequestNotification">
                     <i class="calendar icon"></i>
                     {{ eventRequestNotification() }} events
                   </div>
                 </a>
-
+-->
       </div>
       </div>
       </div>
@@ -83,111 +84,109 @@
         </div>
 
           <div class="ui medium buttons">
-            <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
+            <!-- <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
+            </button></a> -->
+            <a ui-sref="activities"> <button class="ui medium blue button "> Se alle øvelser
             </button></a>
-            <a ui-sref="activities"> <button class="ui medium blue button "> Se øvelser
-            </button></a>
-
-
       </div>
         <div class="row dashboard-margin">
-          <div ui-view></div>
+          <event-list></event-list>
         </div>
-
       </div>
     </div>
   </div>
   </div>
 
-<!-- Accep/Deny modal-->
+  <!-- Accep/Deny modal-->
 
-    <div class="ui small modal friendModal" ng-controller="profileCtrl as prc">
-      <i class="close icon" onclick="closeModal()"></i>
+      <div class="ui small modal friendModal">
+        <i class="close icon" onclick="closeModal()"></i>
+        <div class="header">
+          Venneforespørsler
+        </div>
+        <div class="content" ng-repeat="fr in friendRequests()">
+          <li class="friend">{{ fr.username }}</li>
+          <button ng-click="accept(fr._id, bool=true)">Aksepter</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
+        </div>
+      </div> <!--Accept/Deny model ends-->
+
+      <!--Send Message Modal-->
+    <div class="ui small modal messageModal">
+      <i class="close icon"></i>
       <div class="header">
-        Venneforespørsler
+        Melding
       </div>
-      <div class="content" ng-repeat="fr in friendRequests()">
-        <li class="friend">{{ fr.username }}</li>
-        <button ng-click="accept(fr._id, bool=true)">Aksepter</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
-      </div>
-    </div> <!--Accept/Deny model ends-->
+      <div class="content" style="margin-bottom: 20px">
+        <div class="ui form">
+          <div class="field">
+            <label>Seach your contacts (Vil bli fjernet)</label>
+        <input type="text" ng-model="selected" typeahead="friend.username for friend in dbC.friends | filter:$viewValue"
+        typeahead-on-select="onSelect($item, $model, $label)">
 
-    <!--Send Message Modal-->
-  <div class="ui small modal messageModal" ng-controller="profileCtrl as prc">
-    <i class="close icon"></i>
-    <div class="header">
-      Melding
-    </div>
-    <div class="content" style="margin-bottom: 20px">
-      <div class="ui form">
+          </div>
         <div class="field">
-          <label>Seach your contacts (Vil bli fjernet)</label>
-      <input type="text" ng-model="selected" typeahead="friend.username for friend in prc.friends | filter:$viewValue"
-      typeahead-on-select="onSelect($item, $model, $label)">
+          <h3>Meldingen vil bli sent til:</h3>
+            <a class="ui green label" ng-repeat="recipient in messageList">{{recipient}}</a>
+          </div>
+        <div class="field">
 
         </div>
-      <div class="field">
-        <h3>Meldingen vil bli sent til:</h3>
-          <a class="ui green label" ng-repeat="recipient in messageList">{{recipient}}</a>
+          <div class="field">
+              <label>Melding</label>
+              <textarea ng-model="message"></textarea>
+          </div>
+          <div class="field">
+            <div class="ui submit right floated green button" ng-click="sendMessage(message)">Send</div>
+          </div>
         </div>
-      <div class="field">
+      </div>
 
-      </div>
-        <div class="field">
-            <label>Melding</label>
-            <textarea ng-model="message"></textarea>
-        </div>
-        <div class="field">
-          <div class="ui submit right floated green button" ng-click="sendMessage(message)">Send</div>
-        </div>
-      </div>
     </div>
 
-  </div>
-
-  <!--Inbox Modal-->
-  <div class="ui small modal inboxModal" ng-controller="dashboardCtrl as dbC">
-    <i class="close icon"></i>
-    <div class="header">
-      Innboks
-    </div>
-    <div class="content">
-      <div class="ui items" ng-repeat="msg in dbC.messages">
-        <div class="item">
-          <a class="ui tiny image">
-            <img src="/img/kristy.png">
-          </a>
-          <div class="content">
-            Fra: <b>{{ msg.from }}</b> | Tid: <b> {{ msg.time }}</b>
-            <div class="description">
-              {{ msg.message }} <a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
+    <!--Inbox Modal-->
+    <div class="ui small modal inboxModal">
+      <i class="close icon"></i>
+      <div class="header">
+        Innboks
+      </div>
+      <div class="content">
+        <div class="ui items" ng-repeat="msg in dbC.messages">
+          <div class="item">
+            <a class="ui tiny image">
+              <img src="/img/kristy.png">
+            </a>
+            <div class="content">
+              Fra: <b>{{ msg.from }}</b> | Tid: <b> {{ msg.time }}</b>
+              <div class="description">
+                {{ msg.message }} <a class="ui right floated red label" ng-click="deleteMessage(msg.message)">Delete</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript">
-    $('.newFriend').click(function(){
-                  $('.ui.small.modal.friendModal')
-                    .modal('show')
+    <script type="text/javascript">
+      $('.newFriend').click(function(){
+                    $('.ui.small.modal.friendModal')
+                      .modal('show')
+                    ;
+                  });
+
+                  function closeModal(){
+                    location.reload()
+                  }
+
+                  $('.modalMessage').click(function(){
+                    $('.ui.small.modal.messageModal').modal('show');
+                  });
+
+                  $('.modalInbox').click(function(){
+                    $('.ui.small.modal.inboxModal').modal('show');
+                  });
+
+                  $('.ui.accordion')
+                    .accordion()
                   ;
-                });
-
-                function closeModal(){
-                  location.reload()
-                }
-
-                $('.modalMessage').click(function(){
-                  $('.ui.small.modal.messageModal').modal('show');
-                });
-
-                $('.modalInbox').click(function(){
-                  $('.ui.small.modal.inboxModal').modal('show');
-                });
-
-                $('.ui.accordion')
-                  .accordion()
-                ;
-  </script>
+    </script>
+</div>
