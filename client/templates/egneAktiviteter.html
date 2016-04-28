@@ -1,55 +1,52 @@
-<div class="ui container myEvents pull-down" ng-controller="egneAktiviteterCtrl as evC">
-  <div class="ui stackable grid container pull-down">
-  <div class= "row">
 
-  <div class="ui compact menu">
-   <div ui-view="createEvent"></div>
-</div>
+<div class="ui container myEvents" ng-controller="egneAktiviteterCtrl as evOC">
+  <div class="row">
+    <div class="ui two column grid">
 
-</div>
-</div>
-<div class="row">
+      <div class="column pull-down myEvents">
 
-<div class="ui two column grid">
-  <div class="column pull-down myEvents">
+        <div class="six wide ui divided items">
+          <h3>Mine Aktiviteter</h3>
 
-    <div class="six wide  ui divided items">
-      <h3>Mine Aktiviteter</h3>
+          <div class="item" ng-hide="evOC.userEvents.length > 0">Det ser ikke ut til at du har noen aktiviteter!</div>
 
-      <!-- {{ evC.userff() }} -->
+          <div class="item" ng-repeat="event in evOC.userEvents">
+            <i class="calendar icon"></i>
+            <div class="content">
+              <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
+              <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evOC.removeEvent(event._id)"><i class="remove circle icon"></i></button>
+              <div class="description">
+        
+                <p>{{ event.date | date }}</p>
+                <p>{{ event.location }}</p>
+                <div ng-hide="{{event.owner == evOC.user._id}}">
+                    <button class="ui green small button" ng-click="acceptEvent(event._id,true)" id="{{event._id}}" ng-show="!event.attending">Accept</button>
+                    <label class="ui green label" ng-show="{{ event.attending }}">You are going.</label>
+                    <button class="ui red small button" ng-click="acceptEvent(event._id,false)" id="event._id">Decline
+                    </button>
+                </div>
+              </div>
 
-      <div class="item" ng-repeat="event in evC.userEvents">
-        <i class="calendar icon"></i>
-        <div class="content">
-          <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
-          <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evC.removeEvent(event._id)"><i class="remove circle icon"></i></button>
-          <div class="description">
-    
-            <p>{{ event.date | date }}</p>
-            <p>{{ event.location }}</p>
-            <div ng-hide="{{event.owner == evC.user._id}}">
-                <button class="ui green small button" ng-click="acceptEvent(event._id,true)" id="{{event._id}}" ng-show="!event.attending">Accept</button>
-                <label class="ui green label" ng-show="{{ event.attending }}">You are going.</label>
-                <button class="ui red small button" ng-click="acceptEvent(event._id,false)" id="event._id">Decline
-                </button>
             </div>
           </div>
+
+          <div class="ui stackable grid container pull-down">
+            <div class= "row">
+              <event-editor></event-editor>
+            </div>
+          </div>
+          
         </div>
       </div>
+
+          <div class="column pull-down myEvents">
+            <div class="ui stackable container">
+              <div class="row">
+                <div ui-view ng-show="evOC.userEvents.length > 0">Klikk på en aktivitet for å se detaljer</div>
+              </div>
+            </div>
+          </div>
+
     </div>
   </div>
-
-  <div class="column pull-down myEvents">
-    <div class="ui stackable container">
-      <div class="row">
-
-      <div ui-view="eventDetails">Trykk på en aktivitet for å se detaljer</div>
-
-    </div>
-
-
-  </div>
-</div>
-</div>
-</div>
 </div>

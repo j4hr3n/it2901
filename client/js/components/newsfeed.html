@@ -2,19 +2,25 @@
 	<div class="ui medium feed">
 		<h4 class="ui header">Dette foregår blant vennene du har lagt til:</h4>
 	  	<div class="event" ng-repeat="post in newsfeed.posts | orderBy: 'date'" ng-switch on="post.type">
+		    <div class="label">
+		      <i class="smile icon" ng-switch-when="friendAdded"></i>
+		      <i class="pencil icon" ng-switch-when="userPost"></i>
+		      <i class="users icon" ng-switch-when="newEvent"></i>
+		      <i class="add user icon" ng-switch-when="joinedEvent"></i>
+		    </div>
 	  		<div class="content">
 		  		<div class="summary" ng-switch-when="friendAdded">
-		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har lagt til <a class="header" ui-sref="publicProfile({ username: post.newFriend.username })">{{ post.newFriend.profile.nameFirst +" "+ post.newFriend.profile.nameLast }}</a> som venn!
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> la til <a class="header" ui-sref="publicProfile({ username: post.newFriendLink })">{{ post.newFriend }}</a> som venn!
 		  		</div>
 		  		<div class="summary" ng-switch-when="userPost">
-		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> skrev: <a class="header" ng-click="post.showDesc = !post.showDesc">{{ post.title }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> skrev: <a class="header" ng-click="post.showDesc = !post.showDesc">{{ post.title }}</a>
 		  			<div ng-show="post.showDesc">&laquo;<i>{{ post.description }}</i>&raquo;</div>
 		  		</div>
 		  		<div class="summary" ng-switch-when="newEvent">
-		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har laget en ny aktivitet: <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har laget en ny aktivitet: <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
 		  		</div>
 		  		<div class="summary" ng-switch-when="joinedEvent">
-		  			<a class="header" ui-sref="publicProfile({ username: post.owner.username })">{{ post.owner.profile.nameFirst +" "+ post.owner.profile.nameLast }}</a> har blitt med i aktiviteten <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har blitt med i aktiviteten <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
 		  		</div>
 	  		</div>
 	  	</div>

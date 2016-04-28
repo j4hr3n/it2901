@@ -16,15 +16,15 @@
        <p>{{edc.currentEvent.description}}</p>
      </div>
      <div class="content pull-down" >
-       Type:
-       <span ng-repeat="type in edc.currentEvent.type">{{ type }}, </span>
-     </div>
-     <div class="content pull-down">
-      <span ng-if="edc.currentEvent.public == true"> Åpen for alle</span>
-      <span ng-if="edc.currentEvent.public != true"> Denne aktiviteten er kun tilgjeneglig for de som er invitert</span> 
-    </div>
+     Type:
+    <span ng-repeat="type in edc.currentEvent.type">{{ type }}, </span>
   </div>
-  <div class="extra content">
+  <div class="content pull-down">
+    <span ng-if="edc.currentEvent.public == true"> Åpen for alle</span>
+    <span ng-if="edc.currentEvent.public != true"> Denne aktiviteten er kun tilgjengelig for de som er invitert</span> 
+  </div>
+   </div>
+   <div class="extra content">
     <a id="status">
       <i class="thumbs up outline icon"></i>
       <span> Status: {{edc.attending}}</span>
@@ -62,50 +62,48 @@
       </div>
     </div>
   </div>
+    <event-editor event="{{edc.currentEvent._id}}"></event-editor>
+  </div>
 
-  <button class="ui small gray button" ng-click="fireEditEventModal()">
-    Oppdater
-  </button>
+  <!-- editEvent Modal -->
+  <!--<div class="ui small modal editEvent">
+    <i class="close icon" ng-click="closeModal()"></i>
 
-</div>
 
-<!-- editEvent Modal -->
-<div class="ui small modal editEvent">
-  <i class="close icon" ng-click="closeModal()"></i>
+    <div class="header blue modal">Oppdater {{edc.currentEvent.name}} </div>
+    <div class="content">
 
-  <div class="header blue modal">Oppdater {{edc.currentEvent.name}} </div>
-  <div class="content">
-
-    <div id="form" class="ui form pull-down" >
-      <div class="required field">
-        <label>Tittel: </label>
-        <input type="text" ng-model="edc.currentEvent.name"/>
-      </div>
-      <div class="ui two column grid">
-        <div class="column">
-          <div class="field">
-            <label>Beskrivelse: </label>
-            <textArea rows="2" type="text" ng-model="edc.currentEvent.description"></textArea>
+      <div id="form" class="ui form pull-down" >
+        <div class="required field">
+          <label>Tittel: </label>
+          <input type="text" ng-model="edc.currentEvent.name"/>
+        </div>
+        <div class="ui two column grid">
+          <div class="column">
             <div class="field">
-              <label>Dato: </label>
-              <div class="choosedate">
-                <input type="text" class="form-control" ng-model="edc.updated.date" ng-click="fireDatepicker()">
-              </div> 
-            </div>
-            <div class="field">
-              <label>Sted: </label>
-              <input type="text" ng-model="edc.currentEvent.location"/>
-            </div>
-            <div class="required field">
-              <label>Legg til venner</label>
-              <select multiple="" ng-model="edc.currentEvent.participants" ng-options="user.username for user in evC.users track by user._id">
-               <option value="">Velg venner</option>
-             </select>
+              <label>Beskrivelse: </label>
+              <textArea rows="2" type="text" ng-model="edc.currentEvent.description"></textArea>
+              <div class="field">
+                <label>Dato: </label>
+                <div class="choosedate">
+                  <input type="text" class="form-control" ng-model="edc.updated.date" ng-click="fireDatepicker()">
+                </div> 
+              </div>
+              <div class="field">
+                <label>Sted: </label>
+                <input type="text" ng-model="edc.currentEvent.location"/>
+              </div>
+              <div class="required field">
+                <label>Legg til venner</label>
+                <select multiple="" ng-model="edc.currentEvent.participants" ng-options="user.username for user in evC.users track by user._id">
+                 <option value="">Velg venner</option>
+               </select>
+             </div>
+             <button class="ui medium green button" ng-click="edc.save()">Oppdater</button>
            </div>
-           <button class="ui medium green button" ng-click="edc.save()">Oppdater</button>
          </div>
-       </div>
-       <div class="column">
+         <div class="column">
+
         <div class="field">
           <label>Aktivitetstype</label>
           <select class="ui fluid search dropdown"  multiple="" ng-model="edc.currentEvent.type">
@@ -152,9 +150,21 @@
           </div>
         </div>
 
+        <div class="field">
+          <label>Legg til øvelser: </label>
+          <input type="text" ng-model="evC.updated.exercises"/>
+        </div>
+
+        <div class="field">
+          <div class="ui checkbox">
+            <input type="checkbox" tabindex="0" ng-model="evC.updated.public">
+            <label>Aktiviteten er tilgjengelig for alle</label>
+          </div>
+        </div>
+
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
+  </div>-->
 </div>
