@@ -8,6 +8,8 @@ $reactive(this).attach($scope);
 
   this.selected = Meteor.user();
 
+ 
+
   this.subscribe('users');
 
 
@@ -31,15 +33,8 @@ $reactive(this).attach($scope);
   });
 
   this.savePersonalData = () => {
-    Meteor.users.update(
-        { _id: this.selected._id },
-        { 
-          $set: {
 
-            "profile.personalData": this.selected.profile.personalData
-          }
-        }
-        )
+    console.log('hei');
+    Meteor.call('updatePersonalData', this.selected._id, this.selected.profile.personalData);
   }
-
 }

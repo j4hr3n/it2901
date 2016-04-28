@@ -12,6 +12,7 @@ Meteor.methods({
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,
 		      'bio': bio,
+		      'personalData' : [{'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}],
 		      'friends': [],
 		      'events' : [],
 		      'notifications' : {
@@ -85,6 +86,13 @@ Meteor.methods({
 	'addProfilePicture' : function(link){
 		//console.log(link);
 		Meteor.users.update({_id : Meteor.userId()}, {$set : { "profile.profilePicture" : link}})
+	},
+
+	'updatePersonalData' : function(userID, newData){
+		//console.log(UserID);
+		console.log(newData);
+		console.log('Hello');
+		Meteor.users.update({_id : userID}, {$set : { "profile.personalData" : newData}})
 	},
 
 	'acceptEvent' : function(eventId){

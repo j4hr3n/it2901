@@ -5,7 +5,15 @@ angular
 function personalDataCtrl($scope, $reactive, $stateParams) {
   $reactive(this).attach($scope);
 
-  $scope.test = "hello world"
+if (!Meteor.user()) 
+    throw new Meteor.Error(403, "Need to be logged in to access your own profile.");
 
+
+  this.helpers({
+    user: () => {
+      return Meteor.user();
+    },
+
+   });
 
 }
