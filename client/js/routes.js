@@ -56,8 +56,8 @@ function config($stateProvider, $urlRouterProvider) {
     })
 
     .state('dashboard', {
+      url: '/dashboard',
       templateUrl: 'client/templates/dashboard.html',
-      controller: 'dashboardCtrl',
       resolve: {
         currentUser($q) {
           if (Meteor.userId() === null) { 
@@ -65,17 +65,9 @@ function config($stateProvider, $urlRouterProvider) {
           } else { return $q.resolve(); }
       }}
     })
-    .state('dashboard.eventlist', {
-      templateUrl: 'client/event-list/event-list.html',
-      controller : 'eventListCtrl'
-    })
-    .state('dashboard.eventlist.createEvent',{
-      url: '/dashboard',
-      templateUrl: 'client/templates/createEvent.html',
-      controller: 'createEventCtrl'
-    })
 
     .state('egneAktiviteter', {
+      url: '/mineAktiviteter',
       templateUrl: 'client/templates/egneAktiviteter.html',
       controller: 'egneAktiviteterCtrl',
       resolve: {
@@ -85,26 +77,10 @@ function config($stateProvider, $urlRouterProvider) {
           } else { return $q.resolve(); }
       }}
     })
-    .state('egneAktiviteter.createEvent', {
-      url: '/mineAktiviteter',
-      views: {
-        "createEvent": {
-          templateUrl: 'client/templates/createEvent.html',
-          controller: 'createEventCtrl'
-        }
-      }
-    })
-    .state('egneAktiviteter.eventDetails',{
-      url: '/mineAktiviteter/:eventId',
-      views: {
-        "createEvent": {
-          templateUrl: 'client/templates/createEvent.html',
-          controller: 'createEventCtrl'
-        },
-        "eventDetails": {
-          templateUrl: 'client/templates/eventDetails.html',
-          controller: 'eventDetailsCtrl',
-        }}
+    .state('egneAktiviteter.eventDetails', {
+      url: '/:eventId',
+      templateUrl: 'client/templates/eventDetails.html',
+      controller: 'eventDetailsCtrl',
     })
 
     .state('network', { // Debug?
@@ -120,11 +96,6 @@ function config($stateProvider, $urlRouterProvider) {
     .state('example', { // Debug?
       url: '/example',
       templateUrl: 'client/miniex/parent.html'
-    })
-    .state('dashboard.child', { // Debug?
-      url: '/child',
-      templateUrl: 'client/event-list/event-list.html',
-      controller : 'eventListCtrl'
     })
 
     .state('personalData', {

@@ -23,6 +23,7 @@
       <!--<a class="item" ui-sref="home" ng-if="!indc.isLoggedIn">Hjem</a>-->
       <a class="item" ui-sref="downloads">Last ned til din mobil</a>
 
+
       <!--Typeahead search-->
         <div>
         	<div class="container-fluid" ng-controller="indexCtrl as idx">
@@ -40,13 +41,11 @@
         </div>
 
 
-
-
       <div class="right menu">
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireLoginModal()">Logg inn</a>
         <a class="item" ng-hide="indc.isLoggedIn" ng-click="fireRegisterModal()">Registrer deg</a>
         <a class="item" ng-show="indc.isLoggedIn" ui-sref="profile" ng-cloak>Din profil</a>
-        <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard.eventlist.createEvent" ng-cloak>Ditt dashboard</a>
+        <a class="item" ng-show="indc.isLoggedIn" ui-sref="dashboard" ng-cloak>Ditt dashboard</a>
         <a class="item" ng-show="indc.isLoggedIn" ng-click="indc.logout()" ng-cloak>Logg ut</a>
       </div>
     </div>

@@ -24,12 +24,62 @@ Meteor.methods({
 		Accounts.createUser(this.user);
 	},
 
+	'updateEvent' : function(eventID, ownerUsername, name, description, date, 
+		location, participants, type, exercises, isPublic) {
+		// participants is here an array of the usernames, without attending-information
+
+		owner = Meteor.users.findOne({ username: ownerUsername });
+		if (owner == null) {
+			throw new Meteor.Error(404, "The required owner '"+ 
+				ownerUsername +"' doesn't exist.");
+		}
+		if (name == null || name == "") {
+			throw new Meteor.Error(404, "The field 'name' is required.");
+		}
+		if (Meteor.isClient && owner != Meteor.user()
+			&& Meteor.user().admin != 1) {
+			throw new Meteor.Error(403, "No permission to edit another's event.");
+		}
+
+		var updatedEvent = {
+			createdBy: owner.username,
+	        name: name,
+	        description: description,
+	        date: date,
+	        location: location,
+	        type: type,
+	        exercises: exercises,
+	        "public": isPublic
+	    }
+	    
+		Events.update(
+			{ _id: eventID },
+			{ $set: {
+					createdBy: updatedEvent.createdBy,
+			        name: updatedEvent.name,
+			        description: updatedEvent.description,
+			        date: updatedEvent.date,
+			        location: updatedEvent.location,
+			        type: updatedEvent.type,
+			        exercises: updatedEvent.exercises,
+			        public: updatedEvent.public
+		    	}
+     		}
+        );
+  
+        Meteor.call("updateEventParticipants", eventID, participants, true, 
+        	(err) => { 
+        		if (err) { 
+        			throw err; 
+        	}}
+        );
+     },
 
 	'acceptEvent' : function(eventId){
 		events = Meteor.user().profile.events;
 		for (var i = 0; i < events.length; i++) {
 			if (events[i].eventId == eventId){
-				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : true}})
+				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"attending" : true}})
 				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : true}})
 			}
 		};
@@ -54,41 +104,111 @@ Meteor.methods({
 		Events.remove(eventId);
 	},
 
-	'createEvent' : function(owner, name, description, date, location, participants, type, 
-		exercises, isPublic) { 
+	'updateEventParticipants': (eventID, newParticipants, resetAttendees=true) => {
+		console.log("'updateEventParticipants' called with "+eventID+" and "+newParticipants)
+
+		uEvent = Events.findOne({ _id: eventID });
+
+    	if (uEvent == null) {
+    		throw new Meteor.Error(404, "Unable to find event with ID='"
+    			+ eventID +"'");
+    	}
+
+		existingAttends = {};
+		for (var i = 0; i < uEvent.participants.length; i++) {
+			attUsername = uEvent.participants[i].username;
+			
+			existingAttends[attUsername] = uEvent.participants[i].attending;
+
+			console.log("pulling "+ attUsername+ " from "+uEvent.name)
+			Meteor.users.update({ username : attUsername}, 
+				{$pull : { "profile.events" : { "eventId" : eventID}}})
+		}
+
+		newParticipants_formatted = [];
+
+		newParticipants.forEach( (participant) => {
+
+	    	if (Meteor.users.findOne({username: participant}) == null) {
+	    		throw new Meteor.Error(404, "Unable to find participant username '"
+	    			+ participant +"'");
+	    	}
+
+	    	if (!resetAttendees && existingAttends[uEvent.createdBy] != undefined)
+		    	attending = existingAttends[uEvent.createdBy];
+		    else {
+		    	attending = (participant == uEvent.createdBy);
+		    	console.log("[participants] OwnerComparison: "+participant+" == "+uEvent.createdBy)
+		    }
+	    	
+	    	newParticipants_formatted.push(
+	    		{ username: participant, "attending" : attending})
+
+        	wr = Meteor.users.update(
+				{ username : participant },
+				{ $push: { "profile.events": 
+						{ 
+							"eventId": eventID,
+							"eventName": uEvent.name,
+							"owner": uEvent.createdBy, 
+							"attending": attending
+						}
+					} 
+				}
+			);
+
+	    	console.log("[participants] "+ uEvent.name +": username: "+  participant
+	    		+ " attending: "+ attending +" WR: "+ wr);
+	    	console.log(Meteor.users.findOne({username:participant}).profile.events);
+        })
+        
+        Events.update({ _id: eventID },
+        	{$set: 
+        		{ participants: newParticipants_formatted }
+        	});
+        console.log("[participants] Final result of Event:")
+	    console.log(Events.findOne({_id: uEvent._id}).participants)
+	},
+
+	'createNewEvent' : function(ownerUsername, name="", description="", date=null, 
+		location=null, participants=[], type=null, exercises=null, isPublic=false) {
+
+		owner = Meteor.users.findOne({ username: ownerUsername });
+		if (owner == null) {
+			throw new Meteor.Error(404, "The required owner '"+ 
+				ownerUsername +"' doesn't exist.");
+		}
+		if (name == null || name == "") {
+			throw new Meteor.Error(404, "The field 'name' is required.");
+		}
+		if (Meteor.isClient && owner != Meteor.user()
+			&& Meteor.user().admin != 1) {
+			throw new Meteor.Error(403, "No permission to create event for others.");
+		}
 
 		var newEvent = {
-			owner: owner,
+			createdBy: owner.username,
 	        name: name,
 	        description: description,
 	        date: date,
 	        location: location,
-	        participants: participants,
+	        participants: [],
 	        type: type,
 	        exercises: exercises,
-	        "public": isPublic,
-            createdBy : ""
+	        "public": isPublic
 	    }
-	    participants = [];
-	    for (var i = 0; i < newEvent.participants.length; i++) {
-	    	participants.push({ username: newEvent.participants[i].username, "attending" : false})
-	    };
-	    newEvent.participants = participants;
-	    newEvent.createdBy = Meteor.user().username;
+	    
         var ev_id = Events.insert(newEvent);
-        newEvent.participants.forEach(function(participant){
-        	Meteor.users.update(
-				{ username : participant.username}, 
-				{ $push : { "profile.events" : { eventId: ev_id, eventName : newEvent.name,  owner : newEvent.owner, attending: false} } }
-			);
-        })
-        /*for(var participant in newEvent.participants){
-			Meteor.users.update(
-				{_id : participant._id}, 
-				{ $push : { "profile.events" : { eventID: ev_id, participating: 0} } }
-			);
-        }*/
-        Meteor.call("createNewsPost", owner, { "newEvent":	{ eventID: ev_id} });
+
+        Meteor.call("updateEventParticipants", ev_id, participants, true, 
+        	(err) => { 
+        		if (err) { 
+        			Events.remove({ _id: ev_id });
+        			throw err; 
+        	}}
+        );
+
+        Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} });
 
 	},
 

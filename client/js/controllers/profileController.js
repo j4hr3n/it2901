@@ -6,11 +6,12 @@ angular
 function profileCtrl($scope, $reactive) {
   $reactive(this).attach($scope);
 
+  if (!Meteor.user()) 
+    throw new Meteor.Error(403, "Need to be logged in to access your own profile.");
 
   this.helpers({
     user: () => {
-      return Meteor.user() || Meteor.users.findOne({});
-                        // ^ Debug
+      return Meteor.user();
     },
     contacts: () => {
       return Meteor.users.find({}, {'username':1});

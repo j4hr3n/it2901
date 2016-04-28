@@ -2,13 +2,13 @@ angular
     .module('it2901')
     .controller('indexCtrl', indexCtrl);
 
-function indexCtrl($scope, $reactive, $location) {
+function indexCtrl($scope, $reactive, $state) {
   $reactive(this).attach($scope);
 
   var _selected;
   $scope.selected = undefined;
 
-  this.subscribe('users');
+  this.subscribe('allUsers');
 
   this.helpers({
     isLoggedIn: () => {
@@ -35,6 +35,6 @@ function indexCtrl($scope, $reactive, $location) {
 
   this.logout = () => {
     Accounts.logout();
-    $location.path("/");
+    $state.go("home")
   }
 }

@@ -5,17 +5,42 @@ angular
 function eventDetailsCtrl($scope, $stateParams, $reactive) {  
     $reactive(this).attach($scope);
 
-
     this.subscribe('events');
-    this.subscribe('users');
+    this.subscribe('allUsers');
+
+    this.helpers({
+        events: () => {
+           return Events.find({});
+         },
+
+         currentEvent: () => {
+          if (!Meteor.userId())
+            throw new Meteor.Error(404, "Need to be logged in to access events.");
+
+          if (!$stateParams.eventId)
+            return null;
+
+          ev = Events.findOne({_id: $stateParams.eventId})
+
+          console.log("Events.findOne({_id: "+$stateParams.eventId +" }) = "
+            + Events.findOne({_id: $stateParams.eventId}));
+
+          if (ev == null) {
+            throw new Meteor.Error(404, "Event not found."+$stateParams.eventId);
+          } else {
+            return ev;
+          }
+        } 
+      });
 
 
     $scope.eventId = $stateParams.eventId;
     $scope.count = 0;
 
-    $scope.participants = Events.findOne({_id : $scope.eventId}).participants
-    for (var i = 0; i < $scope.participants.length; i++) {
-      if ($scope.participants[i].attending == true){
+    $scope.participants = this.currentEvent.participants
+    for (var i = 0; i < this.currentEvent.participants.length; i++) {
+      
+      if (this.currentEvent.participants[i].attending == true) {
           $scope.count++;
       }
     };
@@ -57,28 +82,6 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
       hide: 200
     }
   });
-
-  
-    this.subscribe('events');
-    this.subscribe('users');
-
-    this.helpers({
-        events: () => {
-           return Events.find({});
-         },
-         currentEvent: () => {
-          return Events.findOne({_id: $stateParams.eventId});
-        }, 
-      });
-
-    /*
-    this.updateEvent = () => {
-
-      Meteor.call("updateEvent", Meteor.user(), this.currentEvent );
-
-    };
-    */
-  
 
       this.save = () => {
 

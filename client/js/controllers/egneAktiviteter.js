@@ -5,10 +5,6 @@ angular
 function egneAktiviteterCtrl($scope, $reactive) {
     $reactive(this).attach($scope);
 
-    userff: () => {
-      return Meteor.user().profile.events;
-    }
-
     $scope.acceptEvent = function(eventId,bool){
       var evs = Meteor.user().profile.events
       if (bool == true){
@@ -59,19 +55,22 @@ function egneAktiviteterCtrl($scope, $reactive) {
     });
 
     this.subscribe('events');
-    this.subscribe('users');
+    this.subscribe('allUsers');
 
     this.helpers({
         user: () => {
+          if (!Meteor.userId())
+            throw new Meteor.Error(404, "Need to be logged in to access events.");
+          
           return Meteor.user()
+
         },
-
         events: () => {
-          return Meteor.user().profile.events;
-       },
-
-       userEvents: () => {
-         return Meteor.user().profile.events;
+          if (this.user) {
+            return this.user.profile.events;
+          } else {
+            return null;
+          }
        }
    });
 

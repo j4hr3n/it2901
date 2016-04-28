@@ -1,7 +1,5 @@
 <div class="ui container dashboard">
 
-
-
   <div class="ui two column grid">
     <!-- Section one -->
     <div class="left floated column pull-down right-padding">
@@ -52,16 +50,15 @@
           </div>
         </div>
 
-          <div class="ui medium buttons">
-            <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
-            </button></a>
-            <a ui-sref="activities"> <button class="ui medium blue button "> Se øvelser
-            </button></a>
-
-
-      </div>
+        <div class="ui medium buttons">
+          <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
+          </button></a>
+          <a ui-sref="activities"> <button class="ui medium blue button "> Se øvelser
+          </button></a>
+        </div>
+          
         <div class="row dashboard-margin">
-          <div ui-view></div>
+          <event-list></event-list>
         </div>
 
       </div>
