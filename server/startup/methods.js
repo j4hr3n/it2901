@@ -325,6 +325,38 @@ Meteor.methods({
 
 	},
 
+	'createExercise' : function(ownerUsername, name="", description="",  
+		type=null, url ="", images=[]) {
+
+		owner = Meteor.users.findOne({ username: ownerUsername });
+		if (owner == null) {
+			throw new Meteor.Error(404, "The required owner '"+ 
+				ownerUsername +"' doesn't exist.");
+		}
+		if (name == null || name == "") {
+			throw new Meteor.Error(404, "The field 'name' is required.");
+		}
+		if (Meteor.isClient && owner != Meteor.user()
+			&& Meteor.user().admin != 1) {
+			throw new Meteor.Error(403, "No permission to create exercises.");
+		}
+
+		var newExercise = {
+			createdBy: owner.username,
+	        name: name,
+	        description: description,
+	        type: type,
+	        url: url,
+	        images: images
+	    }
+	    
+        var ex_id = Exercises.insert(newExercise);
+
+		//TODO Notification when admin has added new exercise
+        //Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} });
+
+	},
+
 	'sendMessage' : function(message, messageList){
 		var date = new Date();
 		time = date.toDateString() + " " + date.getHours().toString() + ":" + date.getMinutes();

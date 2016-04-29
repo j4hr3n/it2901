@@ -2,6 +2,8 @@ NewsPosts = new Mongo.Collection("newsPosts");
 
 Events = new Mongo.Collection("events");
 
+Exercises = new Mongo.Collection("exercises");
+
 PersonalData = new Mongo.Collection("personalData")
 
 Meteor.users.allow({
@@ -26,6 +28,19 @@ Events.allow({
 	},
 	remove: function (userId, event){
 		return userId && event.owner == userId;
+	}
+});
+
+Exercises.allow({
+	insert: function (userId, exercise) {
+		return userId && exercise.owner == userId;
+	},
+	update: function(userId, exercise, fieldNames, modifier) {
+		return userId && (exercise.owner == userId
+			|| _.contains(exercise.participants, userId));
+	},
+	remove: function (userId, exercise){
+		return userId && exercise.owner == userId;
 	}
 });
 
