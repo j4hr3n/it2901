@@ -9,6 +9,8 @@ this.types = ['Balanse', 'Styrke', 'Fleksibilitet'];
 
 this.url;
 
+this.chosenExercise;
+
 this.chosen = [];
 
 this.visible = false;
@@ -62,11 +64,11 @@ this.view = (types) => {
 
 this.revealSegment = () => {
   this.visible = !this.visible;
-/*
-  $('.ui.segmet.newExercises')
-  .transition('show');
-  .transition('slide down');*/
+}
 
+this.addToUser = () => {
+  console.log('id: ', this.chosenExercise);
+  Meteor.call('addExercisetoUser', Meteor.user()._id, this.chosenExercise);
 }
 
 this.helpers({
@@ -75,8 +77,9 @@ this.helpers({
     },
   });
 
-this.setUrl = (url) => {
+this.setUrl = (url, id) => {
   this.url = url;
+  this.chosenExercise = id;
   console.log("url: ", this.url);
   document.getElementById('frame').setAttribute("src", url);
   $('.ui.modal.one').modal('show');

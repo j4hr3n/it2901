@@ -15,7 +15,7 @@
             <div class="item" ng-repeat="ex in exC.Exercises" ng-if="exC.view(ex.types)">
               <i class="large child icon"></i>
               <div class="content">
-                <a class="header" ng-click="exC.setUrl(ex.url)">{{ex.name}}</a>
+                <a class="header" ng-click="exC.setUrl(ex.url, ex._id)">{{ex.name}}</a>
                 <button title="Klikk for å slette øvelsen" class="remove event button" ng-click="exC.removeExercise(ex._id)"><i class="remove circle icon"></i></button>
                 <br>
                  <span>Type: </span><span ng-repeat="type in ex.types"> {{type}}, </span>
@@ -114,7 +114,7 @@
 
 <div class="column">
 <!--Edit so that the button checks if the exercise is already added to your list (also reposition)-->
-<button ng-click="inviteFriend(user._id)" class="ui basic button add-friend"><i class="icon user"></i>Legg til i mine øvelser</button>
+<button ng-click="exC.addToUser()" class="ui basic button add-friend"><i class="icon user"></i>Legg til i mine øvelser</button>
 </div>
 </div>
 

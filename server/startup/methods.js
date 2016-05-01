@@ -15,6 +15,7 @@ Meteor.methods({
 		      'personalData' : [{'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}],
 		      'friends': [],
 		      'events' : [],
+		      'exercises' : [],
 		      'notifications' : {
 		        'friendRequests' : [],
 		        'activities' : []
@@ -269,6 +270,17 @@ Meteor.methods({
 			);
         }*/
 
+	},
+
+	'addExercisetoUser' : (userId, exId) => {
+			user = Meteor.users.findOne({ _id: userId });
+			Meteor.users.update({ _id : userId}, 
+				{$push : { "profile.exercises" : { '_id' : exId}}});
+			
+			console.log("idAdded: ", exId);
+			console.log("exercise added: ", user.profile.exercises);
+
+			
 	},
 
 	'createNewsPost' : (userID, info, isPublic = false) => {

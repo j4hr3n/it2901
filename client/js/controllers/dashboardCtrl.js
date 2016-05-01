@@ -7,6 +7,7 @@ function dashboardCtrl($scope, $reactive) {
 
 $reactive(this).attach($scope);
 
+this.subscribe('exercises');
 
   this.helpers({
     user: () => {
@@ -33,6 +34,30 @@ $reactive(this).attach($scope);
     messages: () => {
       user = Meteor.user();
       return user.profile.messages;
+    }, 
+
+    exercises: () => {
+       exIds = Meteor.user().profile.exercises;
+       console.log("exLen: ", exIds); 
+       display = [];
+
+       for(var i = 0; i < exIds.length; i++){
+
+           var oid = exIds[i]._id;
+           console.log("foundId: " , oid);
+         // var ex = Exercises.find(oid);
+           var ex = Exercises.findOne({_id : oid});
+          //var ex = Exercises.find({ _id : oid})
+
+          //console.log('allExercisesfromDB: ', Exercises.find({}));
+
+          //ex = Exercises.findOne({exIds[i]._id});
+          console.log('ex: ', ex);
+          display.push(ex);
+
+       }
+       console.log('dispaly: ', display);
+       return display;
     }
 
   });
