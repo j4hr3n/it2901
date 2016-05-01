@@ -325,8 +325,14 @@ Meteor.methods({
 
 	},
 
-	'createExercise' : function(ownerUsername, name="", description="",  
-		type=null, url ="", images=[]) {
+	'createExercise' : function(exercise) {
+
+		var ex_id = Exercises.insert(exercise);
+		var t = Exercises.findOne({_id : ex_id});
+		console.log('ex:', t);
+		//console.log('created: ', Exercises.findOne({name : exercise.name}));
+/*
+
 
 		owner = Meteor.users.findOne({ username: ownerUsername });
 		if (owner == null) {
@@ -339,8 +345,8 @@ Meteor.methods({
 		if (Meteor.isClient && owner != Meteor.user()
 			&& Meteor.user().admin != 1) {
 			throw new Meteor.Error(403, "No permission to create exercises.");
-		}
-
+		}*/
+/*
 		var newExercise = {
 			createdBy: owner.username,
 	        name: name,
@@ -348,13 +354,17 @@ Meteor.methods({
 	        type: type,
 	        url: url,
 	        images: images
-	    }
+	    }*/
 	    
-        var ex_id = Exercises.insert(newExercise);
+        //var ex_id = Exercises.insert(exercise);
 
 		//TODO Notification when admin has added new exercise
         //Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} });
 
+	},
+
+	'removeExercise' : function(exId){
+		Exercises.remove({_id : exId});
 	},
 
 	'sendMessage' : function(message, messageList){

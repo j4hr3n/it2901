@@ -7,8 +7,6 @@ function dashboardCtrl($scope, $reactive) {
 
 $reactive(this).attach($scope);
 
-subscribe("exercises");
-
 
   this.helpers({
     user: () => {
@@ -24,11 +22,7 @@ subscribe("exercises");
       return user.profile.friends;
 
     },
-    Exercises: () => {
-      return Exercises.find({});
-    },
-
-
+   
     notifications: () => {
       user =  Meteor.user();
       return user.profile.nameFirst;
