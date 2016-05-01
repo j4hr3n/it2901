@@ -61,10 +61,10 @@
         <div class="row dashboard-margin">
           <div class="ui middle aligned divided list pull-down">
           <h3>Dine øvelser</h3>
-            <div class="item">
+            <div class="item" ng-repeat="ex in dbC.Exercises">
               <i class="large child icon"></i>
               <div class="content">
-                <a class="header">Sofasittende overkroppsrotasjon</a>
+                <a class="header">{{ex.name}}</a>
               </div>
             </div>
             <div class="item">

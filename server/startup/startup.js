@@ -199,3 +199,4 @@ Meteor.startup(function () {
 
   Meteor.publish("events", () => { return Events.find({})});
 });
+Meteor.publish("exercises", () => {return Exercises.find({})});

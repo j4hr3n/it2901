@@ -62,6 +62,7 @@ function config($stateProvider, $urlRouterProvider) {
   .state('activities', {
     url: '/activities',
     templateUrl: 'client/templates/activities.html',
+    controller: 'exerciseCtrl',
     resolve: {
       currentUser($q) {
         if (Meteor.userId() === null) {

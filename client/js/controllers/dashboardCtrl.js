@@ -22,8 +22,7 @@ $reactive(this).attach($scope);
       return user.profile.friends;
 
     },
-
-
+   
     notifications: () => {
       user =  Meteor.user();
       return user.profile.nameFirst;

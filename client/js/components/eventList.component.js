@@ -12,6 +12,8 @@ angular
 function eventListCtrl ($scope, $reactive) {
   $reactive(this).attach($scope);
 
+$scope.quantity = 3;
+
   this.subscribe('events');
 
   this.helpers({

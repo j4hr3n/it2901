@@ -1,3 +1,22 @@
+$blue: #2185D0;
+$disabled: #65aee7;
+
+.activities{
+	margin: 2em;
+}
+
+.ui.toggle.button.exerciseType{
+	background-color: #ffffff;
+	border: solid $blue 2px;
+	color: $blue;
+}
+
+.ui.toggle.button.exerciseType:hover{
+	background-color: $blue;
+	color: #ffffff;
+}
+
+
 
 .header{
   font-size: 17px;
