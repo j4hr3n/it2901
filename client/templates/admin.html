@@ -1,36 +1,76 @@
 <div class="ui container admin" ng-controller="adminCtrl as adc">
-	  <div class="ui two column grid">
+	<div class="ui two column grid">
 	    <div class="left floated column pull-down right-padding">
-      		<h3 class="ui dividing header">Admin Panel</h3>
-	      	<div class="ui stackable grid container"></div>
-	      	<div class="row admin-margin"></div>
+	    	<div class="ui piled segment">
+		  		<h3 class="ui dividing header">Admin Panel</h3>
+		      	<div class="ui stackable grid container"></div>
+		      	<div class="row admin-margin"></div>
 
 
-	      	<div class="header">Søk etter bruker</div>
+		      	<div class="header">Søk etter bruker</div>
 
-	      	<div class="content" style="margin-bottom: 20px">
-		      <div class="ui form">
-		        <div class="field">
-		        	<label></label>
-		      		<input name="user" id="users" type="text" placeholder="Search for users" ng-model="adc.selected" typeahead="user as user.profile.nameFirst + ' ' + user.profile.nameLast for user in adc.usersList | filter:$viewValue | limitTo:8" class="form-control">
-		      	</div>
-		      </div>
-		    </div>
-
-	      	<div class="row admin-margin"></div>
-
-	      	<div class="row">
-	      		<h3>Valgt bruker - {{adc.selected.profile.nameFirst + " " + adc.selected.profile.nameLast}} </h3>
-		      	<div class="ui container" ng-repeat="field in adc.getReactively('selected').profile.personalData track by $index" >
-			      <div class="ui action input">
-			      	<label>Personlig data - {{$index + 1}} </label>
-			        <input id="title" placeholder="Type" type="text" ng-model="field.title">
-			        <input id="value" placeholder="Verdi" type="text" ng-model="field.value">
-			        <div type="submit" ng-click="adc.savePersonalData()" class="ui button">Endre</div>
+		      	<div class="content" style="margin-bottom: 20px">
+			      <div class="ui form">
+			        <div class="field">
+			        	<label></label>
+			      		<input name="user" id="users" type="text" placeholder="Search for users" ng-model="adc.selected" typeahead="user as user.profile.nameFirst + ' ' + user.profile.nameLast for user in adc.usersList | filter:$viewValue | limitTo:8" class="form-control">
+			      	</div>
 			      </div>
 			    </div>
+
+		      	<div class="row admin-margin"></div>
+
+		      	<div class="row">
+		      		<h3>Valgt bruker - {{adc.selected.profile.nameFirst + " " + adc.selected.profile.nameLast}} </h3>
+			      	<div class="ui form">
+								<div class="inline fields" ng-repeat="field in adc.getReactively('selected').profile.personalData track by $index">
+								<div class="field">
+									<label>Personlig data - {{$index + 1}}</label>
+									<input type="text" placeholder="Type" ng-model="field.title">
+								</div>
+								<div class="field">
+									<label></label>
+									<input type="text" placeholder="Verdi" ng-model="field.value">
+								</div>
+								<div class="field">
+									<label></label>
+									<div type="submit" ng-click="adc.savePersonalData()" class="ui button">Endre</div>
+								</div>
+							</div>
+				      <!-- <div class="ui action input">
+				      	<label>Personlig data - {{$index + 1}} </label>
+				        <input id="title" placeholder="Type" type="text" ng-model="field.title">
+				        <input id="value" placeholder="Verdi" type="text" ng-model="field.value">
+				        <div type="submit" ng-click="adc.savePersonalData()" class="ui button">Endre</div>
+				      </div> -->
+				    </div>
+				</div>
 			</div>
 		</div>
 
-	  </div>
+		<div class="right floated column pull-down left-padding">
+			<div class="ui people shape">
+		    	<div class="ui card">
+			        <div class="image">
+			         	<img ng-src="{{ adc.selected.profile.profilePicture }}">
+			         	<!-- <button id ="PicButton" ng-switch-when ="edit" ng-click="" class="ui button" type="upload">Last opp bilde</button> -->
+			        </div>
+			        <div class="content">
+			        	<div>
+			        		<div>
+			        			<a class="header">{{ adc.selected.profile.nameFirst + " " + adc.selected.profile.nameLast }}</a>
+				          		<div name="bio" class="description">
+				            	<span> {{ adc.selected.profile.bio }} {{text}}</span>
+				          		</div>
+			        		</div>
+			        	</div>
+			        </div>
+			        <div class="extra content">
+		            	<i class="user icon"></i>
+		            	<a>{{ adc.selected.profile.friends.length }} venner</a>
+		        	</div>
+		    	</div>
+		    </div>
+		</div>
+	</div>
 </div>
