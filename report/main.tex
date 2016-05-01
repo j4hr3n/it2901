@@ -1,0 +1,95 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{appendix}
+\usepackage[table]{xcolor}
+\usepackage{float}
+
+% This defines 3 new commands that can be used to specify explicit width of columns in tabular.
+% Usage: \begin{tabular}{L{0.2\linewidth} R{2em} C{5cm} }
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+\title{Name of Solution \\
+\large IT2901 Informatics Project 11 \\for Babak Farshchian at SINTEF}
+
+\author{Name of group members }
+\date{April 2016}
+
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{tabu}
+
+\usepackage[official]{eurosym}
+
+\usepackage{caption, subcaption}
+\captionsetup[subfigure]{width=0.9\textwidth}
+
+\usepackage{array,graphicx}
+\usepackage{booktabs}
+\usepackage{pifont}
+
+\newcommand*\rot{\rotatebox{75}}
+\newcommand*\OK{\ding{51}}
+\newcommand*\rotvert{\rotatebox{90}}
+
+
+
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+
+\listoffigures
+\listoftables
+
+\include{introduction}
+
+
+\include{prestudy}
+
+\include{requirements}
+
+\include{alternativeSolutions}
+
+\include{desiredSolution}
+screenshots and description of mockups?
+use case video?
+
+\include{projectManagement}
+
+\include{developmentEnvironment}
+
+
+\include{systemDesign}
+
+
+\include{testStrategy}
+
+\chapter{Evaluation of Solution}
+evaluate according to functional requirements.
+Evaluate according to senior usability guidelines form pre-study??
+
+\chapter{Future Improvements}
+
+\include{lessons}
+
+\chapter{Conclusion}
+
+\chapter{References}
+
+\include{appendix}
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

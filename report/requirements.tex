@@ -1,0 +1,352 @@
+\chapter{Requirements}
+
+
+\section{Use Cases}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase1}
+\caption{Use case 1}
+    \label{fig:UC1}
+    \end{figure}
+
+\begin{table}[H]
+% See definition at beginning of main.
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 1 & User registration  \\ 
+ \hline
+ Actors & Customer, user \\ 
+ \hline
+ Stakeholders & Customers, developers users \\ 
+  \hline
+ Primary actor & user  \\ 
+ \hline
+ Pre-conditions & System is up and running \\ 
+ \hline
+ Post-conditions & The user has registered a profile and is logged in \\ 
+  \hline
+ Triggers & User visits the website and clicks to register \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item User enters the webpage.
+  \item User navigates mouse to register button and clicks
+  \item User fills in user information and submits the data
+  \item The user has now created a profile and is logged in
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & User now has a profile registered and can use it to log in in the future \\ 
+ \hline
+ Alternative paths & 3a. User fails to register\\
+ \hline
+\end{tabular}
+\caption{Use Case 1}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase2}
+\caption{Use case 2}
+    \label{fig:UC2}
+    \end{figure}
+
+\begin{table}[H]
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 2 & User log in  \\ 
+ \hline
+ Actors & Customer, user \\ 
+ \hline
+ Stakeholders & Customer, developers, user \\ 
+  \hline
+ Primary actor & User  \\ 
+ \hline
+ Pre-conditions & User has a registered a profile \\ 
+ \hline
+ Post-conditions & User has successfully logged in \\ 
+  \hline
+ Triggers & User clicks on the login button on the website  \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item User enters the webpage.
+  \item User navigates mouse to log in button and clicks
+  \item User fills in user information and clicks login
+  \item The user has now logged in
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & User is now logged in and can use the service as a registered user \\ 
+ \hline
+ Alternative paths & 3a. The login fails\\
+ \hline
+\end{tabular}
+\caption{Use Case 2}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase3}
+\caption{Use case 3}
+    \label{fig:UC3}
+    \end{figure}
+
+\begin{table}[H]
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 3 & User invites friend to self-created event  \\ 
+ \hline
+ Actors & Customer, user, other users \\ 
+ \hline
+ Stakeholders & Customer, developers, user, other users \\ 
+  \hline
+ Primary actor & User  \\ 
+ \hline
+ Pre-conditions & User is logged in and ready to create event \\ 
+ \hline
+ Post-conditions & User created an event and invited friends to it \\ 
+  \hline
+ Triggers & A button to create event is clicked after all the necessary information is submitted  \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item Click create new event button
+  \item The user fills in relevant information for the event and clicks create
+  \item The user searches for friends in their friends list and invites friends to his newly created event
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & An event is successfully created and friends are invited to it \\ 
+ \hline
+ Alternative paths & 2a. The user fails to register the event.
+3a. The user does not manage to invite any friends.\\
+ \hline
+\end{tabular}
+\caption{Use Case 3}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase4}
+\caption{Use case 4}
+    \label{fig:UC4}
+    \end{figure}
+
+\begin{table}[H]
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 4 & User downloads the app  \\ 
+ \hline
+ Actors & Customer, user \\ 
+ \hline
+ Stakeholders & Customer, developers, user \\ 
+  \hline
+ Primary actor & User  \\ 
+ \hline
+ Pre-conditions & User has a smart phone/tablet \\ 
+ \hline
+ Post-conditions & User successfully downloaded the app \\ 
+  \hline
+ Triggers & The user navigates to the “download app” page and follows the link to their preferred app store.  \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item User is on the web page and clicks the download app tab
+  \item The user navigates to the preferred app store from the links provided
+  \item Downloads the app
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & The app is downloaded to the user’s device \\ 
+ \hline
+ Alternative paths & 2a. The app store is down or not available \\
+ & 3a. The user is unable to download the app\\
+ \hline
+\end{tabular}
+\caption{Use Case 4}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase5}
+\caption{Use case 5}
+    \label{fig:UC5}
+    \end{figure}
+
+\begin{table}[H]
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 5 & User creates event  \\ 
+ \hline
+ Actors & Customer, user \\ 
+ \hline
+ Stakeholders & Customer, developers, user \\ 
+  \hline
+ Primary actor & User  \\ 
+ \hline
+ Pre-conditions & User is logged in \\ 
+ \hline
+ Post-conditions & User created event \\ 
+  \hline
+ Triggers & The user clicks create event button  \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item User is on the web page and is logged in and navigates to the dashboard
+  \item User clicks the create event button 
+  \item User fills in information about the event and clicks submit
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & The user has successfully created a new event. \\ 
+ \hline
+ Alternative paths & 3a. User fails to create event\\
+ \hline
+\end{tabular}
+\caption{Use Case 5}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.75\textwidth]{Figures/UseCase6}
+\caption{Use case 6}
+    \label{fig:UC6}
+    \end{figure}
+
+\begin{table}[H]
+\begin{tabular}{ | L{0.25\linewidth} | L{0.75\linewidth} | } 
+ \hline \rowcolor{lightgray}
+ Use case 6 & User adds friend to network  \\ 
+ \hline
+ Actors & Customer, user \\ 
+ \hline
+ Stakeholders & Customer, developers, user \\ 
+  \hline
+ Primary actor & User  \\ 
+ \hline
+ Pre-conditions & User is logged in \\ 
+ \hline
+ Post-conditions & User added friend to their network \\ 
+  \hline
+ Triggers & The user clicks search for other users button  \\ 
+ \hline
+Flow & \begin{minipage}{5in}
+    \vskip 1pt
+    \begin{enumerate}
+  \item User in on the web page and navigates to the search bar
+  \item User clicks the search to initiate the search
+  \item User finds the person it wants to add and clicks add to friends list
+   \end{enumerate}
+   \vskip 4pt
+ \end{minipage}\\ 
+ \hline
+ Main success scenarios & The user has successfully added a person to their network \\ 
+ \hline
+ Alternative paths & 3a. User fails to add contact to their friends list\\
+ \hline
+\end{tabular}
+\caption{Use Case 6}
+\end{table}
+
+
+\section{Functional Requirements}
+Based on the use cases, we settled on the following functional requirements: 
+\begin{center}
+\begin{table}[H]
+    \centering
+\begin{tabular}{ |C{0.05\linewidth}|C{0.1\linewidth}|C{0.15\linewidth}|L{0.7\linewidth}| } 
+ \hline \rowcolor{lightgray}
+ \multicolumn{4}{|c|}{Functional Requirements} \\
+ \hline
+ No. & Priority & Use case no. & Description \\
+ \hline
+ F1 & P1 & UC1 & Register user profile \\ 
+ \hline
+ F2 & P1 & UC2 & Registered user should be able to login \\ 
+  \hline
+ F3 & P3 & UCX & Registered user should be able to edit their profile \\
+  \hline
+ F4 & P1 & UC3 & Registered user can create event \\
+  \hline
+ F5 & P1 & UC3 & Registered user can search for events. \\
+  \hline
+ F6 & P1 & UC3 & Registered user can invite friends to event \\
+  \hline
+ F7 & P1 & UCX & Registered user can join others events \\
+  \hline
+ F8 & P2 & UCX & Non-registered user can view public events \\
+  \hline
+ F9 & P2 & UCX & Registered user can view their fitness information in his/her profile page \\
+  \hline
+ F10 & P2 & UC5  & Registered user can manually add their activities \\
+  \hline
+ F11 & P1 & UC3  & Registered user can search for and view other users’ profiles \\
+  \hline
+ F12 & P2 & UC3  & Registered user can view friend list \\
+  \hline
+ F13 & P2 & UCX  & Registered user can add/delete friends from friend list \\
+  \hline
+ F14 & P3 & UCX  & Registered users can instant message other users \\
+  \hline
+ F15 & P1 & UC4  & All users should be able to download the app from the website \\
+  \hline
+ F16 & P3 & UCX  & All users should be able to view different exercises on the web page \\
+  \hline
+ F17 & P3 & UCX  & All users should be able to take a simple fitness test on the web site (created by us or takes you to a different web site?) \\
+  \hline
+ F18 & P2 & UCX  & Registered users should get updates from other users in a news feed \\
+  \hline
+ F19 & P2 & UCX  & All users should be able to get basic information about fall risk \\
+ \hline
+\end{tabular}
+\caption{Functional Requirements}
+ \label{table:funcReq}
+\end{table}
+\end{center}
+
+
+\section{Non-Functional Requirements}
+
+\begin{table} [H]\centering
+    \begin{tabular}{ |C{0.05\linewidth}|C{0.15\linewidth}|L{0.7\linewidth}| } 
+ \hline \rowcolor{lightgray}
+ \multicolumn{3}{|c|}{Non-Functional Requirements} \\
+ \hline
+ No. & Name & Description \\
+ \hline
+ NF1 & Usability & As the service is designed with the elderly in mind, simple and easily understandable interfaces is a must \\ 
+ \hline
+ NF2 & Security & Secure personal data like username, password, email and fitness information \\ 
+  \hline
+ NF3 & Accessibility & The users should be able to access the system \\
+  \hline
+ NF4 & Availability & The system is up and running at all times \\
+  \hline
+ NF5 & Maintainability & Clean and concise code that can be maintained and extended easily if needed. \\
+  \hline
+ NF6 & Performance & The system must be fast and responsive \\
+ 
+ \hline
+\end{tabular}
+\caption{Non-Functional Requirements}
+\end{table}
+
+\section{Changes in Requirements(Change Order}
+\subsection{Additions}
+\subsection{Removals}
+Skille mellom events/exercises og activities, kalle homepage for dashboard, skrive om dette i changing requirements.
+Add admin view where admins can create exercises, add tags, create user accounts
+
+\section{Requirements Evaluation??}
