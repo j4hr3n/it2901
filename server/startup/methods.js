@@ -274,6 +274,13 @@ Meteor.methods({
 
 	'addExercisetoUser' : (userId, exId) => {
 			user = Meteor.users.findOne({ _id: userId });
+			ex = user.profile.exercises;
+			for(var i = 0; i < ex.length; i++){
+				console.log("exId: ", exId , "loopedId: ", ex[i]._id);
+				if(ex[i]._id == exId){
+					return
+				}
+			}
 			Meteor.users.update({ _id : userId}, 
 				{$push : { "profile.exercises" : { '_id' : exId}}});
 			
