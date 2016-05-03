@@ -38,7 +38,7 @@ function registerCtrl($scope, $reactive, $state) {
   }
 
   this.user = {  // This is converted into an order-sensitive argument list
-    'username': Math.random().toString(36).substring(7),
+    'username': '', //Math.random().toString(36).substring(7),
     'password': '',
     'email': '',
     'profilePicture' : '',
