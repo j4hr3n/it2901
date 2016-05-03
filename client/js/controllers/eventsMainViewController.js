@@ -1,8 +1,8 @@
 angular
 .module('it2901')
-.controller('egneAktiviteterCtrl', egneAktiviteterCtrl);
+.controller('eventsMainViewCtrl', eventsMainViewCtrl);
 
-function egneAktiviteterCtrl($scope, $reactive) {
+function eventsMainViewCtrl($scope, $reactive) {
 
     $reactive(this).attach($scope);
 

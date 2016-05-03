@@ -1,5 +1,5 @@
 
-<div class="ui container myEvents" ng-controller="egneAktiviteterCtrl as evOC">
+<div class="ui container myEvents" ng-controller="eventsMainViewCtrl as evOC">
 
   <div class="row">
     <div class="ui two column grid">
@@ -14,7 +14,7 @@
           <div class="item" ng-repeat="event in evOC.userEvents">
             <i class="calendar icon"></i>
             <div class="content">
-              <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
+              <a class=" header" ui-sref="eventsMainView.eventDetails({ eventId: event._id })"> {{ event.name }} </a>
               <button title="Klikk for å slette aktiviteten" class="remove event button" ng-click="evOC.removeEvent(event._id)"><i class="remove circle icon"></i></button>
               <div class="description">
         

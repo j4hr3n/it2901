@@ -3,7 +3,7 @@
   <div class="item" ng-repeat="event in evList.events | limitTo:quantity">
     <i class="calendar icon"></i>
     <div class="content">
-      <a class=" header" ui-sref="egneAktiviteter.eventDetails({ eventId: event.eventId })"> {{ event.eventName }} </a>
+      <a class=" header" ui-sref="eventsMainView.eventDetails({ eventId: event.eventId })"> {{ event.eventName }} </a>
       <div class="description">   
         <p>{{ event.date | date}} kl 12.00</p>
         <p>{{ event.location }}</p>
@@ -14,7 +14,7 @@
 
 <div class="ui compact menu">
 
-    <a ui-sref="egneAktiviteter" class="ui blue item">
+    <a ui-sref="eventsMainView" class="ui blue item">
         Se alle
         <div class="floating ui red circular label" ng-model="evList.eventNotification">
           {{ evList.eventNotification }}
@@ -24,7 +24,7 @@
   </div>
 
 <!--
-<button ui-sref="egneAktiviteter" class="ui medium blue button ">Se alle</button>
+<button ui-sref="eventsMainView" class="ui medium blue button ">Se alle</button>
 <event-editor></event-editor>
 -->
 

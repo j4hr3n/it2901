@@ -17,10 +17,10 @@
 		  			<div ng-show="post.showDesc">&laquo;<i>{{ post.description }}</i>&raquo;</div>
 		  		</div>
 		  		<div class="summary" ng-switch-when="newEvent">
-		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har laget en ny aktivitet: <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har laget en ny aktivitet: <a class="header" ui-sref="eventsMainView.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
 		  		</div>
 		  		<div class="summary" ng-switch-when="joinedEvent">
-		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har blitt med i aktiviteten <a class="header" ui-sref="egneAktiviteter.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
+		  			<a class="header" ui-sref="publicProfile({ username: post.ownerLink })">{{ post.owner }}</a> har blitt med i aktiviteten <a class="header" ui-sref="eventsMainView.eventDetails({ eventId: post.event._id })">{{ post.event.name }}</a>
 		  		</div>
 	  		</div>
 	  	</div>

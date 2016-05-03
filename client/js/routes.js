@@ -57,9 +57,9 @@ function config($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('activities', {
-    url: '/activities',
-    templateUrl: 'client/templates/activities.html',
+  .state('exercises', {
+    url: '/øvelser',
+    templateUrl: 'client/templates/exercises.html',
     controller: 'exerciseCtrl',
     resolve: {
       currentUser($q) {
@@ -74,8 +74,8 @@ function config($stateProvider, $urlRouterProvider) {
 
 
   //Balanse route
-  .state('balanse', {
-    url: '/activities/balanse',
+  .state('exercises.balance', {
+    url: '/balanse',
     templateUrl: 'client/templates/balanse.html',
     resolve: {
       currentUser($q) {
@@ -89,8 +89,8 @@ function config($stateProvider, $urlRouterProvider) {
   })
 
   //Styrke route
-  .state('styrke', {
-    url: '/activities/styrke',
+  .state('exercises.strength', {
+    url: '/styrke',
     templateUrl: 'client/templates/styrke.html',
     resolve: {
       currentUser($q) {
@@ -104,8 +104,8 @@ function config($stateProvider, $urlRouterProvider) {
   })
 
   //Fleksibilitet route
-  .state('fleksibilitet', {
-    url: '/activities/fleksibilitet',
+  .state('exercises.flexibility', {
+    url: '/fleksibilitet',
     templateUrl: 'client/templates/fleksibilitet.html',
     resolve: {
       currentUser($q) {
@@ -133,10 +133,10 @@ function config($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('egneAktiviteter', {
+  .state('eventsMainView', {
       url: '/mineAktiviteter',
-      templateUrl: 'client/templates/egneAktiviteter.html',
-      controller: 'egneAktiviteterCtrl',
+      templateUrl: 'client/templates/eventsMainView.html',
+      controller: 'eventsMainViewCtrl',
       resolve: {
         currentUser($q) {
           if (Meteor.userId() == null) {
@@ -147,7 +147,7 @@ function config($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('egneAktiviteter.eventDetails', {
+    .state('eventsMainView.eventDetails', {
       url: '/:eventId',
       templateUrl: 'client/templates/eventDetails.html',
       controller: 'eventDetailsCtrl',
