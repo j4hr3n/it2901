@@ -14,6 +14,7 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
+          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -32,6 +33,7 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
+          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -50,6 +52,7 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
+          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
