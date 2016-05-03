@@ -124,7 +124,7 @@ function egneAktiviteterCtrl($scope, $reactive) {
         theEvent = Events.findOne({_id : eventId})
         console.log("eventowner: " + theEvent.owner);
         console.log("userId: " + Meteor.userId());
-        if (Meteor.userId() == theEvent.owner){
+        if (Meteor.user().username == theEvent.createdBy){
           Meteor.call('deleteEvent', eventId, function(err, result){
             if (!err){
               swal("Deleted", "The event is now deleted", "success")
