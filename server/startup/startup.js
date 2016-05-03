@@ -14,7 +14,6 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -33,7 +32,6 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -52,7 +50,6 @@ Meteor.startup(function () {
           'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
           'friends': [],
           'events' : [],
-          'exercises' : [],
           'notifications' : {
             'friendRequests' : [],
             'activities' : []
@@ -67,7 +64,7 @@ Meteor.startup(function () {
       Accounts.createUser(users[i]);
     }
   }
-
+  
   Events.remove({});
   if(Events.find().count() === 0){
     var events = [
@@ -97,9 +94,9 @@ Meteor.startup(function () {
 
     for (i = 0; i < events.length; i++) {
       newEvent = events[i];
-
-      Meteor.call('createNewEvent', newEvent.createdBy, newEvent.name, newEvent.description,
-        newEvent.date, newEvent.location, newEvent.participants, newEvent.type,
+      
+      Meteor.call('createNewEvent', newEvent.createdBy, newEvent.name, newEvent.description, 
+        newEvent.date, newEvent.location, newEvent.participants, newEvent.type, 
         newEvent.exercises, newEvent.public);
     }
   }
@@ -202,3 +199,4 @@ Meteor.startup(function () {
 
   Meteor.publish("events", () => { return Events.find({})});
 });
+Meteor.publish("exercises", () => {return Exercises.find({})});
