@@ -3,7 +3,7 @@ angular
   .controller('dashboardCtrl', dashboardCtrl);
 
 
-function dashboardCtrl($scope, $reactive) {
+function dashboardCtrl($scope, $reactive, $state) {
 
 $reactive(this).attach($scope);
 
@@ -11,40 +11,43 @@ this.subscribe('exercises');
 
   this.helpers({
     user: () => {
-      return Meteor.user() || Meteor.users.findOne({});
-                        // ^ Debug
+      if (Meteor.user()) {
+        return Meteor.user();
+
+      } else {
+        $state.go("home");
+        //throw new Meteor.Error(403, "[Dashboard] Not logged in.");
+        //return null;
+      }
+
     },
+   
     contacts: () => {
       return Meteor.users.find({}, {'username':1});
     },
 
     friends: () => {
-      user =  Meteor.user();
-      return user.profile.friends;
-
+      return Meteor.user().profile.friends;
     },
    
     notifications: () => {
-      user =  Meteor.user();
-      return user.profile.nameFirst;
-
+      return Meteor.user().profile.nameFirst;
       //user.profile.notifications.friendRequest.info.length
     },
 
     messages: () => {
-      user = Meteor.user();
-      return user.profile.messages;
+      return Meteor.user().profile.messages;
     }, 
 
     exercises: () => {
        exIds = Meteor.user().profile.exercises;
-       console.log("exLen: ", exIds); 
+       //console.log("exLen: ", exIds); 
        display = [];
 
        for(var i = 0; i < exIds.length; i++){
 
            var oid = exIds[i]._id;
-           console.log("foundId: " , oid);
+           //console.log("foundId: " , oid);
          // var ex = Exercises.find(oid);
            var ex = Exercises.findOne({_id : oid});
           //var ex = Exercises.find({ _id : oid})
@@ -52,19 +55,18 @@ this.subscribe('exercises');
           //console.log('allExercisesfromDB: ', Exercises.find({}));
 
           //ex = Exercises.findOne({exIds[i]._id});
-          console.log('ex: ', ex);
+          //console.log('ex: ', ex);
           display.push(ex);
 
        }
-       console.log('dispaly: ', display);
+       //console.log('dispaly: ', display);
        return display;
     }
 
   });
 
   $scope.eventNotification = function(){
-    user = Meteor.user();
-    return user.profile.events.length
+    return Meteor.user().profile.events.length
   }
 
 
@@ -151,7 +153,6 @@ this.subscribe('exercises');
   };
 
   //Edit profile view
-  console.log(this.user.profile.namefirst + "hello");
   $scope.editing = false;
   $scope.removeEdit =false;
   $scope.editProfile = "save";
@@ -189,11 +190,9 @@ this.subscribe('exercises');
     $scope.switchProfile();
   }
 
-
 // Fitness score
 
   var friendList = []
-
 
   function isFriend(userId){
     friendObject = Meteor.user().profile.friends

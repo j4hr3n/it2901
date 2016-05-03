@@ -16,7 +16,9 @@
 
     <a ui-sref="egneAktiviteter" class="ui blue item">
         Se alle
-        <div class="floating ui red circular label" ng-model="eventNotification">{{eventNotification()}}</div>
+        <div class="floating ui red circular label" ng-model="evList.eventNotification">
+          {{ evList.eventNotification }}
+        </div>
       </a>
      <event-editor></event-editor>
   </div>

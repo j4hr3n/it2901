@@ -51,7 +51,7 @@ function eventEditorCtrl($scope, $reactive) {
                 +$scope.eventToEdit+"'.");
         }
 
-        if (Meteor.user().username != this.newEvent.createdBy && Meteor.user().admin != 1) 
+        if (Meteor.user().username != this.newEvent.createdBy && !Meteor.user().isAdmin)
             throw new Meteor.Error(403, "[Event-editor] No permission to edit event.");
 
         this.newEvent.participants = this.newEvent.participants.map((part) => {

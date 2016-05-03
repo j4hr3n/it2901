@@ -33,9 +33,7 @@ function config($stateProvider, $urlRouterProvider) {
       templateUrl: 'client/templates/profile.html',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) {
-
-
+          if (Meteor.userId() == null) {
             return $q.reject('AUTH_REQUIRED');
           } else {
             return $q.resolve();
@@ -50,7 +48,7 @@ function config($stateProvider, $urlRouterProvider) {
     controller: 'adminCtrl',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null || !Meteor.user().isAdmin) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -65,7 +63,7 @@ function config($stateProvider, $urlRouterProvider) {
     controller: 'exerciseCtrl',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -81,7 +79,7 @@ function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'client/templates/balanse.html',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -96,7 +94,7 @@ function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'client/templates/styrke.html',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -111,7 +109,7 @@ function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'client/templates/fleksibilitet.html',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -126,7 +124,7 @@ function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'client/templates/dashboard.html',
     resolve: {
       currentUser($q) {
-        if (Meteor.userId() === null) {
+        if (Meteor.userId() == null) {
           return $q.reject('AUTH_REQUIRED');
         } else {
           return $q.resolve();
@@ -141,7 +139,7 @@ function config($stateProvider, $urlRouterProvider) {
       controller: 'egneAktiviteterCtrl',
       resolve: {
         currentUser($q) {
-          if (Meteor.userId() === null) {
+          if (Meteor.userId() == null) {
             return $q.reject('AUTH_REQUIRED');
           } else {
             return $q.resolve();

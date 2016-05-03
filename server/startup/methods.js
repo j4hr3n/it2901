@@ -27,6 +27,8 @@ Meteor.methods({
 		};
 
 		Accounts.createUser(this.user);
+
+		console.log("Created new user: '"+ this.user.username +"'")
 	},
 
 	'updateEvent' : function(eventID, ownerUsername, name, description, date, 
@@ -42,7 +44,7 @@ Meteor.methods({
 			throw new Meteor.Error(404, "The field 'name' is required.");
 		}
 		if (Meteor.isClient && owner != Meteor.user()
-			&& Meteor.user().admin != 1) {
+			&& !Meteor.user().isAdmin) {
 			throw new Meteor.Error(403, "No permission to edit another's event.");
 		}
 
@@ -91,8 +93,8 @@ Meteor.methods({
 
 	'updatePersonalData' : function(userID, newData){
 		//console.log(UserID);
+		console.log('[updatePersonalData] Hello');
 		console.log(newData);
-		console.log('Hello');
 		Meteor.users.update({_id : userID}, {$set : { "profile.personalData" : newData}})
 	},
 
@@ -104,7 +106,7 @@ Meteor.methods({
 
         var ev = Events.findOne(eventId);
         var test = Events.update({_id : eventId, "participants" : { $elemMatch : { "username" : Meteor.user().username} } }, { $set : { "participants.$.attending" : GOING}});
-        console.log("test: " + test);
+        console.log("[AcceptEvent] test: " + test);
 
         Meteor.call("createNewsPost", Meteor.userId(), 
         	{ "joinedEvent":	{ eventID: eventId} });
@@ -143,7 +145,7 @@ Meteor.methods({
 	},
 
 	'updateEventParticipants': (eventID, newParticipants, resetAttendees=true) => {
-		console.log("'updateEventParticipants' called with "+eventID+" and "+newParticipants)
+		//console.log("'updateEventParticipants' called with "+eventID+" and "+newParticipants)
 
 		uEvent = Events.findOne({ _id: eventID });
 
@@ -158,7 +160,7 @@ Meteor.methods({
 			
 			existingAttends[attUsername] = uEvent.participants[i].attending;
 
-			console.log("pulling "+ attUsername+ " from "+uEvent.name)
+			//console.log("pulling "+ attUsername+ " from "+uEvent.name)
 			Meteor.users.update({ username : attUsername}, 
 				{$pull : { "profile.events" : { "eventId" : eventID}}})
 		}
@@ -176,7 +178,7 @@ Meteor.methods({
 		    	attending = existingAttends[uEvent.createdBy];
 		    else {
 		    	attending = (participant == uEvent.createdBy) ? GOING : DEFAULT;
-		    	console.log("[participants] OwnerComparison: "+participant+" == "+uEvent.createdBy)
+		    	//console.log("[participants] OwnerComparison: "+participant+" == "+uEvent.createdBy)
 		    }
 	    	
 	    	newParticipants_formatted.push(
@@ -195,17 +197,17 @@ Meteor.methods({
 				}
 			);
 
-	    	console.log("[participants] "+ uEvent.name +": username: "+  participant
-	    		+ " attending: "+ attending +" WR: "+ wr);
-	    	console.log(Meteor.users.findOne({username:participant}).profile.events);
+	    	//console.log("[participants] "+ uEvent.name +": username: "+  participant
+	    	//	+ " attending: "+ attending +" WR: "+ wr);
+	    	//console.log(Meteor.users.findOne({username:participant}).profile.events);
         })
         
         Events.update({ _id: eventID },
         	{$set: 
         		{ participants: newParticipants_formatted }
         	});
-        console.log("[participants] Final result of Event:")
-	    console.log(Events.findOne({_id: uEvent._id}).participants)
+        //console.log("[participants] Final result of Event:")
+	    //console.log(Events.findOne({_id: uEvent._id}).participants)
 	},
 
 	'createNewEvent' : function(ownerUsername, name="", description="", date=null, 
@@ -220,7 +222,7 @@ Meteor.methods({
 			throw new Meteor.Error(404, "The field 'name' is required.");
 		}
 		if (Meteor.isClient && owner != Meteor.user()
-			&& Meteor.user().admin != 1) {
+			&& !Meteor.user().isAdmin) {
 			throw new Meteor.Error(403, "No permission to create event for others.");
 		}
 
@@ -237,6 +239,7 @@ Meteor.methods({
 	    }
 	    
         var ev_id = Events.insert(newEvent);
+        console.log("Created new Event: '"+ newEvent.name +"'")
 
         Meteor.call("updateEventParticipants", ev_id, participants, true, 
         	(err) => { 
@@ -246,7 +249,8 @@ Meteor.methods({
         	}}
         );
 
-        Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} });
+        Meteor.call("createNewsPost", owner._id, { "newEvent":	{ eventID: ev_id} }, 
+        	newEvent.public);
 /*
 	    participants = [];
 	    for (var i = 0; i < newEvent.participants.length; i++) {
@@ -342,13 +346,22 @@ Meteor.methods({
 
 		NewsPosts.insert(newsPost_new);
 
+		console.log("Created new NewsPost ("+ newsPost_new.type +")");
 	},
 
-	'createExercise' : function(exercise) {
-
+	'createNewExercise' : function(owner, name, description, types, url) {
+		exercise = {
+			owner: owner,
+			name: name,
+			description: description,
+			types: types,
+			url: url
+		}
 		var ex_id = Exercises.insert(exercise);
 		var t = Exercises.findOne({_id : ex_id});
-		console.log('ex:', t);
+
+		console.log("Created new Exercise: '"+ exercise.name +"'")
+		
 		//console.log('created: ', Exercises.findOne({name : exercise.name}));
 /*
 
@@ -362,7 +375,7 @@ Meteor.methods({
 			throw new Meteor.Error(404, "The field 'name' is required.");
 		}
 		if (Meteor.isClient && owner != Meteor.user()
-			&& Meteor.user().admin != 1) {
+			&& Meteor.user().isAdmin != 1) {
 			throw new Meteor.Error(403, "No permission to create exercises.");
 		}*/
 /*
@@ -453,16 +466,33 @@ Meteor.methods({
 		return "hei";
 	},
 
-	'addFriend' : function(userId, bool){
-		if ( bool == true ) {
-			theUser = Meteor.users.findOne({'_id' : userId})
-			Meteor.users.update({_id : Meteor.userId()}, { $push : { "profile.friends" : theUser }})
-			Meteor.users.update({_id : userId}, {$push : {"profile.friends" : Meteor.user()}})
-			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
-			Meteor.users.update({_id : userId}, {$pull : { "profile.notifications.friendRequests" : { '_id' : Meteor.user()}}})
+	'addFriend' : function(userId, bool, user2ID=null){
+		if (user2ID != null && user2ID != Meteor.userId()) {
+			if (Meteor.isClient && !(Meteor.user() && Meteor.user().isAdmin))
+				throw Meteor.Error(403, "No permission to edit other users")
 
-			Meteor.call("createNewsPost", Meteor.userId(), { "friendAdded":
+			user2ID = Meteor.users.findOne({'_id' : user2ID})._id
+		} else {
+			user2ID = Meteor.userId();
+		}
+
+		userId = Meteor.users.findOne({'_id' : userId})._id
+
+		if ( bool == true ) {
+
+			Meteor.users.update({_id : user2ID}, 
+				{ $push : { "profile.friends" : userId }})
+			Meteor.users.update({_id : userId}, 
+				{$push : {"profile.friends" : user2ID}})
+
+			Meteor.users.update({_id : user2ID}, 
+				{$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
+			Meteor.users.update({_id : userId}, 
+				{$pull : { "profile.notifications.friendRequests" : { '_id' : user2ID}}})
+
+			Meteor.call("createNewsPost", user2ID, { "friendAdded":
 				{ newFriendID: userId}});
+
 		} else if ( bool == false){
 			Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
 		}
@@ -478,9 +508,21 @@ Meteor.methods({
 		return friendList;
 	},
 
-	'deleteFriend' : function(userName){
-		var theUser = Meteor.users.findOne({username : userName})
-		Meteor.users.update({_id : Meteor.userId()}, { $pull : { "profile.friends" : { username : userName} }});
-		Meteor.users.update({ username : userName}, { $pull : { "profile.friends" : { username : Meteor.user().username} }});
+	'deleteFriend' : function(username) {
+		
+		var theUser = Meteor.users.findOne({username: username})
+		Meteor.users.update({_id : Meteor.userId()}, { $pull : { "profile.friends" : { username : username} }});
+		Meteor.users.update({ username : username}, { $pull : { "profile.friends" : { username : Meteor.user().username} }});
+	},
+
+	'setUserIsAdmin' : function(username, isAdmin) {
+		if (Meteor.isClient && !Meteor.user().isAdmin) {
+			throw new Meteor.Error(403, "No permission to set administrators.");
+		}
+
+		Meteor.users.update({ username: username}, { $set: {isAdmin: isAdmin}});
+
+		testuser = Meteor.users.findOne({ username: username})
+		console.log("Set "+username+" to admin("+isAdmin+")")
 	}
 })

@@ -12,11 +12,18 @@ function indexCtrl($scope, $reactive, $state, $filter) {
 
   this.helpers({
     isLoggedIn: () => {
-      return Meteor.userId() !== null;
+      return Meteor.user() != undefined;
     },
-    currentUser: () => {
-      return Meteor.user();
+
+    isAdmin: () => {
+      if (Meteor.user()) {
+        return Meteor.user().isAdmin;
+        
+      } else {
+        return false;
+      }
     },
+
     usersList: ()=> {
       //Filling in parameters does nothing :C
       return Meteor.users.find({}, {});

@@ -35,7 +35,12 @@ $('.ui.fluid.search.dropdown').dropdown({});
 
 this.subscribe('exercises');
 
-this.newExercise = {};
+this.newExercise = {
+  name: "",
+  description: "",
+  types: [],
+  url: ""
+};
 
 var displayStates = [];
 this.activate = (type) => {
@@ -54,6 +59,9 @@ this.activate = (type) => {
 }
 
 this.view = (types) => {
+  if (displayStates.length == 0)
+    return true;
+
   for (var i = 0; i < displayStates.length; i++){
     if(inneholder.call(types, displayStates[i])){
       return true
@@ -89,38 +97,39 @@ this.addExercise = () => {
 
   this.newExercise.owner = Meteor.user()._id;
    
-if(this.chosen.length > 0){
-    this.newExercise.types = this.chosen;
-}
-else{
-  this.newExercise.types = [];
-}
+  if (this.chosen.length > 0) {
+      this.newExercise.types = this.chosen;
+  }
+  else {
+    this.newExercise.types = [];
+  }
 
-  Meteor.call('createExercise', this.newExercise);
+  Meteor.call('createNewExercise', this.newExercise.owner, this.newExercise.name, 
+    this.newExercise.description, this.newExercise.types, this.newExercise.url);
     
   this.newExercise = {};
-    };
+};
 
-    this.removeExercise = (exerciseId) => {
-      Meteor.call('removeExercise', exerciseId);
-    };
+this.removeExercise = (exerciseId) => {
+  Meteor.call('removeExercise', exerciseId);
+};
 
-    this.contains = (id, type) => {
-     // console.log("id: ", id);
-     // console.log("type: ", type);
-        var ex = Exercises.findOne(id);
-       // console.log("ex: ", ex);
-        var tags = ex.types;
-       // console.log("types: ", tags);
-       for(var i = 0; i < tags.length; i++){
-          if(tags[i] == type){
-            return true;
-          }
-          else{
-            return false;
-          }
-       }
-    };
+this.contains = (id, type) => {
+ // console.log("id: ", id);
+ // console.log("type: ", type);
+    var ex = Exercises.findOne(id);
+   // console.log("ex: ", ex);
+    var tags = ex.types;
+   // console.log("types: ", tags);
+   for(var i = 0; i < tags.length; i++){
+      if(tags[i] == type){
+        return true;
+      }
+      else{
+        return false;
+      }
+   }
+};
 
 //temp kode
 var inneholder = function(needle) {

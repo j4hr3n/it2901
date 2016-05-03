@@ -1,7 +1,15 @@
 Meteor.startup(function () {
 
-  Meteor.users.remove({});
-  if (Meteor.users.find().count() === 0) {
+  var debugData = true;
+  
+  if (debugData) {
+    Exercises.remove({});
+    Events.remove({});
+    NewsPosts.remove({});
+    Meteor.users.remove({});
+  }
+
+  if (debugData) {
     var users = [
       {
         'username': 'Babs',
@@ -10,16 +18,6 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
-          //'bio': 'Test bio for babs',
-          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
-          'friends': [],
-          'events' : [],
-          'exercises' : [],
-          'notifications' : {
-            'friendRequests' : [],
-            'activities' : []
-          },
-          'messages' : [],
           'profilePicture' : 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg'
         }
       },
@@ -30,15 +28,6 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Randy',
           'nameLast': 'Savage',
-          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
-          'friends': [],
-          'events' : [],
-          'exercises' : [],
-          'notifications' : {
-            'friendRequests' : [],
-            'activities' : []
-          },
-          'messages' : [],
           'profilePicture' : '/img/kristy.png'
         }
       },
@@ -49,27 +38,21 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Per',
           'nameLast': 'Paal',
-          'personalData' : [{'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}, {'title': '', value: "69"}],
-          'friends': [],
-          'events' : [],
-          'exercises' : [],
-          'notifications' : {
-            'friendRequests' : [],
-            'activities' : []
-          },
-          'messages' : [],
           'profilePicture' : '/img/profile1.png'
         }
       }
     ];
 
     for (var i = 0; i < users.length; i++) {
-      Accounts.createUser(users[i]);
+      user = users[i];
+
+      Meteor.call('createNewUser', user.username, user.password, user.email, 
+        user.profile.profilePicture, user.profile.nameFirst, user.profile.nameLast, "")
     }
+    Meteor.call("setUserIsAdmin", "Babs", true);
   }
   
-  Events.remove({});
-  if(Events.find().count() === 0){
+  if (debugData) {
     var events = [
       {
         createdBy: "Babs",
@@ -80,7 +63,7 @@ Meteor.startup(function () {
         participants: ["Babs","theRandy"],
         type: ["Innendørs"],
         exercises: "",
-        public: "false"
+        public: false
       },
       {
         createdBy: "perp",
@@ -91,7 +74,7 @@ Meteor.startup(function () {
         participants: ["perp"],
         type: "",
         exercises: "",
-        public: "true"
+        public: true
       }
     ];
 
@@ -104,102 +87,83 @@ Meteor.startup(function () {
     }
   }
 
-  NewsPosts.remove({});
-  if (NewsPosts.find().count() < 3) {
-    /*var posts = [
-      {
-        "public": true,
-        info: { "friendAdded": {
-          newFriendID: Meteor.users.findOne()._id }
-        },
-        ownerID: Meteor.users.findOne({username: "perp"})._id,
-        "public": true,
-      },
-      {
-        info: { "newEvent": {
-          eventID: Events.findOne()._id }
-        },
-        ownerID: Meteor.users.findOne({username: "Babs"})._id,
-        "public": true,
-      },
-      {
-        info: { "joinedEvent": {
-          eventID: Events.findOne()._id }
-        },
-        ownerID: Meteor.users.findOne({username: "theRandy"})._id,
-        "public": true,
-      },
-      {
-        info: { userPost: {
-          title: "Bilder fra bærturen",
-          description: "Kom nettopp hjem fra turen til Bloksberg!" }
-        },
-        ownerID: Meteor.users.findOne({username: "theRandy"})._id,
-        "public": true,
-      }
-    ];*/
-    Meteor.call('createNewsPost', Meteor.users.findOne({username: "perp"})._id,
-      { "friendAdded": {
-          newFriendID: Meteor.users.findOne()._id }
-        }, true);
-    Meteor.call('createNewsPost', Meteor.users.findOne({username: "Babs"})._id,
-      { "newEvent": {
-          eventID: Events.findOne({})._id }
-        }, true);
+  if (debugData) {
+    
+    Meteor.call('addFriend', 
+      Meteor.users.findOne({username: "perp"})._id, true,
+      Meteor.users.findOne({username: "Babs"})._id)
+
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
       { "joinedEvent": {
           eventID: Events.findOne({})._id }
-        }, true);
+        }, false);
+
+    Meteor.call('addFriend', 
+      Meteor.users.findOne({username: "theRandy"})._id, true,
+      Meteor.users.findOne({username: "perp"})._id)
+
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
       { "userPost": {
           title: "Bilder fra bærturen",
           description: "Kom nettopp hjem fra turen til Bloksberg!" }
         }, true);
+  }
 
-    /*for (post in posts) {
-      Meteor.call('createNewsPost', post.ownerID, post.info, post.public);/*,
-        (error) => {
-          if (error)
-            throw new Meteor.Error(404, "failed to insert number "+i+" ("+error+")")
-        });
-    }*/
+  if (debugData) {
+    Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
+      "Fremoverlent knehasetøy", "Bøy deg fremover", ["Fleksibilitet"], "google.com")
+
+    Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
+      "Biceps repetisjoner", "Løft noe tungt", ["Styrke"], "google.com")
+
+    Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
+      "Balanseøvelse", "Plasser en pute på gulvet. Gå i en ring rundt den", 
+      ["Balanse"], "google.com")
   }
 
   Meteor.publish("newsfeedPosts", function (options) {
-    //if (this.userId) {
+
+    if (!this.userId) {
+      return null 
+    } else {
       selector = {
         $or: [
           { $and: [
               { ownerID: {$exists: true}},
               { $or: [
-                { ownerID: this.userId}
-                //{ ownerID: { $in: Meteor.users.findOne(this.userId).profile.friends}}
+                { ownerID: this.userId},
+                { ownerID: { $in: 
+                    Meteor.users.findOne({_id: this.userId}).profile.friends}}
               ]}
           ]},
           { $and: [
               { "public": true},
               { "public": {$exists: true}}
-          ]},
-          { "public": {$exists: true}}
+          ]}
         ]
-      };selector = {};
+      };//selector = {};
 
       Counts.publish(this, 'numberOfNewsfeedPosts',
         NewsPosts.find(selector), {noReady: true});
 
       return NewsPosts.find(selector, options);
-
-    //} else {
-     // return null;
-   //}
+    }
   });
 
   Meteor.publish("allUsers", function () {
+    // "By default, the current user's username, emails and profile are
+    // published to the client." http://docs.meteor.com/#/ffull/meteor_users
     return Meteor.users.find({}, {'profile': 1, 'username': 1});
   });
-  // "By default, the current user's username, emails and profile are
-  // published to the client." http://docs.meteor.com/#/ffull/meteor_users
-
   Meteor.publish("events", () => { return Events.find({})});
+  Meteor.publish("exercises", () => {return Exercises.find({})});
+
+  Accounts.onCreateUser(function(options, user) { 
+    user.isAdmin = false;
+    // Override of onCreateUser, which normally copies over options.profile to user.profile
+    if (options.profile)
+      user.profile = options.profile;
+
+    return user;
+  });
 });
-Meteor.publish("exercises", () => {return Exercises.find({})});

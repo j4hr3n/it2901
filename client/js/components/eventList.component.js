@@ -17,19 +17,19 @@ $scope.quantity = 3;
   this.subscribe('events');
 
   this.helpers({
-      events: () => {
-        var user =  Meteor.user();
+    events: () => {
+      var user =  Meteor.user();
 
-        if (user) {
-          return user.profile.events;
+      if (user) {
+        return user.profile.events;
 
-        } else {
-          return null;
-        }
-     }, 
-     eventNotification: function(){
-      user = Meteor.user();
-      return user.profile.events.length
+      } else {
+        return null;
+      }
+    }, 
+
+    eventNotification: () => {
+      return Meteor.user().profile.events.length
     } 
   });
 
