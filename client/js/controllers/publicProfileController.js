@@ -6,14 +6,47 @@ function userProfile($scope, $reactive, $stateParams) {
   $reactive(this).attach($scope);
 
   $scope.username = $stateParams.username;
+  
 
   this.helpers({
     checkUser: () => {
       return "hello";
+    },
+
+    isLoggedIn: () => {
+      return Meteor.user() != undefined;
+    },
+
+    hello: () => {
+      return true;
     }
   });
 
   $scope.user;
+
+
+var friendList = []
+  $scope.isFriend = function(){
+    friendObject = Meteor.user().profile.friends
+    for (var i = 0; i < friendObject.length; i++) {
+      friendList.push(friendObject[i].username)
+    };
+
+    if (friendList.indexOf($scope.username) < 0){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  
+  $scope.inviteFriend = function(){
+    theUser = Meteor.users.findOne({'username' : $scope.username})
+    Meteor.call('inviteFriend', theUser)
+    swal("Invitation sent", "An invitation has been sent", "success")
+  }
+
+
 
   $scope.profilePicture = function(){
   	var theUser = Meteor.users.findOne({ username : $scope.username })
