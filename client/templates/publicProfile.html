@@ -1,4 +1,4 @@
-<div class="ui container" ng-controller="publicProfileCtrl as ppc">
+<div class="ui container" ng-controller="publicProfileCtrl as ppc" style="text-align: center; margin-top: 10px">
 	<div ng-if="world()">
 		This is a public profile for: <b> {{ user }}</b><br/>
 		<img ng-src="{{ profilePicture() }}" style="width: 20%; height: 20%; margin-top: 10px">
@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div ng-if="world() == false">
-		<b style="color: red">There is no such user</b><br/>
+		<h1 style="margin-top: 100px"><b style="color: red">There is no such user</b></h1><br/>
 	</div>
 </div>
 
