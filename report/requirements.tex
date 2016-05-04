@@ -28,16 +28,14 @@
   \hline
  Triggers & User visits the website and clicks to register \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow &
+\vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item User enters the webpage.
   \item User navigates mouse to register button and clicks
   \item User fills in user information and submits the data
   \item The user has now created a profile and is logged in
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & User now has a profile registered and can use it to log in in the future \\ 
  \hline
@@ -71,16 +69,14 @@ Flow & \begin{minipage}{5in}
   \hline
  Triggers & User clicks on the login button on the website  \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow & 
+    \vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item User enters the webpage.
   \item User navigates mouse to log in button and clicks
   \item User fills in user information and clicks login
   \item The user has now logged in
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & User is now logged in and can use the service as a registered user \\ 
  \hline
@@ -114,15 +110,13 @@ Flow & \begin{minipage}{5in}
   \hline
  Triggers & A button to create event is clicked after all the necessary information is submitted  \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow & 
+    \vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item Click create new event button
   \item The user fills in relevant information for the event and clicks create
   \item The user searches for friends in their friends list and invites friends to his newly created event
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & An event is successfully created and friends are invited to it \\ 
  \hline
@@ -157,15 +151,13 @@ Flow & \begin{minipage}{5in}
   \hline
  Triggers & The user navigates to the “download app” page and follows the link to their preferred app store.  \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow & 
+   \vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item User is on the web page and clicks the download app tab
   \item The user navigates to the preferred app store from the links provided
   \item Downloads the app
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & The app is downloaded to the user’s device \\ 
  \hline
@@ -200,15 +192,13 @@ Flow & \begin{minipage}{5in}
   \hline
  Triggers & The user clicks create event button  \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow & 
+    \vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item User is on the web page and is logged in and navigates to the dashboard
   \item User clicks the create event button 
   \item User fills in information about the event and clicks submit
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & The user has successfully created a new event. \\ 
  \hline
@@ -220,7 +210,7 @@ Flow & \begin{minipage}{5in}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width = 0.75\textwidth]{Figures/UseCase6}
+\includegraphics[width = 0.5\textwidth]{Figures/UseCase6}
 \caption{Use case 6}
     \label{fig:UC6}
     \end{figure}
@@ -242,15 +232,13 @@ Flow & \begin{minipage}{5in}
   \hline
  Triggers & The user clicks search for other users button  \\ 
  \hline
-Flow & \begin{minipage}{5in}
-    \vskip 1pt
-    \begin{enumerate}
+Flow & 
+    \vspace{-5mm}
+    \begin{enumerate}[noitemsep]
   \item User in on the web page and navigates to the search bar
   \item User clicks the search to initiate the search
   \item User finds the person it wants to add and clicks add to friends list
-   \end{enumerate}
-   \vskip 4pt
- \end{minipage}\\ 
+   \end{enumerate}\\ 
  \hline
  Main success scenarios & The user has successfully added a person to their network \\ 
  \hline
@@ -280,7 +268,7 @@ Based on the use cases, we settled on the following functional requirements:
   \hline
  F4 & P1 & UC3 & Registered user can create event \\
   \hline
- F5 & P1 & UC3 & Registered user can search for events. \\
+ F5 & P1 & UC3 & Registered user can search for events \\
   \hline
  F6 & P1 & UC3 & Registered user can invite friends to event \\
   \hline
@@ -304,7 +292,7 @@ Based on the use cases, we settled on the following functional requirements:
   \hline
  F16 & P3 & UCX  & All users should be able to view different exercises on the web page \\
   \hline
- F17 & P3 & UCX  & All users should be able to take a simple fitness test on the web site (created by us or takes you to a different web site?) \\
+ F17 & P3 & UCX  & All users should be able to take a simple fitness test on the web site\\
   \hline
  F18 & P2 & UCX  & Registered users should get updates from other users in a news feed \\
   \hline
@@ -343,10 +331,35 @@ Based on the use cases, we settled on the following functional requirements:
 \caption{Non-Functional Requirements}
 \end{table}
 
-\section{Changes in Requirements(Change Order}
+\section{Changes in Requirements(Change Order?)}
 \subsection{Additions}
+\begin{enumerate}
+    \item Users of the system should be distinguished between administrators and non-administrators.
+    \item Administrators must be able to create user accounts
+    \item Administrators must be able to create exercises
+    \item Administrators must be able to enter personal data about users
+    \item Users must be able to select exercises and add them to their accounts
+    \item Users must be able to add exercises to events
+\end{enumerate}
+
 \subsection{Removals}
-Skille mellom events/exercises og activities, kalle homepage for dashboard, skrive om dette i changing requirements.
-Add admin view where admins can create exercises, add tags, create user accounts
+Only one functional requirement was removed halfway through the project. This was 
+\begin{enumerate}
+    \item F8: \textit{Non-registered users can view public events}
+    \begin{itemize}
+        \item[-] Replaced by public events only being visible to registered users.
+    \end{itemize}
+\end{enumerate}
+ 
+No other functional requirements were removed, but parts of the functionality in the original requirements were replaced with placeholders in the final system. This was in agreement with the customer, as the ADAPT project was not able to deliver the necessary data needed to implement the functionality. The requirements affected were: 
+\begin{enumerate}
+    \item  F9: \textit{Users can view their own fitness information.} The fitness information should have consisted of diagrams and graphs and a composite indicator displaying the general fitness based on several different parameter. Since it never became clear which parameters would form the basis for this fitness indicator, the final solution contains a placeholder fitness indicator, but no functionality is attached to this indicator. 
+    \item F17: \textit{Take a simple fitness test.} The fitness test is also a placeholder test. The parameters necessary for creating a trustworthy test were never supplied.
+    
+\end{enumerate}
+
 
 \section{Requirements Evaluation??}
+
+// Should we include a section on Requirements Evalutation?
+

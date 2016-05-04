@@ -3,6 +3,14 @@
 \usepackage{appendix}
 \usepackage[table]{xcolor}
 \usepackage{float}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+%Set section depth
+\setcounter{secnumdepth}{4}
+
 
 % This defines 3 new commands that can be used to specify explicit width of columns in tabular.
 % Usage: \begin{tabular}{L{0.2\linewidth} R{2em} C{5cm} }
@@ -11,11 +19,34 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
+\title{Stærk \\
+\large \textit{Preventing falls among elderly} \\[0.5em] IT2901 - Informatics Project II \\for Babak Farshchian at SINTEF}
 
-\title{Name of Solution \\
-\large IT2901 Informatics Project 11 \\for Babak Farshchian at SINTEF}
+\author{Name of group members}
 
-\author{Name of group members }
+\author{
+  Christoffer Jahren\\
+  \texttt{christcj@stud.ntnu.no}
+  \and
+  Eirik Wist\\
+  \texttt{eirikwis@stud.ntnu.no}
+  \and
+  Aleksander Foosnæs\\
+  \texttt{aleksafo@stud.ntnu.no}
+  \and
+  Brang Nu\\
+  \texttt{bntong@stud.ntnu.no}
+  \and
+  Sindre Skaraas\\
+  \texttt{sindrebs@stud.ntnu.no}
+  \and
+  Sarah Svedenborg\\
+  \texttt{sarahm@stud.ntnu.no} 
+  \and
+   Emil Andersen (Group leader)\\
+  \texttt{emilsa@stud.ntnu.no} 
+}
+
 \date{April 2016}
 
 
@@ -25,6 +56,7 @@
 
 \usepackage[official]{eurosym}
 
+\usepackage{multirow}
 \usepackage{caption, subcaption}
 \captionsetup[subfigure]{width=0.9\textwidth}
 
@@ -38,8 +70,13 @@
 
 
 
-
 \begin{document}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{Figures/ntnulogo}
+    \label{fig:ntnulogo}
+\end{figure}
 
 \maketitle
 
@@ -57,13 +94,13 @@
 
 \include{prestudy}
 
+\include{envisionedSolution}
+
 \include{requirements}
 
 \include{alternativeSolutions}
 
 \include{desiredSolution}
-screenshots and description of mockups?
-use case video?
 
 \include{projectManagement}
 
@@ -75,21 +112,21 @@ use case video?
 
 \include{testStrategy}
 
-\chapter{Evaluation of Solution}
-evaluate according to functional requirements.
-Evaluate according to senior usability guidelines form pre-study??
+\include{evaluation}
 
-\chapter{Future Improvements}
+
+\include{future}
 
 \include{lessons}
 
 \chapter{Conclusion}
-
-\chapter{References}
-
-\include{appendix}
-
+//This chapter will be completed in the final version of the report
 
 \bibliographystyle{plain}
 \bibliography{references}
+
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\include{appendix}
+
 \end{document}

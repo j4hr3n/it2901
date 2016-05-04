@@ -1,10 +1,141 @@
 \chapter{Test Strategy}
+//Do we need this section?
 \section{Intro to Test Strategy}
-\section{Formative Testing}
-\section{Summative Testing}
-\section{Usability Testing}
+\section{Formative Usability Testing}
+We had weekly sprint demos with the customer which doubled as formative usability tests. In this way, we received continuous feedback from the customer about the concept and design of the product.
+Moreover, together with the customer, we planned to hold a formative usability test with users representing the target audience of the application. We would perform the test with other projects involved in the Adapt project and use the same feedback in our varying applications. However, a date for the test was never settled before our internal coding deadline. Together with the customer, we agreed to hold the test at a later point, still, and then in our report describe which changes we would have made to our system based on the test results. 
+However, a date was never settled for this test.
+\section{Summative Usability Testing}
+As the project progressed and the formative usability test never happened with the target audience, the group hoped that this test could be replaced by a summative usability test at a later stage, as the time for a formative usability test had passed.
+However, as this test apparently involved more groups than ours and other researchers, in addition to our customer, fixing a date for such a test proved difficult. Again, together with the customer, we agreed to hold the test at a later point, and then in our report describe which changes we would have made to our system based on the test results. 
+However, a date was still not settled before the project deadline.
+
+As the summative testing planned with the customer, and a target audience, never took place, the customer suggested to hold a usability test with a selection of his colleagues at SINTEF in order for us to perform at least one usability test. We prepared the tasks, Table \ref{table: usabilityTasks} for the usability test, and the evaluation questions in the form of an online questionnaire, but the customer did not provide a date for this test either. Thus in order to hold at least one test and receive feedback on our system, the team members performed the usability test on their own acquaintances instead.
+
+\begin{table}[H]
+\centering
+\begin{tabu} to 1.0\textwidth{ |X[l]| } 
+\hline \rowcolor{lightgray}
+Usability test tasks presented to the tester: \\
+\hline
+
+\begin{enumerate}
+    \item Create a new account and log in.
+    \item Next, add your first and last name to your profile information.
+    \item Upload a profile picture.
+    \item Now, add a new contact, named Babs, to your list of contacts.
+    \item Sign out
+    \item Sign in as Babs with the following details
+        \begin{itemize}
+            \item[] Email: Babs
+            \item[] Password: 123
+        \end{itemize}
+    \item Accept the friend request you just sent to Babs
+    \item Then, sign in to your own account
+    \item Create a new event and invite Babs to join
+    \item Find the event you just created and set your own status to “not attending”
+    \item Now, browse the exercises offered by the system
+    \item Add one of the exercises to your dashboard
+    \item Write a post in the news feed telling your network something interesting you want to share.
+    \item To increase you network, search for a user named "theRandy" and send him a friend request
+    \item Lastly, send a message to Babs asking him to respond to your event invitation 
+\end{enumerate}\\
+\hline
+\end{tabu}
+\caption{Usability test tasks}
+\label{table: usabilityTasks}
+\end{table}
+
+After performing all the tasks presented to them, the testers were asked to fill in an online questionnaire about their experience with the product. The questions are based on standard survey of user satifaction questions presented in Table \ref{table: SUS} below.
+
+\begin{table}[H]
+\centering
+\begin{tabu} to 1.0\textwidth{ |X[l]| } 
+\hline \rowcolor{lightgray}
+Questions used in survey of user satisfaction \\
+\hline
+On questions 1 to 4, the user was asked to rate how much they agreed with the statement. This was done using a scale from 1-5 (5 being most agreeable), in addition to a "I don't know" option.\\
+The last two (question 5 and 6) involved a larger text entry area.
+\begin{enumerate}
+    \item I found the product difficult to use.
+    \item There was a lot to learn before I could properly use the product.
+    \item I found the product unnecessarily complex
+    \item I imagine that most people would be able to quickly learn to use this product
+    \item Were there any tasks you were unable to complete or that was otherwise too difficult?
+    \item If you have any feedback or suggestion, you may write them here
+\end{enumerate}\\
+\hline
+\end{tabu}
+\caption{Questions used in survey of user satisfaction}
+\label{table: SUS}
+\end{table}
+
 \section{Unit Testing}
+Unit tests were performed continuously throughout coding to test new functions as they were developed. After defining the functional requirements, we wrote unit tests which covered all the requirements. 
+The team members in charge of developing the different functions were also in charge of performing the related unit tests. It was then clear, if the new code added to the project behaved correctly and did not break already existing code. 
+The complete unit test definitions can be seen in Appendix \ref{unitTests}
 \section{Integration Testing}
+After having completed unit testing on all modules of the solution, one can start doing Integration testing. This is done by testing how well these modules work together. We will in other words test the interface between the modules. 
+
+The integration testing method used throughout our project was the top-down approach, where you start at the topmost module and work your way down the hierarchy. We have also tested using a black-box approach where we did not look at the underlying functionality, but rather concentrated on the GUI and how it responded to actions that should make the modules interoperate.
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{Figures/modules.png}
+\caption{High level module figure}
+\label{fig:ModuleFigure}
+\end{figure}
+
 \section{Acceptance Test}
+
+\begingroup
+\leftskip=0cm plus 0.5fil \rightskip=0cm plus -0.5fil
+\parfillskip=0cm plus 1fil
+\textit{The Acceptance test will be conducted with the customer before the final delivery of the project}\par
+\endgroup
+
 \section{Test Plan}
+//This will be included in the final version of the report. Any comments on how this section should look like is most welcome
 \section{Test Results}
+\subsection{Unit Test Results}
+\textbf{Successful unit tests:}
+
+\begin{multicols}{3}
+\begin{enumerate}
+    \item Unit Test 1
+    \item Unit Test 2
+    \item Unit Test 3
+    \item Unit Test 5
+    \item Unit Test 6
+    \item Unit Test 7 N/A
+    \item Unit Test 8
+    \item Unit Test 9
+    \item Unit Test 11
+    \item Unit Test 12
+    \item Unit Test 14
+    \item Unit Test 15
+    \item Unit Test 16
+    \item Unit Test 17
+    \item Unit Test 18
+\end{enumerate}
+\end{multicols}
+
+\textbf{Failed unit tests:}
+\begin{enumerate}
+    \item Unit Test 4
+    \item Unit Test 10
+    \item Unit Test 11
+    \item Unit Test 13
+\end{enumerate}
+\subsection{Integration Test Results}
+Quantifying the results from our integration tests are unfortunately quite hard. The testing has been done by the developers throughout the project and has proven to be both successful and unsuccessful. The only module that required more rigorous testing on our behalf was the integration between our solution and the database. During the final moments of testing this interaction seemingly worked just fine. 
+\subsection{Usability Test Results}
+
+\textit{Not yet completed: These results will be based on a usability test, where the results are stored in a Google doc form based on a user feedback questionnaire}
+
+\subsection{Acceptance Test Results}
+
+\begingroup
+\leftskip=0cm plus 0.5fil \rightskip=0cm plus -0.5fil
+\parfillskip=0cm plus 1fil
+\textit{The Acceptance test results will be shown here when the testing has been done with the customer}\par
+\endgroup
