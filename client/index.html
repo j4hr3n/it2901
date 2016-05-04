@@ -25,7 +25,7 @@
 
 
       <!--Typeahead search-->
-        <div>
+        <div ng-if="indc.isLoggedIn">
         	<div class="container-fluid" ng-controller="indexCtrl as idx">
             <div class="ui icon input">
             <div class="ui form-group ">
@@ -39,6 +39,7 @@
           </div>
         	</div>
         </div>
+      
 
 
       <div class="right menu">

@@ -41,7 +41,8 @@ function indexCtrl($scope, $reactive, $state, $filter) {
       //         }
       //       }
       //     )
-    }
+    },
+
   });
 
   // $scope.globalSearch = function(keyword){
