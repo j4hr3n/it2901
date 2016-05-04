@@ -471,19 +471,21 @@ Meteor.methods({
 			if (Meteor.isClient && !(Meteor.user() && Meteor.user().isAdmin))
 				throw Meteor.Error(403, "No permission to edit other users")
 
-			user2ID = Meteor.users.findOne({'_id' : user2ID})._id
+			user2 = Meteor.users.findOne({'_id' : user2ID})
 		} else {
 			user2ID = Meteor.userId();
+			user2 = Meteor.user()
 		}
 
 		userId = Meteor.users.findOne({'_id' : userId})._id
+		user = Meteor.users.findOne({'_id' : userId})
 
 		if ( bool == true ) {
 
 			Meteor.users.update({_id : user2ID}, 
-				{ $push : { "profile.friends" : userId }})
+				{ $push : { "profile.friends" : user }})
 			Meteor.users.update({_id : userId}, 
-				{$push : {"profile.friends" : user2ID}})
+				{$push : {"profile.friends" : user2}})
 
 			Meteor.users.update({_id : user2ID}, 
 				{$pull : { "profile.notifications.friendRequests" : { '_id' : userId}}})
