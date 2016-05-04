@@ -10,6 +10,11 @@ function indexCtrl($scope, $reactive, $state, $filter) {
 
   this.subscribe('allUsers');
 
+  $scope.onSelect = function ($item, $model, $label) {
+    $scope.selected = null;
+    window.location.href = '#/public/' + $item.username
+  };
+
   this.helpers({
     isLoggedIn: () => {
       return Meteor.user() != undefined;
