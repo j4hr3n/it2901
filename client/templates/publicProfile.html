@@ -6,7 +6,7 @@
 			<div ng-if="isFriend()">
 				<button class="ui red button" ng-click="unfriendConfirmation(user)">Unfriend</button>
 			</div>
-			<div ng-if="!isFriend()">
+			<div ng-if="!isFriend() && currentUser.username !== username">
 				<button class="ui blue button" ng-click="inviteFriend()">Add friend</button>
 			</div>
 		</div>
