@@ -54,11 +54,11 @@ function networkController($scope, $reactive) {
   $scope.inviteFriend = function(userId){
     theUser = Meteor.users.findOne({'_id' : userId})
     if ( userId === Meteor.userId() ){
-      sweetAlert("Oops...", "You cannot be your own friend.", "error");
+      sweetAlert("Beklager!", "Du kan da ikke sende venneforespørsel til deg selv!", "error");
     } else if ( isFriend(userId) == true){
-      sweetAlert("Oops...", "You are already friend with this person!", "error");
+      sweetAlert("Beklager!", "Du er allerede venner med denne personen!", "error");
     } else if ( isRequest(userId) == true ){
-      sweetAlert("Oops...", "You have already sent friend invitation to this person!", "error");
+      sweetAlert("Beklager!", "Du har allerede sendt en forespørsel til denne personen!", "error");
     } else if ( isFriend(userId) == false ){
         reqList = []
         allRequests = Meteor.user().profile.notifications.friendRequests
@@ -67,16 +67,16 @@ function networkController($scope, $reactive) {
             reqList.push(allRequests[i]._id)
           };
         }
-        if (reqList.indexOf(userId) < 0 ){
+        if (reqList.indexOf(userId) < 0 ) {
           Meteor.call('inviteFriend', theUser)
-          swal("Invitation sent", "An invitation has been sent", "success")
+          swal("Invitasjon sendt", "En venneforespørsel har blitt sendt!", "success")
           friendRequestList.push(userId)
         }else{
-          swal("Oops", "You've already got an invitation from this freind. You just need to approve it!", "error")
+          swal("Oops", "Du har allerede mottatt en forespørsel fra denne personen. Det er bare å akseptere den!", "error")
         }
 
     }else {
-      sweetAlert("Oops...", "You are already friend with this person!", "error");
+      sweetAlert("Oops...", "Du er allerede venner med denne personen!", "error");
     }
   }
 

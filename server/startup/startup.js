@@ -111,14 +111,16 @@ Meteor.startup(function () {
 
   if (debugData) {
     Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
-      "Fremoverlent knehasetøy", "Bøy deg fremover", ["Fleksibilitet"], "google.com")
+      "Sittende knehasetøy", "Sitt på en stol og roter ankelen", ["Fleksibilitet"], 
+      "https://www.youtube.com/embed/jrTzmEhfmQI")
 
     Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
-      "Biceps repetisjoner", "Løft noe tungt", ["Styrke"], "google.com")
+      "Gåøvelser", "Følg denne videoen", ["Styrke"], 
+      "https://www.youtube.com/embed/TlM3Ev8y3ZU")
 
     Meteor.call("createNewExercise", Meteor.users.findOne({username: "Babs"})._id,
-      "Balanseøvelse", "Plasser en pute på gulvet. Gå i en ring rundt den", 
-      ["Balanse"], "google.com")
+      "Øvelse for huksittende", "Du kan holde i hva som helst; et bordbein, et gjerde eller noe annet.", 
+      ["Balanse"], "https://videos.files.wordpress.com/Ytoe9lld/huksittende-med-stc3b8tte_dvd.mp4")
   }
 
   Meteor.publish("newsfeedPosts", function (options) {

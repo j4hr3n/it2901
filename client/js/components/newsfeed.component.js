@@ -44,15 +44,16 @@ function newsfeedCtrl($scope, $reactive) {
 							post.newFriend = "deg";
 							post.newFriendLink = Meteor.user().username;
 						} else {
-							post.newFriend = Meteor.users.findOne({_id: post.newFriendID });
+							post.newFriendUser = Meteor.users.findOne({_id: post.newFriendID });
 
-							if (post.newFriend == null) {
+							if (post.newFriendUser == null) {
 								throw new Meteor.Error(404, "[Newsfeed] Unable to find user ID '"
 									+ post.newFriendID +"'");
 							}
-							post.newFriend = (post.newFriend.profile.nameFirst 
-								+" "+ post.newFriend.profile.nameLast);
-							post.newFriendLink = post.newFriend.username;
+							post.newFriend = (post.newFriendUser.profile.nameFirst 
+								+" "+ post.newFriendUser.profile.nameLast);
+							
+							post.newFriendLink = post.newFriendUser.username;
 						}
 						break;
 					case "userPost":

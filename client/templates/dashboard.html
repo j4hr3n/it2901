@@ -5,51 +5,49 @@
     <!-- Section one -->
     <div class="left floated column pull-down right-padding">
       <h3 class="ui dividing header">Nyheter</h3>
-      <div class="ui stackable grid container"></div>
+
       <div class="row dashboard-margin">
         <newsfeed></newsfeed>
       </div>
 
-      <div class="row dashboard-margin">
-      </div>
-      <div class="row">
+      <div class="venner">
+        <div class="row">
+          <div class="ui compact menu">
+            <a class="item"> 
+              <button class="ui large blue button" ui-sref="network">Dine kontakter</button>
+            </a>
+            <a class="item newFriend">
+                <i class="add user icon"></i>Venneforespørsler
+                <div class="floating ui ui red circular label" ng-show="0 < dbC.friendRequestNotification">
+                  {{ dbC.friendRequestNotification }}</div>
+              </a>
+          </div>         
+        </div>
+      
+        <div class="row">
+          <div class="ui green buttons">
+            <button class="ui labeled icon button modalInbox">
+              <i class="inbox icon"></i>
+              {{ dbC.messageRequestNotification }} meldinger
+            </button>
 
-        <a ui-sref="network"> <button class="ui large blue button "> Kontakter
-        </button></a>
-
-        <br>
-         <div class="venner">
-            <div class="ui items">
-              <div class="ui compact menu">
-                <a class="item newFriend">
-                    <i class="add user icon"></i> Venneforespørsler
-                    <div class="floating ui ui red circular label" ng-model="friendRequestNotification">{{friendRequestNotification()}}</div>
-                  </a>
-              </div><br>
-              <div class="item modalMessage">
-              <button class="ui green button">
-                <i class="send icon"></i>
-                Send melding</button>
-              </div>
-
-              <button class="ui green labeled icon button modalInbox" ng-model="messageRequestNotification">
-                <i class="inbox icon"></i>
-                {{ messageRequestNotification() }}  meldinger
-              </button><br/>
-
-              
+            <div class="item modalMessage">
+            <button class="ui button">
+              <i class="send icon"></i>
+              Send melding</button>
+            </div>
+          </div>
+        </div>
 <!--
                 <a href="/#/mineAktiviteter">
-                  <div class="ui big label" style="margin-top: 10px" ng-model="eventRequestNotification">
+                  <div class="ui big label" style="margin-top: 10px" ng-model="dbC.eventRequestNotification">
                     <i class="calendar icon"></i>
-                    {{ eventRequestNotification() }} events
+                    {{ dbC.eventRequestNotification }} events
                   </div>
                 </a>
 -->
       </div>
-      </div>
-      </div>
-      </div>
+    </div>
 
     <!-- Section two -->
     <div class="right floated column pull-down">
@@ -64,16 +62,9 @@
                 <a class="header">{{ex.name}}</a>
               </div>
             </div>
-            <div class="item">
-              <i class="large child icon"></i>
-              <div class="content">
-                <a class="header">Fremoverlent knehasetøy</a>
-              </div>
-            </div>
-            <div class="item">
-              <i class="large child icon"></i>
-              <div class="content">
-                <a class="header">Balanseøvelse</a>
+            <div class="item" ng-show="0 == dbC.exercises.length">
+              <div class="header">
+                Du har ikke lagt til noen aktiviteter enda. Klikk på knappen nedenfor og legg noen til!
               </div>
             </div>
           </div>
@@ -82,7 +73,7 @@
           <div class="ui medium buttons">
             <!-- <a ui-sref="activities"> <button class="ui medium blue button "> Legg til ny øvelse
             </button></a> -->
-            <a ui-sref="exercises"> <button class="ui medium blue button "> Se alle øvelser
+            <a ui-sref="exercises"> <button class="ui medium blue button ">Finn nye øvelser
             </button></a>
       </div>
         <div class="row dashboard-margin">
@@ -100,9 +91,15 @@
         <div class="header">
           Venneforespørsler
         </div>
-        <div class="content" ng-repeat="fr in friendRequests()">
-          <li class="friend">{{ fr.username }}</li>
-          <button ng-click="accept(fr._id, bool=true)">Aksepter</button><button ng-click="accept(fr._id, bool=false)">Deny</button>
+        <div class="content">
+          <div class="meta" ng-show="dbC.friendRequests.length == 0">
+            Du har ikke mottatt noen venneinvitasjoner enda.
+          </div>
+          <div ng-repeat="fr in dbC.friendRequests">
+            <li class="friend">{{ fr.username }}</li>
+            <button class="ui button" ng-click="accept(fr._id, bool=true)">Aksepter</button>
+            <button class="ui button" ng-click="accept(fr._id, bool=false)">Deny</button>
+          </div>
         </div>
       </div> <!--Accept/Deny model ends-->
 
@@ -146,6 +143,9 @@
         Innboks
       </div>
       <div class="content">
+        <div class="meta" ng-show="dbC.messages.length == 0">
+          Innboksen din er tom for meldinger.
+        </div>
         <div class="ui items" ng-repeat="msg in dbC.messages">
           <div class="item">
             <a class="ui tiny image">

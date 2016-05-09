@@ -58,7 +58,7 @@ function config($stateProvider, $urlRouterProvider) {
   })
 
   .state('exercises', {
-    url: '/øvelser',
+    url: '/ovelser',
     templateUrl: 'client/templates/exercises.html',
     controller: 'exerciseCtrl',
     resolve: {

@@ -10,10 +10,10 @@ this.types = ['Balanse', 'Styrke', 'Fleksibilitet'];
 this.url;
 
 this.chosenExercise;
-
 this.chosen = [];
-
 this.visible = false;
+
+this.exerciseMap = {};
 
 
  this.toggleSelection = function toggleSelection(type) {
@@ -75,21 +75,38 @@ this.revealSegment = () => {
 }
 
 this.addToUser = () => {
-  console.log('id: ', this.chosenExercise);
-  Meteor.call('addExercisetoUser', Meteor.user()._id, this.chosenExercise);
+  console.log('adding exercise to user. id: ', this.chosenExercise._id);
+  Meteor.call('addExercisetoUser', Meteor.user()._id, this.chosenExercise._id);
 }
 
 this.helpers({
     Exercises: () => {
-      return Exercises.find({});
+      this.exerciseMap = {}
+
+      return Exercises.find({}).map((ex) => {
+        this.exerciseMap[ex._id] = ex;
+
+        return ex
+      });
+    },
+
+    isAdmin: () => {
+      if (Meteor.user()) {
+        return Meteor.user().isAdmin;
+        
+      } else {
+        return false;
+      }
     },
   });
 
-this.setUrl = (url, id) => {
-  this.url = url;
-  this.chosenExercise = id;
-  console.log("url: ", this.url);
-  document.getElementById('frame').setAttribute("src", url);
+this.setUrl = (id) => {
+  console.log("SetUrl: "+ id)
+  this.chosenExercise = this.exerciseMap[id];
+  this.url = this.chosenExercise.url;
+
+  console.log("url: "+ this.url);
+  document.getElementById('frame').setAttribute("src", this.url);
   $('.ui.modal.one').modal('show');
 }
 
@@ -102,6 +119,11 @@ this.addExercise = () => {
   }
   else {
     this.newExercise.types = [];
+  }
+
+  if (this.newExercise.url.includes("youtube.com/watch?v=")) {
+    this.newExercise.url = this.newExercise.url.replace(
+      "youtube.com/watch?v=", "youtube.com/embed/")
   }
 
   Meteor.call('createNewExercise', this.newExercise.owner, this.newExercise.name, 

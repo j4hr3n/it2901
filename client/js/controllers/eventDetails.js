@@ -2,7 +2,7 @@ angular
 .module('it2901')
 .controller('eventDetailsCtrl', eventDetailsCtrl);
 
-function eventDetailsCtrl($scope, $stateParams, $reactive) {  
+function eventDetailsCtrl($scope, $stateParams, $reactive, $state) {  
   $reactive(this).attach($scope);
 
     this.subscribe('events');
@@ -14,21 +14,24 @@ function eventDetailsCtrl($scope, $stateParams, $reactive) {
          },
 
          currentEvent: () => {
+          if (!$stateParams.eventId) {
+            $state.go("eventsMainView")
+            return null;
+          }
+
           if (!Meteor.userId())
             throw new Meteor.Error(404, "Need to be logged in to access events.");
 
-          if (!$stateParams.eventId)
-            return null;
-
           ev = Events.findOne({_id: $stateParams.eventId})
 
-          console.log("Events.findOne({_id: "+$stateParams.eventId +" }) = "
-            + Events.findOne({_id: $stateParams.eventId}));
-
-          if (ev == null) {
-            throw new Meteor.Error(404, "Event not found."+$stateParams.eventId);
-          } else {
+          if (ev != null) {
             return ev;
+
+          } else {
+            console.log("[eventDetails] Event not found: '"+ $stateParams.eventId +"'");
+
+            $state.go("eventsMainView")
+            return null;
           }
         } 
       });

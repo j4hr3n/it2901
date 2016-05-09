@@ -21,7 +21,20 @@ $scope.quantity = 3;
       var user =  Meteor.user();
 
       if (user) {
-        return user.profile.events;
+        return user.profile.events.map((event) => {
+          attending = event.attending;
+
+          event = Events.findOne(event.eventId);
+
+          if (event != undefined) {
+            event.attending = attending;
+
+            return event;
+
+          } else {
+            return;
+          }
+        });
 
       } else {
         return null;

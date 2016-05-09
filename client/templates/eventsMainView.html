@@ -7,7 +7,7 @@
       <div class="column pull-down myEvents">
 
         <div class="six wide ui divided items">
-          <h3>Mine Aktiviteter</h3>
+          <h3>Alle aktiviteter</h3>
 
           <div class="item" ng-hide="evOC.userEvents.length > 0">Det ser ikke ut til at du har noen aktiviteter!</div>
 
@@ -21,10 +21,13 @@
                 <p>{{ event.date | date }}</p>
                 <p>{{ event.location }}</p>
                 <div ng-hide="{{event.owner == evOC.user._id}}">
-                    <button class="ui green small button" ng-click="acceptEvent(event._id,true)" id="{{event._id}}" ng-show="!event.attending">Accept</button>
-                    <label class="ui green label" ng-show="{{ event.attending }}">You are going.</label>
-                    <button class="ui red small button" ng-click="acceptEvent(event._id,false)" id="event._id">Decline
+
+                    <button class="ui green small button" ng-click="acceptEvent(event._id,true)" id="{{event._id}}" ng-show="event.attending == 0">Klikk for å delta</button>
+                    <button class="ui red small button" ng-click="acceptEvent(event._id,false)" id="event._id" ng-show="event.attending == 0">Klikk for å ikke delta
                     </button>
+
+                    <label class="ui green label" ng-show="event.attending == 1" ng-click="acceptEvent(event._id,false)" >Du deltar</label>                    
+                    <label class="ui red label" ng-show="event.attending == -1" ng-click="acceptEvent(event._id,true)" >Du deltar ikke</label>
                 </div>
               </div>
 

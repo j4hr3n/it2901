@@ -98,45 +98,84 @@ Meteor.methods({
 		Meteor.users.update({_id : userID}, {$set : { "profile.personalData" : newData}})
 	},
 
-	'acceptEvent' : function(eventId){
+	'acceptEvent' : function(eventId) {
 
-		if (!Meteor.userId) {
+		if (!Meteor.userId()) {
 			throw new Meteor.Error(403, "Need to be logged in to accept event invitation.")
 		};
 
-        var ev = Events.findOne(eventId);
-        var test = Events.update({_id : eventId, "participants" : { $elemMatch : { "username" : Meteor.user().username} } }, { $set : { "participants.$.attending" : GOING}});
-        console.log("[AcceptEvent] test: " + test);
+        Events.update(
+        	{_id : eventId },
+        	{ $pull : { "participants" : 
+        		{ username: Meteor.user().username} } }
+        );       
+        var changed = Events.update(
+        	{_id : eventId },
+        	{ $push : { "participants" : 
+        		{ username: Meteor.user().username, "attending" : GOING } } }
+        );
+
+        if (changed == 0)
+        	throw new Meteor.Error(404, "Unable to update database.")
+
+        Meteor.users.update(
+        	{_id : Meteor.userId() },
+        	{ $pull : { "profile.events" : 
+        		{ eventId: eventId} } }
+        );       
+        var changed = Meteor.users.update(
+        	{_id : Meteor.userId() },
+        	{ $push : { "profile.events" : 
+        		{ eventId: eventId, "attending" : GOING } } }
+        );
+
+        if (changed == 0)
+        	throw new Meteor.Error(404, "Unable to update database (Event DB may be now corrupt).")
+
+        console.log("[acceptEvent] "+Meteor.user().username
+        	+" accepted eventID: "+eventId);
 
         Meteor.call("createNewsPost", Meteor.userId(), 
         	{ "joinedEvent":	{ eventID: eventId} });
-/*
-		events = Meteor.user().profile.events;
-		for (var i = 0; i < events.length; i++) {
-			if (events[i].eventId == eventId){
-
-				Meteor.users.update({_id : Meteor.userId(), "profile.events.eventId": eventId},{$set : {"profile.events.$.attending" : GOING}})
-				Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : GOING}})
-			}
-		};*/
 	},
 
-	'denyEvent' : function(eventId){
+	'denyEvent' : function(eventId) {
 
-		var ev = Events.findOne(eventId);
-          Events.update({_id : eventId, "participants.username" : Meteor.user().username}, { $set : { "participants.$.attending" : NOT_GOING}});
-/*
-		evs = Meteor.user().profile.events
-		for (var i = 0; i < evs.length; i++) {
-			if (evs[i].eventId == eventId){
-				Meteor.users.update({_id : Meteor.userId()}, {$pull : { "profile.events" : { "eventId" : eventId}}})
-				Events.update({_id : eventId}, { $pull : { "participants" : { "username" : Meteor.user().username}}})
-				//Events.update({_id : eventId}, { $inc : { "isAttendingCount" : -1}})
-				//Meteor.events.update({_id : eventId}, {$pull : {"participants" : { _id : Meteor.user()}}})
-				//Meteor.events.remove({"_id" : eventId})
-			}
-		};*/
+		if (!Meteor.userId) {
+			throw new Meteor.Error(403, "Need to be logged in to deny event invitations.")
+		};
 
+        Events.update(
+        	{_id : eventId },
+        	{ $pull : { "participants" : 
+        		{ username: Meteor.user().username} } }
+        );
+        var changed = Events.update(
+        	{_id : eventId },
+        	{ $push : { "participants" : 
+        		{ username: Meteor.user().username, "attending" : NOT_GOING } } }
+        );
+
+        if (changed == 0) {
+        	throw new Meteor.Error(404, "Unable to update database.")
+        }
+
+        Meteor.users.update(
+        	{_id : Meteor.userId() },
+        	{ $pull : { "profile.events" : 
+        		{ eventId: eventId} } }
+        );       
+        var changed = Meteor.users.update(
+        	{_id : Meteor.userId() },
+        	{ $push : { "profile.events" : 
+        		{ eventId: eventId, "attending" : NOT_GOING } } }
+        );
+
+        if (changed == 0)
+        	throw new Meteor.Error(404, "Unable to update database (Event DB may be now corrupt).")
+
+        console.log("[denyEvent] "+Meteor.user().username
+        	+" denied eventID: "+eventId);
 	},
 
 	'deleteEvent' : function(eventId){
@@ -184,7 +223,7 @@ Meteor.methods({
 	    	newParticipants_formatted.push(
 	    		{ username: participant, "attending" : attending})
 
-        	wr = Meteor.users.update(
+        	writeResult = Meteor.users.update(
 				{ username : participant },
 				{ $push: { "profile.events": 
 						{ 
@@ -198,7 +237,7 @@ Meteor.methods({
 			);
 
 	    	//console.log("[participants] "+ uEvent.name +": username: "+  participant
-	    	//	+ " attending: "+ attending +" WR: "+ wr);
+	    	//	+ " attending: "+ attending +" WR: "+ writeResult);
 	    	//console.log(Meteor.users.findOne({username:participant}).profile.events);
         })
         

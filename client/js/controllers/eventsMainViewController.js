@@ -12,23 +12,27 @@ function eventsMainViewCtrl($scope, $reactive) {
 
   this.displayEvents;
 
-    $scope.acceptEvent = function(eventId,bool){
-      var evs = Meteor.user().profile.events
-      if (bool == true){
-        for (var i = 0; i < evs.length; i++) {
-              if (evs[i].eventId == eventId){
-                swal("Accepted", "You are going to this event!", "success")
-                Meteor.call('acceptEvent', eventId)
-              }
-            };
-      } else if (bool == false) {
-        Meteor.call('denyEvent', eventId, function(err, result){
-          if (!err){
-            swal("Declined", "You are not going to this event.", "error");
-          }
-        })
-      }
+    $scope.acceptEvent = function(eventId, bool) {
 
+      if (bool == true) {
+
+        Meteor.call('acceptEvent', eventId, function(err) {
+          if (err) {
+            swal("Oops", "En feil oppstod.", "error");
+          } else {
+            swal("Deltar!", "Du er nå satt som deltakende!", "success");
+          }
+        });
+
+      } else {
+        Meteor.call('denyEvent', eventId, function(err) {
+          if (err) {
+            swal("Oops", "En feil oppstod.", "error");
+          } else {
+            swal("Deltar ikke", "Du kommer ikke til å gå til denne aktivitetet.", "error");
+          }
+        });
+      }
     }
 
     $('#status').popup({
@@ -70,53 +74,52 @@ function eventsMainViewCtrl($scope, $reactive) {
           throw new Meteor.Error(404, "Need to be logged in to access events.");
           
           return Meteor.user()
-        },
-       
-      allEvents: () => {
-        console.log("allev:")
-        console.log(Events.find({}))
-        return Events.find({});
       },
 
       userEvents: () => {
 
-        var display = [];
-        var evs = Meteor.user().profile.events;
-        var all = Events.find({});
+        var displayedEvents = [];
+        var profileEvents = Meteor.user().profile.events;
 
-        for(var i = 0; i < evs.length; i++){
+        var allEvents = Events.find({});
 
-          var oid = evs[i].eventId;
-          var temp = Events.findOne(oid);
+        for (var i = 0; i < profileEvents.length; i++){
 
-          display.push(temp);
+          var temp = Events.findOne(profileEvents[i].eventId);
+          temp.attending = profileEvents[i].attending;
+
+          displayedEvents.push(temp);
         }
 
-        all.forEach(function(ev) {
-          if(ev.public == true){
+        allEvents.forEach(function(ev) {
+
+          if(ev.public == true) {
+
             var should_insert = true;
-            for(var i = 0; i < display.length; i++){
-              //Hindrer duplikater fra å bli lagt til
-              if(display[i]._id == ev._id){
-                should_insert=false;
+            for(var i = 0; i < displayedEvents.length; i++) {
+
+              // Stops duplicates from being added
+              if(displayedEvents[i]._id == ev._id) {
+                should_insert = false;
                 break;
               }
             }
             if (should_insert) {
-              display.push(ev);
+              ev.attending = 0;
+              displayedEvents.push(ev);
             }
           }
         });
 
-        //console.log("display: ");
-        for(var i = 0; i < display.length; i++){
-          //console.log("display: " + display[i]._id);
+        //console.log("displayedEvents: ");
+        for(var i = 0; i < displayedEvents.length; i++) {
+          //console.log("displayedEvents: " + displayedEvents[i]._id);
         }
         //Sorter events på dato
-        display.sort(function(a,b) {
+        displayedEvents.sort(function(a,b) {
           return new Date(a.date) - new Date(b.date);
         });
-       return display;
+       return displayedEvents;
      }
    });
 
