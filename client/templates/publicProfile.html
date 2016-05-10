@@ -1,18 +1,18 @@
 <div class="ui container" ng-controller="publicProfileCtrl as ppc" style="text-align: center; margin-top: 10px">
 	<div ng-if="world()">
-		This is a public profile for: <b> {{ username }}</b><br/>
+		Dette er en offentlig profil for: <b> {{ username }}</b><br/>
 		<img ng-src="{{ profilePicture() }}" style="width: 20%; height: 20%; margin-top: 10px">
 		<div>
 			<div ng-if="isFriend()">
-				<button class="ui red button" ng-click="unfriendConfirmation(user)">Unfriend</button>
+				<button class="ui red button" ng-click="unfriendConfirmation(user)">Fjern som venn</button>
 			</div>
 			<div ng-if="!isFriend() && currentUser.username !== username">
-				<button class="ui blue button" ng-click="inviteFriend()">Add friend</button>
+				<button class="ui blue button" ng-click="inviteFriend()">Legg til som venn</button>
 			</div>
 		</div>
 	</div>
 	<div ng-if="world() == false">
-		<h1 style="margin-top: 100px"><b style="color: red">There is no such user!</b></h1><br/>
+		<h1 style="margin-top: 100px"><b style="color: red">Denne brukeren finnes ikke!</b></h1><br/>
 	</div>
 </div>
 
