@@ -104,7 +104,7 @@ Meteor.startup(function () {
 
     Meteor.call('createNewsPost', Meteor.users.findOne({username: "theRandy"})._id,
       { "userPost": {
-          title: "Bilder fra bærturen",
+          title: "Hjemme fra bærturen",
           description: "Kom nettopp hjem fra turen til Bloksberg!" }
         }, true);
   }

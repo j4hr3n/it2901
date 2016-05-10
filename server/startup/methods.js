@@ -12,7 +12,7 @@ Meteor.methods({
 		      'nameFirst': nameFirst,
 		      'nameLast': nameLast,
 		      'bio': bio,
-		      'personalData' : [{'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}, {'title': '', value: "0"}],
+		      'personalData' : [{'title': 'Median duration of locomotion bouts', value: "0"}, {'title': 'Number of strides', value: "0"}, {'title': 'Stride time', value: "0"}, {'title': 'Mean walking speed', value: "0"}, {'title': 'Index harmonicity', value: "0"}, {'title': 'Frequency variability', value: "0"},{'title': 'Harmonic ratio', value: "0"}, {'title': 'Dominant frequency', value: "0"}, {'title': 'Sample and permutation entropy', value: "0"}, {'title': 'Local dynamic stability', value: "0"}, {'title': 'Ingen data', value: "0"}, {'title': 'Ingen data', value: "0"}],
 		      'friends': [],
 		      'events' : [],
 		      'exercises' : [],
