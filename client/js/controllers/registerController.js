@@ -69,6 +69,19 @@ function registerCtrl($scope, $reactive, $state) {
           console.log("Created new user: " + this.user.username);
           $('.ui.small.modal.register').modal('hide');
           $state.go("dashboard");
+          
+          Meteor.loginWithPassword(
+            this.user.email, this.user.password, (err) => {
+              if (err) {
+                console.log("Failed logging in: " + err);
+                this.error = err
+                $('.ui.small.modal.loginError').modal('show');
+
+              } else {
+                console.log("Logged in successfully");
+                $state.go("dashboard");
+              }
+          });
         }
       });
     } else {
