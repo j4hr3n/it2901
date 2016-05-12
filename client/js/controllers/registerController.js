@@ -56,7 +56,7 @@ function registerCtrl($scope, $reactive, $state) {
   this.registerNewUser = () => {
 
     matchingUser = Meteor.users.findOne({ 'username' : this.user.username });
-    this.user.profilePicture = "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg";
+    this.user.profilePicture = "/img/profile1.png";
     console.log(_.values(this.user))
 
     if (matchingUser == null) {
