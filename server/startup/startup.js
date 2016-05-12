@@ -18,7 +18,7 @@ Meteor.startup(function () {
         'profile': {
           'nameFirst': 'Babak',
           'nameLast': 'Farschian',
-          'profilePicture' : 'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/7/005/068/396/32cc8e5.jpg'
+          'profilePicture' : '/img/profile1.png'
         }
       },
       {
